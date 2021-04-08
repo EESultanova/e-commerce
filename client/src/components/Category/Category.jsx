@@ -4,14 +4,14 @@ const Category = ({category}) => {
   
   return (
     
-      <div class="col-md-3">
+      <div className="col-md-3">
         <Link to={`/categories/${category._id}`} >
-        <div class="card card-category">
-          <div class="img-wrap">
+        <div className="card card-category">
+          <div className="img-wrap">
             <img src={category.photo} alt="something" />
           </div>
-          <div class="card-body">
-            <h4 class="card-title"><a href="/">{category.name}</a></h4>
+          <div className="card-body">
+            <h4 className="card-title">{category.name}</h4>
           </div>
         </div>
         </Link>

@@ -20,3 +20,13 @@ export const deleteGood = (good) => {
     payload: good
   }
 }
+
+export const getGoodsFromServer = (id) => {
+  return dispatch => {
+    fetch(`http://localhost:3001/api/v1/category/${id}`)
+    .then(response => response.json())
+    .then(goodsFromServer => dispatch(getGoods(goodsFromServer)))
+  }
+}
+
+
