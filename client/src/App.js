@@ -8,6 +8,7 @@ import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import ListOfGoods from './components/ListOfGoods/ListOfGoods'
+import GoodDetails from './components/GoodDetails/GoodDetails';
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
         <Switch>
           <Route path="/categories/:id">
             <ListOfGoods />
+          </Route>
+
+          <Route path="/goods/:id">
+            <GoodDetails />
           </Route>
 
           <Route path="/">

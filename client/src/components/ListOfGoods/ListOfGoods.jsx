@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router"
-import { getGoods, getGoodsFromServer } from "../../redux/actionCreators/goodAC"
+import { getGoodsFromServer } from "../../redux/actionCreators/goodAC"
 import Good from "../Good/Good.jsx"
 
 const ListGoods = () => {
@@ -13,74 +13,74 @@ const ListGoods = () => {
     dispatch(getGoodsFromServer(id))
   }, [])
 
-  const goods = useSelector(state => state.goods)
+  const goods = useSelector(state => state.goods.goods)
   console.log(goods)
 
   return (
     <>
-      <div class="card mb-3 mx-4 my-4">
-          <div class="card-body">
-        <div class="row">
-          <div class="col-md-2"> Your are here: </div>
-          <nav class="col-md-8"> 
-          <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="/">Home</a></li>
-              <li class="breadcrumb-item"><a href="/">Category name</a></li>
-              <li class="breadcrumb-item"><a href="/">Sub category</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Items</li>
+      <div className="card mb-3 mx-4 my-4">
+          <div className="card-body">
+        <div className="row">
+          <div className="col-md-2"> Your are here: </div>
+          <nav className="col-md-8"> 
+          <ol className="breadcrumb">
+              <li className="breadcrumb-item"><a href="/">Home</a></li>
+              <li className="breadcrumb-item"><a href="/">Category name</a></li>
+              <li className="breadcrumb-item"><a href="/">Sub category</a></li>
+              <li className="breadcrumb-item active" aria-current="page">Items</li>
           </ol>  
           </nav>
         </div>
      
-        <div class="row">
-          <div class="col-md-2">Filter by</div>
-          <div class="col-md-10"> 
-            <ul class="list-inline">
-              <li class="list-inline-item mr-3 dropdown"><a href="/" class="dropdown-toggle" data-toggle="dropdown">   Supplier type </a>
-                    <div class="dropdown-menu p-3" style={{maxWidth: "20rem"}}>	
-                  <label class="form-check">
-                    <input type="radio" name="myfilter" class="form-check-input" /> Good supplier
+        <div className="row">
+          <div className="col-md-2">Filter by</div>
+          <div className="col-md-10"> 
+            <ul className="list-inline">
+              <li className="list-inline-item mr-3 dropdown"><a href="/" className="dropdown-toggle" data-toggle="dropdown">   Supplier type </a>
+                    <div className="dropdown-menu p-3" style={{maxWidth: "20rem"}}>	
+                  <label className="form-check">
+                    <input type="radio" name="myfilter" className="form-check-input" /> Good supplier
                   </label>
-                  <label class="form-check">	
-                    <input type="radio" name="myfilter" class="form-check-input" /> Best supplier
+                  <label className="form-check">	
+                    <input type="radio" name="myfilter" className="form-check-input" /> Best supplier
                   </label>
-                  <label class="form-check">
-                    <input type="radio" name="myfilter" class="form-check-input" /> New supplier
+                  <label className="form-check">
+                    <input type="radio" name="myfilter" className="form-check-input" /> New supplier
                   </label>
                     </div>
                 </li>
-                <li class="list-inline-item mr-3 dropdown">
-                  <a href="/" class="dropdown-toggle" data-toggle="dropdown">  Country </a>
-                    <div class="dropdown-menu p-3">	
-                  <label class="form-check"> 	 <input type="checkbox" class="form-check-input" /> China    </label>
-                  <label class="form-check">   	 <input type="checkbox" class="form-check-input" /> Japan      </label>
-                  <label class="form-check">    <input type="checkbox" class="form-check-input" /> Uzbekistan  </label>
-                  <label class="form-check">  <input type="checkbox" class="form-check-input" /> Russia     </label>
+                <li className="list-inline-item mr-3 dropdown">
+                  <a href="/" className="dropdown-toggle" data-toggle="dropdown">  Country </a>
+                    <div className="dropdown-menu p-3">	
+                  <label className="form-check"> 	 <input type="checkbox" className="form-check-input" /> China    </label>
+                  <label className="form-check">   	 <input type="checkbox" className="form-check-input" /> Japan      </label>
+                  <label className="form-check">    <input type="checkbox" className="form-check-input" /> Uzbekistan  </label>
+                  <label className="form-check">  <input type="checkbox" className="form-check-input" /> Russia     </label>
                     </div>
                 </li>
-              <li class="list-inline-item mr-3 dropdown">
-                <a href="/" class="dropdown-toggle" data-toggle="dropdown">Feature</a>
-                <div class="dropdown-menu">
-                  <a href="/" class="dropdown-item">Anti backterial</a>
-                  <a href="/" class="dropdown-item">With buttons</a>
-                  <a href="/" class="dropdown-item">Extra safety</a>
+              <li className="list-inline-item mr-3 dropdown">
+                <a href="/" className="dropdown-toggle" data-toggle="dropdown">Feature</a>
+                <div className="dropdown-menu">
+                  <a href="/" className="dropdown-item">Anti backterial</a>
+                  <a href="/" className="dropdown-item">With buttons</a>
+                  <a href="/" className="dropdown-item">Extra safety</a>
                 </div>
               </li>
-              <li class="list-inline-item mr-3"><a href="/">Color</a></li>
-              <li class="list-inline-item mr-3"><a href="/">Size</a></li>
-              <li class="list-inline-item mr-3">
-                <div class="form-inline">
-                  <label class="mr-2">Price</label>
-                <input class="form-control form-control-sm" placeholder="Min" type="number" />
-                  <span class="px-2"> - </span>
-                <input class="form-control form-control-sm" placeholder="Max" type="number" />
-                <button type="submit" class="btn btn-sm btn-light ml-2">Ok</button>
+              <li className="list-inline-item mr-3"><a href="/">Color</a></li>
+              <li className="list-inline-item mr-3"><a href="/">Size</a></li>
+              <li className="list-inline-item mr-3">
+                <div className="form-inline">
+                  <label className="mr-2">Price</label>
+                <input className="form-control form-control-sm" placeholder="Min" type="number" />
+                  <span className="px-2"> - </span>
+                <input className="form-control form-control-sm" placeholder="Max" type="number" />
+                <button type="submit" className="btn btn-sm btn-light ml-2">Ok</button>
               </div>
               </li>
-              <li class="list-inline-item mr-3">
-                <label class="custom-control mt-1 custom-checkbox">
-                <input type="checkbox" class="custom-control-input" />
-                <div class="custom-control-label">Ready to ship
+              <li className="list-inline-item mr-3">
+                <label className="custom-control mt-1 custom-checkbox">
+                <input type="checkbox" className="custom-control-input" />
+                <div className="custom-control-label">Ready to ship
                 </div>
               </label>
               </li>
@@ -91,29 +91,29 @@ const ListGoods = () => {
           </div>
         </div>
 
-        <header class="mb-3 mx-4">
-            <div class="form-inline">
-              <strong class="mr-md-auto">32 Items found </strong>
-              <select class="mr-2 form-control">
+        <header className="mb-3 mx-4">
+            <div className="form-inline">
+              <strong className="mr-md-auto">32 Items found </strong>
+              <select className="mr-2 form-control">
                 <option>Latest items</option>
                 <option>Trending</option>
                 <option>Most Popular</option>
                 <option>Cheapest</option>
               </select>
-              <div class="btn-group">
-                <a href="page-listing-grid.html" class="btn btn-light active" data-toggle="tooltip" title="List view"> 
-                  <i class="fa fa-bars"></i></a>
-                <a href="page-listing-large.html" class="btn btn-light" data-toggle="tooltip" title="Grid view"> 
-                  <i class="fa fa-th"></i></a>
+              <div className="btn-group">
+                <a href="page-listing-grid.html" className="btn btn-light active" data-toggle="tooltip" title="List view"> 
+                  <i className="fa fa-bars"></i></a>
+                <a href="page-listing-large.html" className="btn btn-light" data-toggle="tooltip" title="Grid view"> 
+                  <i className="fa fa-th"></i></a>
               </div>
             </div>
         </header>
 
-        <div class="row">
+        <div className="row">
           {
         goods.length ? goods.map(good => {
           return (
-            <Good good={good}/>
+            <Good key={good._id} good={good}/>
           )
         })
         : 'No goods'
@@ -121,23 +121,23 @@ const ListGoods = () => {
         </div>
 
 
-        <nav class="mb-4 mx-4" aria-label="Page navigation sample">
-          <ul class="pagination">
-            <li class="page-item disabled"><a class="page-link" href="/">Previous</a></li>
-            <li class="page-item active"><a class="page-link" href="/">1</a></li>
-            <li class="page-item"><a class="page-link" href="/">2</a></li>
-            <li class="page-item"><a class="page-link" href="/">3</a></li>
-            <li class="page-item"><a class="page-link" href="/">4</a></li>
-            <li class="page-item"><a class="page-link" href="/">5</a></li>
-            <li class="page-item"><a class="page-link" href="/">Next</a></li>
+        <nav className="mb-4 mx-4" aria-label="Page navigation sample">
+          <ul className="pagination">
+            <li className="page-item disabled"><a className="page-link" href="/">Previous</a></li>
+            <li className="page-item active"><a className="page-link" href="/">1</a></li>
+            <li className="page-item"><a className="page-link" href="/">2</a></li>
+            <li className="page-item"><a className="page-link" href="/">3</a></li>
+            <li className="page-item"><a className="page-link" href="/">4</a></li>
+            <li className="page-item"><a className="page-link" href="/">5</a></li>
+            <li className="page-item"><a className="page-link" href="/">Next</a></li>
           </ul>
         </nav>
 
 
-        <div class="box text-center">
+        <div className="box text-center">
           <p>Did you find what you were looking for？</p>
-          <a href="/" class="btn btn-light">Yes</a>
-          <a href="/" class="btn btn-light">No</a>
+          <a href="/" className="btn btn-light">Yes</a>
+          <a href="/" className="btn btn-light">No</a>
         </div>
     
       
