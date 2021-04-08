@@ -123,12 +123,17 @@ const Header = () => {
 	<ul className="navbar-nav ml-md-auto">
   <li className="nav-item">
     <button>
-			<a className="btn btn-primary" href="/">Login</a>
+			<Link className="btn btn-primary" to="/login">Login</Link>
       </button>
 		</li>
 			<li className="nav-item">
         <button>
-			<a className="btn btn-primary" href="/">Registration</a>
+			<Link className="btn btn-primary" to="/registration">Registration</Link>
+      </button>
+		</li>
+    <li className="nav-item">
+        <button>
+			<Link className="btn btn-primary" to="/logout">Log out</Link>
       </button>
 		</li>
 		<li className="nav-item dropdown">

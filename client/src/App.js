@@ -10,6 +10,7 @@ import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import ListOfGoods from './components/ListOfGoods/ListOfGoods'
 import Cart from './components/Cart/Cart'
+import Login from './components/Login/Login'
 
 function App() {
   return (
@@ -17,17 +18,25 @@ function App() {
       <Router>
         <Header/>
         <Switch>
+
+          <Route exact path="/login">
+            <Login />
+          </Route>
+
           <Route exact path="/categories/:id">
             <ListOfGoods />
           </Route>
 
+          
+          <Route exact path="/cart">
+            <Cart />
+          </Route>
+          
           <Route exact path="/">
             <Main />
           </Route>
 
-          <Route exact path="/cart">
-            <Cart />
-          </Route>
+
         </Switch>
         <Footer/>
       </Router>
