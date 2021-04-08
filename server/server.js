@@ -17,13 +17,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/api/v1/", async (req, res) => {
-  const categories = await CategoryModel.find();
-  res.json(categories);
+  try {
+    const categories = await CategoryModel.find();
+    res.json(categories);
+  } catch (error) {
+    res.sendStatus(500)
+  }
 });
 
 app.get("/api/v1/category/:id", async (req, res) => {
-  const goods = await GoodModel.find({category: req.params.id})
-  res.json(goods)
+  try {
+    const goods = await GoodModel.find({category: req.params.id})
+    res.json(goods)
+  } catch (error) {
+    res.sendStatus(500)
+  }
 })
 
 app.listen(PORT, () => {
