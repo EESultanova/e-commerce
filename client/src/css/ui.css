@@ -854,7 +854,8 @@ a[class*='card'] {
   display: block;
   margin-bottom: 20px;
   overflow: hidden;
-  min-height: 410px; }
+  min-height: 310px; 
+  max-width: 310px;}
   .card-category .card-title {
     font-weight: 600;
     font-size: 18px; }
