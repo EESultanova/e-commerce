@@ -9,7 +9,7 @@ const Main = () => {
             
             <div class="card card-category">
               <div class="img-wrap">
-                <img src="images/items/1.jpg" />
+                <img src="/images/items/1.jpg" />
               </div>
               <div class="card-body">
                 <h4 class="card-title"><a href="/">Summer shirts</a></h4>
