@@ -9,6 +9,7 @@ import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import ListOfGoods from './components/ListOfGoods/ListOfGoods'
+import GoodDetails from './components/GoodDetails/GoodDetails';
 import Cart from './components/Cart/Cart'
 import Login from './components/Login/Login'
 
@@ -27,6 +28,9 @@ function App() {
             <ListOfGoods />
           </Route>
 
+          <Route path="/goods/:id">
+            <GoodDetails />
+          </Route>
           
           <Route exact path="/cart">
             <Cart />
