@@ -8,6 +8,7 @@ import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import ListOfGoods from './components/ListOfGoods/ListOfGoods'
+import Order from './components/Order/Order';
 
 function App() {
   return (
@@ -22,7 +23,13 @@ function App() {
           <Route path="/">
             <Main />
           </Route>
+
+          <Route path="/car">
+            <Order />
+          </Route>
+
         </Switch>
+
         <Footer/>
       </Router>
     </div>
