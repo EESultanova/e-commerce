@@ -16,10 +16,10 @@ const Main = () => {
   const categories = useSelector(state => state.categories)
 
   return ( 
-    <section class="section-content padding-y">
-      <div class="container">
+    <section className="section-content padding-y">
+      <div className="container">
 
-        <nav class="row">
+        <nav className="row">
           {
             categories?.length ? categories.map(category => {
               
