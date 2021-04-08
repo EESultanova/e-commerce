@@ -1,9 +1,9 @@
 import './App.css';
 
-import { 
+import {
   BrowserRouter as Router,
-  Route, 
-  Switch 
+  Route,
+  Switch
 } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
@@ -12,18 +12,62 @@ import ListOfGoods from './components/ListOfGoods/ListOfGoods'
 import GoodDetails from './components/GoodDetails/GoodDetails';
 import Cart from './components/Cart/Cart'
 import Login from './components/Login/Login'
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser } from "./redux/actionCreators/topicsAC";
+import { useEffect } from 'react';
+import { API_URL } from './config';
+import Registration from './components/Registration/Registration';
+import Profile from './components/Profile.js/Profile';
 
 function App() {
+
+  const user = useSelector(state => state.user.isAuth);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    auth();
+  }, []);
+
+  const auth = async () => {
+    try {
+      await fetch(`${API_URL}api/v1/auth/auth`,
+        { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+      )
+        .then(res => res.json())
+        .then((response) => {
+          console.log('=======>', response)
+          dispatch(setUser(response))
+        })
+    } catch (e) {
+      alert(e)
+      localStorage.removeItem('token');
+    }
+
+  }
+
   return (
     <div className="App">
       <Router>
-        <Header/>
+        <Header />
         <Switch>
 
-          <Route exact path="/login">
-            <Login />
-          </Route>
-
+          {!user ?
+            <Switch>
+              <Route exact path="/registration">
+                <Registration />
+              </Route>
+              <Route exact path="/login">
+                <Login />
+              </Route>
+            </Switch>
+            :
+            <Switch>
+              <Route exact path="/profile">
+                <Profile />
+              </Route>
+            </Switch>
+          }
           <Route exact path="/categories/:id">
             <ListOfGoods />
           </Route>
@@ -31,20 +75,18 @@ function App() {
           <Route path="/goods/:id">
             <GoodDetails />
           </Route>
-          
+
           <Route exact path="/cart">
             <Cart />
           </Route>
-          
+
           <Route exact path="/">
             <Main />
           </Route>
-
-
         </Switch>
-        <Footer/>
+        <Footer />
       </Router>
-    </div>
+    </div >
   );
 }
 
