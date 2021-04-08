@@ -121,11 +121,18 @@ const Header = () => {
 		</li>
 	</ul>
 	<ul className="navbar-nav ml-md-auto">
+  <li className="nav-item">
+    <button>
+			<a className="btn btn-primary" href="/">Login</a>
+      </button>
+		</li>
 			<li className="nav-item">
-			<a className="nav-link" href="/">Get the app</a>
+        <button>
+			<a className="btn btn-primary" href="/">Registration</a>
+      </button>
 		</li>
 		<li className="nav-item dropdown">
-			<a className="nav-link dropdown-toggle" href="http://example.com" data-toggle="dropdown">English</a>
+			<a className="nav-link dropdown-toggle mt-1" href="http://example.com" data-toggle="dropdown">English</a>
 			<div className="dropdown-menu dropdown-menu-right">
 			<a className="dropdown-item" href="/">Russian</a>
 			<a className="dropdown-item" href="/">French</a>
