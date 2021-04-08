@@ -9,12 +9,6 @@ const ListGoods = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //   fetch(`http://localhost:3001/api/v1/category/${id}`)
-  //     .then(response => response.json())
-  //     .then(goodsFromServer => dispatch(getGoods(goodsFromServer)))
-  // }, [])
-
   useEffect(() => {
     dispatch(getGoodsFromServer(id))
   }, [])
