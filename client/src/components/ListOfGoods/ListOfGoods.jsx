@@ -4,6 +4,8 @@ import { useParams } from "react-router"
 import { getGoodsFromServer } from "../../redux/actionCreators/goodAC"
 import Good from "../Good/Good.jsx"
 
+
+
 const ListGoods = () => {
 
   const { id } = useParams()

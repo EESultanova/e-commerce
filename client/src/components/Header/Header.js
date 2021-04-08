@@ -2,6 +2,10 @@ import '../../html/css/ui.css'
 import '../../html/css/responsive.css'
 import '../../html/css/bootstrap.css'
 
+import { 
+  Link
+} from 'react-router-dom';
+
 
 const Header = () => {
   return ( 
@@ -10,9 +14,9 @@ const Header = () => {
 	<div className="container">
 		<div className="row align-items-center">
 			<div className="col-xl-2 col-lg-3 col-md-12">
-				<a href="http://bootstrap-ecommerce.com" className="brand-wrap">
+				<Link to="/" className="brand-wrap">
 					<img className="logo" src="images/logo.png" alt=""/>
-				</a>
+				</Link>
 			</div>
 			<div className="col-xl-6 col-lg-5 col-md-6">
 				<form action="#" className="search-header">
@@ -61,12 +65,12 @@ const Header = () => {
 						</a>
 					</div>
 					<div className="widget-header">
-						<a href="/" className="widget-view">
+						<Link to="/cart" className="widget-view">
 							<div className="icon-area">
 								<i className="fa fa-shopping-cart"></i>
 							</div>
 							<small className="text"> Cart </small>
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>
@@ -88,7 +92,7 @@ const Header = () => {
 			<a className="nav-link dropdown-toggle" data-toggle="dropdown" href="/"> <i className="fa fa-bars text-muted mr-2"></i> Demo pages </a>
 			<div className="dropdown-menu dropdown-large">
 				<nav className="row">
-					<div className="col-6">
+					<div className="col-12 ml-3">
 						<a href="page-index-1.html">Home page 1</a>
 						<a href="page-index-2.html">Home page 2</a>
 						<a href="page-category.html">All category</a>
@@ -99,16 +103,6 @@ const Header = () => {
 						<a href="page-content.html">Page content</a>
 						<a href="page-user-login.html">Page login</a>
 						<a href="page-user-register.html">Page register</a>
-					</div>
-					<div className="col-6">
-						<a href="page-profile-main.html">Profile main</a>
-						<a href="page-profile-orders.html">Profile orders</a>
-						<a href="page-profile-seller.html">Profile seller</a>
-						<a href="page-profile-wishlist.html">Profile wishlist</a>
-						<a href="page-profile-setting.html">Profile setting</a>
-						<a href="page-profile-address.html">Profile address</a>
-						<a href="rtl-page-index-1.html">RTL home page</a>
-						<a href="page-components.html" target="_blank">More components</a>
 					</div>
 				</nav>
 			</div> 
@@ -127,11 +121,23 @@ const Header = () => {
 		</li>
 	</ul>
 	<ul className="navbar-nav ml-md-auto">
+  <li className="nav-item">
+    <button>
+			<Link className="btn btn-primary" to="/login">Login</Link>
+      </button>
+		</li>
 			<li className="nav-item">
-			<a className="nav-link" href="/">Get the app</a>
+        <button>
+			<Link className="btn btn-primary" to="/registration">Registration</Link>
+      </button>
+		</li>
+    <li className="nav-item">
+        <button>
+			<Link className="btn btn-primary" to="/logout">Log out</Link>
+      </button>
 		</li>
 		<li className="nav-item dropdown">
-			<a className="nav-link dropdown-toggle" href="http://example.com" data-toggle="dropdown">English</a>
+			<a className="nav-link dropdown-toggle mt-1" href="http://example.com" data-toggle="dropdown">English</a>
 			<div className="dropdown-menu dropdown-menu-right">
 			<a className="dropdown-item" href="/">Russian</a>
 			<a className="dropdown-item" href="/">French</a>
