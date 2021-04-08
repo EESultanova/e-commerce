@@ -1,19 +1,19 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories } from "../../redux/actionCreators/categoryAC"
+import { getCategories, getCategoriesFromServer } from "../../redux/actionCreators/categoryAC"
 import Category from "../Category/Category";
 
 const Main = () => {
 
   const dispatch = useDispatch()
-  
-  useEffect(() => {
-    fetch('http://localhost:3001/api/v1/')
-      .then(response => response.json())
-      .then(categoriesFromServer => dispatch(getCategories(categoriesFromServer)))
-  }, [])
 
   const categories = useSelector(state => state.categories)
+
+  useEffect(() => {
+    dispatch(getCategoriesFromServer)
+  }, [])
+
+  console.log(categories)
 
   return ( 
     <section className="section-content padding-y">
@@ -24,16 +24,14 @@ const Main = () => {
             categories?.length ? categories.map(category => {
               
               return (
-                <Category category={category}/>
+                <Category key={category._id} category={category}/>
               )
             })
             : "No categories"
           }
         </nav>
-
-
-    </div>
-</section>
+      </div>
+    </section>
    );
 }
  

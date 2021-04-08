@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router"
-import { getGoods } from "../../redux/actionCreators/goodAC"
+import { getGoods, getGoodsFromServer } from "../../redux/actionCreators/goodAC"
 import Good from "../Good/Good.jsx"
 
 const ListGoods = () => {
@@ -10,9 +10,7 @@ const ListGoods = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    fetch(`http://localhost:3001/api/v1/category/${id}`)
-      .then(response => response.json())
-      .then(goodsFromServer => dispatch(getGoods(goodsFromServer)))
+    dispatch(getGoodsFromServer(id))
   }, [])
 
   const goods = useSelector(state => state.goods)
