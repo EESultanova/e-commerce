@@ -1,6 +1,6 @@
-import '../../css/ui.css'
-import '../../css/responsive.css'
-import '../../css/bootstrap.css'
+import '../../html/css/ui.css'
+import '../../html/css/responsive.css'
+import '../../html/css/bootstrap.css'
 
 
 const Header = () => {
