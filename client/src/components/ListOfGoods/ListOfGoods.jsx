@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router"
 import { getGoodsFromServer } from "../../redux/actionCreators/goodAC"
@@ -12,6 +12,8 @@ const ListGoods = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
 
+  const [sortedGoods, setSortedGoods] = useState([]);
+
   useEffect(() => {
     dispatch(getCategoriesFromServer);
     dispatch(getGoodsFromServer(id))
@@ -21,37 +23,48 @@ const ListGoods = () => {
   const categories = useSelector(state => state.categories)
   const currentCategory = categories.find(categories => categories._id === id)
 
+  // const sortedItems = useSelector(state => state.sortedGoods)
+  // sortedItems.push('1');
+
   // console.log(currentCategory.name, '======')
   console.log(goods)
 
-  function sortAsc(sortType) {
-    let nav = document.querySelector('#goods-wrap');
-    for (let i = 0; i < nav.children.length; i++) {
-      for (let j = i; j < nav.children.length; j++) {
-        if (+nav.children[i].getAttribute(sortType) > +nav.children[j].getAttribute(sortType)) {
-          let replacedNode = nav.replaceChild(nav.children[j], nav.children[i]);
-          insertAfter(replacedNode, nav.children[i]);
-        }
-      }
-    }
+  function sortGoods(arg) {
+    if (arg === 'sortasc') return setSortedGoods(goods.sort((a, b) => a.price - b.price).slice(0));
+    else if (arg === 'sortdesc') return setSortedGoods(goods.sort((a, b) => b.price - a.price).slice(0));
+    else return setSortedGoods(goods.sort((a, b) => b.rating - a.rating).slice(0));
   }
 
-  function sortDesc(sortType) {
-    let nav = document.querySelector('#goods-wrap');
-    console.log(nav.children.length)
-    for (let i = 0; i < nav.children.length; i++) {
-      for (let j = i; j < nav.children.length; j++) {
-        if (+nav.children[i].getAttribute(sortType) < +nav.children[j].getAttribute(sortType)) {
-          let replacedNode = nav.replaceChild(nav.children[j], nav.children[i]);
-          insertAfter(replacedNode, nav.children[i]);
-        }
-      }
-    }
-  }
 
-  function insertAfter(elem, refElem) {
-    return refElem.parentNode.insertBefore(elem, refElem.nextSibling);
-  }
+
+  // function sortAsc(sortType) {
+  //   let nav = document.querySelector('#goods-wrap');
+  //   for (let i = 0; i < nav.children.length; i++) {
+  //     for (let j = i; j < nav.children.length; j++) {
+  //       if (+nav.children[i].getAttribute(sortType) > +nav.children[j].getAttribute(sortType)) {
+  //         let replacedNode = nav.replaceChild(nav.children[j], nav.children[i]);
+  //         insertAfter(replacedNode, nav.children[i]);
+  //       }
+  //     }
+  //   }
+  // }
+
+  // function sortDesc(sortType) {
+  //   let nav = document.querySelector('#goods-wrap');
+  //   console.log(nav.children.length)
+  //   for (let i = 0; i < nav.children.length; i++) {
+  //     for (let j = i; j < nav.children.length; j++) {
+  //       if (+nav.children[i].getAttribute(sortType) < +nav.children[j].getAttribute(sortType)) {
+  //         let replacedNode = nav.replaceChild(nav.children[j], nav.children[i]);
+  //         insertAfter(replacedNode, nav.children[i]);
+  //       }
+  //     }
+  //   }
+  // }
+
+  // function insertAfter(elem, refElem) {
+  //   return refElem.parentNode.insertBefore(elem, refElem.nextSibling);
+  // }
 
   return (
     <>
@@ -131,11 +144,11 @@ const ListGoods = () => {
         <div className="form-inline">
           <strong className="mr-md-auto">{goods.length} Items found </strong>
           <form>
-            {/* <select onChange={(event) => changeSort(event.target.value)} value={currentFruit} className="mr-2 form-control">
-              <option>Цена возрастание</option>
-              <option>Цена убывание</option>
-              <option>Sort rating</option>
-            </select> */}
+            <select onChange={(event) => sortGoods(event.target.value)} className="mr-2 form-control">
+              <option value="sortasc">Price Low to High</option>
+              <option value="sortdesc">Price High to Low</option>
+              <option value="sortrating">Sort by rating</option>
+            </select>
           </form>
           <div className="btn-group">
             <a href="page-listing-grid.html" className="btn btn-light active" data-toggle="tooltip" title="List view">
@@ -144,11 +157,11 @@ const ListGoods = () => {
               <i className="fa fa-th"></i></a>
           </div>
         </div>
-        <div className="d-flex justify-content-center mb-5">
+        {/* <div className="d-flex justify-content-center mb-5">
           <button onClick={() => sortAsc('data-price')} id="sort-asc" type="submit" className="btn btn-success mx-2">Цена возрастание</button>
           <button onClick={() => sortDesc('data-price')} id="sort-desc" type="submit" className="btn btn-success mx-2">Цена убывание</button>
           <button onClick={() => sortDesc('data-rate')} id="sort-rating" type="submit" className="btn btn-success mx-2">Sort rating</button>
-        </div>
+        </div> */}
       </header>
 
       <div id="goods-wrap" className="row">
