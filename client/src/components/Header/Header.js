@@ -51,18 +51,11 @@ const Header = () => {
 						<div className="col-xl-4 col-lg-4 col-md-6">
 							<div className="widgets-wrap float-md-right">
 								<div className="widget-header mr-3">
-									{/* <a href="/" className="widget-view">
-										<div className="icon-area">
-											<i className="fa fa-user"></i>
-											<span className="notify">3</span>
-										</div> */}
-									{/* <small className="text"> My profile </small> */}
-									{user &&
-										<NavLink to="/profile"><img src={avatar} alt="" style={Object.assign({}, { width: '32px' }, { height: '31px' }, { 'borderRadius': '50%' })} />
-											<small className="text"> My profile </small>
-										</NavLink>
-									}
-									{/* </a> */}
+									<NavLink to={
+										!user ? '/login' : '/profile'
+									}><img src={avatar} alt="" style={Object.assign({}, { width: '32px' }, { height: '31px' }, { 'borderRadius': '50%' })} />
+										<small className="text"> My profile </small>
+									</NavLink>
 								</div>
 								<div className="widget-header mr-3">
 									<a href="/" className="widget-view">
