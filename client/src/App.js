@@ -25,65 +25,62 @@ function App() {
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   auth();
-  // }, []);
+  useEffect(() => {
+    auth();
+  }, []);
 
-  // const auth = async () => {
-  //   try {
-  //     await fetch(`${API_URL}api/v1/auth/auth`,
-  //       { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
-  //     )
-  //       .then(res => res.json())
-  //       .then((response) => {
-  //         console.log('=======>', response)
-  //         dispatch(setUser(response))
-  //       })
-  //   } catch (e) {
-  //     alert(e)
-  //     localStorage.removeItem('token');
-  //   }
+  const auth = async () => {
+    try {
+      await fetch(`${API_URL}api/v1/auth/auth`,
+        { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+      )
+        .then(res => res.json())
+        .then((response) => {
+          console.log('=======>', response)
+          dispatch(setUser(response))
+        })
+    } catch (e) {
+      alert(e)
+      localStorage.removeItem('token');
+    }
 
-  // }
+  }
 
   return (
     <div className="App">
       <Router>
         <Header />
-        <Switch>
+        <Route exact path="/categories/:id">
+          <ListOfGoods />
+        </Route>
+        <Route path="/goods/:id">
+          <GoodDetails />
+        </Route>
 
-          {/* {!user ?
-            <Switch>
-              <Route exact path="/registration">
-                <Registration />
-              </Route>
-              <Route exact path="/login">
-                <Login />
-              </Route>
-            </Switch>
-            :
-            <Switch>
-              <Route exact path="/profile">
-                <Profile />
-              </Route>
-            </Switch>
-          } */}
-          <Route exact path="/categories/:id">
-            <ListOfGoods />
-          </Route>
+        <Route exact path="/cart">
+          <Cart />
+        </Route>
 
-          <Route path="/goods/:id">
-            <GoodDetails />
-          </Route>
+        <Route exact path="/">
+          <Main />
+        </Route>
 
-          <Route exact path="/cart">
-            <Cart />
-          </Route>
-
-          <Route exact path="/">
-            <Main />
-          </Route>
-        </Switch>
+        {!user ?
+          <Switch>
+            <Route exact path="/registration">
+              <Registration />
+            </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+          </Switch>
+          :
+          <Switch>
+            <Route exact path="/profile">
+              <Profile />
+            </Route>
+          </Switch>
+        }
         <Footer />
       </Router>
     </div >

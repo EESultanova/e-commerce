@@ -30,7 +30,7 @@ export const deleteGood = (good) => {
 
 export const getGoodsFromServer = (id) => {
   return dispatch => {
-    fetch(`http://localhost:3001/api/v1/categories/${id}`)
+    fetch(`http://localhost:3000/api/v1/categories/${id}`)
     .then(response => response.json())
     .then(goodsFromServer => dispatch(getGoods(goodsFromServer)))
   }
@@ -38,7 +38,7 @@ export const getGoodsFromServer = (id) => {
 
 export const getGoodDetailsFromServer = (id) => {
   return dispatch => {
-    fetch(`http://localhost:3001/api/v1/goods/${id}`)
+    fetch(`http://localhost:3000/api/v1/goods/${id}`)
       .then(response => response.json())
       .then(oneGoodFromServer => dispatch(getGood(oneGoodFromServer)))
   }
