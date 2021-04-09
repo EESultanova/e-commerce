@@ -14,6 +14,7 @@ const Header = () => {
 
 	const user = useSelector(state => state.user.isAuth);
 	const currentUser = useSelector(state => state.user);
+  const logo = "images/logo.png"
 	const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : avatarLogo;
 	const dispatch = useDispatch()
 	const handlergameOver = () => {
@@ -26,9 +27,11 @@ const Header = () => {
 				<div className="container">
 					<div className="row align-items-center">
 						<div className="col-xl-2 col-lg-3 col-md-12">
-							<Link to="/" className="brand-wrap">
-								<img className="logo" src="images/logo.png" alt="" />
-							</Link>
+              {logo &&
+                <Link to="/" className="brand-wrap">
+                  <img className="logo" src={logo} alt="" />
+                </Link>
+              }
 						</div>
 						<div className="col-xl-6 col-lg-5 col-md-6">
 							<form action="#" className="search-header">

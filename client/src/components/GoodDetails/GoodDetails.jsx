@@ -1,6 +1,7 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router"
+import { addGoodToCart, increaseGoodQuantity } from "../../redux/actionCreators/cartAC"
 import { getGoodDetailsFromServer, getGoodsFromServer } from "../../redux/actionCreators/goodAC"
 
 const GoodDetails = () => {
@@ -13,21 +14,39 @@ const GoodDetails = () => {
   }, [])
 
   const good = useSelector(state => state.goods.good)
+  const cart = useSelector(state => state.cart)
+  console.log("======>", cart)
+  const inCart = cart.map(x => {
+    if (x._id === good._id) {
+      return true
+    }
+    return false
+  })
+
+  cart.find(x => x._id === good._id)
+  console.log(cart.find(x => x._id === good._id))
 
   return (
     <div className="row">
           <aside className="col-md-6">
       <div className="card">
-      <article className="gallery-wrap"> 
-        <div className="img-big-wrap">
-          <div> <a href="/"><img src={good.photo} alt="" /></a></div>
-        </div>
-        {/* <div className="thumbs-wrap">
-          <a href="/" className="item-thumb"> <img src={good.photo[1]} alt="" /></a>
-          <a href="/" className="item-thumb"> <img src={good.photo[2]} alt="" /></a>
-          <a href="/" className="item-thumb"> <img src={good.photo[3]} alt="" /></a> */}
-          {/* <a href="/" className="item-thumb"> <img src={good.photo[4]} alt="" /></a> */}
-        {/* </div> */}
+      <article className="gallery-wrap">
+        {good.photo &&
+          <>
+            <div className="img-big-wrap">
+              <div> <a href="/"><img src={good.photo} alt="" /></a></div>
+            </div>
+            <div className="thumbs-wrap">
+              {good.photo.length ? good.photo.map((photo, indx) => {
+                return (
+                  <a key={indx} href="/" className="item-thumb"> <img src={photo} alt="" /></a>
+                )
+              })
+              : ''
+              }
+            </div>
+          </>
+        }
       </article>
       </div>
           </aside>
@@ -79,26 +98,12 @@ const GoodDetails = () => {
         <dd className="col-sm-9">in Stock</dd>
       </dl>
 
-        <div className="form-row  mt-4">
-          <div className="form-group col-md flex-grow-1">
-            <div className="input-group mb-3 input-spinner">
-              <div className="input-group-prepend">
-                <button className="btn btn-light" type="button" id="button-plus"> &#43;</button>
-              </div>
-              <input type="text" className="form-control" value="1" />
-              <div className="input-group-append">
-                <button className="btn btn-light" type="button" id="button-minus"> &minus; </button>
-              </div>
-            </div>
-          </div>
+        <div className="form-row  mt-5">
           <div className="form-group col-md">
-            <a href={`/add/${good._id}`} className="btn  btn-primary"> 
-              <i className="fas fa-shopping-cart"></i> <span className="text">Add to cart</span> 
-            </a>
-            &nbsp;&nbsp;
-            <a href="/" className="btn btn-light">
-              <i className="fas fa-envelope"></i> <span className="text">Contact supplier</span> 
-            </a>
+            {/* {!inCart ?  */}
+              <button onClick={() => dispatch(addGoodToCart(good))} className="btn  btn-primary">
+                <i className="fas fa-shopping-cart"></i> <span className="text">Add to cart</span>
+              </button>
           </div>
         </div>
 
