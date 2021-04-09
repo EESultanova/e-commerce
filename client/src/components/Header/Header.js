@@ -8,18 +8,27 @@ import { Link, NavLink } from "react-router-dom";
 import { removeUser } from '../../redux/actionCreators/topicsAC'
 import avatarLogo from '../../assets/avatar.svg';
 import { API_URL } from '../../config'
+import { useEffect, useState } from 'react';
+import { filterGoodsSaga } from '../../redux/actionCreators/goodAC';
 
 
 const Header = () => {
-
+  const [input, setInput] = useState('')
+  const categories = useSelector(state => state.categories)
+  const [categoryForFilter, setCategoryForFilter] = useState(categories[0]?._id)
 	const user = useSelector(state => state.user.isAuth);
 	const currentUser = useSelector(state => state.user);
-  const logo = "images/logo.png"
 	const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : avatarLogo;
 	const dispatch = useDispatch()
+
 	const handlergameOver = () => {
 		dispatch(removeUser())
 	}
+  // console.log(categories)
+
+  useEffect(() => {
+    dispatch(filterGoodsSaga({categoryForFilter, input})) 
+  }, [input])
 
 	return (
 		<header className="section-header">
@@ -27,21 +36,17 @@ const Header = () => {
 				<div className="container">
 					<div className="row align-items-center">
 						<div className="col-xl-2 col-lg-3 col-md-12">
-              {logo &&
-                <Link to="/" className="brand-wrap">
-                  <img className="logo" src={logo} alt="" />
-                </Link>
-              }
+							<Link to="/" className="brand-wrap">
+								<img className="logo" src="images/logo.png" alt="" />
+							</Link>
 						</div>
 						<div className="col-xl-6 col-lg-5 col-md-6">
 							<form action="#" className="search-header">
 								<div className="input-group w-100">
-									<select className="custom-select border-right" name="category_name">
-										<option value="">All type</option><option value="codex">Special</option>
-										<option value="comments">Only best</option>
-										<option value="content">Latest</option>
-									</select>
-									<input type="text" className="form-control" placeholder="Search" />
+									<select className="custom-select border-right" onChange={(e) => setCategoryForFilter(e.target.value)} name="category_name">
+                   {categories.map(el => <option key={el._id} value={el._id}>{el.name}</option>)}
+  								</select>
+									<input type="text" value={input} onChange={(e) => setInput(e.target.value)} className="form-control" placeholder="Search" />
 
 									<div className="input-group-append">
 										<button className="btn btn-primary" type="submit">
@@ -54,11 +59,18 @@ const Header = () => {
 						<div className="col-xl-4 col-lg-4 col-md-6">
 							<div className="widgets-wrap float-md-right">
 								<div className="widget-header mr-3">
-									<NavLink to={
-										!user ? '/login' : '/profile'
-									}><img src={avatar} alt="" style={Object.assign({}, { width: '32px' }, { height: '31px' }, { 'borderRadius': '50%' })} />
-										<small className="text"> My profile </small>
-									</NavLink>
+									{/* <a href="/" className="widget-view">
+										<div className="icon-area">
+											<i className="fa fa-user"></i>
+											<span className="notify">3</span>
+										</div> */}
+									{/* <small className="text"> My profile </small> */}
+									{user &&
+										<NavLink to="/profile"><img src={avatar} alt="" style={Object.assign({}, { width: '32px' }, { height: '31px' }, { 'borderRadius': '50%' })} />
+											<small className="text"> My profile </small>
+										</NavLink>
+									}
+									{/* </a> */}
 								</div>
 								<div className="widget-header mr-3">
 									<a href="/" className="widget-view">
