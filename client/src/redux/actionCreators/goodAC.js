@@ -1,4 +1,4 @@
-import { ADD_GOOD, DELETE_GOOD, GET_GOOD, GET_GOODS } from "../types/goodTypes"
+import { ADD_GOOD, DELETE_GOOD, GET_GOOD, GET_GOODS, FILTER_GOODS, FILTER_GOODS_SAGA } from "../types/goodTypes"
 
 export const getGoods = (goods) => {
   return {
@@ -43,3 +43,14 @@ export const getGoodDetailsFromServer = (id) => {
       .then(oneGoodFromServer => dispatch(getGood(oneGoodFromServer)))
   }
 }
+
+export const filterGoods = (input) => ({
+  type: FILTER_GOODS,
+  payload: input
+})
+
+
+export const filterGoodsSaga = (input) => ({
+  type: FILTER_GOODS_SAGA,
+  payload: input
+})
