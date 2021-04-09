@@ -155,7 +155,7 @@ const Header = () => {
 							{user &&
 								<li className="nav-item">
 									<button>
-										<Link onClick={handlergameOver} className="btn btn-primary" to="/logout">Log out</Link>
+										<Link onClick={handlergameOver} className="btn btn-primary" to="/">Log out</Link>
 									</button>
 								</li>
 							}

@@ -50,40 +50,38 @@ function App() {
     <div className="App">
       <Router>
         <Header />
-        <Switch>
+        <Route exact path="/categories/:id">
+          <ListOfGoods />
+        </Route>
 
-          {!user ?
-            <Switch>
-              <Route exact path="/registration">
-                <Registration />
-              </Route>
-              <Route exact path="/login">
-                <Login />
-              </Route>
-            </Switch>
-            :
-            <Switch>
-              <Route exact path="/profile">
-                <Profile />
-              </Route>
-            </Switch>
-          }
-          <Route exact path="/categories/:id">
-            <ListOfGoods />
-          </Route>
+        <Route path="/goods/:id">
+          <GoodDetails />
+        </Route>
 
-          <Route path="/goods/:id">
-            <GoodDetails />
-          </Route>
+        <Route exact path="/cart">
+          <Cart />
+        </Route>
 
-          <Route exact path="/cart">
-            <Cart />
-          </Route>
+        <Route exact path="/">
+          <Main />
+        </Route>
 
-          <Route exact path="/">
-            <Main />
-          </Route>
-        </Switch>
+        {!user ?
+          <Switch>
+            <Route exact path="/registration">
+              <Registration />
+            </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+          </Switch>
+          :
+          <Switch>
+            <Route exact path="/profile">
+              <Profile />
+            </Route>
+          </Switch>
+        }
         <Footer />
       </Router>
     </div >
