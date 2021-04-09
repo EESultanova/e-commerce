@@ -1,43 +1,31 @@
+import { Link } from "react-router-dom"
+
 const Good = ({good}) => {
 
-  console.log(good, "GOOd")
-
   return (
-    <div class="col-md-3 mx-4">
-            <figure class="card card-product-grid">
-              <div class="img-wrap"> 
-                <span class="badge badge-danger"> NEW </span>
-                <img src={good.photo} alt=""/>
-              </div>
-              <figcaption class="info-wrap">
-                  <a href="/" class="title mb-2">{good.name}</a>
-                  <div class="price-wrap">
-                    <span class="price">{good.price}$</span> 
-                    <small class="text-muted">/per item</small>
-                  </div>
-                  
-                  <p class="mb-2"> 2 Pieces  <small class="text-muted">(Min Order)</small></p>
-                  
-                  <p class="text-muted ">Guangzhou Yichuang Electronic Co</p>
-                
-                  
-                  <p class="mb-3">
-                    <span class="tag"> <i class="fa fa-check"></i> Verified</span> 
-                    <span class="tag"> 2 Years </span> 
-                    <span class="tag"> 23 reviews </span>
-                    <span class="tag"> Japan </span>
-                  </p>
-                
-                  <label class="custom-control mb-3 custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" />
-                    <div class="custom-control-label">Add to compare
-                    </div>
-                  </label>
-
-                  <a href="/" class="btn btn-outline-primary"> <i class="fa fa-envelope"></i> Contact supplier </a>	
-              </figcaption>
-            </figure>
+    <div className="col-md-3 mx-4">
+      <Link to={`/goods/${good._id}`}>
+        <figure className="card card-product-grid">
+          <div className="img-wrap"> 
+            <span className="badge badge-danger"> NEW </span>
+            <img src={good.photo} alt=""/>
           </div>
+          <figcaption className="info-wrap">
+              <p className="title mb-2">{good.name}</p>
+              <div className="price-wrap">
+                <span className="price">{good.price}$</span> 
+                <small className="text-muted">/per item</small>
+              </div>
+            
+              <label className="custom-control mb-3 mt-2 custom-checkbox">
+                <input type="checkbox" className="custom-control-input" />
+                <div className="custom-control-label mr-4">Add to compare
+                </div>
+              </label>	
+          </figcaption>
+        </figure>
+      </Link>
+    </div>
     
   )
 }

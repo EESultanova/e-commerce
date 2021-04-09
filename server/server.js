@@ -2,9 +2,14 @@ require('dotenv').config()
 
 const express = require("express");
 const cors = require("cors");
+const path = require('path');
+const fileupload = require("express-fileupload");
 const { dbConnect } = require("./src/db/connect");
 const GoodModel = require("./src/models/good.model");
 const CategoryModel = require("./src/models/category.model")
+
+const authRouter = require('./src/routes/auth.routes');
+const filesRouter = require('./src/routes/file.routes');
 
 const app = express();
 
@@ -14,7 +19,12 @@ dbConnect();
 
 app.use(cors());
 app.use(express.json());
+app.use(fileupload());
+app.use(express.static(path.join(__dirname, 'static')))
 app.use(express.urlencoded({ extended: true }));
+
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/files', filesRouter);
 
 app.get("/api/v1/", async (req, res) => {
   try {
@@ -25,11 +35,24 @@ app.get("/api/v1/", async (req, res) => {
   }
 });
 
-app.get("/api/v1/category/:id", async (req, res) => {
+app.get("/api/v1/categories/:id", async (req, res) => {
   try {
-    const goods = await GoodModel.find({category: req.params.id})
+    const goods = await GoodModel.find({ category: req.params.id })
     res.json(goods)
   } catch (error) {
+    res.sendStatus(500)
+  }
+})
+
+app.get("/api/v1/goods/:id", async (req, res) => {
+  try {
+    const { id } = req.params
+    console.log(id)
+    const good = await GoodModel.findById(id)
+    console.log(good)
+    res.json(good)
+  } catch (error) {
+    console.log(error)
     res.sendStatus(500)
   }
 })

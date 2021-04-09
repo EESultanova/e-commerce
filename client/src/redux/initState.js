@@ -1,8 +1,17 @@
 const initState = {
-    categories: [],
-    currentCategory: null,
+  user: {
+    name: '',
+    isAuth: false,
+    avatar: '',
+  },
+  categories: [],
+  currentCategory: null,
+  goods: {
     goods: [],
-    cart: []
+    good: {}
+  },
+  cart: [],
+  good: {},
 }
 
 export default initState
