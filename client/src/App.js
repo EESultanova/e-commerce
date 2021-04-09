@@ -40,7 +40,7 @@ function App() {
           dispatch(setUser(response))
         })
     } catch (e) {
-      alert(e)
+      // alert(e)
       localStorage.removeItem('token');
     }
 
