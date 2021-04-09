@@ -17,9 +17,9 @@ const Good = ({good}) => {
                 <small className="text-muted">/per item</small>
               </div>
             
-              <label className="custom-control mb-3 custom-checkbox">
+              <label className="custom-control mb-3 mt-2 custom-checkbox">
                 <input type="checkbox" className="custom-control-input" />
-                <div className="custom-control-label">Add to compare
+                <div className="custom-control-label mr-4">Add to compare
                 </div>
               </label>	
           </figcaption>
