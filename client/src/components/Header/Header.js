@@ -110,22 +110,14 @@ const Header = () => {
 								<div className="dropdown-menu dropdown-large">
 									<nav className="row">
 										<div className="col-12 ml-3">
-											<a href="page-index-1.html">Home page 1</a>
-											<a href="page-index-2.html">Home page 2</a>
+											<a href="/">Home page</a>
 											<a href="page-category.html">All category</a>
-											<a href="page-listing-large.html">Listing list</a>
-											<a href="page-listing-grid.html">Listing grid</a>
-											<a href="page-shopping-cart.html">Shopping cart</a>
-											<a href="page-detail-product.html">Product detail</a>
-											<a href="page-content.html">Page content</a>
-											<a href="page-user-login.html">Page login</a>
-											<a href="page-user-register.html">Page register</a>
 										</div>
 									</nav>
 								</div>
 							</li>
 							<li className="nav-item">
-								<a className="nav-link" href="/">Ready to ship</a>
+								<a className="nav-link" href="/">All categories</a>
 							</li>
 							<li className="nav-item">
 								<a className="nav-link" href="/">Trade shows</a>
@@ -155,7 +147,7 @@ const Header = () => {
 							{user &&
 								<li className="nav-item">
 									<button>
-										<Link onClick={handlergameOver} className="btn btn-primary" to="/logout">Log out</Link>
+										<Link onClick={handlergameOver} className="btn btn-primary" to="/">Log out</Link>
 									</button>
 								</li>
 							}

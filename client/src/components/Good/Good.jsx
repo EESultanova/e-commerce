@@ -8,7 +8,7 @@ const Good = ({good}) => {
         <figure className="card card-product-grid">
           <div className="img-wrap"> 
             <span className="badge badge-danger"> NEW </span>
-            <img src={good.photo[0]} alt=""/>
+            <img src={good.photo[0]} className="mt-2" alt=""/>
           </div>
           <figcaption className="info-wrap">
               <p className="title mb-2">{good.name}</p>
@@ -17,9 +17,9 @@ const Good = ({good}) => {
                 <small className="text-muted">/per item</small>
               </div>
             
-              <label className="custom-control mb-3 custom-checkbox">
+              <label className="custom-control mb-3 mt-2 custom-checkbox">
                 <input type="checkbox" className="custom-control-input" />
-                <div className="custom-control-label">Add to compare
+                <div className="custom-control-label mr-4">Add to compare
                 </div>
               </label>	
           </figcaption>
