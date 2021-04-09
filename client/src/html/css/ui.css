@@ -9,6 +9,11 @@ html {
 INCLUDE STYLES AND COMPONENTS
 ===================== */
 /* ================== HELPERS  =================== */
+
+.col-md-3 .mx-4 .good {
+  min-height: 10%!important;
+}
+
 a:hover {
   text-decoration: none; }
 
@@ -782,7 +787,8 @@ a[class*='card'] {
     height: 250px; }
   .card-product-grid .info-wrap {
     overflow: hidden;
-    padding: 16px; }
+    padding: 16px;
+    height: 11.5rem; }
   .card-product-grid .bottom-wrap {
     padding: 16px;
     border-top: 1px solid #e5e7ea; }
@@ -1266,7 +1272,7 @@ body {
 
 /* ================== PAGE DETAILS ==================  */
 .gallery-wrap .img-big-wrap {
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   border-radius: 0.37rem;
   overflow: hidden;
   background-color: #fff; }
