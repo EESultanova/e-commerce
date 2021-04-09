@@ -9,6 +9,7 @@ import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import ListOfGoods from './components/ListOfGoods/ListOfGoods'
+import Order from './components/Order/Order';
 import GoodDetails from './components/GoodDetails/GoodDetails';
 import Cart from './components/Cart/Cart'
 import Login from './components/Login/Login'
@@ -44,45 +45,44 @@ function App() {
     auth();
   }, []);
 
-  return (
-    <div className="App">
-      <Router>
-        <Header />
-        <Route exact path="/categories/:id">
-          <ListOfGoods />
-        </Route>
-        <Route path="/goods/:id">
-          <GoodDetails />
-        </Route>
-
-        <Route exact path="/cart">
-          <Cart />
-        </Route>
-
-        <Route exact path="/">
-          <Main />
-        </Route>
-
-        {!user ?
-          <Switch>
-            <Route exact path="/registration">
-              <Registration />
-            </Route>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-          </Switch>
-          :
-          <Switch>
-            <Route exact path="/profile">
-              <Profile />
-            </Route>
-          </Switch>
-        }
-        <Footer />
-      </Router>
-    </div >
-  );
+  
+    return (
+      <div className="App">
+        <Router>
+          <Header />
+          <Route exact path="/categories/:id">
+            <ListOfGoods />
+          </Route>
+          <Route path="/goods/:id">
+            <GoodDetails />
+          </Route>
+          <Route exact path="/cart">
+            <Cart />
+          </Route>
+          <Route exact path="/">
+            <Main />
+          </Route>
+          {!user ?
+            <Switch>
+              <Route exact path="/registration">
+                <Registration />
+              </Route>
+              <Route exact path="/login">
+                <Login />
+              </Route>
+            </Switch>
+            :
+            <Switch>
+              <Route exact path="/profile">
+                <Profile />
+              </Route>
+            </Switch>
+          }
+          <Footer />
+          <Order/>
+        </Router>
+      </div >
+    );
 }
 
 export default App;

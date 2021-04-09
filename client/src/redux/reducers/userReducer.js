@@ -1,3 +1,4 @@
+import { ADD_ORDER_DETAILS } from "../types/orderTypes";
 import { SET_USER, CHANGE_POINTS, REMOVE_USER, SET_AVATAR } from "../types/topicsTypes";
 
 
@@ -14,6 +15,12 @@ const userReducer = (state = {}, action) => {
                     isAuth: true,
                 }
             }
+
+            case ADD_ORDER_DETAILS:
+              return {
+                ...state,
+                user: [...state.orders, action.payload]
+              }    
 
         // case SET_AVATAR:
         //     if (action.payload.user) {
