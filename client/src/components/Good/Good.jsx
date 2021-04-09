@@ -3,12 +3,12 @@ import { Link } from "react-router-dom"
 const Good = ({good}) => {
 
   return (
-    <div className="col-md-3 mx-4">
+    <div className="col-md-3 mx-4 good">
       <Link to={`/goods/${good._id}`}>
         <figure className="card card-product-grid">
           <div className="img-wrap"> 
             <span className="badge badge-danger"> NEW </span>
-            <img src={good.photo} alt=""/>
+            <img src={good.photo[0]} className="mt-2" alt=""/>
           </div>
           <figcaption className="info-wrap">
               <p className="title mb-2">{good.name}</p>

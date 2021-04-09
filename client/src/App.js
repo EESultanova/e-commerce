@@ -26,10 +26,6 @@ function App() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    auth();
-  }, []);
-
   const auth = async () => {
     try {
       await fetch(`${API_URL}api/v1/auth/auth`,
@@ -43,9 +39,11 @@ function App() {
     } catch (e) {
       // alert(e)
       localStorage.removeItem('token');
-    }
+    }}
 
-  }
+  useEffect(() => {
+    auth();
+  }, []);
 
   
     return (

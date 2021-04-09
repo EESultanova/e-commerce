@@ -2,8 +2,9 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router"
 import { getGoodsFromServer } from "../../redux/actionCreators/goodAC"
+import { getCategoriesFromServer } from "../../redux/actionCreators/categoryAC"
 import Good from "../Good/Good.jsx"
-
+import { Link } from "react-router-dom"
 
 
 const ListGoods = () => {
@@ -12,10 +13,15 @@ const ListGoods = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(getCategoriesFromServer);
     dispatch(getGoodsFromServer(id))
   }, [])
 
   const goods = useSelector(state => state.goods.goods)
+  const categories = useSelector(state => state.categories)
+  const currentCategory = categories.find(categories => categories._id === id)
+
+  // console.log(currentCategory.name, '======')
   console.log(goods)
 
   return (
@@ -24,11 +30,10 @@ const ListGoods = () => {
           <div className="card-body">
         <div className="row">
           <div className="col-md-2"> Your are here: </div>
-          <nav className="col-md-8"> 
+          <nav className="col-md-8" style={{marginRight: 205}}> 
           <ol className="breadcrumb">
               <li className="breadcrumb-item"><a href="/">Home</a></li>
-              <li className="breadcrumb-item"><a href="/">Category name</a></li>
-              <li className="breadcrumb-item"><a href="/">Sub category</a></li>
+                {currentCategory && <li className="breadcrumb-item"><Link to={`/categories/${currentCategory._id}`}>{currentCategory.name}</Link></li>}
               <li className="breadcrumb-item active" aria-current="page">Items</li>
           </ol>  
           </nav>
@@ -37,7 +42,7 @@ const ListGoods = () => {
         <div className="row">
           <div className="col-md-2">Filter by</div>
           <div className="col-md-10"> 
-            <ul className="list-inline">
+            <ul className="list-inline" style={{display: 'flex', marginLeft: '1.2rem'}}>
               <li className="list-inline-item mr-3 dropdown"><a href="/" className="dropdown-toggle" data-toggle="dropdown">   Supplier type </a>
                     <div className="dropdown-menu p-3" style={{maxWidth: "20rem"}}>	
                   <label className="form-check">
@@ -95,7 +100,7 @@ const ListGoods = () => {
 
         <header className="mb-3 mx-4">
             <div className="form-inline">
-              <strong className="mr-md-auto">32 Items found </strong>
+              <strong className="mr-md-auto">{goods.length} Items found </strong>
               <select className="mr-2 form-control">
                 <option>Latest items</option>
                 <option>Trending</option>
