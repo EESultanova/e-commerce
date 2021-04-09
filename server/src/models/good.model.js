@@ -13,6 +13,10 @@ const goodSchema = new Schema({
     type: Number,
     required: true,
   },
+  rating: {
+    type: String,
+    required: true,
+  },
   photo: [{
     type: String,
   }],

@@ -20,14 +20,14 @@ const GoodDetails = () => {
       <div className="card">
       <article className="gallery-wrap"> 
         <div className="img-big-wrap">
-          <div> <a href="/"><img src={good.photo[0]} alt="" /></a></div>
+          <div> <a href="/"><img src={good.photo} alt="" /></a></div>
         </div>
-        <div className="thumbs-wrap">
+        {/* <div className="thumbs-wrap">
           <a href="/" className="item-thumb"> <img src={good.photo[1]} alt="" /></a>
           <a href="/" className="item-thumb"> <img src={good.photo[2]} alt="" /></a>
-          <a href="/" className="item-thumb"> <img src={good.photo[3]} alt="" /></a>
+          <a href="/" className="item-thumb"> <img src={good.photo[3]} alt="" /></a> */}
           {/* <a href="/" className="item-thumb"> <img src={good.photo[4]} alt="" /></a> */}
-        </div>
+        {/* </div> */}
       </article>
       </div>
           </aside>
