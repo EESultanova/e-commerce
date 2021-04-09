@@ -25,26 +25,26 @@ function App() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    auth();
-  }, []);
+  // useEffect(() => {
+  //   auth();
+  // }, []);
 
-  const auth = async () => {
-    try {
-      await fetch(`${API_URL}api/v1/auth/auth`,
-        { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
-      )
-        .then(res => res.json())
-        .then((response) => {
-          console.log('=======>', response)
-          dispatch(setUser(response))
-        })
-    } catch (e) {
-      alert(e)
-      localStorage.removeItem('token');
-    }
+  // const auth = async () => {
+  //   try {
+  //     await fetch(`${API_URL}api/v1/auth/auth`,
+  //       { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+  //     )
+  //       .then(res => res.json())
+  //       .then((response) => {
+  //         console.log('=======>', response)
+  //         dispatch(setUser(response))
+  //       })
+  //   } catch (e) {
+  //     alert(e)
+  //     localStorage.removeItem('token');
+  //   }
 
-  }
+  // }
 
   return (
     <div className="App">
@@ -52,7 +52,7 @@ function App() {
         <Header />
         <Switch>
 
-          {!user ?
+          {/* {!user ?
             <Switch>
               <Route exact path="/registration">
                 <Registration />
@@ -67,7 +67,7 @@ function App() {
                 <Profile />
               </Route>
             </Switch>
-          }
+          } */}
           <Route exact path="/categories/:id">
             <ListOfGoods />
           </Route>
