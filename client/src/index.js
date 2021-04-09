@@ -8,7 +8,11 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { Provider } from 'react-redux';
 import thunk from "redux-thunk"
 
-const store = createStore(rootReducer, initState, composeWithDevTools(applyMiddleware(thunk)))
+const store = createStore(rootReducer, initState(), composeWithDevTools(applyMiddleware(thunk)))
+
+store.subscribe(() => {
+  window.localStorage.setItem('myApp', JSON.stringify(store.getState()))
+})
 
 ReactDOM.render(
   <React.StrictMode>
