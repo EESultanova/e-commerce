@@ -53,7 +53,6 @@ function App() {
         <Route exact path="/categories/:id">
           <ListOfGoods />
         </Route>
-
         <Route path="/goods/:id">
           <GoodDetails />
         </Route>
