@@ -13,9 +13,9 @@ const goodSchema = new Schema({
     type: Number,
     required: true,
   },
-  photo: {
+  photo: [{
     type: String,
-  },
+  }],
   category: {
     type: Schema.Types.ObjectId,
     ref: 'Categories',
