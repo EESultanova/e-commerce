@@ -1,4 +1,4 @@
-const initState = () => {
+const initState = () =>  {
   const state = {
     user: {
       name: '',
@@ -13,12 +13,10 @@ const initState = () => {
       good: {},
     },
     cart: [],
-    good: {},
   }
 
   const fromLS = JSON.parse(window.localStorage.getItem('myApp'))
   return fromLS ? fromLS : state
-
 }
 
 

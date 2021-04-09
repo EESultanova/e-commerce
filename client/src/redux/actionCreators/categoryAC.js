@@ -12,3 +12,4 @@ export const getCategoriesFromServer = async (dispatch) => {
     .then(response => response.json())
     .then(categoriesFromServer => dispatch(getCategories(categoriesFromServer)))
 }
+
