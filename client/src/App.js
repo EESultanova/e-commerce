@@ -47,62 +47,44 @@ function App() {
 
   }
 
-  return (
-    <div className="App">
-      <Router>
-        <Header/>
-        <Switch>
+  
+    return (
+      <div className="App">
+        <Router>
+          <Header />
           <Route exact path="/categories/:id">
             <ListOfGoods />
           </Route>
-
-          <Route exact path="/">
-            <Main />
+          <Route path="/goods/:id">
+            <GoodDetails />
           </Route>
-
           <Route exact path="/cart">
             <Cart />
           </Route>
-        </Switch>
-
-        <Order/>
-        <Footer/>
-        <Header />
-        <Route exact path="/categories/:id">
-          <ListOfGoods />
-        </Route>
-        <Route path="/goods/:id">
-          <GoodDetails />
-        </Route>
-
-        <Route exact path="/cart">
-          <Cart />
-        </Route>
-
-        <Route exact path="/">
-          <Main />
-        </Route>
-
-        {!user ?
-          <Switch>
-            <Route exact path="/registration">
-              <Registration />
-            </Route>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-          </Switch>
-          :
-          <Switch>
-            <Route exact path="/profile">
-              <Profile />
-            </Route>
-          </Switch>
-        }
-        <Footer />
-      </Router>
-    </div >
-  );
+          <Route exact path="/">
+            <Main />
+          </Route>
+          {!user ?
+            <Switch>
+              <Route exact path="/registration">
+                <Registration />
+              </Route>
+              <Route exact path="/login">
+                <Login />
+              </Route>
+            </Switch>
+            :
+            <Switch>
+              <Route exact path="/profile">
+                <Profile />
+              </Route>
+            </Switch>
+          }
+          <Footer />
+          <Order/>
+        </Router>
+      </div >
+    );
 }
 
 export default App;

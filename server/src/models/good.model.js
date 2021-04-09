@@ -20,6 +20,9 @@ const goodSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Categories',
   },
+  delivery: {
+    type: String
+  },
 });
 
 const GoodModel = model('Goods', goodSchema);
