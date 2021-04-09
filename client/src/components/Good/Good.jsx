@@ -8,7 +8,7 @@ const Good = ({good}) => {
         <figure className="card card-product-grid">
           <div className="img-wrap"> 
             <span className="badge badge-danger"> NEW </span>
-            <img src={good.photo} alt=""/>
+            <img src={good.photo[0]} alt=""/>
           </div>
           <figcaption className="info-wrap">
               <p className="title mb-2">{good.name}</p>
