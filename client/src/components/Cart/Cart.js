@@ -1,4 +1,12 @@
+import { useDispatch, useSelector } from "react-redux";
+import { deleteGoodFromCart } from "../../redux/actionCreators/cartAC";
+
 const Cart = () => {
+
+  const dispatch = useDispatch()
+  const cart = useSelector(state => state.cart)
+  
+  console.log('CART ===>', cart)
 
   return ( 
     <section className="section-content padding-y">
@@ -19,35 +27,40 @@ const Cart = () => {
       </thead>
       <tbody>
         {/*  */}
-      <tr>
-        <td>
-          <figure className="itemside">
-            <div className="aside"><img src="images/items/1.jpg" className="img-sm" alt=""/></div>
-            <figcaption className="info">
-              <a href="/" className="title text-dark">Some name of item goes here nice</a>
-              <p className="text-muted small">Size: XL, Color: blue, <br/> Brand: Gucci</p>
-            </figcaption>
-          </figure>
-        </td>
-        <td> 
-          <select className="form-control">
-            <option>1</option>
-            <option>2</option>	
-            <option>3</option>	
-            <option>4</option>	
-          </select> 
-        </td>
-        <td> 
-          <div className="price-wrap"> 
-            <var className="price">$1156.00</var> 
-            <small className="text-muted"> $315.20 each </small> 
-          </div>
-        </td>
-        <td className="text-right"> 
-        <a data-original-title="Save to Wishlist" title="" href="/" className="btn btn-light" data-toggle="tooltip"> <i className="fa fa-heart"></i></a> 
-        <a href="/" className="btn btn-light"> Remove</a>
-        </td>
-      </tr>
+      {cart.length ? cart.map(good => {
+        return (
+          <tr key={good._id}>
+            <td>
+              <figure className="itemside">
+                <div className="aside"><img src={good.photo} className="img-sm" alt=""/></div>
+                <figcaption className="info">
+                  <a href="/" className="title text-dark">{good.name}</a>
+                  <p className="text-muted small">{good.description}</p>
+                </figcaption>
+              </figure>
+            </td>
+            <td> 
+              <select className="form-control">
+                <option>1</option>
+                <option>2</option>	
+                <option>3</option>	
+                <option>4</option>	
+              </select> 
+            </td>
+            <td> 
+              <div className="price-wrap"> 
+                <var className="price">$1156.00</var> 
+                <small className="text-muted"> {good.price} each </small> 
+              </div>
+            </td>
+            <td className="text-right"> 
+            <button onClick={() => dispatch(deleteGoodFromCart(good._id))} className="btn btn-light"> Remove</button>
+            </td>
+          </tr>
+          )
+        })
+        : <h5>No goods</h5>
+      }
       {/*  */}
       </tbody>
       </table>

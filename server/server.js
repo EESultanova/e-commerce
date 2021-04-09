@@ -47,12 +47,9 @@ app.get("/api/v1/categories/:id", async (req, res) => {
 app.get("/api/v1/goods/:id", async (req, res) => {
   try {
     const { id } = req.params
-    console.log(id)
     const good = await GoodModel.findById(id)
-    console.log(good)
     res.json(good)
   } catch (error) {
-    console.log(error)
     res.sendStatus(500)
   }
 })
