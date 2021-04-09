@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router"
 import { getGoodsFromServer } from "../../redux/actionCreators/goodAC"
 import Good from "../Good/Good.jsx"
-
+import { Link } from "react-router-dom"
 
 
 const ListGoods = () => {
@@ -16,6 +16,10 @@ const ListGoods = () => {
   }, [])
 
   const goods = useSelector(state => state.goods.goods)
+  const categories = useSelector(state => state.categories)
+  // const currentCategory = categories.find(categories => categories._id === id)
+
+  // console.log(currentCategory.name, '======')
   console.log(goods)
 
   return (
@@ -27,7 +31,7 @@ const ListGoods = () => {
           <nav className="col-md-8"> 
           <ol className="breadcrumb">
               <li className="breadcrumb-item"><a href="/">Home</a></li>
-              <li className="breadcrumb-item"><a href="/">Category name</a></li>
+              {/* <li className="breadcrumb-item"><Link to={`/categories/${currentCategory._id}`}>{currentCategory.name}</Link></li> */}
               <li className="breadcrumb-item"><a href="/">Sub category</a></li>
               <li className="breadcrumb-item active" aria-current="page">Items</li>
           </ol>  
