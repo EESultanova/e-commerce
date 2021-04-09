@@ -16,11 +16,11 @@ const userReducer = (state = {}, action) => {
                 }
             }
 
-            case ADD_ORDER_DETAILS:
-              return {
+        case ADD_ORDER_DETAILS:
+            return {
                 ...state,
                 user: [...state.orders, action.payload]
-              }    
+            }
 
         // case SET_AVATAR:
         //     if (action.payload.user) {
@@ -43,6 +43,7 @@ const userReducer = (state = {}, action) => {
             return {
                 ...state,
                 name: '',
+                avatar: '',
                 isAuth: false
             }
 
