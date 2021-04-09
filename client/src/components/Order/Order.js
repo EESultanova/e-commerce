@@ -45,7 +45,7 @@ function Order() {
 	  <div className="form-row">
 			<div className="form-group col-sm-6">
 				<label className="js-check box active">
-					<input type="radio" name="dostavka" value="option1" checked/>
+					<input type="radio" name="dostavka" value="option1" defaultChecked/>
 					<h6 className="title">Standart delivery</h6>
 					<p className="text-muted">Free by airline within 20 days</p>
 				</label> 
@@ -88,12 +88,12 @@ function Order() {
       <h4 className="card-title mb-4">Payment</h4>
       <form role="form" style={{maxWidth:380}}>
 			<div className="form-group">
-			<label for="username">Name on card</label>
+			<label htmlFor="username">Name on card</label>
 			<input  onChange={e => setCardName(e.target.value)} type="text" className="form-control" name="username" placeholder="Ex. John Smith" required=""/>
 			</div> 
 
 			<div className="form-group card required">
-			<label for="cardNumber">Card number</label>
+			<label htmlFor="cardNumber">Card number</label>
 			<div className="input-group">
 				<input type="text"  onChange={e => setCard(e.target.value)}  className="form-control" name="cardNumber" placeholder="" />
 				<div className="input-group-append">

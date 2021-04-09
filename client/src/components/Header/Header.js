@@ -114,7 +114,7 @@ const Header = () => {
 					<div className="collapse navbar-collapse" id="main_nav">
 						<ul className="navbar-nav">
 							<li className="nav-item dropdown">
-								<a className="nav-link dropdown-toggle" data-toggle="dropdown" href="/"> <i className="fa fa-bars text-muted mr-2"></i> Demo pages </a>
+								<a className="nav-link dropdown-toggle" data-toggle="dropdown" href="/"> <i className="fa fa-bars text-muted mr-2"></i> Menu </a>
 								<div className="dropdown-menu dropdown-large">
 									<nav className="row">
 										<div className="col-12 ml-3">
