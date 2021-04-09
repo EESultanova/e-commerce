@@ -16,14 +16,13 @@ const GoodDetails = () => {
   const good = useSelector(state => state.goods.good)
   const cart = useSelector(state => state.cart)
   console.log("======>", cart)
-  const specialCart = cart.map(x => {
+  const inCart = cart.map(x => {
     if (x._id === good._id) {
       return true
     }
     return false
   })
 
-  console.log(specialCart)
   cart.find(x => x._id === good._id)
   console.log(cart.find(x => x._id === good._id))
 
@@ -101,9 +100,10 @@ const GoodDetails = () => {
 
         <div className="form-row  mt-5">
           <div className="form-group col-md">
-            <button onClick={() => dispatch(addGoodToCart(good))} className="btn  btn-primary">
-              <i className="fas fa-shopping-cart"></i> <span className="text">Add to cart</span>
-            </button>
+            {/* {!inCart ?  */}
+              <button onClick={() => dispatch(addGoodToCart(good))} className="btn  btn-primary">
+                <i className="fas fa-shopping-cart"></i> <span className="text">Add to cart</span>
+              </button>
           </div>
         </div>
 
