@@ -4,7 +4,7 @@ const initState = () =>  {
       name: '',
       isAuth: false,
       avatar: '',
-      cart: [],
+      orders: [],
     },
     categories: [],
     currentCategory: null,
@@ -18,5 +18,7 @@ const initState = () =>  {
   const fromLS = JSON.parse(window.localStorage.getItem('myApp'))
   return fromLS ? fromLS : state
 }
+
+
 
 export default initState

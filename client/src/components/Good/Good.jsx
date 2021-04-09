@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 const Good = ({good}) => {
 
   return (
-    <div className="col-md-3 mx-4">
+    <div className="col-md-3 mx-4 good" data-price={good.price} data-rate={good.rating}>
       <Link to={`/goods/${good._id}`}>
         <figure className="card card-product-grid">
           <div className="img-wrap"> 
