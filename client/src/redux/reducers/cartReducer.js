@@ -1,21 +1,17 @@
-const { ADD_GOOD_TO_CART, DELETE_GOOD_FROM_CART, INCREASE_QUANTITY, DECREASE_QUANTITY } = require("../types/cartTypes");
+const { ADD_GOOD_TO_CART, DELETE_GOOD_FROM_CART, CHANGE_QUANTITY } = require("../types/cartTypes");
 
 const cartReducer = (state = [], action) => {
   switch (action.type) {
-    case INCREASE_QUANTITY:
-      console.log('hello')
+    case CHANGE_QUANTITY:
+      console.log('Hello reducer')
+      console.log(action)
       return state.map(goodCart => {
-        console.log(goodCart._id)
-        console.log(action.payload)
-        if (goodCart._id === action.payload) {
-          console.log('bye')
+        if (goodCart._id === action.id) {
           return {
             ...goodCart,
-            quantity: goodCart.quantity + 1
+            quantity: action.quantity
           }
         }
-        console.log('one', goodCart)
-        console.log('two', action.payload)
         return goodCart
       })
 
@@ -26,18 +22,8 @@ const cartReducer = (state = [], action) => {
       ]
 
     case DELETE_GOOD_FROM_CART:
+      console.log(action.payload)
       return state.filter(good => good._id !== action.payload)
-
-      case DECREASE_QUANTITY:
-        return state.map(good => {
-          if (good._id === action.payload) {
-            return {
-              ...good,
-              quantity: good.quantity -= 1
-            }
-          }
-          return good
-        })
     
     default:
       return state
