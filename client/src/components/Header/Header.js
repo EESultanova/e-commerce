@@ -18,6 +18,8 @@ const Header = () => {
   const [categoryForFilter, setCategoryForFilter] = useState(categories[0]?._id)
 	const user = useSelector(state => state.user.isAuth);
 	const currentUser = useSelector(state => state.user);
+  const cart = useSelector(state => state.cart)
+  const logo = "images/logo.png"
 	const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : avatarLogo;
 	const dispatch = useDispatch()
 
@@ -93,6 +95,10 @@ const Header = () => {
 									<Link to="/cart" className="widget-view">
 										<div className="icon-area">
 											<i className="fa fa-shopping-cart"></i>
+                      {cart.length ?
+                        <span className="notify">{cart.length}</span>
+                        : ''
+                      }
 										</div>
 										<small className="text"> Cart </small>
 									</Link>

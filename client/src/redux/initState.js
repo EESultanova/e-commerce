@@ -4,7 +4,6 @@ const initState = () =>  {
       name: '',
       isAuth: false,
       avatar: '',
-      orders: [],
     },
     categories: [],
     currentCategory: null,

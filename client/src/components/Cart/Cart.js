@@ -1,11 +1,17 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteGoodFromCart } from "../../redux/actionCreators/cartAC";
+import { changeQuantity, deleteGoodFromCart } from "../../redux/actionCreators/cartAC";
 
 const Cart = () => {
 
   const dispatch = useDispatch()
+
   const cart = useSelector(state => state.cart)
+
+  console.log(cart)
+  const total = Object.values(cart).reduce((acc, {price, quantity}) => (acc + price) * quantity, 0)
+  console.log(total)
+  // Object.values(departments).reduce((acc, {quantity}) => acc + quantity, 0)
   
   console.log('CART ===>', cart)
 
@@ -41,16 +47,11 @@ const Cart = () => {
               </figure>
             </td>
             <td> 
-              <select className="form-control">
-                <option>1</option>
-                <option>2</option>	
-                <option>3</option>	
-                <option>4</option>	
-              </select> 
+              <input onChange={(event) => dispatch(changeQuantity(good._id, event.target.value))} type="number" min="1"  placeholder="0" className="form-control"/>
             </td>
             <td> 
               <div className="price-wrap"> 
-                <var className="price">$1156.00</var> 
+                <var className="price">{good.price * good.quantity} $</var> 
                 <small className="text-muted"> {good.price} each </small> 
               </div>
             </td>
@@ -78,34 +79,11 @@ const Cart = () => {
 
         </main>
         <aside className="col-md-3">
-          <div className="card mb-3">
-            <div className="card-body">
-            <form>
-              <div className="form-group">
-                <label>Have coupon?</label>
-                <div className="input-group">
-                  <input type="text" className="form-control" name="" placeholder="Coupon code" />
-                  <span className="input-group-append"> 
-                    <button className="btn btn-primary">Apply</button>
-                  </span>
-                </div>
-              </div>
-            </form>
-            </div>
-          </div>
           <div className="card">
             <div className="card-body">
                 <dl className="dlist-align">
                   <dt>Total price:</dt>
-                  <dd className="text-right">USD 568</dd>
-                </dl>
-                <dl className="dlist-align">
-                  <dt>Discount:</dt>
-                  <dd className="text-right">USD 658</dd>
-                </dl>
-                <dl className="dlist-align">
-                  <dt>Total:</dt>
-                  <dd className="text-right  h5"><strong>$1,650</strong></dd>
+                  <dd className="text-right">{total.toFixed(2)} $</dd>
                 </dl>
                 <hr/>
                 <p className="text-center mb-3">

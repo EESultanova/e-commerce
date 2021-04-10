@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router"
-import { addGoodToCart, increaseGoodQuantity } from "../../redux/actionCreators/cartAC"
-import { getGoodDetailsFromServer, getGoodsFromServer } from "../../redux/actionCreators/goodAC"
+import { addGoodToCart, deleteGoodFromCart } from "../../redux/actionCreators/cartAC"
+import { getGoodDetailsFromServer } from "../../redux/actionCreators/goodAC"
 
 const GoodDetails = () => {
 
@@ -15,13 +15,10 @@ const GoodDetails = () => {
 
   const good = useSelector(state => state.goods.good)
   const cart = useSelector(state => state.cart)
-  console.log("======>", cart)
-  const inCart = cart.map(x => {
-    if (x._id === good._id) {
-      return true
-    }
-    return false
-  })
+  const ids = cart.map(good => good._id)
+  const inCart = ids.includes(good._id)
+  console.log(inCart)
+
 
   cart.find(x => x._id === good._id)
   console.log(cart.find(x => x._id === good._id))
@@ -33,7 +30,7 @@ const GoodDetails = () => {
       <article className="gallery-wrap">
         {good.photo &&
           <>
-            <div className="img-big-wrap">
+            <div className="img-big-wrap mt-5">
               <div> <a href="/"><img src={good.photo} alt="" /></a></div>
             </div>
             <div className="thumbs-wrap">
@@ -73,9 +70,7 @@ const GoodDetails = () => {
       </div>
 
       <div className="mb-3"> 
-        <var className="price h4">{good.price}$</var> 
-        &nbsp;
-        <span className="text-muted">USD 562.65 incl. VAT</span> 
+        <var className="price h4">{good.price} $</var> 
       </div>
 
       <p>{good.description}</p>
@@ -100,10 +95,13 @@ const GoodDetails = () => {
 
         <div className="form-row  mt-5">
           <div className="form-group col-md">
-            {/* {!inCart ?  */}
+            {(inCart === true) ?
+              <button onClick={() => dispatch(deleteGoodFromCart(good._id))} type="button" class="btn btn-secondary">Remove from cart</button>
+              :   
               <button onClick={() => dispatch(addGoodToCart(good))} className="btn  btn-primary">
-                <i className="fas fa-shopping-cart"></i> <span className="text">Add to cart</span>
-              </button>
+              <i className="fas fa-shopping-cart"></i> <span className="text">Add to cart</span>
+            </button>
+            }
           </div>
         </div>
 

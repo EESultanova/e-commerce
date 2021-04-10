@@ -1,4 +1,4 @@
-import { ADD_GOOD_TO_CART, DECREASE_QUANTITY, DELETE_GOOD_FROM_CART, INCREASE_QUANTITY } from "../types/cartTypes"
+import { ADD_GOOD_TO_CART, CHANGE_QUANTITY, DELETE_GOOD_FROM_CART } from "../types/cartTypes"
 
 export const addGoodToCart = (good) => {
   return {
@@ -14,17 +14,12 @@ export const deleteGoodFromCart = (good) => {
   }
 }
 
-export const increaseGoodQuantity = (id) => {
-  console.log('increase', id)
-  return {
-    type: INCREASE_QUANTITY,
-    payload: id
-  }
-}
-
-export const decreaseGoodQuantity = (id) => {
-  return {
-    type: DECREASE_QUANTITY,
-    payload: id
+export const changeQuantity = (id, quantity) => {
+  return function(dispatch) {
+    dispatch({
+      type: CHANGE_QUANTITY,
+      id,
+      quantity
+    })
   }
 }
