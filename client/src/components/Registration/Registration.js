@@ -13,6 +13,7 @@ function Registration() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setNickname] = useState('');
+    const [role, setRole] = useState('');
 
     const inputEmailHandler = (e) => {
         setEmail(e.target.value);
@@ -24,6 +25,10 @@ function Registration() {
 
     const inputNicknameHandler = (e) => {
         setNickname(e.target.value);
+    }
+
+    const inputRoleHandler = (e) => {
+        setRole(e.target.value);
     }
 
     const submitHandler = async (e) => {
@@ -38,6 +43,7 @@ function Registration() {
                     name,
                     email,
                     password,
+                    role,
                 })
             })
                 .then(res => res.json())
@@ -64,6 +70,14 @@ function Registration() {
                 </div>
                 <div class="mb-3">
                     <input value={password} onChange={inputPasswordHandler} name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Type your password ..." />
+                </div>
+
+                <div class="mb-3">
+                    <select onChange={inputRoleHandler} className="mr-2 form-control">
+                        <option selected="selected">Choose your role</option>
+                        <option value="seller">Seller</option>
+                        <option value="buyer">Buyer</option>
+                    </select>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
