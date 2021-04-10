@@ -8,12 +8,9 @@ const Cart = () => {
 
   const cart = useSelector(state => state.cart)
 
-  console.log(cart)
-  const total = Object.values(cart).reduce((acc, {price, quantity}) => (acc + price) * quantity, 0)
-  console.log(total)
-  // Object.values(departments).reduce((acc, {quantity}) => acc + quantity, 0)
-  
-  console.log('CART ===>', cart)
+  const total = cart
+    .map(el => el.price * el.quantity)
+    .reduce((acc, currentValue) => acc + currentValue)
 
   return ( 
     <section className="section-content padding-y">
