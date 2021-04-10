@@ -1,23 +1,19 @@
 import { filterGoods } from "../actionCreators/goodAC";
-import { FILTER_GOODS, FILTER_GOODS_SAGA } from "../types/goodTypes";
-import { call, put, takeEvery, takeLatest, debounce, throttle } from 'redux-saga/effects'
+import { FILTER_GOODS_SAGA } from "../types/goodTypes";
+import { call, put, debounce, throttle } from 'redux-saga/effects'
 
  
 
 const getGoodFromServer = (data = {}, otherArg) => {
-  console.log('getGoodFromServer: data', data)
-  return fetch(`http://localhost:3001/api/v1/filter?_category=${data.categoryForFilter}&_s=${data.input}`)
-    .then(res => console.log('С сервера приходит статус:', res))
+  return data.input ? fetch(`http://localhost:3001/api/v1/filter?_c=${data.categoryForFilter}&_s=${data.input}`)
+    .then(res => res.json()) : null
 }
 
 
 function* filterSagaWorker(action) {
   try {
-  console.log('inside filterSagaWorker')
-      
-     const data = yield call(getGoodFromServer, action.payload, "otherArg");
-    //  console.log( 'action.payload in filterSagaWorker',  action.payload)
-    //  yield put(filterGoods(data));
+     const search = yield call(getGoodFromServer, action.payload, "otherArg");
+     yield put(filterGoods(search));
   } catch (e) {
      yield put({type: "USER_FETCH_FAILED", message: e.message});
   }
@@ -25,7 +21,6 @@ function* filterSagaWorker(action) {
 
 
 function* filterSagaWatcher() {
-  console.log('inside filterSagaWatcher')
   yield debounce(1000, FILTER_GOODS_SAGA, filterSagaWorker);
 }
 

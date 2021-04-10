@@ -8,12 +8,11 @@ const Main = () => {
   const dispatch = useDispatch()
 
   const categories = useSelector(state => state.categories)
-
+  
   useEffect(() => {
     dispatch(getCategoriesFromServer)
   }, [])
 
-  console.log(categories)
 
   return ( 
     <section className="section-content padding-y">
