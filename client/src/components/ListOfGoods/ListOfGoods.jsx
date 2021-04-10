@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router"
+import { useHistory, useLocation, useParams } from "react-router"
 import { getGoodsFromServer } from "../../redux/actionCreators/goodAC"
 import { getCategoriesFromServer } from "../../redux/actionCreators/categoryAC"
 import Good from "../Good/Good.jsx"
@@ -10,64 +10,38 @@ import { Link } from "react-router-dom"
 
 const ListGoods = () => {
 
+  const { search } = useLocation();
+  const searchParams = new URLSearchParams(search);
+  const sorting = searchParams.get('sorting')
+
   const { id } = useParams()
   const dispatch = useDispatch()
 
-  const [sortedGoods, setSortedGoods] = useState([]);
-  const searchResult = useSelector(state => state.search)
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getCategoriesFromServer);
-    dispatch(getGoodsFromServer(id))
-  }, [])
+    dispatch(getGoodsFromServer(id, sorting))
+  }, [sorting])
   
-  console.log(searchResult)
   const goods = useSelector(state => state.goods.goods)
   const categories = useSelector(state => state.categories)
   const currentCategory = categories.find(categories => categories._id === id)
 
-  // const sortedItems = useSelector(state => state.sortedGoods)
-  // sortedItems.push('1');
 
-  // console.log(currentCategory.name, '======')
   console.log(goods)
 
   function sortGoods(arg) {
-    if (arg === 'sortasc') return setSortedGoods(goods.sort((a, b) => a.price - b.price).slice(0));
-    else if (arg === 'sortdesc') return setSortedGoods(goods.sort((a, b) => b.price - a.price).slice(0));
-    else return setSortedGoods(goods.sort((a, b) => b.rating - a.rating).slice(0));
+    if (arg === 'sortasc') {
+      history.push(`/categories/${id}/?sorting=price`)
+    }
+    else if (arg === 'sortdesc') {
+      history.push(`/categories/${id}/?sorting=price_desc`)
+    } else {
+      history.push(`/categories/${id}/?sorting=rating`)
+    }
   }
 
-
-
-  // function sortAsc(sortType) {
-  //   let nav = document.querySelector('#goods-wrap');
-  //   for (let i = 0; i < nav.children.length; i++) {
-  //     for (let j = i; j < nav.children.length; j++) {
-  //       if (+nav.children[i].getAttribute(sortType) > +nav.children[j].getAttribute(sortType)) {
-  //         let replacedNode = nav.replaceChild(nav.children[j], nav.children[i]);
-  //         insertAfter(replacedNode, nav.children[i]);
-  //       }
-  //     }
-  //   }
-  // }
-
-  // function sortDesc(sortType) {
-  //   let nav = document.querySelector('#goods-wrap');
-  //   console.log(nav.children.length)
-  //   for (let i = 0; i < nav.children.length; i++) {
-  //     for (let j = i; j < nav.children.length; j++) {
-  //       if (+nav.children[i].getAttribute(sortType) < +nav.children[j].getAttribute(sortType)) {
-  //         let replacedNode = nav.replaceChild(nav.children[j], nav.children[i]);
-  //         insertAfter(replacedNode, nav.children[i]);
-  //       }
-  //     }
-  //   }
-  // }
-
-  // function insertAfter(elem, refElem) {
-  //   return refElem.parentNode.insertBefore(elem, refElem.nextSibling);
-  // }
 
   return (
     <>
@@ -147,11 +121,34 @@ const ListGoods = () => {
         <div className="form-inline">
           <strong className="mr-md-auto">{goods.length} Items found </strong>
           <form>
-            <select onChange={(event) => sortGoods(event.target.value)} className="mr-2 form-control">
-              <option value="sortasc">Price Low to High</option>
-              <option value="sortdesc">Price High to Low</option>
-              <option value="sortrating">Sort by rating</option>
-            </select>
+            {sorting === 'price' &&
+              <select onChange={(event) => sortGoods(event.target.value)} className="mr-2 form-control">
+                <option selected="selected" value="sortasc">Price Low to High</option>
+                <option value="sortdesc">Price High to Low</option>
+                <option value="sortrating">Rating</option>
+              </select>
+            }
+            {sorting === 'price_desc' &&
+              <select onChange={(event) => sortGoods(event.target.value)} className="mr-2 form-control">
+                <option value="sortasc">Price Low to High</option>
+                <option selected="selected" value="sortdesc">Price High to Low</option>
+                <option value="sortrating">Rating</option>
+              </select>
+            }
+            {sorting === 'rating' &&
+              <select onChange={(event) => sortGoods(event.target.value)} className="mr-2 form-control">
+                <option value="sortasc">Price Low to High</option>
+                <option value="sortdesc">Price High to Low</option>
+                <option selected="selected" value="sortrating">Rating</option>
+              </select>
+            }
+            {sorting == null &&
+              <select onChange={(event) => sortGoods(event.target.value)} className="mr-2 form-control">
+                <option selected="selected" value="sortasc">Price Low to High</option>
+                <option value="sortdesc">Price High to Low</option>
+                <option value="sortrating">Rating</option>
+              </select>
+            }
           </form>
           <div className="btn-group">
             <a href="page-listing-grid.html" className="btn btn-light active" data-toggle="tooltip" title="List view">
@@ -160,11 +157,6 @@ const ListGoods = () => {
               <i className="fa fa-th"></i></a>
           </div>
         </div>
-        {/* <div className="d-flex justify-content-center mb-5">
-          <button onClick={() => sortAsc('data-price')} id="sort-asc" type="submit" className="btn btn-success mx-2">Цена возрастание</button>
-          <button onClick={() => sortDesc('data-price')} id="sort-desc" type="submit" className="btn btn-success mx-2">Цена убывание</button>
-          <button onClick={() => sortDesc('data-rate')} id="sort-rating" type="submit" className="btn btn-success mx-2">Sort rating</button>
-        </div> */}
       </header>
 
       <div id="goods-wrap" className="row">
