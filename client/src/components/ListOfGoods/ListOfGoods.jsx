@@ -16,20 +16,21 @@ const ListGoods = () => {
 
   const { id } = useParams()
   const dispatch = useDispatch()
+  const searchResult = useSelector(state => state.search)
 
   const history = useHistory();
 
   useEffect(() => {
     dispatch(getCategoriesFromServer);
-    dispatch(getGoodsFromServer(id, sorting))
+    dispatch(getGoodsFromServer(id, sorting, searchResult))
   }, [sorting])
-  
+
   const goods = useSelector(state => state.goods.goods)
   const categories = useSelector(state => state.categories)
   const currentCategory = categories.find(categories => categories._id === id)
 
 
-  console.log(goods)
+  console.log(searchResult)
 
   function sortGoods(arg) {
     if (arg === 'sortasc') {
@@ -119,7 +120,7 @@ const ListGoods = () => {
 
       <header className="mb-3 mx-4">
         <div className="form-inline">
-          <strong className="mr-md-auto">{goods.length} Items found </strong>
+          <strong className="mr-md-auto">{searchResult ? searchResult.length : goods.length} Items found </strong>
           <form>
             {sorting === 'price' &&
               <select onChange={(event) => sortGoods(event.target.value)} className="mr-2 form-control">
@@ -161,10 +162,10 @@ const ListGoods = () => {
 
       <div id="goods-wrap" className="row">
         {searchResult ? searchResult.map(good => {
-            return (
-              <Good key={good._id} good={good} />
-            )
-          }) :
+          return (
+            <Good key={good._id} good={good} />
+          )
+        }) :
           goods.length ? goods.map(good => {
             return (
               <Good key={good._id} good={good} />
