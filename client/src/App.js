@@ -58,6 +58,7 @@ function App() {
           </Route>
           <Route exact path="/cart">
             <Cart />
+            <Order/>
           </Route>
           <Route exact path="/">
             <Main />
@@ -79,7 +80,7 @@ function App() {
             </Switch>
           }
           <Footer />
-          <Order/>
+          
         </Router>
       </div >
     );

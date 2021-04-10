@@ -7,12 +7,17 @@ import initState from './redux/initState';
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { Provider } from 'react-redux';
 import thunk from "redux-thunk"
+import createSagaMiddleware from 'redux-saga'
+import rootSaga from './redux/saga/rootSaga';
 
-const store = createStore(rootReducer, initState(), composeWithDevTools(applyMiddleware(thunk)))
+const sagaMiddleware = createSagaMiddleware()
+const store = createStore(rootReducer, initState(), composeWithDevTools(applyMiddleware(thunk, sagaMiddleware)))
+sagaMiddleware.run(rootSaga)
 
 store.subscribe(() => {
   window.localStorage.setItem('myApp', JSON.stringify(store.getState()))
 })
+
 
 ReactDOM.render(
   <React.StrictMode>
