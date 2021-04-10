@@ -28,11 +28,38 @@ export const deleteGood = (good) => {
   }
 }
 
-export const getGoodsFromServer = (id) => {
-  return dispatch => {
+// export const getGoodsFromServer = (id) => {
+//   return dispatch => {
+//     fetch(`http://localhost:3001/api/v1/categories/${id}`)
+//     .then(response => response.json())
+//     .then(goodsFromServer => dispatch(getGoods(goodsFromServer)))
+//   }
+// }
+
+export const getGoodsFromServer = (id, sorting) => {
+  console.log(sorting)
+  if (sorting === 'price') {
+    return dispatch => {
+      fetch(`http://localhost:3001/api/v1/categories/${id}`)
+        .then(response => response.json())
+        .then(goodsFromServer => dispatch(getGoods(goodsFromServer.sort((a, b) => a.price - b.price))))
+    }
+  } else if (sorting === 'price_desc') {
+    return dispatch => {
+      fetch(`http://localhost:3001/api/v1/categories/${id}`)
+        .then(response => response.json())
+        .then(goodsFromServer => dispatch(getGoods(goodsFromServer.sort((a, b) => b.price - a.price))))
+    }
+  } else if (sorting === 'rating') {
+    return dispatch => {
+      fetch(`http://localhost:3001/api/v1/categories/${id}`)
+        .then(response => response.json())
+        .then(goodsFromServer => dispatch(getGoods(goodsFromServer.sort((a, b) => b.rating - a.rating))))
+    }
+  } else return dispatch => {
     fetch(`http://localhost:3001/api/v1/categories/${id}`)
-    .then(response => response.json())
-    .then(goodsFromServer => dispatch(getGoods(goodsFromServer)))
+      .then(response => response.json())
+      .then(goodsFromServer => dispatch(getGoods(goodsFromServer.sort((a, b) => a.price - b.price))))
   }
 }
 
