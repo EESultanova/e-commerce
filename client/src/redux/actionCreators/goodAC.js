@@ -36,31 +36,41 @@ export const deleteGood = (good) => {
 //   }
 // }
 
-export const getGoodsFromServer = (id, sorting) => {
-  console.log(sorting)
-  if (sorting === 'price') {
-    return dispatch => {
+export const getGoodsFromServer = (id, sorting, searchResult) => {
+  if (searchResult) {
+    if (sorting === 'price') {
+      return dispatch => dispatch(getGoods(searchResult.sort((a, b) => a.price - b.price)))
+    } else if (sorting === 'price_desc') {
+      return dispatch => dispatch(getGoods(searchResult.sort((a, b) => b.price - a.price)))
+    } else if (sorting === 'rating') {
+      return dispatch => dispatch(getGoods(searchResult.sort((a, b) => b.rating - a.rating)))
+    } else return dispatch => dispatch(getGoods(searchResult.sort((a, b) => a.price - b.price)))
+  } else {
+    if (sorting === 'price') {
+      return dispatch => {
+        fetch(`http://localhost:3001/api/v1/categories/${id}`)
+          .then(response => response.json())
+          .then(goodsFromServer => dispatch(getGoods(goodsFromServer.sort((a, b) => a.price - b.price))))
+      }
+    } else if (sorting === 'price_desc') {
+      return dispatch => {
+        fetch(`http://localhost:3001/api/v1/categories/${id}`)
+          .then(response => response.json())
+          .then(goodsFromServer => dispatch(getGoods(goodsFromServer.sort((a, b) => b.price - a.price))))
+      }
+    } else if (sorting === 'rating') {
+      return dispatch => {
+        fetch(`http://localhost:3001/api/v1/categories/${id}`)
+          .then(response => response.json())
+          .then(goodsFromServer => dispatch(getGoods(goodsFromServer.sort((a, b) => b.rating - a.rating))))
+      }
+    } else return dispatch => {
       fetch(`http://localhost:3001/api/v1/categories/${id}`)
         .then(response => response.json())
         .then(goodsFromServer => dispatch(getGoods(goodsFromServer.sort((a, b) => a.price - b.price))))
     }
-  } else if (sorting === 'price_desc') {
-    return dispatch => {
-      fetch(`http://localhost:3001/api/v1/categories/${id}`)
-        .then(response => response.json())
-        .then(goodsFromServer => dispatch(getGoods(goodsFromServer.sort((a, b) => b.price - a.price))))
-    }
-  } else if (sorting === 'rating') {
-    return dispatch => {
-      fetch(`http://localhost:3001/api/v1/categories/${id}`)
-        .then(response => response.json())
-        .then(goodsFromServer => dispatch(getGoods(goodsFromServer.sort((a, b) => b.rating - a.rating))))
-    }
-  } else return dispatch => {
-    fetch(`http://localhost:3001/api/v1/categories/${id}`)
-      .then(response => response.json())
-      .then(goodsFromServer => dispatch(getGoods(goodsFromServer.sort((a, b) => a.price - b.price))))
   }
+
 }
 
 export const getGoodDetailsFromServer = (id) => {
