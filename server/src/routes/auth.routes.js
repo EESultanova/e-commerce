@@ -22,7 +22,7 @@ router.post('/registration',
                 return res.status(400).json({ message: 'Uncorrect request', errors });
             }
 
-            const { name, email, password } = req.body;
+            const { name, email, password, role } = req.body;
 
             const candidate = await User.findOne({ email });
 
@@ -35,6 +35,7 @@ router.post('/registration',
                 email,
                 password: hashPassword,
                 avatar: '',
+                role,
             });
             await user.save();
             // return res.json({ message: 'User was created' })
@@ -48,6 +49,7 @@ router.post('/registration',
                     email: user.email,
                     name: user.name,
                     avatar: user.avatar,
+                    role: user.role,
                 }
             });
         } catch (e) {
@@ -76,6 +78,7 @@ router.post('/login', async (req, res) => {
                 email: user.email,
                 name: user.name,
                 avatar: user.avatar,
+                role: user.role,
             }
         });
     } catch (e) {
@@ -96,6 +99,7 @@ router.get('/auth', checkAuth, async (req, res) => {
                 email: user.email,
                 name: user.name,
                 avatar: user.avatar,
+                role: user.role,
             }
         });
     } catch (e) {
