@@ -7,6 +7,7 @@ import Good from "../Good/Good.jsx"
 import { Link } from "react-router-dom"
 
 
+
 const ListGoods = () => {
 
   const { search } = useLocation();
@@ -22,7 +23,7 @@ const ListGoods = () => {
     dispatch(getCategoriesFromServer);
     dispatch(getGoodsFromServer(id, sorting))
   }, [sorting])
-
+  
   const goods = useSelector(state => state.goods.goods)
   const categories = useSelector(state => state.categories)
   const currentCategory = categories.find(categories => categories._id === id)
@@ -159,7 +160,11 @@ const ListGoods = () => {
       </header>
 
       <div id="goods-wrap" className="row">
-        {
+        {searchResult ? searchResult.map(good => {
+            return (
+              <Good key={good._id} good={good} />
+            )
+          }) :
           goods.length ? goods.map(good => {
             return (
               <Good key={good._id} good={good} />
