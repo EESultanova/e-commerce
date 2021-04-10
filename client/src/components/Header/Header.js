@@ -51,9 +51,7 @@ const Header = () => {
 									<input type="text" value={input} onChange={(e) => setInput(e.target.value)} className="form-control" placeholder="Search" />
 
 									<div className="input-group-append">
-										<button className="btn btn-primary" type="submit">
-											<i className="fa fa-search"></i> Search
-					      </button>
+		                <Link to={`/categories/${categoryForFilter}`} className="btn btn-primary">	<i className="fa fa-search"></i>Search</Link>
 									</div>
 								</div>
 							</form>

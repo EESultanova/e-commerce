@@ -69,15 +69,11 @@ app.post("/api/v1/order", async (req, res) => {
 
 app.get("/api/v1/filter", async (req, res) => {
   try {
-    const {_category: category} = req.query
-    const {_s: input} = req.query
-  console.log('category---->', category)
-  console.log('input-------->', input)
-
-  
-    console.log(req.query)
-    res.sendStatus(400)
-    
+    const {_c: category, _s: input} = req.query
+    // const {_s: input} = req.query
+    const good = await GoodModel.find({name: new RegExp(`^${input}.*`, 'ig'), category: category})
+    console.log(good)
+    good.length ? res.status(200).json(good) : res.sendStatus(404)
   } catch (error) {
     console.log(error)
     res.sendStatus(500)

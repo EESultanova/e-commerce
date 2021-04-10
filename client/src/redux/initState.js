@@ -12,7 +12,7 @@ const initState = () =>  {
       good: {},
     },
     cart: [],
-    data: {},
+    search: [],
   }
 
   const fromLS = JSON.parse(window.localStorage.getItem('myApp'))
