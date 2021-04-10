@@ -61,6 +61,7 @@ router.post('/registration',
 router.post('/login', async (req, res) => {
     try {
         const { name, email, password } = req.body;
+        if (!email || !password) return res.status(404).json({ message: 'All fields must be filled' });
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
