@@ -121,22 +121,6 @@ const GoodDetails = () => {
             <div className="form-group col-md">
               {(inCart === true) ?
                 <button onClick={() => {
-                  // store.addNotification({
-                  //   // content: NotifyRemove,
-                  //   message: `${good.name} was removed from your cart!`,
-                  //   type: 'default',
-                  //   container: 'bottom-right',
-                  //   insert: 'bottom',
-                  //   animationIn: ['animated', 'fadeIn'],
-                  //   animationOut: ['animated', 'fadeOut'],
-
-                  //   dismiss: {
-                  //     duration: 2000,
-                  //     showIcon: true,
-                  //   },
-                  //   width: 200,
-
-                  // })
                   store.addNotification({
                     content: NotifyRemove,
                     message: `${good?.name} was removed from your cart!`,
@@ -156,23 +140,6 @@ const GoodDetails = () => {
                 }} type="button" class="btn btn-secondary">Remove from cart</button>
                 :
                 <button onClick={() => {
-                  // store.addNotification({
-                  //   // content: NotifyAdd,
-                  //   // title: 'success',
-                  //   message: `${good.name} was added to your cart!`,
-                  //   type: 'warning',
-                  //   container: 'bottom-right',
-                  //   insert: 'bottom',
-                  //   animationIn: ['animated', 'fadeIn'],
-                  //   animationOut: ['animated', 'fadeOut'],
-
-                  //   dismiss: {
-                  //     duration: 2000,
-                  //     showIcon: true,
-                  //   },
-                  //   width: 200,
-
-                  // })
                   store.addNotification({
                     content: NotifyAdd,
                     message: `${good?.name} was added to your cart!`,

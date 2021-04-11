@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { changeQuantity, deleteGoodFromCart } from "../../redux/actionCreators/cartAC";
+import { Link } from "react-router-dom"
 
 const Cart = () => {
 
   const dispatch = useDispatch()
 
   const cart = useSelector(state => state.cart)
+  const currentUserAuth = useSelector(state => state.user.isAuth)
 
   const total = cart
     .map(el => el.price * el.quantity)
@@ -64,7 +66,7 @@ const Cart = () => {
       </table>
 
       <div className="card-body border-top">
-        <a href="/" className="btn btn-primary float-md-right"> Make Purchase <i className="fa fa-chevron-right"></i> </a>
+        <Link to={currentUserAuth ? `/order` : `/login`} className="btn btn-primary float-md-right"> Make Purchase <i className="fa fa-chevron-right"></i> </Link>
         <a href="/" className="btn btn-light d-flex" style={{'width': '19%'}}> <i className="fa fa-chevron-left mr-1" style={{'margin-top': '0.2rem'}}></i> Continue shopping </a>
       </div>	
       </div>

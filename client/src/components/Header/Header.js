@@ -33,6 +33,10 @@ const Header = () => {
     dispatch(filterGoodsSaga({categoryForFilter, input})) 
   }, [input])
 
+  const headerStyle = {
+    "font-family": 'Prime, Helvetica, Arial, sans-serif'
+  }
+
 	return (
 		<header className="section-header">
 			<section className="header-main border-bottom">
@@ -41,6 +45,7 @@ const Header = () => {
 						<div className="col-xl-2 col-lg-3 col-md-12">
 							<Link to="/" className="brand-wrap">
 								<img className="logo" src="http://localhost:3000/images/logo.png" alt="" />
+                {/* <span style={headerStyle}>E-Commerce</span> */}
 							</Link>
 						</div>
 						<div className="col-xl-6 col-lg-5 col-md-6">
