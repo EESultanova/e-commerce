@@ -30,6 +30,7 @@ function Profile() {
 
     const deleteHandler = async () => {
         try {
+            console.log('here fetch')
             await fetch(`${API_URL}api/v1/files/avatar`, {
                 method: "DELETE",
                 headers: {
@@ -53,10 +54,10 @@ function Profile() {
 
     return (
         <div className="mx-auto" style={Object.assign({}, { width: '400px' }, { 'margin-top': '150px' })}>
-            <div class="mb-3">
+            <div className="mb-3">
                 <input accept="image/*" onChange={(e) => inputAvatarHandler(e)} name="avatar" type="file" placeholder="Dowload avatar ..." />
             </div>
-            <button onClick={deleteHandler} type="submit" class="btn btn-primary">Delete avatar</button>
+            <button onClick={deleteHandler} type="submit" className="btn btn-primary">Delete avatar</button>
         </div>
     )
 }
