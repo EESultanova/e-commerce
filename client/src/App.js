@@ -20,6 +20,7 @@ import { API_URL } from './config';
 import Registration from './components/Registration/Registration';
 import Profile from './components/Profile.js/Profile';
 import ProfileContextProvider from './contexts/ProfileContext';
+import ReactNotification from 'react-notifications-component';
 
 function App() {
 
@@ -40,17 +41,18 @@ function App() {
     } catch (e) {
       // alert(e)
       localStorage.removeItem('token');
-    }}
+    }
+  }
 
   useEffect(() => {
     auth();
   }, []);
 
-  
-    return (
-      <div className="App">
-        <ProfileContextProvider>
+  return (
+    <div className="App">
+      <ProfileContextProvider>
         <Router>
+          <ReactNotification />
           <Header />
           <Route exact path="/categories/:id">
             <ListOfGoods />
@@ -60,7 +62,7 @@ function App() {
           </Route>
           <Route exact path="/cart">
             <Cart />
-            <Order/>
+            <Order />
           </Route>
           <Route exact path="/">
             <Main />
@@ -82,11 +84,11 @@ function App() {
             </Switch>
           }
           <Footer />
-          
+
         </Router>
-        </ProfileContextProvider>
-      </div >
-    );
+      <ProfileContextProvider>
+    </div >
+  );
 }
 
 export default App;
