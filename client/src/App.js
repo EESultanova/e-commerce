@@ -19,6 +19,7 @@ import { useEffect } from 'react';
 import { API_URL } from './config';
 import Registration from './components/Registration/Registration';
 import Profile from './components/Profile.js/Profile';
+import ProfileContextProvider from './contexts/ProfileContext';
 
 function App() {
 
@@ -48,6 +49,7 @@ function App() {
   
     return (
       <div className="App">
+        <ProfileContextProvider>
         <Router>
           <Header />
           <Route exact path="/categories/:id">
@@ -82,6 +84,7 @@ function App() {
           <Footer />
           
         </Router>
+        </ProfileContextProvider>
       </div >
     );
 }
