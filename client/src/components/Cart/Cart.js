@@ -9,7 +9,7 @@ const Cart = () => {
 
   const total = cart
     .map(el => el.price * el.quantity)
-    .reduce((acc, currentValue) => acc + currentValue)
+    .reduce((acc, currentValue) => acc + currentValue, 0)
 
   return ( 
     <section className="section-content padding-y">
