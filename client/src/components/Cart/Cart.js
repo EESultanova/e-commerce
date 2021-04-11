@@ -51,7 +51,7 @@ const Cart = () => {
             </td>
             <td> 
               <div className="price-wrap"> 
-                <var className="price">{good.price * good.quantity} $</var> 
+                <var className="price">{(good.price * good.quantity).toFixed(2)} $</var> 
                 <small className="text-muted"> {good.price} each </small> 
               </div>
             </td>
