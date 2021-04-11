@@ -33,6 +33,7 @@ function Registration() {
 
     const submitHandler = async (e) => {
         e.preventDefault();
+
         try {
             await fetch(`${API_URL}api/v1/auth/registration`, {
                 method: "POST",
@@ -48,41 +49,68 @@ function Registration() {
             })
                 .then(res => res.json())
                 .then(responseFromServer => {
-                    alert(responseFromServer.message);
-                    dispatch(setUser(responseFromServer));
-                    localStorage.setItem('token', responseFromServer.token);
+                    console.log(responseFromServer.message)
+                    const header = document.querySelector('#container');
+                    if (document.querySelector('.text_delete')) {
+                        document.querySelector('.text_delete').remove();
+                    }
+
+                    const text = document.createElement('h4');
+                    text.style.color = 'red';
+                    text.className = 'text_delete';
+
+                    if (responseFromServer.message === 'Uncorrect request') {
+                        text.innerText = `All fields must be filled`;
+                        header.appendChild(text);
+                    } else
+
+                        if (responseFromServer.message === `User with email ${email} already exists`) {
+                            text.innerText = `User with email ${email} already exists`;
+                            header.appendChild(text);
+                        } else {
+                            dispatch(setUser(responseFromServer));
+                            localStorage.setItem('token', responseFromServer.token);
+                            history.push('/');
+                        }
+
                 })
-            history.push('/');
         } catch (e) {
-            alert(e);
+            console.log(e);
         }
 
     }
 
     return (
-        <div className="mx-auto" style={Object.assign({}, { width: '400px' }, { 'margin-top': '150px' })}>
-            <form onSubmit={submitHandler}>
-                <div class="mb-3">
-                    <input value={email} onChange={inputEmailHandler} name='email' type="email" class="form-control" id="exampleInputEmail1" placeholder="Type your email ..." aria-describedby="emailHelp" />
-                </div>
-                <div class="mb-3">
-                    <input value={name} onChange={inputNicknameHandler} name="name" type="text" class="form-control" placeholder="Type your name ..." />
-                </div>
-                <div class="mb-3">
-                    <input value={password} onChange={inputPasswordHandler} name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Type your password ..." />
-                </div>
+        <section className="section-conten padding-y" style={{ minHeight: 84 }}>
 
-                <div class="mb-3">
-                    <select onChange={inputRoleHandler} className="mr-2 form-control">
-                        <option selected="selected">Choose your role</option>
-                        <option value="seller">Seller</option>
-                        <option value="buyer">Buyer</option>
-                    </select>
-                </div>
+            <div className="card mx-auto" style={{ maxWidth: 380, marginTop: 100 }}>
+                <div className="card-body">
+                    <h4 id="container" className="card-title mb-4">Registration</h4>
+                    <form onSubmit={submitHandler}>
+                        <div className="form-group">
+                            <input value={email} onChange={inputEmailHandler} name='email' type="email" class="form-control" id="exampleInputEmail1" placeholder="Type your email ..." aria-describedby="emailHelp" />
+                        </div>
+                        <div className="form-group">
+                            <input value={name} onChange={inputNicknameHandler} name="name" type="text" class="form-control" placeholder="Type your name ..." />
+                        </div>
+                        <div className="form-group">
+                            <input value={password} onChange={inputPasswordHandler} name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Type your password ..." />
+                        </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
+                        <div className="form-group">
+                            <select onChange={inputRoleHandler} className="mr-2 form-control">
+                                <option selected="selected">Choose your role</option>
+                                <option value="seller">Seller</option>
+                                <option value="buyer">Buyer</option>
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <button type="submit" className="btn btn-primary btn-block">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section >
     )
 }
 

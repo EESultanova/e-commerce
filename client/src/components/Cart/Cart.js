@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeQuantity, deleteGoodFromCart } from "../../redux/actionCreators/cartAC";
 
@@ -8,12 +7,9 @@ const Cart = () => {
 
   const cart = useSelector(state => state.cart)
 
-  console.log(cart)
-  const total = Object.values(cart).reduce((acc, {price, quantity}) => (acc + price) * quantity, 0)
-  console.log(total)
-  // Object.values(departments).reduce((acc, {quantity}) => acc + quantity, 0)
-  
-  console.log('CART ===>', cart)
+  const total = cart
+    .map(el => el.price * el.quantity)
+    .reduce((acc, currentValue) => acc + currentValue)
 
   return ( 
     <section className="section-content padding-y">
@@ -47,7 +43,7 @@ const Cart = () => {
               </figure>
             </td>
             <td> 
-              <input onChange={(event) => dispatch(changeQuantity(good._id, event.target.value))} type="number" min="1"  placeholder="0" className="form-control"/>
+              <input onChange={(event) => dispatch(changeQuantity(good._id, event.target.value))} type="number" value={good.quantity} min="1" placeholder="0" className="form-control"/>
             </td>
             <td> 
               <div className="price-wrap"> 

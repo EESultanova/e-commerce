@@ -22,6 +22,7 @@ async function uploadAvatar(req, res) {
                 email: user.email,
                 name: user.name,
                 avatar: avatarName,
+                role: user.role,
             }
         });
         // return res.json(user);
@@ -43,6 +44,7 @@ async function deleteAvatar(req, res) {
                 email: user.email,
                 name: user.name,
                 avatar: user.avatar,
+                role: user.role,
             }
         });
     } catch (e) {
