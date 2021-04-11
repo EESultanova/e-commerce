@@ -22,7 +22,7 @@ const GoodDetails = () => {
   const good = useSelector(state => state.goods.good)
   const cart = useSelector(state => state.cart)
   const ids = cart.map(good => good._id)
-  const inCart = ids.includes(good._id)
+  const inCart = ids.includes(good?._id)
   console.log(inCart)
 
 
@@ -52,13 +52,17 @@ const GoodDetails = () => {
       <aside className="col-md-6">
         <div className="card">
           <article className="gallery-wrap">
-            {good.photo &&
+            {good?.photo &&
               <>
                 <div className="img-big-wrap mt-5">
-                  <div> <a href="/"><img src={good.photo[photo]} alt="" /></a></div>
+
+              
+
+                  <div> <a href="/"><img src={good?.photo[photo]} alt="" /></a></div>
+
                 </div>
                 <div className="thumbs-wrap">
-                  {good.photo.length ? good.photo.map((photo, indx) => {
+                  {good?.photo.length ? good?.photo.map((photo, indx) => {
                     return (
                       <div key={indx} href="#" className="item-thumb"> <img src={photo} alt="" onClick={() => setPhoto(indx)} /></div>
                     )
@@ -74,7 +78,7 @@ const GoodDetails = () => {
       <main className="col-md-6">
         <article className="product-info-aside">
 
-          <h2 className="title mt-3">{good.name}</h2>
+          <h2 className="title mt-3">{good?.name}</h2>
 
           <div className="rating-wrap my-3">
             <ul className="rating-stars">
@@ -94,10 +98,10 @@ const GoodDetails = () => {
           </div>
 
           <div className="mb-3">
-            <var className="price h4">{good.price} $</var>
+            <var className="price h4">{good?.price} $</var>
           </div>
 
-          <p>{good.description}</p>
+          <p>{good?.description}</p>
 
 
           <dl className="row">
@@ -139,7 +143,7 @@ const GoodDetails = () => {
                   // })
                   store.addNotification({
                     content: NotifyRemove,
-                    message: `${good.name} was removed from your cart!`,
+                    message: `${good?.name} was removed from your cart!`,
                     type: 'default',
                     container: 'bottom-right',
                     insert: 'bottom',
@@ -152,7 +156,7 @@ const GoodDetails = () => {
                     width: 200,
 
                   })
-                  dispatch(deleteGoodFromCart(good._id))
+                  dispatch(deleteGoodFromCart(good?._id))
                 }} type="button" class="btn btn-secondary">Remove from cart</button>
                 :
                 <button onClick={() => {
@@ -175,7 +179,7 @@ const GoodDetails = () => {
                   // })
                   store.addNotification({
                     content: NotifyAdd,
-                    message: `${good.name} was added to your cart!`,
+                    message: `${good?.name} was added to your cart!`,
                     type: 'warning',
                     container: 'bottom-right',
                     insert: 'succes',
