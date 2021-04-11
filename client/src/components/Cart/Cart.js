@@ -44,12 +44,12 @@ const Cart = () => {
               </figure>
             </td>
             <td> 
-              <input onChange={(event) => dispatch(changeQuantity(good._id, event.target.value))} type="number" min="1"  placeholder="0" className="form-control"/>
+              <input onChange={(event) => dispatch(changeQuantity(good._id, event.target.value))} type="number" value={good.quantity} min="1" placeholder="0" className="form-control"/>
             </td>
             <td> 
               <div className="price-wrap"> 
                 <var className="price">{good.price * good.quantity} $</var> 
-                <small className="text-muted"> {good.price} each </small> 
+                <small className="text-muted"> {good.price} $ each </small> 
               </div>
             </td>
             <td className="text-right"> 
