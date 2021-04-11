@@ -19,6 +19,7 @@ import { useEffect } from 'react';
 import { API_URL } from './config';
 import Registration from './components/Registration/Registration';
 import Profile from './components/Profile.js/Profile';
+import ProfileContextProvider from './contexts/ProfileContext';
 import ReactNotification from 'react-notifications-component';
 
 function App() {
@@ -47,44 +48,45 @@ function App() {
     auth();
   }, []);
 
-
   return (
     <div className="App">
-      <Router>
-        <ReactNotification />
-        <Header />
-        <Route exact path="/categories/:id">
-          <ListOfGoods />
-        </Route>
-        <Route path="/goods/:id">
-          <GoodDetails />
-        </Route>
-        <Route exact path="/cart">
-          <Cart />
-          <Order />
-        </Route>
-        <Route exact path="/">
-          <Main />
-        </Route>
-        {!user ?
-          <Switch>
-            <Route exact path="/registration">
-              <Registration />
-            </Route>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-          </Switch>
-          :
-          <Switch>
-            <Route exact path="/profile">
-              <Profile />
-            </Route>
-          </Switch>
-        }
-        <Footer />
+      <ProfileContextProvider>
+        <Router>
+          <ReactNotification />
+          <Header />
+          <Route exact path="/categories/:id">
+            <ListOfGoods />
+          </Route>
+          <Route path="/goods/:id">
+            <GoodDetails />
+          </Route>
+          <Route exact path="/cart">
+            <Cart />
+            <Order />
+          </Route>
+          <Route exact path="/">
+            <Main />
+          </Route>
+          {!user ?
+            <Switch>
+              <Route exact path="/registration">
+                <Registration />
+              </Route>
+              <Route exact path="/login">
+                <Login />
+              </Route>
+            </Switch>
+            :
+            <Switch>
+              <Route exact path="/profile">
+                <Profile />
+              </Route>
+            </Switch>
+          }
+          <Footer />
 
-      </Router>
+        </Router>
+      <ProfileContextProvider>
     </div >
   );
 }

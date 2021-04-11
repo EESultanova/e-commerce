@@ -10,6 +10,7 @@ import avatarLogo from '../../assets/avatar.svg';
 import { API_URL } from '../../config'
 import { useEffect, useState } from 'react';
 import { filterGoodsSaga } from '../../redux/actionCreators/goodAC';
+import { useProfileContext } from '../../contexts/ProfileContext';
 
 
 const Header = () => {
@@ -21,6 +22,7 @@ const Header = () => {
   const cart = useSelector(state => state.cart)
 	const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : avatarLogo;
 	const dispatch = useDispatch()
+  let {setChoice} = useProfileContext()
 
 	const handlergameOver = () => {
 		dispatch(removeUser())
@@ -73,12 +75,12 @@ const Header = () => {
 									</a>
 								</div>
 								<div className="widget-header mr-3">
-									<a href="/" className="widget-view">
+									<Link to="/profile" className="widget-view" onClick={() => setChoice(2)}>
 										<div className="icon-area">
 											<i className="fa fa-store"></i>
 										</div>
 										<small className="text"> Orders </small>
-									</a>
+									</Link>
 								</div>
 								<div className="widget-header">
 									<Link to="/cart" className="widget-view">

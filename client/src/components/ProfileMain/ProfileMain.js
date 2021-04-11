@@ -1,8 +1,3 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from 'react-router-dom';
 import ProfileAddress from '../ProfileAddress/ProfileAddress';
 import ProfileOverview from "../ProfileOverview/ProfileOverview";
 import ProfileOrders from "../ProfileOrders/ProfileOrders";
@@ -10,6 +5,7 @@ import { useState } from 'react';
 import ProfileWishlist from '../ProfileWishlist/ProfileWishlist';
 import ProfileSelling from '../ProfileSelling/ProfileSelling';
 import ProfileSettings from '../ProfileSettings/ProfileSettings';
+import { useProfileContext } from '../../contexts/ProfileContext';
 import ProfileAddNewItem from '../ProfileSelling/ProfileAddNewItem';
 import userReducer from '../../redux/reducers/userReducer';
 import { useSelector } from 'react-redux';
@@ -17,7 +13,7 @@ import { useSelector } from 'react-redux';
 
 const ProfileMain = () => {
 
-  let [choice, setChoice] = useState(0)
+  let {choice, setChoice} = useProfileContext()
   const user = useSelector(state => state.user)
 
   return ( 
