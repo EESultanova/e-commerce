@@ -1,4 +1,12 @@
+import { useSelector } from "react-redux";
+import { API_URL } from '../../config'
+import avatarLogo from '../../assets/avatar.svg';
+
 const ProfileSettings = () => {
+
+  const currentUser = useSelector(state => state.user);
+  const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : avatarLogo;
+
   return ( 
     <div class="card">
       <div class="card-body">
@@ -51,7 +59,7 @@ const ProfileSettings = () => {
 
      	</div>
      	<div class="col-md">
-     		<img src="images/avatars/avatar1.jpg" class="img-md rounded-circle border" alt=""/>
+     		<img src={avatar} class="img-md rounded-circle border" alt=""/>
      	</div>
       </form>
       </div>
