@@ -19,7 +19,6 @@ const Header = () => {
 	const user = useSelector(state => state.user.isAuth);
 	const currentUser = useSelector(state => state.user);
   const cart = useSelector(state => state.cart)
-  const logo = "images/logo.png"
 	const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : avatarLogo;
 	const dispatch = useDispatch()
 
