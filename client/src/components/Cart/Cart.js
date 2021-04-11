@@ -65,7 +65,7 @@ const Cart = () => {
 
       <div className="card-body border-top">
         <a href="/" className="btn btn-primary float-md-right"> Make Purchase <i className="fa fa-chevron-right"></i> </a>
-        <a href="/" className="btn btn-light"> <i className="fa fa-chevron-left"></i> Continue shopping </a>
+        <a href="/" className="btn btn-light d-flex" style={{'width': '19%'}}> <i className="fa fa-chevron-left mr-1" style={{'margin-top': '0.2rem!important'}}></i> Continue shopping </a>
       </div>	
       </div>
 

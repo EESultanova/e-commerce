@@ -74,6 +74,7 @@ const Header = () => {
 										<small className="text"> Message </small>
 									</a>
 								</div>
+                
 								<div className="widget-header mr-3">
 									<Link to="/profile" className="widget-view" onClick={() => setChoice(2)}>
 										<div className="icon-area">
