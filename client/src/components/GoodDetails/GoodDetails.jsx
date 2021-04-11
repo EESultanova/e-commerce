@@ -55,12 +55,12 @@ const GoodDetails = () => {
             {good.photo &&
               <>
                 <div className="img-big-wrap mt-5">
-                  <div> <a href="/"><img src={good.photo[photo]} alt="" /></a></div>
+                  <div><img src={good.photo[photo]} alt="" /></div>
                 </div>
                 <div className="thumbs-wrap">
                   {good.photo.length ? good.photo.map((photo, indx) => {
                     return (
-                      <div key={indx} href="#" className="item-thumb"> <img src={photo} alt="" onClick={() => setPhoto(indx)} /></div>
+                      <div key={indx} className="item-thumb" onClick={() => setPhoto(indx)}> <img src={photo} alt="" /></div>
                     )
                   })
                     : ''
