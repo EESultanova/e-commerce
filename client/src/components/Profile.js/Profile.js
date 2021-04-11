@@ -2,6 +2,9 @@ import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from '../../redux/actionCreators/topicsAC'
 import { API_URL } from '../../config'
+import ProfileHeader from '../ProfileHeader/ProfileHeader';
+import ProfileMain from '../ProfileMain/ProfileMain';
+
 
 function Profile() {
 
@@ -53,12 +56,16 @@ function Profile() {
     }
 
     return (
-        <div className="mx-auto" style={Object.assign({}, { width: '400px' }, { 'margin-top': '150px' })}>
+      <>
+      <ProfileHeader/>
+      <ProfileMain/>
+        <div className="mx-auto" style={Object.assign({}, { width: '400px' }, { 'margin-top': '10px', 'margin-bottom': '10px' })}>
             <div className="mb-3">
                 <input accept="image/*" onChange={(e) => inputAvatarHandler(e)} name="avatar" type="file" placeholder="Dowload avatar ..." />
             </div>
             <button onClick={deleteHandler} type="submit" className="btn btn-primary">Delete avatar</button>
         </div>
+      </>
     )
 }
 
