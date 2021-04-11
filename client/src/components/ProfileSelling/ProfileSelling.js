@@ -1,4 +1,5 @@
 const ProfileSelling = () => {
+  console.log('ProfileSelling RENDER')
   return ( 
     <article className="card">
 			<div className="card-body">
