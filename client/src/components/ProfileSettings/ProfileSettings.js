@@ -1,4 +1,8 @@
+import { useSelector } from "react-redux";
+
 const ProfileSettings = () => {
+  const user = useSelector(state => state.user)
+  
   return ( 
     <div class="card">
       <div class="card-body">
