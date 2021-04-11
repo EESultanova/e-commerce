@@ -14,7 +14,7 @@ import { sellerAddGood, sellerAddGoodToServer } from "../../redux/actionCreators
   const [photo, setPhoto] = useState('')
 
   const dispatch = useDispatch()
-
+console.log('jndsckjsdnvksdnvlsdnv')
   function confirmHandler() {
     dispatch(sellerAddGood({name, quantity, price, description, category, photo, rating: "0"}))
     sellerAddGoodToServer({name, quantity, price, description, category, photo, rating: "0"})
