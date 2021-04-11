@@ -24,21 +24,68 @@ function Order() {
 
   const fioToServer = fio.value
   const addressToServer = address.value
+
+  const total = currentCart
+    .map(el => el.price * el.quantity)
+    .reduce((acc, currentValue) => acc + currentValue, 0)
   
   function confirmHandler() {
     //добавить обнуление cart state
     //у продавца должны пропасть соответствующие товары из cart
     
+    console.log(fioToServer, currentCart);
+
     dispatch(addOrderDetails({fioToServer, addressToServer, email, phone, currentCart}))
     addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser})
   }
  
   return(
     <>
+    <table className="table table-borderless table-shopping-cart m-5">
+      <thead className="text-muted">
+      <tr className="small text-uppercase">
+        <th scope="col">Product</th>
+        <th scope="col" width="120">Quantity</th>
+        <th scope="col" width="120">Price</th>
+        <th scope="col" className="text-right" width="200"> </th>
+      </tr>
+      </thead>
+      <tbody>
+    {currentCart.length ? currentCart.map(good => {
+        return (
+          <tr key={good._id} className="m-4">
+            <td>
+              <figure className="itemside">
+                <div className="aside"><img src={good.photo} className="img-sm" alt=""/></div>
+                <figcaption className="info">
+                  <a href="/" className="title text-dark">{good.name}</a>
+                  <p className="text-muted small">{good.description}</p>
+                </figcaption>
+              </figure>
+            </td>
+            <td> 
+              <input type="number" value={good.quantity} min="1" placeholder="0" className="form-control" readOnly={true}/>
+            </td>
+            <td> 
+              <div className="price-wrap"> 
+                <var className="price">{(good.price * good.quantity).toFixed(2)} $</var> 
+                <small className="text-muted"> {good.price} each </small> 
+              </div>
+            </td>
+            <td className="text-right"> 
+            </td>
+          </tr>
+          )
+        })
+        : <h5>No goods</h5>
+      }
+      </tbody>
+  </table>
+  <h4 className="card-title mb-3">Total price: {total.toFixed(2)} $</h4>
   <section className="section-content padding-y">
-<div className="container" style={{maxWidth:720}}>
+    <div className="container" style={{maxWidth:720}}>
 
-<div className="card mb-4">
+    <div className="card mb-4">
       <div className="card-body">
       <h4 className="card-title mb-3">Delivery info</h4>
 
@@ -111,26 +158,26 @@ function Order() {
 						<label className="hidden-xs">Expiration</label>
 						<div className="form-inline" style={{minWidth:220}}>
 							<select className="form-control" onChange={e => setExpMonth(e.target.value)} style={{width:100}}>
-								<option>01 - Janiary</option>
-								<option>02 - February</option>
-								<option>03 - February</option>
-                <option>04 - March</option>
-								<option>05 - April</option>
-								<option>06 - May</option>
-                <option>07 - June</option>
-								<option>08 - July</option>
-								<option>09 - August</option>
-                <option>10 - September</option>
-								<option>11 - October</option>
-								<option>12 - November</option>
+								<option value="1">01 - Janiary</option>
+								<option value="2">02 - February</option>
+								<option value="3">03 - February</option>
+                <option value="4">04 - March</option>
+								<option value="5">05 - April</option>
+								<option value="6">06 - May</option>
+                <option value="7">07 - June</option>
+								<option value="8">08 - July</option>
+								<option value="9">09 - August</option>
+                <option value="10">10 - September</option>
+								<option value="11">11 - October</option>
+								<option value="12">12 - November</option>
 							</select>
 							<span style={{width:20, textAlign:'center'}}> / </span>
 							<select className="form-control" onChange={e => setExpYear(e.target.value)}style={{width:100}}>
-								<option>2021</option>
-								<option>2022</option>
-								<option>2023</option>
-								<option>2024</option>
-								<option>2025</option>
+								<option value="21">2021</option>
+								<option value="22">2022</option>
+								<option value="23">2023</option>
+								<option value="24">2024</option>
+								<option value="25">2025</option>
 							</select>
 						</div>
 					</div>
@@ -152,6 +199,7 @@ function Order() {
   </div> 
   </div>
   </section>
+  
   </>
   )
 }
