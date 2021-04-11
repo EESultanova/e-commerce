@@ -4,13 +4,13 @@ import { FioSuggestions } from 'react-dadata';
 import 'react-dadata/dist/react-dadata.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { addOrderDetails, addOrderDetailsToServer } from '../../redux/actionCreators/userAC';
-const {REACT_APP_DADATA} = process.env
+// const {REACT_APP_DADATA} = process.env
 
 function Order() {
   const dispatch = useDispatch()
   const [address, setAddress] = useState('')
   const [fio, setFio] = useState('')
-  const [fioForBack, setFioForBack] = useState('')
+  // const [fioForBack, setFioForBack] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [card, setCard] = useState('')
@@ -86,7 +86,7 @@ function Order() {
 		<div className="card mb-4">
       <div className="card-body">
       <h4 className="card-title mb-4">Payment</h4>
-      <form role="form" style={{maxWidth:380}}>
+      <form style={{maxWidth:380}}>
 			<div className="form-group">
 			<label htmlFor="username">Name on card</label>
 			<input  onChange={e => setCardName(e.target.value)} type="text" className="form-control" name="username" placeholder="Ex. John Smith" required=""/>

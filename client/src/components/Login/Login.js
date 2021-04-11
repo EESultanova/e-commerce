@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { setUser } from '../../redux/actionCreators/topicsAC'
 import { API_URL } from '../../config'
 

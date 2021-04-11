@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories, getCategoriesFromServer } from "../../redux/actionCreators/categoryAC"
+import { getCategoriesFromServer } from "../../redux/actionCreators/categoryAC"
 import Category from "../Category/Category";
 
 const Main = () => {
