@@ -86,8 +86,8 @@ function App() {
           <Footer />
 
         </Router>
-      <ProfileContextProvider>
-    </div >
+      </ProfileContextProvider>
+    </div>
   );
 }
 
