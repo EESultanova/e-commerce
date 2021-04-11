@@ -1,13 +1,11 @@
 import ProfileAddress from '../ProfileAddress/ProfileAddress';
 import ProfileOverview from "../ProfileOverview/ProfileOverview";
 import ProfileOrders from "../ProfileOrders/ProfileOrders";
-import { useState } from 'react';
 import ProfileWishlist from '../ProfileWishlist/ProfileWishlist';
 import ProfileSelling from '../ProfileSelling/ProfileSelling';
 import ProfileSettings from '../ProfileSettings/ProfileSettings';
 import { useProfileContext } from '../../contexts/ProfileContext';
 import ProfileAddNewItem from '../ProfileSelling/ProfileAddNewItem';
-import userReducer from '../../redux/reducers/userReducer';
 import { useSelector } from 'react-redux';
 
 
@@ -39,8 +37,8 @@ const ProfileMain = () => {
               {choice === 2 && <ProfileOrders/>}
               {choice === 3 && <ProfileWishlist/>}
               {choice === 4 && <ProfileSettings/>}
-              {user.role === "seller" || choice === 5 && <ProfileSelling/>}
-              {user.role === "seller" || choice === 6 && <ProfileAddNewItem/>}
+              {user.role === "seller" && choice === 5 && <ProfileSelling/>}
+              {user.role === "seller" && choice === 6 && <ProfileAddNewItem/>}
             </main>
           </div>
         </div>
