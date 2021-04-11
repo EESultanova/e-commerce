@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router"
 import { addGoodToCart, deleteGoodFromCart } from "../../redux/actionCreators/cartAC"
@@ -10,7 +10,8 @@ import 'animate.css'
 import 'react-notifications-component/dist/theme.css'
 
 const GoodDetails = () => {
-
+  
+  const [photo, setPhoto] = useState(0)
   const { id } = useParams()
   const dispatch = useDispatch()
 
@@ -44,6 +45,8 @@ const GoodDetails = () => {
     )
   }
 
+  
+
   return (
     <div className="row">
       <aside className="col-md-6">
@@ -52,12 +55,12 @@ const GoodDetails = () => {
             {good.photo &&
               <>
                 <div className="img-big-wrap mt-5">
-                  <div> <a href="/"><img src={good.photo} alt="" /></a></div>
+                  <div> <a href="/"><img src={good.photo[photo]} alt="" /></a></div>
                 </div>
                 <div className="thumbs-wrap">
                   {good.photo.length ? good.photo.map((photo, indx) => {
                     return (
-                      <a key={indx} href="/" className="item-thumb"> <img src={photo} alt="" /></a>
+                      <div key={indx} href="#" className="item-thumb"> <img src={photo} alt="" onClick={() => setPhoto(indx)} /></div>
                     )
                   })
                     : ''
