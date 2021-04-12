@@ -11,6 +11,7 @@ const CategoryModel = require("./src/models/category.model")
 const authRouter = require('./src/routes/auth.routes');
 const filesRouter = require('./src/routes/file.routes');
 const UserModel = require('./src/models/user.model');
+const OrderModel = require('./src/models/order.model');
 
 const app = express();
 
@@ -57,9 +58,35 @@ app.get("/api/v1/goods/:id", async (req, res) => {
 
 app.post("/api/v1/order", async (req, res) => {
   try {
-    const order = {...req.body, currentUser: true}
+    const orderForUser = {...req.body, currentUser: true}
+    const {
+      fioToServer,
+      addressToServer,
+      email,
+      phone,
+      card,
+      cardName,
+      expMonth,
+      expYear,
+      cvv,
+      currentCart,
+      currentUser} = req.body
+    console.log(req.body)
     await UserModel.findByIdAndUpdate(req.body.currentUser.id,
-      {$push:  {orders: order}})
+      {$push:  {orders: orderForUser}})
+    await OrderModel.create({
+      fio: fioToServer,
+      address: addressToServer,
+      email: email,
+      phone: phone,
+      card: card,
+      cardName: cardName,
+      expMonth: expMonth,
+      expYear: expYear,
+      cvv: cvv,
+      cart: currentCart,
+      user: currentUser.id,
+    })  
     res.sendStatus(200)
   } catch (error) {
     console.log(error)
@@ -79,7 +106,6 @@ app.post("/api/v1/add_new_good", async (req, res) => {
       rating: rating,
       category: category,
 })
-    console.log('newGood from server------>', newGood)
     await UserModel.findByIdAndUpdate(user, {$push: {goods: newGood._id}})
       res.sendStatus(200)
   } catch (error) {

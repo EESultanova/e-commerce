@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { setUser } from '../../redux/actionCreators/topicsAC'
-import { API_URL } from '../../config'
+import { API_URL, SITE_URL } from '../../config'
 import { emptyCart } from "../../redux/actionCreators/cartAC";
 
 
@@ -28,7 +28,7 @@ const Login = () => {
   const submitHandler = async (e) => {
     e.preventDefault()
     try {
-      await fetch(`${API_URL}api/v1/auth/login`, {
+      await fetch(`${SITE_URL}api/v1/auth/login`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -78,7 +78,7 @@ const Login = () => {
         <div className="card-body">
           <h4 id="container" className="card-title mb-4">Sign in</h4>
           <form onSubmit={submitHandler}>
-            <img className="logo" src={`images/logocommerce3.png`} alt="" style={{ maxWidth: 180, marginBottom: 40 }} />
+            <img className="logo" src="/images/logocommerce3.png" alt="" style={{ maxWidth: 180, marginBottom: 40 }} />
             <div className="form-group">
               <input value={email} onChange={inputEmailHandler} name='email' type="email" className="form-control" placeholder="Email" />
             </div>

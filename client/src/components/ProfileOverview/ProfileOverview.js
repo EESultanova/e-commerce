@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
-import { API_URL } from '../../config'
+import { API_URL, SITE_URL } from '../../config'
 import avatarLogo from '../../assets/avatar.svg';
 
 const ProfileOverview = () => {
 
   const currentUser = useSelector(state => state.user);
-  const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : avatarLogo;
+  const avatar = currentUser.avatar ? `${SITE_URL + currentUser.avatar}` : avatarLogo;
 
   return ( 
     <>

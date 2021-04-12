@@ -1,3 +1,4 @@
+import { SITE_URL } from "../../config"
 import { GET_CATEGORIES } from "../types/categoryTypes"
 import { hideLoader, showLoader } from "./loaderAC"
 

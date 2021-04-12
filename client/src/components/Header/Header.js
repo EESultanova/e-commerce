@@ -21,7 +21,7 @@ const Header = () => {
 	const currentUser = useSelector(state => state.user);
   const cart = useSelector(state => state.cart)
   const userCart = useSelector(state => state.user.cart)
-	const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : avatarLogo;
+	const avatar = currentUser.avatar ? `${SITE_URL + currentUser.avatar}` : avatarLogo;
 	const dispatch = useDispatch()
   let {setChoice} = useProfileContext()
 
@@ -44,7 +44,7 @@ const Header = () => {
 					<div className="row align-items-center">
 						<div className="col-xl-2 col-lg-3 col-md-12">
 							<Link to="/" className="brand-wrap">
-								<img className="logo" src={`${SITE_URL}images/logocommerce3.png`} alt="" />
+								<img className="logo" src="/images/logocommerce3.png" alt="" />
                 {/* <span style={headerStyle}>E-Commerce</span> */}
 							</Link>
 						</div>
@@ -93,7 +93,7 @@ const Header = () => {
 										<div className="icon-area">
 											<i className="fa fa-shopping-cart"></i>
                       {user &&
-                        (userCart.length ?
+                        (userCart?.length ?
                         <span className="notify">{userCart.length}</span>
                         : '')
                       }

@@ -1,5 +1,6 @@
 import { ADD_GOOD_TO_USER_CART, ADD_ORDER_DETAILS, CHANGE_QUANTITY_USER, DELETE_GOOD_FROM_USER_CART } from "../types/userTypes"
 import { SELLER_ADD_GOOD } from "../types/goodTypes"
+import { SITE_URL } from "../../config"
 
 export const addOrderDetails = (order) => {
   return {
@@ -21,7 +22,7 @@ export const addOrderDetailsToServer = (
   currentCart,
   currentUser}) => {
   return  (
-    fetch('http://localhost:3001/api/v1/order', {
+    fetch(`${SITE_URL}api/v1/order`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -87,7 +88,7 @@ export const sellerAddGoodToServer = ({
 }) => {
   console.log('category------_>', category)
   return (
-    fetch('http://localhost:3001/api/v1/add_new_good', {
+    fetch(`${SITE_URL}api/v1/add_new_good`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'

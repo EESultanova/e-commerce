@@ -1,6 +1,7 @@
 import { ADD_GOOD_TO_USER_CART, ADD_ORDER_DETAILS, CHANGE_QUANTITY_USER, DELETE_GOOD_FROM_USER_CART } from "../types/userTypes";
 import { SET_USER, REMOVE_USER } from "../types/topicsTypes";
-import { ADD_GOOD_TO_CART } from "../types/cartTypes";
+// import { ADD_GOOD_TO_CART } from "../types/cartTypes";
+import { SELLER_ADD_GOOD } from "../types/goodTypes";
 
 
 const userReducer = (state = {} , action) => {
@@ -30,9 +31,15 @@ const userReducer = (state = {} , action) => {
         case ADD_ORDER_DETAILS:
             return {
                 ...state,
-                orders: [action.payload]
+                orders: [...state.orders, action.payload]
             }
 
+        case SELLER_ADD_GOOD:
+            return {
+              ...state,
+              goods : [...state.goods, action.payload]
+            }
+        
         case CHANGE_QUANTITY_USER:
           return {
             ...state,

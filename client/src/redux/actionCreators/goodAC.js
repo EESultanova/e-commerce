@@ -1,3 +1,4 @@
+import { SITE_URL } from "../../config";
 import {
   ADD_GOOD,
   DELETE_GOOD,
@@ -54,7 +55,7 @@ export const getGoodsFromServer = (id, sorting, searchResult) => {
   } else {
     if (sorting === "price") {
       return (dispatch) => {
-        fetch(`http://localhost:3001/api/v1/categories/${id}`)
+        fetch(`${SITE_URL}api/v1/categories/${id}`)
           .then((response) => response.json())
           .then((goodsFromServer) =>
             dispatch(
@@ -64,7 +65,7 @@ export const getGoodsFromServer = (id, sorting, searchResult) => {
       };
     } else if (sorting === "price_desc") {
       return (dispatch) => {
-        fetch(`http://localhost:3001/api/v1/categories/${id}`)
+        fetch(`${SITE_URL}api/v1/categories/${id}`)
           .then((response) => response.json())
           .then((goodsFromServer) =>
             dispatch(
@@ -74,7 +75,7 @@ export const getGoodsFromServer = (id, sorting, searchResult) => {
       };
     } else if (sorting === "rating") {
       return (dispatch) => {
-        fetch(`http://localhost:3001/api/v1/categories/${id}`)
+        fetch(`${SITE_URL}api/v1/categories/${id}`)
           .then((response) => response.json())
           .then((goodsFromServer) =>
             dispatch(
@@ -84,7 +85,7 @@ export const getGoodsFromServer = (id, sorting, searchResult) => {
       };
     } else
       return (dispatch) => {
-        fetch(`http://localhost:3001/api/v1/categories/${id}`)
+        fetch(`${SITE_URL}api/v1/categories/${id}`)
           .then((response) => response.json())
           .then((goodsFromServer) =>
             dispatch(
@@ -97,7 +98,7 @@ export const getGoodsFromServer = (id, sorting, searchResult) => {
 
 export const getGoodDetailsFromServer = (id) => {
   return (dispatch) => {
-    fetch(`http://localhost:3001/api/v1/goods/${id}`)
+    fetch(`${SITE_URL}api/v1/goods/${id}`)
       .then((response) => response.json())
       .then((oneGoodFromServer) => dispatch(getGood(oneGoodFromServer)));
   };
