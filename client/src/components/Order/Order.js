@@ -110,7 +110,7 @@ function Order() {
 	<div className="form-row">
 		<div className="col form-group">
 			<label>Email</label>
-		  	<input  onChange={e => setEmail(e.target.value)}  type="email" className="form-control" placeholder="" />
+		  	<input onChange={e => setEmail(e.target.value)}  type="email" className="form-control" placeholder="" />
 		</div> 
 		<div className="col form-group">
 			<label>Phone</label>

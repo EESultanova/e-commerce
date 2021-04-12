@@ -60,7 +60,7 @@ const ListGoods = () => {
             <div className="col-md-2">Filter by</div>
             <div className="col-md-10">
               <ul className="list-inline" style={{ display: 'flex', marginLeft: '1.2rem' }}>
-                <li className="list-inline-item mr-3 dropdown"><a href="/" className="dropdown-toggle" data-toggle="dropdown">   Supplier type </a>
+                {/* <li className="list-inline-item mr-3 dropdown"><a href="/" className="dropdown-toggle" data-toggle="dropdown">   Supplier type </a>
                   <div className="dropdown-menu p-3" style={{ maxWidth: "20rem" }}>
                     <label className="form-check">
                       <input type="radio" name="myfilter" className="form-check-input" /> Good supplier
@@ -91,7 +91,7 @@ const ListGoods = () => {
                   </div>
                 </li>
                 <li className="list-inline-item mr-3"><a href="/">Color</a></li>
-                <li className="list-inline-item mr-3"><a href="/">Size</a></li>
+                <li className="list-inline-item mr-3"><a href="/">Size</a></li> */}
                 <li className="list-inline-item mr-3">
                   <div className="form-inline">
                     <label className="mr-2">Price</label>
@@ -102,11 +102,11 @@ const ListGoods = () => {
                   </div>
                 </li>
                 <li className="list-inline-item mr-3">
-                  <label className="custom-control mt-1 custom-checkbox">
+                  {/* <label className="custom-control mt-1 custom-checkbox">
                     <input type="checkbox" className="custom-control-input" />
                     <div className="custom-control-label">Ready to ship
                 </div>
-                  </label>
+                  </label> */}
                 </li>
               </ul>
             </div>

@@ -14,8 +14,8 @@ const Good = ({ good }) => {
           <figcaption className="info-wrap">
             <p className="title mb-2">{good.name}</p>
             <div className="price-wrap">
-              <span className="price">{good.price}$</span>
-              <small className="text-muted">/per item</small>
+              <span className="price">{good.price} $</span>
+              <small className="text-muted"> /per item</small>
             </div>
 
             <label className="custom-control mb-3 mt-2 custom-checkbox">

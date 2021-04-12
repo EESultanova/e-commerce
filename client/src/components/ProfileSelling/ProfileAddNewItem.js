@@ -55,7 +55,7 @@ import 'react-notifications-component/dist/theme.css'
         <div className="form-row">
 			<div className="col form-group">
 				<label>Name</label>
-			  	<input type="text" onChange={e => setName(e.target.value)} className="form-control" placeholder="Drill"/>
+			  	<input type="text" onChange={e => setName(e.target.value)} className="form-control" placeholder="Drill" maxLength="125"/>
 			</div> 
 			<div className="col form-group">
 				<label>Quantity</label>
