@@ -3,6 +3,7 @@ import { AddressSuggestions } from 'react-dadata'
 import { FioSuggestions } from 'react-dadata';
 import 'react-dadata/dist/react-dadata.css'
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { emptyCart } from '../../redux/actionCreators/cartAC';
 import { addOrderDetails, addOrderDetailsToServer } from '../../redux/actionCreators/userAC';
 
@@ -31,7 +32,7 @@ function Order() {
   function confirmHandler() {
     dispatch(addOrderDetails({fioToServer, addressToServer, email, phone, currentCart}))
     addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser})
-    // dispatch(emptyCart())
+    dispatch(emptyCart())
   }
 
   return(
@@ -40,7 +41,7 @@ function Order() {
     {
       currentCart.length ? currentCart.map(good => {
         return (
-          <section className="section-content padding-y">
+          <section className="section-content padding-y" key={good._id}>
           <div className="container" style={{maxWidth:800}}>
           <tr key={good._id} className="m-4">
             <td>
@@ -182,7 +183,10 @@ function Order() {
 					</div> 
 				</div>
 			</div>
-			<button onClick={confirmHandler} className="subscribe btn btn-primary btn-block" type="button"> Confirm  </button>
+				<button className="subscribe btn btn-primary btn-block">
+					<Link onClick={confirmHandler}  to="/"> Confirm </Link>
+				</button>
+
 		</form>
       </div> 
 
