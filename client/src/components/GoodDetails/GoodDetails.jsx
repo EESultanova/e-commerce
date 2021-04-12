@@ -2,13 +2,14 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router"
 import { addGoodToCart, deleteGoodFromCart } from "../../redux/actionCreators/cartAC"
-import { getGoodDetailsFromServer } from "../../redux/actionCreators/goodAC"
+import { getGood, getGoodDetailsFromServer } from "../../redux/actionCreators/goodAC"
 
 import { store } from 'react-notifications-component';
 
 import 'animate.css'
 import 'react-notifications-component/dist/theme.css'
 import { addGoodToUserCart, deleteGoodFromUserCart } from "../../redux/actionCreators/userAC"
+import Loader from "../Loader/Loader"
 
 const GoodDetails = () => {
   
@@ -18,21 +19,22 @@ const GoodDetails = () => {
 
   useEffect(() => {
     dispatch(getGoodDetailsFromServer(id))
+    return () => {dispatch(getGood([]))}
   }, [])
   
   const currentUserAuth = useSelector(state => state.user.isAuth)
   const good = useSelector(state => state.goods.good)
 
   const cart = useSelector(state => state.cart)
-  console.log(cart);
   const ids = cart?.map(good => good?._id)
   const inCart = ids?.includes(good?._id)
+  console.log(inCart, 'local cart')
 
   const userCart = useSelector(state => state?.user?.cart)
   const userIds = userCart?.map(good => good?._id)
   const inUserCart = userIds?.includes(good?._id)
+  console.log(inUserCart, 'user cart');
 
-  console.log(inUserCart);
   function NotifyAdd() {
     return (
       <div className="bg-primary text-white rounded" style={{ width: 200 }}>
@@ -69,7 +71,7 @@ const GoodDetails = () => {
                       <div key={indx} className="item-thumb" onClick={() => setPhoto(indx)}> <img src={photo} alt="" /></div>
                     )
                   })
-                    : ''
+                    : <Loader />
                   }
                 </div>
               </>
