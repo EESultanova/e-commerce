@@ -25,7 +25,6 @@ const Header = () => {
 	const handlergameOver = () => {
 		dispatch(removeUser())
 	}
-  // console.log(categories)
 
   useEffect(() => {
     dispatch(filterGoodsSaga({categoryForFilter, input})) 

@@ -22,11 +22,6 @@ const GoodDetails = () => {
   const cart = useSelector(state => state.cart)
   const ids = cart.map(good => good._id)
   const inCart = ids.includes(good._id)
-  console.log(inCart)
-
-
-  cart.find(x => x._id === good._id)
-  console.log(cart.find(x => x._id === good._id))
 
   function NotifyAdd() {
     return (

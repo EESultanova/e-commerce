@@ -3,8 +3,6 @@ const { ADD_GOOD_TO_CART, DELETE_GOOD_FROM_CART, CHANGE_QUANTITY } = require("..
 const cartReducer = (state = [], action) => {
   switch (action.type) {
     case CHANGE_QUANTITY:
-      console.log('Hello reducer')
-      console.log(action)
       return state.map(goodCart => {
         if (goodCart._id === action.id) {
           return {
