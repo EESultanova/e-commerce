@@ -28,7 +28,7 @@ function Order() {
   .map(el => el.price * el.quantity)
   .reduce((acc, currentValue) => acc + currentValue, 0)
   
-  console.log(this.state)
+  // console.log(this.state)
 
   function confirmHandler() {
     //добавить обнуление cart state
