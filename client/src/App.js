@@ -62,6 +62,8 @@ function App() {
           </Route>
           <Route exact path="/cart">
             <Cart />
+          </Route>
+          <Route exact path="/order">
             <Order />
           </Route>
           <Route exact path="/">

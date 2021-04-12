@@ -1,6 +1,6 @@
 import { filterGoods } from "../actionCreators/goodAC";
 import { FILTER_GOODS_SAGA } from "../types/goodTypes";
-import { call, put, debounce, throttle } from 'redux-saga/effects'
+import { call, put, debounce } from 'redux-saga/effects'
 
  
 

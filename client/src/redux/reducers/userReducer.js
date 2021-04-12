@@ -1,5 +1,5 @@
 import { ADD_ORDER_DETAILS } from "../types/orderTypes";
-import { SET_USER, CHANGE_POINTS, REMOVE_USER, SET_AVATAR } from "../types/topicsTypes";
+import { SET_USER, REMOVE_USER } from "../types/topicsTypes";
 
 
 const userReducer = (state = {}, action) => {
@@ -15,6 +15,7 @@ const userReducer = (state = {}, action) => {
                     isAuth: true,
                 }
             }
+            break
 
         case ADD_ORDER_DETAILS:
             return {

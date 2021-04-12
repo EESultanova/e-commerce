@@ -1,5 +1,6 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_URL } from '../../config'
+import { setUser } from '../../redux/actionCreators/topicsAC'
 import avatarLogo from '../../assets/avatar.svg';
 
 const ProfileSettings = () => {
@@ -7,26 +8,73 @@ const ProfileSettings = () => {
   const currentUser = useSelector(state => state.user);
   const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : avatarLogo;
 
+  const dispatch = useDispatch()
+
+    const uploadHandler = async (file) => {
+        try {
+            const formData = new FormData();
+            formData.append('file', file);
+            await fetch(`${API_URL}api/v1/files/avatar`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    // 'Content-Type': 'application/json'
+                },
+                body: formData
+            })
+                .then(res => res.json())
+                .then((response) => {
+                    dispatch(setUser(response))
+                })
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    const deleteHandler = async () => {
+        try {
+            console.log('here fetch')
+            await fetch(`${API_URL}api/v1/files/avatar`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+            })
+                .then(res => res.json())
+                .then((response) => {
+                    console.log('=======>', response)
+                    dispatch(setUser(response))
+                })
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    const inputAvatarHandler = (e) => {
+        const file = e.target.files[0];
+        uploadHandler(file);
+    }
+
   return ( 
-    <div class="card">
-      <div class="card-body">
-     <form class="row">
-     	<div class="col-md-9">
-     		<div class="form-row">
-				<div class="col form-group">
+    <div className="card">
+      <div className="card-body">
+     <form className="row">
+     	<div className="col-md-9">
+     		<div className="form-row">
+				<div className="col form-group">
 					<label>Name</label>
-				  	<input type="text" class="form-control" value="Vosidiy" />
+				  	<input type="text" className="form-control" value={currentUser.name} />
 				</div>
-				<div class="col form-group">
+				<div className="col form-group">
 					<label>Email</label>
-				  	<input type="email" class="form-control" value="vosidiy@gmail.com" />
+				  	<input type="email" className="form-control" value={currentUser.email} readOnly={true} />
 				</div>
 			</div>
 			
-			<div class="form-row">
-				<div class="form-group col-md-6">
+			<div className="form-row">
+				<div className="form-group col-md-6">
 				  <label>Country</label>
-				  <select id="inputState" class="form-control">
+				  <select id="inputState" className="form-control">
 				    <option> Choose...</option>
 				      <option>Uzbekistan</option>
 				      <option>Russia</option>
@@ -35,34 +83,50 @@ const ProfileSettings = () => {
 				      <option>Afganistan</option>
 				  </select>
 				</div>
-				<div class="form-group col-md-6">
+				<div className="form-group col-md-6">
 				  <label>City</label>
-				  <input type="text" class="form-control" />
+				  <input type="text" className="form-control" />
 				</div>
 			</div>
 
-			<div class="form-row">
-				<div class="form-group col-md-6">
+			<div className="form-row">
+				<div className="form-group col-md-6">
 				  <label>Zip</label>
-				  <input type="text" class="form-control" value="123009" />
+				  <input type="text" className="form-control" value="123009" />
 				</div>
-				<div class="form-group col-md-6">
+				<div className="form-group col-md-6">
 				  <label>Phone</label>
-				  <input type="text" class="form-control" value="+123456789" />
+				  <input type="text" className="form-control" value="+123456789" />
 				</div>
 			</div>
 
-			<button class="btn btn-primary">Save</button>	
-			<button class="btn btn-light">Change password</button>	
+			<button className="btn btn-primary mr-2">Save</button>	
+			<button className="btn btn-light">Change password</button>
+      <br/>	
+      <br/>	
+      <div className="mx-auto" style={{"width": '400px', 'margin-top': '10px', 'margin-bottom': '10px', 'border': '1px solid #ced4da', 'padding': '10px', 'border-radius': '0.37rem'}}>
+      <div className="mb-3">Download / Delete Avatar</div>
+        <div className="mb-3">
+          <input accept="image/*" onChange={(e) => inputAvatarHandler(e)} name="avatar" type="file" style={{'width': '18rem'}}/>
+        </div>
+          <button onClick={deleteHandler} type="submit" className="btn btn-primary">Delete avatar</button>
+      </div>
 
 			<br/><br/><br/><br/><br/><br/>
 
      	</div>
-     	<div class="col-md">
-     		<img src={avatar} class="img-md rounded-circle border" alt=""/>
+
+
+     	<div className="col-md">
+     		<img src={avatar} className="img-md rounded-circle border" alt=""/>
      	</div>
+
       </form>
+
       </div>
+        
+
+
     </div>
    );
 }
