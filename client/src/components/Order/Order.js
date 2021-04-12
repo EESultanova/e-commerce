@@ -28,9 +28,10 @@ function Order() {
   .map(el => el.price * el.quantity)
   .reduce((acc, currentValue) => acc + currentValue, 0)
   
+  console.log(this.state)
+
   function confirmHandler() {
     //добавить обнуление cart state
-    //у продавца должны пропасть соответствующие товары из cart
     
     dispatch(addOrderDetails({fioToServer, addressToServer, email, phone, currentCart}))
     addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser})
