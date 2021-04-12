@@ -1,4 +1,4 @@
-import { ADD_GOOD, DELETE_GOOD, GET_GOOD, GET_GOODS } from "../types/goodTypes";
+import { ADD_GOOD, DELETE_GOOD, GET_GOOD, GET_GOODS, SELLER_ADD_GOOD } from "../types/goodTypes";
 
 const goodReducer = (state = [], action) => {
   switch (action.type) {
@@ -26,7 +26,10 @@ const goodReducer = (state = [], action) => {
         goods: state.filter(good => good._id !== action.payload)
       }
 
-   
+    case SELLER_ADD_GOOD:
+      return {
+        newGood: action.payload
+      }
 
     default:
       return state;
