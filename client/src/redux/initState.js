@@ -6,6 +6,7 @@ const initState = () =>  {
       avatar: '',
       goods: [],
       orders: [],
+      cart: [],
     },
     categories: [],
     currentCategory: null,

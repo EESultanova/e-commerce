@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux';
 
 
 const ProfileMain = () => {
-
   let {choice, setChoice} = useProfileContext()
   const user = useSelector(state => state.user)
 

@@ -28,8 +28,8 @@ const GoodDetails = () => {
   const inCart = ids.includes(good._id)
 
   const userCart = useSelector(state => state.user.cart)
-  const userIds = userCart.map(good => good._id)
-  const inUserCart = userIds.includes(good._id)
+  const userIds = userCart?.map(good => good?._id)
+  const inUserCart = userIds?.includes(good?._id)
 
   function NotifyAdd() {
     return (
