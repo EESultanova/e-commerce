@@ -29,12 +29,13 @@ const GoodDetails = () => {
 
   const userCart = useSelector(state => state.user.cart)
   const userIds = userCart.map(good => good._id)
-  const inUserCart = ids.includes(good._id)
+  const inUserCart = userIds.includes(good._id)
 
   function NotifyAdd() {
     return (
       <div className="bg-primary text-white rounded" style={{ width: 200 }}>
-        <h6>{good.name} was added to your cart!</h6>
+        <h6>Success</h6>
+        <p>{good.name} was added to your cart!</p>
       </div>
     )
   }
@@ -42,7 +43,8 @@ const GoodDetails = () => {
   function NotifyRemove() {
     return (
       <div className="bg-secondary text-white rounded" style={{ width: 200 }}>
-        <h6>{good.name} was removed from your cart!</h6>
+        <h6>Success</h6>
+        <p>{good.name} was removed from your cart!</p>
       </div>
     )
   }
@@ -164,7 +166,7 @@ const GoodDetails = () => {
                 </button>)
               }
               {currentUserAuth &&
-                ((inCart === true) ?
+                ((inUserCart === true) ?
                 <button onClick={() => {
                   store.addNotification({
                     content: NotifyRemove,

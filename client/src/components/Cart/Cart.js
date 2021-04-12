@@ -3,6 +3,11 @@ import { changeQuantity, deleteGoodFromCart } from "../../redux/actionCreators/c
 import { changeQuantityUserCart, deleteGoodFromUserCart } from "../../redux/actionCreators/userAC";
 import { Link } from "react-router-dom"
 
+import { store } from 'react-notifications-component';
+
+import 'animate.css'
+import 'react-notifications-component/dist/theme.css'
+
 const Cart = () => {
 
   const dispatch = useDispatch()
@@ -21,7 +26,16 @@ const Cart = () => {
     .map(el => el.price * el.quantity)
     .reduce((acc, currentValue) => acc + currentValue, 0)
 
-  return ( 
+  function NotifyRemove() {
+    return (
+      <div className="bg-secondary text-white rounded" style={{ width: 200 }}>
+        <h6>Success</h6>
+        <p>Item was removed from your cart!</p>
+      </div>
+    )
+  }
+
+  return (
     <section className="section-content padding-y">
       <div className="container">
 
@@ -109,15 +123,14 @@ const Cart = () => {
         <a href="/" className="btn btn-light d-flex" style={{'width': '19%'}}> <i className="fa fa-chevron-left mr-1" style={{'margin-top': '0.2rem'}}></i> Continue shopping </a>
       </div>	
       </div>
+            <div className="alert alert-success mt-3">
+              <p className="icontext"><i className="icon text-success fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
+            </div>
 
-      <div className="alert alert-success mt-3">
-        <p className="icontext"><i className="icon text-success fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
-      </div>
-
-        </main>
-        <aside className="col-md-3">
-          <div className="card">
-            <div className="card-body">
+          </main>
+          <aside className="col-md-3">
+            <div className="card">
+              <div className="card-body">
                 <dl className="dlist-align">
                   <dt>Total price:</dt>
                   {currentUserAuth &&
@@ -127,19 +140,19 @@ const Cart = () => {
                     <dd className="text-right">{totalLocalCart.toFixed(2)} $</dd>
                   }
                 </dl>
-                <hr/>
+                <hr />
                 <p className="text-center mb-3">
                   <img src="images/misc/payments.png" height="26" alt="" />
                 </p>
-                
-            </div> 
-          </div>
-        </aside>
-      </div>
+
+              </div>
+            </div>
+          </aside>
+        </div>
 
       </div>
-</section>
-   )
+    </section>
+  )
 }
- 
+
 export default Cart;

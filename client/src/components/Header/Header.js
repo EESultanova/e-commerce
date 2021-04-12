@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, NavLink } from "react-router-dom";
 import { removeUser } from '../../redux/actionCreators/topicsAC'
 import avatarLogo from '../../assets/avatar.svg';
-import { API_URL } from '../../config'
+import { API_URL, SITE_URL } from '../../config'
 import { useEffect, useState } from 'react';
 import { filterGoodsSaga } from '../../redux/actionCreators/goodAC';
 import { useProfileContext } from '../../contexts/ProfileContext';
@@ -46,7 +46,7 @@ const Header = () => {
 					<div className="row align-items-center">
 						<div className="col-xl-2 col-lg-3 col-md-12">
 							<Link to="/" className="brand-wrap">
-								<img className="logo" src="http://localhost:3000/images/logo.png" alt="" />
+								<img className="logo" src={`${SITE_URL}images/logocommerce3.png`} alt="" />
                 {/* <span style={headerStyle}>E-Commerce</span> */}
 							</Link>
 						</div>

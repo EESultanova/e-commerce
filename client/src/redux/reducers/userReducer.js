@@ -3,7 +3,7 @@ import { SET_USER, REMOVE_USER } from "../types/topicsTypes";
 import { ADD_GOOD_TO_CART } from "../types/cartTypes";
 
 
-const userReducer = (state = {}, action) => {
+const userReducer = (state = {} , action) => {
     switch (action.type) {
         case SET_USER:
             if (action.payload.user) {
@@ -30,7 +30,7 @@ const userReducer = (state = {}, action) => {
         case ADD_ORDER_DETAILS:
             return {
                 ...state,
-                user: [...state.orders, action.payload]
+                orders: [action.payload]
             }
 
         case CHANGE_QUANTITY_USER:

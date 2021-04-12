@@ -437,7 +437,7 @@ p:last-child {
 
 .brand-wrap .logo, .navbar-brand .logo {
   margin-right: 7px;
-  max-height: 34px;
+  max-height: 50px;
   display: inline-block; }
 
 .navbar-main .nav-link:hover {
@@ -506,7 +506,7 @@ p:last-child {
     color: #ff6a00; }
 
 .section-footer .logo-footer {
-  height: 40px; }
+  height: 66px; }
 
 .section-footer .title {
   font-weight: 600;

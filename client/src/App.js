@@ -22,6 +22,8 @@ import Profile from './components/Profile.js/Profile';
 import ProfileContextProvider from './contexts/ProfileContext';
 import ReactNotification from 'react-notifications-component';
 
+import MessengerCustomerChat from 'react-messenger-customer-chat';
+
 function App() {
 
   const user = useSelector(state => state.user.isAuth);
@@ -54,6 +56,10 @@ function App() {
         <Router>
           <ReactNotification />
           <Header />
+          <MessengerCustomerChat
+            pageId="104351358442170"
+            appId="1179535882491681"
+          />,
           <Route exact path="/categories/:id">
             <ListOfGoods />
           </Route>
@@ -62,8 +68,6 @@ function App() {
           </Route>
           <Route exact path="/cart">
             <Cart />
-          </Route>
-          <Route exact path="/order">
             <Order />
           </Route>
           <Route exact path="/">
@@ -86,7 +90,6 @@ function App() {
             </Switch>
           }
           <Footer />
-
         </Router>
       </ProfileContextProvider>
     </div>

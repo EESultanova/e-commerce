@@ -69,17 +69,19 @@ app.post("/api/v1/order", async (req, res) => {
 
 app.post("/api/v1/add_new_good", async (req, res) => {
   try {
- const {name, quantity, price, description, category, photo, rating} = req.body
- await GoodModel.create({
-  quantity :quantity,
-  photo: [photo],
-  name: name,
-  description: description,
-  price: price,
-  rating: rating,
-  category: category,
+    const {name, quantity, price, description, category, photo, rating, user} = req.body
+    const newGood = await GoodModel.create({
+      quantity :quantity,
+      photo: [photo],
+      name: name,
+      description: description,
+      price: price,
+      rating: rating,
+      category: category,
 })
-    res.sendStatus(200)
+    console.log('newGood from server------>', newGood)
+    await UserModel.findByIdAndUpdate(user, {$push: {goods: newGood._id}})
+      res.sendStatus(200)
   } catch (error) {
     console.log(error)
     res.sendStatus(500)
@@ -96,6 +98,12 @@ app.get("/api/v1/filter", async (req, res) => {
     res.sendStatus(500)
   }
 })
+
+const root = require('path').join(__dirname, '../', 'client', 'build');
+app.use(express.static(root));
+app.get('*', (req, res) => {
+  res.sendFile('index.html', { root });
+});
 
 app.listen(PORT, () => {
   console.log('Server started on port ', PORT)
