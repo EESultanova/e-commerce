@@ -26,6 +26,7 @@ const userSchema = new Schema({
     ref: 'Goods'
   }],
   orders: [],
+  cart: [],
   avatar: {
     type: String,
   },

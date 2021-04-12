@@ -52,43 +52,44 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
-        <ReactNotification />
-        <Header />
-        <MessengerCustomerChat
-          pageId="104351358442170"
-          appId="1179535882491681"
-        />,
-        <Route exact path="/categories/:id">
-          <ListOfGoods />
-        </Route>
-        <Route path="/goods/:id">
-          <GoodDetails />
-        </Route>
-        <Route exact path="/cart">
-          <Cart />
-          <Order />
-        </Route>
-        <Route exact path="/">
-          <Main />
-        </Route>
-        {!user ?
-          <Switch>
-            <Route exact path="/registration">
-              <Registration />
-            </Route>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-          </Switch>
-          :
-          <Switch>
-            <Route exact path="/profile">
-              <Profile />
-            </Route>
-          </Switch>
-        }
-        <Footer />
+      <ProfileContextProvider>
+        <Router>
+          <ReactNotification />
+          <Header />
+          <MessengerCustomerChat
+            pageId="104351358442170"
+            appId="1179535882491681"
+          />,
+          <Route exact path="/categories/:id">
+            <ListOfGoods />
+          </Route>
+          <Route path="/goods/:id">
+            <GoodDetails />
+          </Route>
+          <Route exact path="/cart">
+            <Cart />
+            <Order />
+          </Route>
+          <Route exact path="/">
+            <Main />
+          </Route>
+          {!user ?
+            <Switch>
+              <Route exact path="/registration">
+                <Registration />
+              </Route>
+              <Route exact path="/login">
+                <Login />
+              </Route>
+            </Switch>
+            :
+            <Switch>
+              <Route exact path="/profile">
+                <Profile />
+              </Route>
+            </Switch>
+          }
+          <Footer />
         </Router>
       </ProfileContextProvider>
     </div>

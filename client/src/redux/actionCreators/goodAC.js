@@ -35,14 +35,6 @@ export const deleteGood = (good) => {
   };
 };
 
-// export const getGoodsFromServer = (id) => {
-//   return dispatch => {
-//     fetch(`http://localhost:3001/api/v1/categories/${id}`)
-//     .then(response => response.json())
-//     .then(goodsFromServer => dispatch(getGoods(goodsFromServer)))
-//   }
-// }
-
 export const getGoodsFromServer = (id, sorting, searchResult) => {
   if (searchResult) {
     if (sorting === "price") {

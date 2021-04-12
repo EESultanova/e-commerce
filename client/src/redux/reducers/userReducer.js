@@ -1,6 +1,6 @@
-import { SELLER_ADD_GOOD } from "../types/goodTypes";
-import { ADD_ORDER_DETAILS } from "../types/orderTypes";
+import { ADD_GOOD_TO_USER_CART, ADD_ORDER_DETAILS, CHANGE_QUANTITY_USER, DELETE_GOOD_FROM_USER_CART } from "../types/userTypes";
 import { SET_USER, REMOVE_USER } from "../types/topicsTypes";
+import { ADD_GOOD_TO_CART } from "../types/cartTypes";
 
 
 const userReducer = (state = {} , action) => {
@@ -18,18 +18,47 @@ const userReducer = (state = {} , action) => {
             }
             break
 
+        case REMOVE_USER:
+          localStorage.removeItem('token');
+          return {
+              ...state,
+              name: '',
+              avatar: '',
+              isAuth: false
+          }
+
         case ADD_ORDER_DETAILS:
             return {
                 ...state,
                 orders: [action.payload]
             }
 
-        case SELLER_ADD_GOOD:
-            return {
-              ...state,
-              goods : [action.payload]
-            }
-        
+        case CHANGE_QUANTITY_USER:
+          return {
+            ...state,
+            cart: state.cart.map(goodCart => {
+              if (goodCart._id === action.id) {
+                return {
+                  ...goodCart,
+                  quantity: action.quantity
+                }
+              }
+              return goodCart
+            })
+          }
+                
+
+        case ADD_GOOD_TO_USER_CART:
+          return {
+            ...state,
+            cart: [...state.cart, action.payload]
+          }
+
+        case DELETE_GOOD_FROM_USER_CART:
+          return {
+            ...state,
+            cart: state.cart.filter(good => good._id !== action.payload)
+          }
 
         // case SET_AVATAR:
         //     if (action.payload.user) {
@@ -46,15 +75,6 @@ const userReducer = (state = {} , action) => {
         //         isAuth: false
         //     }
         // }
-
-        case REMOVE_USER:
-            localStorage.removeItem('token');
-            return {
-                ...state,
-                name: '',
-                avatar: '',
-                isAuth: false
-            }
 
         default:
             return state

@@ -29,9 +29,6 @@ const ListGoods = () => {
   const categories = useSelector(state => state.categories)
   const currentCategory = categories.find(categories => categories._id === id)
 
-
-  console.log(searchResult)
-
   function sortGoods(arg) {
     if (arg === 'sortasc') {
       history.push(`/categories/${id}/?sorting=price`)
