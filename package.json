@@ -1,0 +1,26 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "14.x",
+    "yarn": "1.22.10"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd ./server && npm i && node server.js",
+    "heroku-postbuild": "cd ./client && yarn && yarn run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamFlayer/e-commerce.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SamFlayer/e-commerce/issues"
+  },
+  "homepage": "https://github.com/SamFlayer/e-commerce#readme"
+}
