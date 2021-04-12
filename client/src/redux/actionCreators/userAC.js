@@ -86,7 +86,6 @@ export const sellerAddGoodToServer = ({
   rating,
   user
 }) => {
-  console.log('category------_>', category)
   return (
     fetch(`${SITE_URL}api/v1/add_new_good`, {
       method: "POST",
