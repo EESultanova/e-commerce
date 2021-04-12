@@ -1,3 +1,5 @@
+import { SITE_URL } from "../../config";
+
 const Footer = () => {
   return ( 
     <footer className="section-footer border-top">
@@ -6,7 +8,7 @@ const Footer = () => {
 			<div className="row">
 				<aside className="col-md-4">
 					<article className="mr-3">
-						<img src="../images/logocommerce3.png"  className="logo-footer" alt=''/>
+						<img src={`${SITE_URL}images/logocommerce3.png`} className="logo-footer" alt=''/>
 						<p className="mt-3">Some short text about company like You might remember the Dell computer commercials in which a youth reports this exciting news to his friends.</p>
 						<div>
 						    <a className="btn btn-icon btn-light" title="Facebook" target="_blank" href="/"><i className="fab fa-facebook-f"></i></a>
