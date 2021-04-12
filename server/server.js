@@ -57,6 +57,7 @@ app.get("/api/v1/goods/:id", async (req, res) => {
 })
 
 app.post("/api/v1/order", async (req, res) => {
+  console.log(req.body);
   try {
     const orderForUser = {...req.body, currentUser: true}
     const {

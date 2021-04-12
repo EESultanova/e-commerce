@@ -21,8 +21,8 @@ function Order() {
 
   const currentUser = useSelector(state => state.user)
   const currentCart = useSelector(state => state.user.cart)
-  const fioToServer = fio.value
-  const addressToServer = address.value
+  let fioToServer = fio.value
+  let addressToServer = address.value
   
   const total = currentCart
   .map(el => el.price * el.quantity)
@@ -33,10 +33,12 @@ function Order() {
   function confirmHandler() {
     //добавить обнуление cart state
     
-    dispatch(addOrderDetails({fioToServer, addressToServer, email, phone, currentCart}))
+    dispatch(addOrderDetails({fioToServer, addressToServer, email, phone, currentCart, currentUser}))
     addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser})
   }
  
+  console.log(fioToServer);
+
   return(
     <>
     <section className="section-content padding-y">
@@ -61,7 +63,7 @@ function Order() {
             <td> 
               <div className="price-wrap"> 
                 <var style={{width:200}} className="price mx-5">{(good.price * good.quantity).toFixed(2)} $</var> 
-                <small className="text-muted"> {good.price}each </small> 
+                <small className="text-muted"> {good.price}each</small> 
               </div>
             </td>
             <td className="text-right"> 
