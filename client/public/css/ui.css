@@ -855,7 +855,8 @@ a[class*='card'] {
   margin-bottom: 20px;
   overflow: hidden;
   min-height: 310px; 
-  max-width: 310px;}
+  max-width: 310px;
+}
   .card-category .card-title {
     font-weight: 600;
     font-size: 18px; }
@@ -866,7 +867,7 @@ a[class*='card'] {
     background: #fff0c5; }
     .card-category .img-wrap img {
       height: 100%;
-      width: 60%;
+      width: 100%;
       -o-object-fit: cover;
          object-fit: cover;
       mix-blend-mode: multiply; }

@@ -25,8 +25,6 @@ const Header = () => {
 	const dispatch = useDispatch()
   let {setChoice} = useProfileContext()
 
-  console.log(userCart.length, 'LEENGTH')
-
 	const handlergameOver = () => {
 		dispatch(removeUser())
 	}

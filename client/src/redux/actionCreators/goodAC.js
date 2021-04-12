@@ -5,7 +5,9 @@ import {
   GET_GOODS,
   FILTER_GOODS,
   FILTER_GOODS_SAGA,
+  SELLER_ADD_GOOD,
 } from "../types/goodTypes";
+import { hideLoader } from "./loaderAC";
 
 export const getGoods = (goods) => {
   return {
@@ -88,7 +90,7 @@ export const getGoodsFromServer = (id, sorting, searchResult) => {
             dispatch(
               getGoods(goodsFromServer.sort((a, b) => a.price - b.price))
             )
-          );
+          ).then(dispatch(hideLoader()));
       };
   }
 };
@@ -111,3 +113,37 @@ export const filterGoodsSaga = (input) => ({
   payload: input,
 });
 
+export const sellerAddGood = (newGood) => {
+  return {
+    type: SELLER_ADD_GOOD,
+    payload: newGood,
+  };
+};
+
+export const sellerAddGoodToServer = ({
+  name,
+  quantity,
+  price,
+  description,
+  category,
+  photo,
+  rating
+}) => {
+  return (
+    fetch('http://localhost:3001/api/v1/add_new_good', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ 
+        name,
+        quantity,
+        price,
+        description,
+        category,
+        photo,
+        rating
+      })
+    }).then(response => response.status === 200 ? console.log('Ответ с сервера 200: товар добавлен ') : console.log('Ответ с сервера 500: товар не добавлен')) 
+  )
+};

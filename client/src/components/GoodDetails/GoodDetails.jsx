@@ -2,13 +2,14 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router"
 import { addGoodToCart, deleteGoodFromCart } from "../../redux/actionCreators/cartAC"
-import { getGoodDetailsFromServer } from "../../redux/actionCreators/goodAC"
+import { getGood, getGoodDetailsFromServer } from "../../redux/actionCreators/goodAC"
 
 import { store } from 'react-notifications-component';
 
 import 'animate.css'
 import 'react-notifications-component/dist/theme.css'
 import { addGoodToUserCart, deleteGoodFromUserCart } from "../../redux/actionCreators/userAC"
+import Loader from "../Loader./Loader"
 
 const GoodDetails = () => {
   
@@ -18,6 +19,7 @@ const GoodDetails = () => {
 
   useEffect(() => {
     dispatch(getGoodDetailsFromServer(id))
+    return () => {dispatch(getGood([]))}
   }, [])
   
   const currentUserAuth = useSelector(state => state.user.isAuth)
@@ -67,7 +69,7 @@ const GoodDetails = () => {
                       <div key={indx} className="item-thumb" onClick={() => setPhoto(indx)}> <img src={photo} alt="" /></div>
                     )
                   })
-                    : ''
+                    : <Loader />
                   }
                 </div>
               </>
@@ -124,7 +126,7 @@ const GoodDetails = () => {
           <div className="form-row  mt-5">
             <div className="form-group col-md">
               {!currentUserAuth &&
-                ((inCart === true) ?
+                ((inUserCart === true) ?
                 <button onClick={() => {
                   store.addNotification({
                     content: NotifyRemove,
@@ -166,7 +168,7 @@ const GoodDetails = () => {
                 </button>)
               }
               {currentUserAuth &&
-                ((inUserCart === true) ?
+                ((inCart === true) ?
                 <button onClick={() => {
                   store.addNotification({
                     content: NotifyRemove,

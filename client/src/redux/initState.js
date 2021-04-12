@@ -6,6 +6,7 @@ const initState = () =>  {
       avatar: '',
       goods: [],
       orders: [],
+      cart: [],
     },
     categories: [],
     currentCategory: null,
@@ -15,7 +16,7 @@ const initState = () =>  {
     },
     cart: [],
     search: [],
-    
+    loader: true,
   }
 
   const fromLS = JSON.parse(window.localStorage.getItem('myApp'))
