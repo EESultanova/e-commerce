@@ -1,6 +1,6 @@
 import { ADD_GOOD_TO_USER_CART, ADD_ORDER_DETAILS, CHANGE_QUANTITY_USER, DELETE_GOOD_FROM_USER_CART } from "../types/userTypes";
 import { SET_USER, REMOVE_USER } from "../types/topicsTypes";
-import { ADD_GOOD_TO_CART } from "../types/cartTypes";
+// import { ADD_GOOD_TO_CART } from "../types/cartTypes";
 import { SELLER_ADD_GOOD } from "../types/goodTypes";
 
 
