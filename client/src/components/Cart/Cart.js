@@ -96,10 +96,9 @@ const Cart = () => {
                 </tbody>
               </table>
 
-              <div className="card-body border-top">
+              <td className="card-body border-top">
                 <a href="/" className="btn btn-primary float-md-right"> Make Purchase <i className="fa fa-chevron-right"></i> </a>
                 <a href="/" className="btn btn-light"> <i className="fa fa-chevron-left"></i> Continue shopping </a>
-              </div>
             </td>
             <td className="text-right"> 
             <button onClick={() => dispatch(deleteGoodFromCart(good._id))} className="btn btn-light"> Remove</button>
