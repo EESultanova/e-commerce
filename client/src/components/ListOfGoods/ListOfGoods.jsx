@@ -1,10 +1,12 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useLocation, useParams } from "react-router"
-import { getGoodsFromServer } from "../../redux/actionCreators/goodAC"
+import { getGoods, getGoodsFromServer } from "../../redux/actionCreators/goodAC"
 import { getCategoriesFromServer } from "../../redux/actionCreators/categoryAC"
 import Good from "../Good/Good.jsx"
 import { Link } from "react-router-dom"
+import Loader from "../Loader/Loader"
+import { hideLoader, showLoader } from "../../redux/actionCreators/loaderAC"
 
 
 
@@ -17,12 +19,14 @@ const ListGoods = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const searchResult = useSelector(state => state.search)
+  const loader = useSelector(state => state.loader)
 
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(getCategoriesFromServer);
+    dispatch(getCategoriesFromServer());
     dispatch(getGoodsFromServer(id, sorting, searchResult))
+    return () => {dispatch(getGoods([]))}
   }, [sorting])
 
   const goods = useSelector(state => state.goods.goods)
@@ -168,7 +172,7 @@ const ListGoods = () => {
               <Good key={good._id} good={good} />
             )
           })
-            : 'No goods'
+            : <Loader />
         }
       </div>
 
@@ -191,8 +195,6 @@ const ListGoods = () => {
         <a href="/" className="btn btn-light">Yes</a>
         <a href="/" className="btn btn-light">No</a>
       </div>
-
-
     </>
   )
 }
