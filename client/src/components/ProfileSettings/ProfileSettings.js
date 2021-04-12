@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { API_URL } from '../../config'
+import { API_URL, SITE_URL } from '../../config'
 import { setUser } from '../../redux/actionCreators/topicsAC'
 import avatarLogo from '../../assets/avatar.svg';
 
 const ProfileSettings = () => {
 
   const currentUser = useSelector(state => state.user);
-  const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : avatarLogo;
+  const avatar = currentUser.avatar ? `${SITE_URL + currentUser.avatar}` : avatarLogo;
 
   const dispatch = useDispatch()
 
@@ -14,7 +14,7 @@ const ProfileSettings = () => {
         try {
             const formData = new FormData();
             formData.append('file', file);
-            await fetch(`${API_URL}api/v1/files/avatar`, {
+            await fetch(`${SITE_URL}api/v1/files/avatar`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -34,7 +34,7 @@ const ProfileSettings = () => {
     const deleteHandler = async () => {
         try {
             console.log('here fetch')
-            await fetch(`${API_URL}api/v1/files/avatar`, {
+            await fetch(`${SITE_URL}api/v1/files/avatar`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
