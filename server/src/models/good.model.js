@@ -16,6 +16,7 @@ const goodSchema = new Schema({
   quantity: {
     type: Number,
     default: 1,
+    min: 0,
   },
   rating: {
     type: String,

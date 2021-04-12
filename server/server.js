@@ -58,6 +58,7 @@ app.get("/api/v1/goods/:id", async (req, res) => {
 
 app.post("/api/v1/order", async (req, res) => {
   try {
+    console.log("req.body------------->", req.body)
     const orderForUser = {...req.body, currentUser: true}
     const {
       fioToServer,
@@ -71,22 +72,35 @@ app.post("/api/v1/order", async (req, res) => {
       cvv,
       currentCart,
       currentUser} = req.body
-    console.log(req.body)
-    await UserModel.findByIdAndUpdate(req.body.currentUser.id,
-      {$push:  {orders: orderForUser}})
-    await OrderModel.create({
-      fio: fioToServer,
-      address: addressToServer,
-      email: email,
-      phone: phone,
-      card: card,
-      cardName: cardName,
-      expMonth: expMonth,
-      expYear: expYear,
-      cvv: cvv,
-      cart: currentCart,
-      user: currentUser.id,
-    })  
+      await UserModel.findByIdAndUpdate(req.body.currentUser.id,
+        {$push:  {orders: orderForUser}})
+      await OrderModel.create({
+        fio: fioToServer,
+        address: addressToServer,
+        email: email,
+        phone: phone,
+        card: card,
+        cardName: cardName,
+        expMonth: expMonth,
+        expYear: expYear,
+        cvv: cvv,
+        cart: currentCart,
+        user: currentUser.id,
+      })
+
+
+    currentCart.map(async el => {
+      console.log(el.name,'---->', el.quantity)
+      const doc = await GoodModel.findById(el._id)
+      console.log('doc------------>', doc)
+
+      if (doc.quantity - el.quantity < 0) {
+       return
+      } else {
+        await GoodModel.findOneAndUpdate({_id: el._id}, {$inc: {quantity: -el.quantity}})
+      }
+      return
+    })
     res.sendStatus(200)
   } catch (error) {
     console.log(error)
