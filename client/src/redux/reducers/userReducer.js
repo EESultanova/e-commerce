@@ -1,8 +1,9 @@
+import { SELLER_ADD_GOOD } from "../types/goodTypes";
 import { ADD_ORDER_DETAILS } from "../types/orderTypes";
 import { SET_USER, REMOVE_USER } from "../types/topicsTypes";
 
 
-const userReducer = (state = {}, action) => {
+const userReducer = (state = {} , action) => {
     switch (action.type) {
         case SET_USER:
             if (action.payload.user) {
@@ -20,8 +21,15 @@ const userReducer = (state = {}, action) => {
         case ADD_ORDER_DETAILS:
             return {
                 ...state,
-                user: [...state.orders, action.payload]
+                orders: [action.payload]
             }
+
+        case SELLER_ADD_GOOD:
+            return {
+              ...state,
+              goods : [action.payload]
+            }
+        
 
         // case SET_AVATAR:
         //     if (action.payload.user) {

@@ -23,9 +23,9 @@ const ProfileMain = () => {
             <aside className="col-md-3">
               <nav className="list-group" style={{'cursor': 'pointer'}}>
                 <div className={`list-group-item ${choice === 0 && 'active'}`} onClick={() => setChoice(0)}> Account overview  </div>
-                <div className={`list-group-item ${choice === 1 && 'active'}`} onClick={() => setChoice(1)}> My Address </div>
-                <div className={`list-group-item ${choice === 2 && 'active'}`} onClick={() => setChoice(2)}> My Orders </div>
-                <div className={`list-group-item ${choice === 3 && 'active'}`} onClick={() => setChoice(3)}> My wishlist </div>
+                {user.role !== "seller" && <div className={`list-group-item ${choice === 1 && 'active'}`} onClick={() => setChoice(1)}> My Address </div>}
+                {user.role !== "seller" && <div className={`list-group-item ${choice === 2 && 'active'}`} onClick={() => setChoice(2)}> My Orders </div>}
+                {user.role !== "seller" && <div className={`list-group-item ${choice === 3 && 'active'}`} onClick={() => setChoice(3)}> My wishlist </div>}
                 <div className={`list-group-item ${choice === 4 && 'active'}`} onClick={() => setChoice(4)}> Settings </div>
                 { user.role === "seller" && <div className={`list-group-item ${choice === 5 && 'active'}`} onClick={() => setChoice(5)}> My Selling Items </div>}
                 { user.role === "seller" && <div className={`list-group-item ${choice === 6 && 'active'}`} onClick={() => setChoice(6)}> To add a new item </div>}
