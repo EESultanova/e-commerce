@@ -5,7 +5,7 @@ import { getGoods, getGoodsFromServer } from "../../redux/actionCreators/goodAC"
 import { getCategoriesFromServer } from "../../redux/actionCreators/categoryAC"
 import Good from "../Good/Good.jsx"
 import { Link } from "react-router-dom"
-import Loader from "../Loader./Loader"
+import Loader from "../Loader/Loader"
 import { hideLoader, showLoader } from "../../redux/actionCreators/loaderAC"
 
 

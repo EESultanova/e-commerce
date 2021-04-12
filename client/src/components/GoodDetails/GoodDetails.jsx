@@ -9,7 +9,7 @@ import { store } from 'react-notifications-component';
 import 'animate.css'
 import 'react-notifications-component/dist/theme.css'
 import { addGoodToUserCart, deleteGoodFromUserCart } from "../../redux/actionCreators/userAC"
-import Loader from "../Loader./Loader"
+import Loader from "../Loader/Loader"
 
 const GoodDetails = () => {
   
@@ -26,15 +26,15 @@ const GoodDetails = () => {
   const good = useSelector(state => state.goods.good)
 
   const cart = useSelector(state => state.cart)
-  console.log(cart);
   const ids = cart?.map(good => good?._id)
   const inCart = ids?.includes(good?._id)
+  console.log(inCart, 'local cart')
 
   const userCart = useSelector(state => state?.user?.cart)
   const userIds = userCart?.map(good => good?._id)
   const inUserCart = userIds?.includes(good?._id)
+  console.log(inUserCart, 'user cart');
 
-  console.log(inUserCart);
   function NotifyAdd() {
     return (
       <div className="bg-primary text-white rounded" style={{ width: 200 }}>
@@ -128,7 +128,7 @@ const GoodDetails = () => {
           <div className="form-row  mt-5">
             <div className="form-group col-md">
               {!currentUserAuth &&
-                ((inUserCart === true) ?
+                ((inCart === true) ?
                 <button onClick={() => {
                   store.addNotification({
                     content: NotifyRemove,
@@ -170,7 +170,7 @@ const GoodDetails = () => {
                 </button>)
               }
               {currentUserAuth &&
-                ((inCart === true) ?
+                ((inUserCart === true) ?
                 <button onClick={() => {
                   store.addNotification({
                     content: NotifyRemove,

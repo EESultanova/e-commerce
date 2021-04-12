@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoriesFromServer } from "../../redux/actionCreators/categoryAC"
 import Category from "../Category/Category";
-import Loader from "../Loader./Loader";
+import Loader from "../Loader/Loader";
 
 const Main = () => {
 
