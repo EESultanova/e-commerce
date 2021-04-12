@@ -20,8 +20,6 @@ import 'react-notifications-component/dist/theme.css'
 
   function confirmHandler() {
 
-    console.log('HANDLERRRRRRRRRRRRRRRRR')
-
     dispatch(sellerAddGood({name, quantity, price, description, category, photo, rating: "0"}))
     sellerAddGoodToServer({name, quantity, price, description, category, photo, rating: "0", user})
 
@@ -43,8 +41,8 @@ import 'react-notifications-component/dist/theme.css'
   
   function NotifyAdd() {
     return (
-      <div className="bg-primary text-white rounded" style={{ width: 200 }}>
-        <h6>{name} was added to your cart!</h6>
+      <div className="bg-primary text-white rounded" style={{ width: 500 }}>
+        <h6>{name} was added succsessfully!</h6>
       </div>
     )
   }

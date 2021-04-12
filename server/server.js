@@ -79,7 +79,6 @@ app.post("/api/v1/add_new_good", async (req, res) => {
       rating: rating,
       category: category,
 })
-    console.log('newGood from server------>', newGood)
     await UserModel.findByIdAndUpdate(user, {$push: {goods: newGood._id}})
       res.sendStatus(200)
   } catch (error) {

@@ -25,8 +25,6 @@ const Header = () => {
 	const dispatch = useDispatch()
   let {setChoice} = useProfileContext()
 
-  console.log(userCart.length, 'LEENGTH')
-
 	const handlergameOver = () => {
 		dispatch(removeUser())
 	}
@@ -95,7 +93,7 @@ const Header = () => {
 										<div className="icon-area">
 											<i className="fa fa-shopping-cart"></i>
                       {user &&
-                        (userCart.length ?
+                        (userCart?.length ?
                         <span className="notify">{userCart.length}</span>
                         : '')
                       }
