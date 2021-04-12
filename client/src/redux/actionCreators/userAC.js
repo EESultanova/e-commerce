@@ -40,7 +40,7 @@ export const addOrderDetailsToServer = (
         currentCart,
         currentUser,
       })
-    }).then(response => response.status === 200 ? console.log('Ответ с сервера 200: заказ добавлен ') : console.log('Ответ с сервера 500: заказ не добавлен')) 
+    }).then(response => response.status === 200 ? console.log('Ответ с сервера 200: заказ добавлен ') : console.log('Ответ с сервера', response.status, ': мало товара')) 
   )
 }
 

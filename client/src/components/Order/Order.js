@@ -3,14 +3,14 @@ import { AddressSuggestions } from 'react-dadata'
 import { FioSuggestions } from 'react-dadata';
 import 'react-dadata/dist/react-dadata.css'
 import { useDispatch, useSelector } from 'react-redux';
+import { emptyCart } from '../../redux/actionCreators/cartAC';
 import { addOrderDetails, addOrderDetailsToServer } from '../../redux/actionCreators/userAC';
-// const {REACT_APP_DADATA} = process.env
 
 function Order() {
   const dispatch = useDispatch()
   const [address, setAddress] = useState('')
   const [fio, setFio] = useState('')
-  // const [fioForBack, setFioForBack] = useState('')
+  const [fiof, setFiof] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [card, setCard] = useState('')
@@ -28,15 +28,12 @@ function Order() {
   .map(el => el.price * el.quantity)
   .reduce((acc, currentValue) => acc + currentValue, 0)
   
-  // console.log(this.state)
-
   function confirmHandler() {
-    //добавить обнуление cart state
-    
     dispatch(addOrderDetails({fioToServer, addressToServer, email, phone, currentCart}))
     addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser})
+    // dispatch(emptyCart())
   }
- 
+
   return(
     <>
     <section className="section-content padding-y">
@@ -56,7 +53,7 @@ function Order() {
               </figure>
             </td>
             <td> 
-              <input type="number" style={{width:50}} value={good.quantity} min="1" placeholder="0" className="form-control" readOnly={true}/>
+              <input type="number" style={{width:70}} value={good.quantity} min="1" placeholder="0" className="form-control" readOnly={true}/>
             </td>
             <td> 
               <div className="price-wrap"> 
@@ -100,10 +97,12 @@ function Order() {
 			</div>
 		</div> 
 
+
+
 	<div className="form-row">
 		<div className="col form-group">
 			<label>Full name</label>
-        <FioSuggestions token="5380c3726e32d6ce9d7fba825b4570fea6395f1b" value={fio} onChange={setFio} filterParts={[]} />
+        <FioSuggestions token="5380c3726e32d6ce9d7fba825b4570fea6395f1b" value={fio} onChange={setFio}/>
 		</div> 
 	</div> 
 
