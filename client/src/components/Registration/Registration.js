@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from '../../redux/actionCreators/topicsAC';
 import { API_URL } from '../../config';
+import { emptyCart } from "../../redux/actionCreators/cartAC";
 
 
 function Registration() {
@@ -14,6 +15,7 @@ function Registration() {
     const [password, setPassword] = useState('');
     const [name, setNickname] = useState('');
     const [role, setRole] = useState('');
+    const cart = useSelector(state => state.cart)
 
     const inputEmailHandler = (e) => {
         setEmail(e.target.value);
@@ -45,6 +47,7 @@ function Registration() {
                     email,
                     password,
                     role,
+                    cart,
                 })
             })
                 .then(res => res.json())
@@ -70,6 +73,7 @@ function Registration() {
                         } else {
                             dispatch(setUser(responseFromServer));
                             localStorage.setItem('token', responseFromServer.token);
+                            dispatch(emptyCart())
                             history.push('/');
                         }
 
@@ -85,7 +89,7 @@ function Registration() {
 
             <div className="card mx-auto" style={{ maxWidth: 380, marginTop: 100 }}>
                 <div className="card-body">
-                    <h4 id="container" className="card-title mb-4">Registration</h4>
+                    <h4 id="container" className="card-title mb-4">Sign up</h4>
                     <form onSubmit={submitHandler}>
                         <div className="form-group">
                             <input value={email} onChange={inputEmailHandler} name='email' type="email" class="form-control" id="exampleInputEmail1" placeholder="Type your email ..." aria-describedby="emailHelp" />

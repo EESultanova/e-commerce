@@ -1,13 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
 import { changeQuantity, deleteGoodFromCart } from "../../redux/actionCreators/cartAC";
+import { changeQuantityUserCart, deleteGoodFromUserCart } from "../../redux/actionCreators/userAC";
+import { Link } from "react-router-dom"
 
 const Cart = () => {
 
   const dispatch = useDispatch()
 
   const cart = useSelector(state => state.cart)
+  const currentUserAuth = useSelector(state => state.user.isAuth)
 
-  const total = cart
+  const userCart = useSelector(state => state.user.cart)
+  console.log(userCart)
+
+  const totalLocalCart = cart
+    .map(el => el.price * el.quantity)
+    .reduce((acc, currentValue) => acc + currentValue, 0)
+
+  const totalUserCart = userCart
     .map(el => el.price * el.quantity)
     .reduce((acc, currentValue) => acc + currentValue, 0)
 
@@ -30,42 +40,73 @@ const Cart = () => {
       </thead>
       <tbody>
         {/*  */}
-      {cart.length ? cart.map(good => {
-        return (
-          <tr key={good._id}>
-            <td>
-              <figure className="itemside">
-                <div className="aside"><img src={good.photo} className="img-sm" alt=""/></div>
-                <figcaption className="info">
-                  <a href="/" className="title text-dark">{good.name}</a>
-                  <p className="text-muted small">{good.description}</p>
-                </figcaption>
-              </figure>
-            </td>
-            <td> 
-              <input onChange={(event) => dispatch(changeQuantity(good._id, event.target.value))} type="number" value={good.quantity} min="1" placeholder="0" className="form-control"/>
-            </td>
-            <td> 
-              <div className="price-wrap"> 
-                <var className="price">{(good.price * good.quantity).toFixed(2)} $</var> 
-                <small className="text-muted"> {good.price} each </small> 
-              </div>
-            </td>
-            <td className="text-right"> 
-            <button onClick={() => dispatch(deleteGoodFromCart(good._id))} className="btn btn-light"> Remove</button>
-            </td>
-          </tr>
-          )
-        })
-        : <h5>No goods</h5>
-      }
+        {!currentUserAuth && 
+          (cart.length ? cart.map(good => {
+            return (
+              <tr key={good._id}>
+                <td>
+                  <figure className="itemside">
+                    <div className="aside"><img src={good.photo} className="img-sm" alt=""/></div>
+                    <figcaption className="info">
+                      <a href="/" className="title text-dark">{good.name}</a>
+                      <p className="text-muted small">{good.description}</p>
+                    </figcaption>
+                  </figure>
+                </td>
+                <td> 
+                  <input onChange={(event) => dispatch(changeQuantity(good._id, event.target.value))} type="number" value={good.quantity} min="1" placeholder="0" className="form-control"/>
+                </td>
+                <td> 
+                  <div className="price-wrap"> 
+                    <var className="price">{(good.price * good.quantity).toFixed(2)} $</var> 
+                    <small className="text-muted"> {good.price} each </small> 
+                  </div>
+                </td>
+                <td className="text-right"> 
+                <button onClick={() => dispatch(deleteGoodFromCart(good._id))} className="btn btn-light"> Remove</button>
+                </td>
+              </tr>
+            )
+          })
+          : 'No goods')  
+        }
+        {currentUserAuth &&
+          (userCart.length ? userCart.map(good => {
+            return (
+              <tr key={good._id}>
+                <td>
+                  <figure className="itemside">
+                    <div className="aside"><img src={good.photo} className="img-sm" alt=""/></div>
+                    <figcaption className="info">
+                      <a href="/" className="title text-dark">{good.name}</a>
+                      <p className="text-muted small">{good.description}</p>
+                    </figcaption>
+                  </figure>
+                </td>
+                <td> 
+                  <input onChange={(event) => dispatch(changeQuantityUserCart(good._id, event.target.value))} type="number" value={good.quantity} min="1" placeholder="0" className="form-control"/>
+                </td>
+                <td> 
+                  <div className="price-wrap"> 
+                    <var className="price">{(good.price * good.quantity).toFixed(2)} $</var> 
+                    <small className="text-muted"> {good.price} each </small> 
+                  </div>
+                </td>
+                <td className="text-right"> 
+                <button onClick={() => dispatch(deleteGoodFromUserCart(good._id))} className="btn btn-light"> Remove</button>
+                </td>
+              </tr>
+            )
+          })
+          : 'No goods')  
+        }
       {/*  */}
       </tbody>
       </table>
 
       <div className="card-body border-top">
-        <a href="/" className="btn btn-primary float-md-right"> Make Purchase <i className="fa fa-chevron-right"></i> </a>
-        <a href="/" className="btn btn-light"> <i className="fa fa-chevron-left"></i> Continue shopping </a>
+        <Link to={currentUserAuth ? `/order` : `/login`} className="btn btn-primary float-md-right"> Make Purchase <i className="fa fa-chevron-right"></i> </Link>
+        <a href="/" className="btn btn-light d-flex" style={{'width': '19%'}}> <i className="fa fa-chevron-left mr-1" style={{'margin-top': '0.2rem'}}></i> Continue shopping </a>
       </div>	
       </div>
 
@@ -79,7 +120,12 @@ const Cart = () => {
             <div className="card-body">
                 <dl className="dlist-align">
                   <dt>Total price:</dt>
-                  <dd className="text-right">{total.toFixed(2)} $</dd>
+                  {currentUserAuth &&
+                    <dd className="text-right">{totalUserCart.toFixed(2)} $</dd>
+                  }
+                  {!currentUserAuth &&
+                    <dd className="text-right">{totalLocalCart.toFixed(2)} $</dd>
+                  }
                 </dl>
                 <hr/>
                 <p className="text-center mb-3">

@@ -10,6 +10,7 @@ import avatarLogo from '../../assets/avatar.svg';
 import { API_URL } from '../../config'
 import { useEffect, useState } from 'react';
 import { filterGoodsSaga } from '../../redux/actionCreators/goodAC';
+import { useProfileContext } from '../../contexts/ProfileContext';
 
 
 const Header = () => {
@@ -19,8 +20,12 @@ const Header = () => {
 	const user = useSelector(state => state.user.isAuth);
 	const currentUser = useSelector(state => state.user);
   const cart = useSelector(state => state.cart)
+  const userCart = useSelector(state => state.user.cart)
 	const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : avatarLogo;
 	const dispatch = useDispatch()
+  let {setChoice} = useProfileContext()
+
+  console.log(userCart.length, 'LEENGTH')
 
 	const handlergameOver = () => {
 		dispatch(removeUser())
@@ -30,6 +35,10 @@ const Header = () => {
     dispatch(filterGoodsSaga({categoryForFilter, input})) 
   }, [input])
 
+  const headerStyle = {
+    "font-family": 'Prime, Helvetica, Arial, sans-serif'
+  }
+
 	return (
 		<header className="section-header">
 			<section className="header-main border-bottom">
@@ -37,7 +46,8 @@ const Header = () => {
 					<div className="row align-items-center">
 						<div className="col-xl-2 col-lg-3 col-md-12">
 							<Link to="/" className="brand-wrap">
-								<img className="logo" src="images/logo.png" alt="" />
+								<img className="logo" src="http://localhost:3000/images/logo.png" alt="" />
+                {/* <span style={headerStyle}>E-Commerce</span> */}
 							</Link>
 						</div>
 						<div className="col-xl-6 col-lg-5 col-md-6">
@@ -71,21 +81,28 @@ const Header = () => {
 										<small className="text"> Message </small>
 									</a>
 								</div>
+                
 								<div className="widget-header mr-3">
-									<a href="/" className="widget-view">
+									<Link to="/profile" className="widget-view" onClick={() => setChoice(2)}>
 										<div className="icon-area">
 											<i className="fa fa-store"></i>
 										</div>
 										<small className="text"> Orders </small>
-									</a>
+									</Link>
 								</div>
 								<div className="widget-header">
 									<Link to="/cart" className="widget-view">
 										<div className="icon-area">
 											<i className="fa fa-shopping-cart"></i>
-                      {cart.length ?
+                      {user &&
+                        (userCart.length ?
+                        <span className="notify">{userCart.length}</span>
+                        : '')
+                      }
+                      {!user &&
+                        (cart.length ?
                         <span className="notify">{cart.length}</span>
-                        : ''
+                        : '')
                       }
 										</div>
 										<small className="text"> Cart </small>
@@ -135,14 +152,14 @@ const Header = () => {
 							{!user &&
 								<li className="nav-item">
 									<button>
-										<Link className="btn btn-primary" to="/login">Login</Link>
+										<Link className="btn btn-primary" to="/login">Sign in</Link>
 									</button>
 								</li>
 							}
 							{!user &&
 								<li className="nav-item">
 									<button>
-										<Link className="btn btn-primary" to="/registration">Registration</Link>
+										<Link className="btn btn-primary" to="/registration">Sign up</Link>
 									</button>
 								</li>
 							}

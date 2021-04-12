@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useLocation, useParams } from "react-router"
 import { getGoodsFromServer } from "../../redux/actionCreators/goodAC"
@@ -28,9 +28,6 @@ const ListGoods = () => {
   const goods = useSelector(state => state.goods.goods)
   const categories = useSelector(state => state.categories)
   const currentCategory = categories.find(categories => categories._id === id)
-
-
-  console.log(searchResult)
 
   function sortGoods(arg) {
     if (arg === 'sortasc') {
@@ -120,7 +117,7 @@ const ListGoods = () => {
 
       <header className="mb-3 mx-4">
         <div className="form-inline">
-          <strong className="mr-md-auto">{searchResult ? searchResult.length : goods.length} Items found </strong>
+          <strong className="mr-md-auto">{searchResult ? searchResult?.length : goods?.length} Items found </strong>
           <form>
             {sorting === 'price' &&
               <select onChange={(event) => sortGoods(event.target.value)} className="mr-2 form-control">
@@ -166,7 +163,7 @@ const ListGoods = () => {
             <Good key={good._id} good={good} />
           )
         }) :
-          goods.length ? goods.map(good => {
+          goods?.length ? goods.map(good => {
             return (
               <Good key={good._id} good={good} />
             )

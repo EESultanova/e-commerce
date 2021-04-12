@@ -22,7 +22,7 @@ router.post('/registration',
                 return res.status(400).json({ message: 'Uncorrect request', errors });
             }
 
-            const { name, email, password, role } = req.body;
+            const { name, email, password, role, cart } = req.body;
 
             const candidate = await User.findOne({ email });
 
@@ -36,6 +36,7 @@ router.post('/registration',
                 password: hashPassword,
                 avatar: '',
                 role,
+                cart,
             });
             await user.save();
             // return res.json({ message: 'User was created' })
@@ -50,6 +51,7 @@ router.post('/registration',
                     name: user.name,
                     avatar: user.avatar,
                     role: user.role,
+                    cart: user.cart,
                 }
             });
         } catch (e) {
@@ -60,7 +62,7 @@ router.post('/registration',
 
 router.post('/login', async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password, cart } = req.body;
         if (!email || !password) return res.status(404).json({ message: 'All fields must be filled' });
         const user = await User.findOne({ email });
         if (!user) {
@@ -80,6 +82,7 @@ router.post('/login', async (req, res) => {
                 name: user.name,
                 avatar: user.avatar,
                 role: user.role,
+                cart: cart,
             }
         });
     } catch (e) {
@@ -101,6 +104,7 @@ router.get('/auth', checkAuth, async (req, res) => {
                 name: user.name,
                 avatar: user.avatar,
                 role: user.role,
+                cart: user.cart,
             }
         });
     } catch (e) {

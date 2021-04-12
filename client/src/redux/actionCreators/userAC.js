@@ -1,4 +1,4 @@
-import { ADD_ORDER_DETAILS } from "../types/orderTypes"
+import { ADD_GOOD_TO_USER_CART, ADD_ORDER_DETAILS, CHANGE_QUANTITY_USER, DELETE_GOOD_FROM_USER_CART } from "../types/userTypes"
 
 export const addOrderDetails = (order) => {
   return {
@@ -42,3 +42,28 @@ export const addOrderDetailsToServer = (
   )
 }
 
+export const addGoodToUserCart = (good) => {
+  return {
+    type: ADD_GOOD_TO_USER_CART,
+    payload: good
+  }
+}
+
+export const deleteGoodFromUserCart = (good) => {
+  console.log(good, "Delete good User")
+  return {
+    type: DELETE_GOOD_FROM_USER_CART,
+    payload: good
+  }
+}
+
+export const changeQuantityUserCart = (id, quantity) => {
+  console.log(quantity, "Change quantity user")
+  return function(dispatch) {
+    dispatch({
+      type: CHANGE_QUANTITY_USER,
+      id,
+      quantity
+    })
+  }
+}
