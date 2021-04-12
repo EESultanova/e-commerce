@@ -1,4 +1,4 @@
-import { ADD_GOOD_TO_CART, CHANGE_QUANTITY, DELETE_GOOD_FROM_CART } from "../types/cartTypes"
+import { ADD_GOOD_TO_CART, CHANGE_QUANTITY, DELETE_GOOD_FROM_CART, EMPTY_CART } from "../types/cartTypes"
 
 export const addGoodToCart = (good) => {
   return {
@@ -21,5 +21,11 @@ export const changeQuantity = (id, quantity) => {
       id,
       quantity
     })
+  }
+}
+
+export const emptyCart = () => {
+  return {
+    type: EMPTY_CART,
   }
 }

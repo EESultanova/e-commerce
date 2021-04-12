@@ -20,6 +20,7 @@ const Header = () => {
 	const user = useSelector(state => state.user.isAuth);
 	const currentUser = useSelector(state => state.user);
   const cart = useSelector(state => state.cart)
+  const userCart = useSelector(state => state.user.cart)
 	const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : avatarLogo;
 	const dispatch = useDispatch()
   let {setChoice} = useProfileContext()
@@ -27,7 +28,6 @@ const Header = () => {
 	const handlergameOver = () => {
 		dispatch(removeUser())
 	}
-  // console.log(categories)
 
   useEffect(() => {
     dispatch(filterGoodsSaga({categoryForFilter, input})) 
@@ -92,9 +92,15 @@ const Header = () => {
 									<Link to="/cart" className="widget-view">
 										<div className="icon-area">
 											<i className="fa fa-shopping-cart"></i>
-                      {cart.length ?
+                      {user &&
+                        (userCart?.length ?
+                        <span className="notify">{userCart.length}</span>
+                        : '')
+                      }
+                      {!user &&
+                        (cart.length ?
                         <span className="notify">{cart.length}</span>
-                        : ''
+                        : '')
                       }
 										</div>
 										<small className="text"> Cart </small>
@@ -144,14 +150,14 @@ const Header = () => {
 							{!user &&
 								<li className="nav-item">
 									<button>
-										<Link className="btn btn-primary" to="/login">Login</Link>
+										<Link className="btn btn-primary" to="/login">Sign in</Link>
 									</button>
 								</li>
 							}
 							{!user &&
 								<li className="nav-item">
 									<button>
-										<Link className="btn btn-primary" to="/registration">Registration</Link>
+										<Link className="btn btn-primary" to="/registration">Sign up</Link>
 									</button>
 								</li>
 							}

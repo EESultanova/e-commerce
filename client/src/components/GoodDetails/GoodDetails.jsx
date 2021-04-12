@@ -8,6 +8,7 @@ import { store } from 'react-notifications-component';
 
 import 'animate.css'
 import 'react-notifications-component/dist/theme.css'
+import { addGoodToUserCart, deleteGoodFromUserCart } from "../../redux/actionCreators/userAC"
 
 const GoodDetails = () => {
   
@@ -18,21 +19,23 @@ const GoodDetails = () => {
   useEffect(() => {
     dispatch(getGoodDetailsFromServer(id))
   }, [])
-
+  
+  const currentUserAuth = useSelector(state => state.user.isAuth)
   const good = useSelector(state => state.goods.good)
+
   const cart = useSelector(state => state.cart)
   const ids = cart.map(good => good._id)
-  const inCart = ids.includes(good?._id)
-  console.log(inCart)
+  const inCart = ids.includes(good._id)
 
-
-  cart.find(x => x._id === good?._id)
-  console.log(cart.find(x => x?._id === good?._id))
+  const userCart = useSelector(state => state.user.cart)
+  const userIds = userCart?.map(good => good?._id)
+  const inUserCart = userIds?.includes(good?._id)
 
   function NotifyAdd() {
     return (
       <div className="bg-primary text-white rounded" style={{ width: 200 }}>
-        <h6>{good?.name} was added to your cart!</h6>
+        <h6>Success</h6>
+        <p>{good.name} was added to your cart!</p>
       </div>
     )
   }
@@ -40,7 +43,8 @@ const GoodDetails = () => {
   function NotifyRemove() {
     return (
       <div className="bg-secondary text-white rounded" style={{ width: 200 }}>
-        <h6>{good?.name} was removed from your cart!</h6>
+        <h6>Success</h6>
+        <p>{good.name} was removed from your cart!</p>
       </div>
     )
   }
@@ -119,7 +123,8 @@ const GoodDetails = () => {
 
           <div className="form-row  mt-5">
             <div className="form-group col-md">
-              {(inCart === true) ?
+              {!currentUserAuth &&
+                ((inCart === true) ?
                 <button onClick={() => {
                   store.addNotification({
                     content: NotifyRemove,
@@ -158,7 +163,49 @@ const GoodDetails = () => {
                   dispatch(addGoodToCart(good))
                 }} className="btn  btn-primary">
                   <i className="fas fa-shopping-cart"></i> <span className="text">Add to cart</span>
-                </button>
+                </button>)
+              }
+              {currentUserAuth &&
+                ((inUserCart === true) ?
+                <button onClick={() => {
+                  store.addNotification({
+                    content: NotifyRemove,
+                    message: `${good?.name} was removed from your cart!`,
+                    type: 'default',
+                    container: 'bottom-right',
+                    insert: 'bottom',
+                    animationIn: ['animated', 'fadeIn'],
+                    animationOut: ['animated', 'fadeOut'],
+
+                    dismiss: {
+                      duration: 2000,
+                    },
+                    width: 200,
+
+                  })
+                  dispatch(deleteGoodFromUserCart(good?._id))
+                }} type="button" class="btn btn-secondary">Remove from cart</button>
+                :
+                <button onClick={() => {
+                  store.addNotification({
+                    content: NotifyAdd,
+                    message: `${good?.name} was added to your cart!`,
+                    type: 'warning',
+                    container: 'bottom-right',
+                    insert: 'succes',
+                    animationIn: ['animated', 'fadeIn'],
+                    animationOut: ['animated', 'fadeOut'],
+
+                    dismiss: {
+                      duration: 2000,
+                    },
+                    width: 200,
+
+                  })
+                  dispatch(addGoodToUserCart(good))
+                }} className="btn  btn-primary">
+                  <i className="fas fa-shopping-cart"></i> <span className="text">Add to cart</span>
+                </button>)
               }
             </div>
           </div>
