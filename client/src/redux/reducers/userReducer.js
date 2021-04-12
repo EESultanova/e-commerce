@@ -21,13 +21,13 @@ const userReducer = (state = {} , action) => {
         case ADD_ORDER_DETAILS:
             return {
                 ...state,
-                orders: [action.payload]
+                orders: [...state.orders, action.payload]
             }
 
         case SELLER_ADD_GOOD:
             return {
               ...state,
-              goods : [action.payload]
+              goods : [...state.goods, action.payload]
             }
         
 
