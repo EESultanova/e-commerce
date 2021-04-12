@@ -19,6 +19,7 @@ import { useEffect } from 'react';
 import { API_URL } from './config';
 import Registration from './components/Registration/Registration';
 import Profile from './components/Profile.js/Profile';
+import ProfileContextProvider from './contexts/ProfileContext';
 import ReactNotification from 'react-notifications-component';
 
 import MessengerCustomerChat from 'react-messenger-customer-chat';
@@ -48,7 +49,6 @@ function App() {
   useEffect(() => {
     auth();
   }, []);
-
 
   return (
     <div className="App">
@@ -89,9 +89,9 @@ function App() {
           </Switch>
         }
         <Footer />
-
-      </Router>
-    </div >
+        </Router>
+      </ProfileContextProvider>
+    </div>
   );
 }
 

@@ -7,9 +7,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, NavLink } from "react-router-dom";
 import { removeUser } from '../../redux/actionCreators/topicsAC'
 import avatarLogo from '../../assets/avatar.svg';
-import { API_URL } from '../../config'
+import { API_URL, SITE_URL } from '../../config'
 import { useEffect, useState } from 'react';
 import { filterGoodsSaga } from '../../redux/actionCreators/goodAC';
+import { useProfileContext } from '../../contexts/ProfileContext';
 
 
 const Header = () => {
@@ -21,6 +22,7 @@ const Header = () => {
   const cart = useSelector(state => state.cart)
 	const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : avatarLogo;
 	const dispatch = useDispatch()
+  let {setChoice} = useProfileContext()
 
 	const handlergameOver = () => {
 		dispatch(removeUser())
@@ -31,6 +33,10 @@ const Header = () => {
     dispatch(filterGoodsSaga({categoryForFilter, input})) 
   }, [input])
 
+  const headerStyle = {
+    "font-family": 'Prime, Helvetica, Arial, sans-serif'
+  }
+
 	return (
 		<header className="section-header">
 			<section className="header-main border-bottom">
@@ -38,7 +44,8 @@ const Header = () => {
 					<div className="row align-items-center">
 						<div className="col-xl-2 col-lg-3 col-md-12">
 							<Link to="/" className="brand-wrap">
-								<img className="logo" src="images/logo.png" alt="" />
+								<img className="logo" src={`${SITE_URL}images/logocommerce3.png`} alt="" />
+                {/* <span style={headerStyle}>E-Commerce</span> */}
 							</Link>
 						</div>
 						<div className="col-xl-6 col-lg-5 col-md-6">
@@ -72,13 +79,14 @@ const Header = () => {
 										<small className="text"> Message </small>
 									</a>
 								</div>
+                
 								<div className="widget-header mr-3">
-									<a href="/" className="widget-view">
+									<Link to="/profile" className="widget-view" onClick={() => setChoice(2)}>
 										<div className="icon-area">
 											<i className="fa fa-store"></i>
 										</div>
 										<small className="text"> Orders </small>
-									</a>
+									</Link>
 								</div>
 								<div className="widget-header">
 									<Link to="/cart" className="widget-view">

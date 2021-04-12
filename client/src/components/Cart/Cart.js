@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { changeQuantity, deleteGoodFromCart } from "../../redux/actionCreators/cartAC";
+import { Link } from "react-router-dom"
 
 import { store } from 'react-notifications-component';
 
@@ -11,6 +12,7 @@ const Cart = () => {
   const dispatch = useDispatch()
 
   const cart = useSelector(state => state.cart)
+  const currentUserAuth = useSelector(state => state.user.isAuth)
 
   const total = cart
     .map(el => el.price * el.quantity)
@@ -98,8 +100,24 @@ const Cart = () => {
                 <a href="/" className="btn btn-primary float-md-right"> Make Purchase <i className="fa fa-chevron-right"></i> </a>
                 <a href="/" className="btn btn-light"> <i className="fa fa-chevron-left"></i> Continue shopping </a>
               </div>
-            </div>
+            </td>
+            <td className="text-right"> 
+            <button onClick={() => dispatch(deleteGoodFromCart(good._id))} className="btn btn-light"> Remove</button>
+            </td>
+          </tr>
+          )
+        })
+        : <h5>No goods</h5>
+      }
+      {/*  */}
+      </tbody>
+      </table>
 
+      <div className="card-body border-top">
+        <Link to={currentUserAuth ? `/order` : `/login`} className="btn btn-primary float-md-right"> Make Purchase <i className="fa fa-chevron-right"></i> </Link>
+        <a href="/" className="btn btn-light d-flex" style={{'width': '19%'}}> <i className="fa fa-chevron-left mr-1" style={{'margin-top': '0.2rem'}}></i> Continue shopping </a>
+      </div>	
+      </div>
             <div className="alert alert-success mt-3">
               <p className="icontext"><i className="icon text-success fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
             </div>
