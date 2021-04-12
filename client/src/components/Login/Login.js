@@ -74,7 +74,7 @@ const Login = () => {
         <div className="card-body">
           <h4 id="container" className="card-title mb-4">Sign in</h4>
           <form onSubmit={submitHandler}>
-            <img className="logo" src={`${SITE_URL}images/logocommerce3.png`} alt="" style={{ maxWidth: 180, marginBottom: 40 }} />
+            <img className="logo" src="/images/logocommerce3.png" alt="" style={{ maxWidth: 180, marginBottom: 40 }} />
             <div className="form-group">
               <input value={email} onChange={inputEmailHandler} name='email' type="email" className="form-control" placeholder="Email" />
             </div>

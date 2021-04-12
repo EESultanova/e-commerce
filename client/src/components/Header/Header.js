@@ -44,7 +44,7 @@ const Header = () => {
 					<div className="row align-items-center">
 						<div className="col-xl-2 col-lg-3 col-md-12">
 							<Link to="/" className="brand-wrap">
-								<img className="logo" src={`${SITE_URL}images/logocommerce3.png`} alt="" />
+								<img className="logo" src="/images/logocommerce3.png" alt="" />
                 {/* <span style={headerStyle}>E-Commerce</span> */}
 							</Link>
 						</div>
