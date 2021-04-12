@@ -16,7 +16,7 @@ import Login from './components/Login/Login'
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from "./redux/actionCreators/topicsAC";
 import { useEffect } from 'react';
-import { API_URL } from './config';
+import { API_URL, SITE_URL } from './config';
 import Registration from './components/Registration/Registration';
 import Profile from './components/Profile.js/Profile';
 import ProfileContextProvider from './contexts/ProfileContext';
@@ -32,7 +32,7 @@ function App() {
 
   const auth = async () => {
     try {
-      await fetch(`${API_URL}api/v1/auth/auth`,
+      await fetch(`${SITE_URL}api/v1/auth/auth`,
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       )
         .then(res => res.json())
