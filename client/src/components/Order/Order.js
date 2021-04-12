@@ -20,67 +20,61 @@ function Order() {
   const [cvv, setCvv] = useState('')
 
   const currentUser = useSelector(state => state.user)
-  const currentCart = useSelector(state => state.cart)
-
+  const currentCart = useSelector(state => state.user.cart)
   const fioToServer = fio.value
   const addressToServer = address.value
-
-  const total = currentCart
-    .map(el => el.price * el.quantity)
-    .reduce((acc, currentValue) => acc + currentValue, 0)
   
+  const total = currentCart
+  .map(el => el.price * el.quantity)
+  .reduce((acc, currentValue) => acc + currentValue, 0)
+  
+  // console.log(this.state)
+
   function confirmHandler() {
     //добавить обнуление cart state
-    //у продавца должны пропасть соответствующие товары из cart
     
-    console.log(fioToServer, currentCart);
-
     dispatch(addOrderDetails({fioToServer, addressToServer, email, phone, currentCart}))
     addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser})
   }
  
   return(
     <>
-    <table className="table table-borderless table-shopping-cart m-5">
-      <thead className="text-muted">
-      <tr className="small text-uppercase">
-        <th scope="col">Product</th>
-        <th scope="col" width="120">Quantity</th>
-        <th scope="col" width="120">Price</th>
-        <th scope="col" className="text-right" width="200"> </th>
-      </tr>
-      </thead>
-      <tbody>
-    {currentCart.length ? currentCart.map(good => {
+    <section className="section-content padding-y">
+    {
+      currentCart.length ? currentCart.map(good => {
         return (
+          <section className="section-content padding-y">
+          <div className="container" style={{maxWidth:800}}>
           <tr key={good._id} className="m-4">
             <td>
               <figure className="itemside">
                 <div className="aside"><img src={good.photo} className="img-sm" alt=""/></div>
                 <figcaption className="info">
-                  <a href="/" className="title text-dark">{good.name}</a>
-                  <p className="text-muted small">{good.description}</p>
+                  <a style={{maxWidth:500}} href="/" className="title text-dark">{good.name}</a>
+                  <p style={{maxWidth:500}} className="text-muted small">{good.description}</p>
                 </figcaption>
               </figure>
             </td>
             <td> 
-              <input type="number" value={good.quantity} min="1" placeholder="0" className="form-control" readOnly={true}/>
+              <input type="number" style={{width:50}} value={good.quantity} min="1" placeholder="0" className="form-control" readOnly={true}/>
             </td>
             <td> 
               <div className="price-wrap"> 
-                <var className="price">{(good.price * good.quantity).toFixed(2)} $</var> 
-                <small className="text-muted"> {good.price} each </small> 
+                <var style={{width:200}} className="price mx-5">{(good.price * good.quantity).toFixed(2)} $</var> 
+                <small className="text-muted"> {good.price}each </small> 
               </div>
             </td>
             <td className="text-right"> 
             </td>
           </tr>
+          </div>
+          </section>
           )
         })
         : <h5>No goods</h5>
       }
-      </tbody>
-  </table>
+
+    </section>
   <h4 className="card-title mb-3">Total price: {total.toFixed(2)} $</h4>
   <section className="section-content padding-y">
     <div className="container" style={{maxWidth:720}}>
