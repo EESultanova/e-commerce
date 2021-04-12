@@ -1,3 +1,3 @@
 // export const API_URL = `http://localhost:3001/`;
-export const API_URL = '';
-export const SITE_URL = `http://localhost:3000/`;
+export const SITE_URL = 'https://e-commerce-here.herokuapp.com/';
+export const SITE_URL1 = `http://localhost:3000/`;
