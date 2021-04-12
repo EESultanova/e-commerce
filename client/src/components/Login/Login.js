@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { setUser } from '../../redux/actionCreators/topicsAC'
-import { API_URL } from '../../config'
+import { API_URL, SITE_URL } from '../../config'
 import { emptyCart } from "../../redux/actionCreators/cartAC";
 
 
@@ -28,7 +28,7 @@ const Login = () => {
   const submitHandler = async (e) => {
     e.preventDefault()
     try {
-      await fetch(`${API_URL}api/v1/auth/login`, {
+      await fetch(`${SITE_URL}api/v1/auth/login`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
