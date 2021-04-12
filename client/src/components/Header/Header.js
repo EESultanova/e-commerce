@@ -21,7 +21,7 @@ const Header = () => {
 	const currentUser = useSelector(state => state.user);
   const cart = useSelector(state => state.cart)
   const userCart = useSelector(state => state.user.cart)
-	const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : avatarLogo;
+	const avatar = currentUser.avatar ? `${SITE_URL + currentUser.avatar}` : avatarLogo;
 	const dispatch = useDispatch()
   let {setChoice} = useProfileContext()
 
