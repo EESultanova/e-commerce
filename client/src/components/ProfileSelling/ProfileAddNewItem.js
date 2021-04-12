@@ -1,25 +1,53 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { sellerAddGood, sellerAddGoodToServer } from "../../redux/actionCreators/goodAC"
-
+import { sellerAddGood, sellerAddGoodToServer } from "../../redux/actionCreators/userAC"
+import { store } from 'react-notifications-component';
+import 'animate.css'
+import 'react-notifications-component/dist/theme.css'
 
  function ProfileAddNewItem() {
   const categories = useSelector(state => state.categories)
+  const user = useSelector(state => state.user.id)
 
   const [name, setName] = useState('')
   const [quantity, setQuantity] = useState(0)
   const [price, setPrice] = useState(0)
   const [description, setDescription] = useState('')
-  const [category, setCategory] = useState('')
+  const [category, setCategory] = useState('607045d7fa8ce327ed1edb2f')
   const [photo, setPhoto] = useState('')
 
   const dispatch = useDispatch()
-console.log('jndsckjsdnvksdnvlsdnv')
-  function confirmHandler() {
-    dispatch(sellerAddGood({name, quantity, price, description, category, photo, rating: "0"}))
-    sellerAddGoodToServer({name, quantity, price, description, category, photo, rating: "0"})
-  }
 
+  function confirmHandler() {
+
+    console.log('HANDLERRRRRRRRRRRRRRRRR')
+
+    dispatch(sellerAddGood({name, quantity, price, description, category, photo, rating: "0"}))
+    sellerAddGoodToServer({name, quantity, price, description, category, photo, rating: "0", user})
+
+    store.addNotification({
+      content: NotifyAdd,
+      message: `${name} was added succsessfully!`,
+      type: 'default',
+      container: 'bottom-right',
+      insert: 'bottom',
+      animationIn: ['animated', 'fadeIn'],
+      animationOut: ['animated', 'fadeOut'],
+      dismiss: {
+        duration: 4000,
+      },
+      width: 500,
+
+    })
+  }
+  
+  function NotifyAdd() {
+    return (
+      <div className="bg-primary text-white rounded" style={{ width: 200 }}>
+        <h6>{name} was added to your cart!</h6>
+      </div>
+    )
+  }
   return (
     <div className="card mb-4">
       <div className="card-body">
@@ -45,9 +73,9 @@ console.log('jndsckjsdnvksdnvlsdnv')
 			  </select>
 			</div> 
 		</div>
-      <div class="form-group col-md-13">
+      <div className="form-group col-md-13">
       <label>Description</label>
-			<textarea class="form-control" onChange={e => setDescription(e.target.value)} rows="3"></textarea>
+			<textarea className="form-control" onChange={e => setDescription(e.target.value)} rows="3"></textarea>
 		</div>
 
 		<div className="form-row">

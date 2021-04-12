@@ -26,13 +26,14 @@ const GoodDetails = () => {
   console.log(inCart)
 
 
-  cart.find(x => x._id === good._id)
-  console.log(cart.find(x => x._id === good._id))
+  cart.find(x => x._id === good?._id)
+  console.log(cart.find(x => x?._id === good?._id))
 
   function NotifyAdd() {
     return (
       <div className="bg-primary text-white rounded" style={{ width: 200 }}>
-        <h6>{good.name} was added to your cart!</h6>
+        <h6>Success</h6>
+        <p>{good.name} was added to your cart!</p>
       </div>
     )
   }
@@ -40,7 +41,8 @@ const GoodDetails = () => {
   function NotifyRemove() {
     return (
       <div className="bg-secondary text-white rounded" style={{ width: 200 }}>
-        <h6>{good.name} was removed from your cart!</h6>
+        <h6>Success</h6>
+        <p>{good.name} was removed from your cart!</p>
       </div>
     )
   }
