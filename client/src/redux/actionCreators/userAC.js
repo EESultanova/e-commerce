@@ -1,4 +1,4 @@
-import { ADD_GOOD_TO_USER_CART, ADD_ORDER_DETAILS, CHANGE_QUANTITY_USER, DELETE_GOOD_FROM_USER_CART } from "../types/userTypes"
+import { ADD_GOOD_TO_USER_CART, ADD_ORDER_DETAILS, CHANGE_QUANTITY_USER, DELETE_GOOD_FROM_USER_CART, GET_ALL_ORDERS, GET_GOODS_SELLER} from "../types/userTypes"
 import { SELLER_ADD_GOOD } from "../types/goodTypes"
 import { SITE_URL } from "../../config"
 
@@ -40,7 +40,7 @@ export const addOrderDetailsToServer = (
         currentCart,
         currentUser,
       })
-    }).then(response => response.status === 200 ? console.log('Ответ с сервера 200: заказ добавлен ') : console.log('Ответ с сервера 500: заказ не добавлен')) 
+    }).then(response => response.status === 200 ? console.log('Ответ с сервера 200: заказ добавлен ') : console.log('Ответ с сервера', response.status, ': мало товара')) 
   )
 }
 
@@ -69,6 +69,7 @@ export const changeQuantityUserCart = (id, quantity) => {
     })
   }
 }
+
 export const sellerAddGood = (newGood) => {
   return {
     type: SELLER_ADD_GOOD,
@@ -86,7 +87,6 @@ export const sellerAddGoodToServer = ({
   rating,
   user
 }) => {
-  console.log('category------_>', category)
   return (
     fetch(`${SITE_URL}api/v1/add_new_good`, {
       method: "POST",
@@ -107,3 +107,30 @@ export const sellerAddGoodToServer = ({
   )
 };
 
+
+export const getSellerGoods = (user) => async (dispatch) => {
+  const response = await fetch(`${SITE_URL}api/v1/get_goods_for_seller?_s=${user}`)
+  const result = await response.json()
+  dispatch(getSellerGoodsFromServer(result))
+};
+
+export const getSellerGoodsFromServer = (goods) => {
+  return {
+    type: GET_GOODS_SELLER,
+    payload: goods,
+  };
+};
+
+export const getAllOrders = (user) => async (dispatch) => {
+  const response = await fetch(`${SITE_URL}api/v1/get_all_orders?_s=${user}`)
+  const result = await response.json()
+  console.log(result)
+  dispatch(getAllOrdersFromServer(result))
+}
+
+export const getAllOrdersFromServer = (orders) => {
+  return {
+    type: GET_ALL_ORDERS,
+    payload: orders,
+  };
+};

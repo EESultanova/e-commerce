@@ -7,6 +7,7 @@ import {
   FILTER_GOODS,
   FILTER_GOODS_SAGA,
   SELLER_ADD_GOOD,
+  CHANGE_GOOD_QUANTITY,
 } from "../types/goodTypes";
 import { hideLoader } from "./loaderAC";
 
@@ -38,6 +39,29 @@ export const deleteGood = (good) => {
   };
 };
 
+export const changeGoodQuantity = (id, quantity) => {
+  return function (dispatch) {
+    dispatch({
+      type: CHANGE_GOOD_QUANTITY,
+      id,
+      quantity
+    })
+  }
+}
+
+export const changeGoodsQuantityOnServer = (goods) => {
+  return (dispatch) => {
+    fetch(`${SITE_URL}api/v1/goods`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ goods })
+    })
+      .then(response => console.log(response.status))
+  }
+}
+
 export const getGoodsFromServer = (id, sorting, searchResult) => {
   if (searchResult) {
     if (sorting === "price") {
@@ -57,10 +81,12 @@ export const getGoodsFromServer = (id, sorting, searchResult) => {
       return (dispatch) => {
         fetch(`${SITE_URL}api/v1/categories/${id}`)
           .then((response) => response.json())
-          .then((goodsFromServer) =>
+          .then((goodsFromServer) => {
+            console.log('goodsFromServer ----->', goodsFromServer)
             dispatch(
               getGoods(goodsFromServer.sort((a, b) => a.price - b.price))
             )
+          }
           );
       };
     } else if (sorting === "price_desc") {
@@ -87,10 +113,13 @@ export const getGoodsFromServer = (id, sorting, searchResult) => {
       return (dispatch) => {
         fetch(`${SITE_URL}api/v1/categories/${id}`)
           .then((response) => response.json())
-          .then((goodsFromServer) =>
+          .then((goodsFromServer) => {
+            console.log('goodsFromServer ----->', goodsFromServer)
+
             dispatch(
-              getGoods(goodsFromServer.sort((a, b) => a.price - b.price))
+              getGoods(goodsFromServer.filter(elem => elem.quantity > 0).sort((a, b) => a.price - b.price))
             )
+          }
           ).then(dispatch(hideLoader()));
       };
   }
@@ -136,7 +165,7 @@ export const sellerAddGoodToServer = ({
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         name,
         quantity,
         price,
@@ -145,6 +174,6 @@ export const sellerAddGoodToServer = ({
         photo,
         rating
       })
-    }).then(response => response.status === 200 ? console.log('Ответ с сервера 200: товар добавлен ') : console.log('Ответ с сервера 500: товар не добавлен')) 
+    }).then(response => response.status === 200 ? console.log('Ответ с сервера 200: товар добавлен ') : console.log('Ответ с сервера 500: товар не добавлен'))
   )
 };

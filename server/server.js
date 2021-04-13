@@ -56,6 +56,15 @@ app.get("/api/v1/goods/:id", async (req, res) => {
   }
 })
 
+app.patch("/api/v1/goods", async (req, res) => {
+  try {
+    const { goods } = req.body
+    console.log(goods)
+  } catch (error) {
+    res.sendStatus(500)
+  }
+})
+
 app.post("/api/v1/order", async (req, res) => {
   console.log(req.body);
   try {
@@ -72,22 +81,32 @@ app.post("/api/v1/order", async (req, res) => {
       cvv,
       currentCart,
       currentUser} = req.body
-    console.log(req.body)
-    await UserModel.findByIdAndUpdate(req.body.currentUser.id,
-      {$push:  {orders: orderForUser}})
-    await OrderModel.create({
-      fio: fioToServer,
-      address: addressToServer,
-      email: email,
-      phone: phone,
-      card: card,
-      cardName: cardName,
-      expMonth: expMonth,
-      expYear: expYear,
-      cvv: cvv,
-      cart: currentCart,
-      user: currentUser.id,
-    })  
+      await UserModel.findByIdAndUpdate(req.body.currentUser.id,
+        {$push:  {orders: orderForUser}})
+      await OrderModel.create({
+        fio: fioToServer,
+        address: addressToServer,
+        email: email,
+        phone: phone,
+        card: card,
+        cardName: cardName,
+        expMonth: expMonth,
+        expYear: expYear,
+        cvv: cvv,
+        cart: currentCart,
+        user: currentUser.id,
+      })
+
+
+    currentCart.map(async el => {
+      const doc = await GoodModel.findById(el._id)
+      if (doc.quantity - el.quantity < 0) {
+       return
+      } else {
+        await GoodModel.findOneAndUpdate({_id: el._id}, {$inc: {quantity: -el.quantity}})
+      }
+      return
+    })
     res.sendStatus(200)
   } catch (error) {
     console.log(error)
@@ -125,6 +144,27 @@ app.get("/api/v1/filter", async (req, res) => {
     res.sendStatus(500)
   }
 })
+
+app.get("/api/v1/get_goods_for_seller", async (req, res) => {
+  try {
+    const {_s: id} = req.query
+    const user = await UserModel.findById(id).populate('goods')
+    return res.json(user.goods);
+  } catch (error) {
+    res.sendStatus(500)
+  }
+});
+
+app.get("/api/v1/get_all_orders", async (req, res) => {
+  try {
+    const {_s: id} = req.query
+    const orders = await OrderModel.find({user: id})
+    return res.json(orders);
+  } catch (error) {
+    res.sendStatus(500)
+  }
+});
+
 
 const root = require('path').join(__dirname, '../', 'client', 'build');
 app.use(express.static(root));
