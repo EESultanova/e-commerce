@@ -61,7 +61,7 @@ function App() {
           <MessengerCustomerChat
             pageId="104351358442170"
             appId="1179535882491681"
-          />,
+          />
           <Route exact path="/categories/:id">
             <ListOfGoods />
           </Route>

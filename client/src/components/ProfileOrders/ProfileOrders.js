@@ -1,10 +1,17 @@
+import { useSelector } from "react-redux";
+
 const ProfileOrders = () => {
+
+  const orders = useSelector(state => state.user?.orders)
+
+  console.log(orders);
+
   return ( 
     <>
     <article className="card mb-4">
 		<header className="card-header">
 			<a href="/" className="float-right"> <i className="fa fa-print"></i> Print</a>
-			<strong className="d-inline-block mr-3">Order ID: 6123456789</strong>
+			<strong className="d-inline-block mr-3">Order ID: 6123456784</strong>
 			<span>Order Date: 16 December 2018</span>
 		</header>
 		<div className="card-body">
