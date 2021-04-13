@@ -2,25 +2,27 @@ import { useSelector } from "react-redux";
 
 const ProfileOrders = () => {
 
-  const orders = useSelector(state => state.user?.orders)
+  const orders = useSelector(state => state.user?.orders[0])
 
   console.log(orders);
 
   return ( 
     <>
-    <article className="card mb-4">
+    {orders ? orders.map(order => {
+      return (
+        <article key={order._id} className="card mb-4">
 		<header className="card-header">
 			<a href="/" className="float-right"> <i className="fa fa-print"></i> Print</a>
-			<strong className="d-inline-block mr-3">Order ID: 6123456784</strong>
-			<span>Order Date: 16 December 2018</span>
+			<strong className="d-inline-block mr-3">Order ID: {order._id}</strong>
+			<span>Order Date: 16 March 2021</span>
 		</header>
 		<div className="card-body">
 			<div className="row"> 
 				<div className="col-md-8">
 					<h6 className="text-muted">Delivery to</h6>
-					<p>Michael Jackson <br/>  
-					Phone +1234567890 Email: myname@gmail.com <br/>
-			    	Location: Home number, Building name, Street 123, <br/> 
+					<p>{order.fio} <br/>  
+					Phone: {order.phone} Email: {order.email} <br/>
+			    	Location: {order.address}, <br/> 
 			    	P.O. Box: 100123
 			 		</p>
 				</div>
@@ -39,13 +41,16 @@ const ProfileOrders = () => {
 		</div>
 		<div className="table-responsive">
 		<table className="table table-hover">
-			<tbody><tr>
+			<tbody>
+        {order.cart.map(item => {
+          return (
+            <tr>
 				<td width="65">
-					<img src="images/items/1.jpg" className="img-xs border" alt="" />
+					<img src={item.photo[0]} className="img-xs border" alt="" />
 				</td>
 				<td> 
-					<p className="title mb-0">Product name goes here </p>
-					<var className="price text-muted">USD 145</var>
+					<p className="title mb-0">{item.name} </p>
+					<var className="price text-muted">USD {item.price}</var>
 				</td>
 				<td> Seller <br/> Nike clothing </td>
 				<td width="250"> <a href="/" className="btn btn-outline-primary">Track order</a> 
@@ -58,48 +63,15 @@ const ProfileOrders = () => {
 					</div>
 				</td>
 			</tr>
-			<tr>
-				<td>
-					<img src="images/items/2.jpg" className="img-xs border" alt="" />
-				</td>
-				<td> 
-					<p className="title mb-0">Another name goes here </p>
-					<var className="price text-muted">USD 15</var>
-				</td>
-				<td> Seller <br/> ABC shop </td>
-				<td> 
-					<a href="/" className="btn btn-outline-primary">Track order</a>
-					<div className="dropdown d-inline-block">
-						 <a href="/" data-toggle="dropdown" className="dropdown-toggle btn btn-outline-secondary" style={{'margin-left': '.5rem'}}>More</a>
-						 <div className="dropdown-menu dropdown-menu-right">
-						 	<a href="/" className="dropdown-item">Return</a>
-						 	<a href="/"  className="dropdown-item">Cancel order</a>
-						 </div>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<img src="images/items/3.jpg" className="img-xs border" alt="" />
-				</td>
-				<td> 
-					<p className="title mb-0">The name of the product  goes here </p>
-					<var className="price text-muted">USD 145</var>
-				</td>
-				<td> Seller <br/> Wallmart </td>
-				<td> <a href="/" className="btn btn-outline-primary">Track order</a> 
-					<div className="dropdown d-inline-block">
-						 <a href="/" data-toggle="dropdown" className="dropdown-toggle btn btn-outline-secondary" style={{'margin-left': '.5rem'}}>More</a>
-						 <div className="dropdown-menu dropdown-menu-right">
-						 	<a href="/" className="dropdown-item">Return</a>
-						 	<a href="/"  className="dropdown-item">Cancel order</a>
-						 </div>
-					</div>
-				</td>
-			</tr>
+			
+          )
+        })}
 		</tbody></table>
 		</div>
 		</article>
+      )
+    }) : <div>No orders</div>}
+    
     </>
    );
 }
