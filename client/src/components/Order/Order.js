@@ -3,7 +3,7 @@ import { AddressSuggestions } from 'react-dadata'
 import { FioSuggestions } from 'react-dadata';
 import 'react-dadata/dist/react-dadata.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useProfileContext } from '../../contexts/ProfileContext';
 import { emptyCart } from '../../redux/actionCreators/cartAC';
 import { changeGoodsQuantityOnServer } from '../../redux/actionCreators/goodAC';
@@ -28,16 +28,19 @@ function Order() {
   const currentCart = useSelector(state => state.user.cart)
   let fioToServer = fio.value
   let addressToServer = address.value
+  const history = useHistory()
   
   const total = currentCart
   .map(el => el.price * el.quantity)
   .reduce((acc, currentValue) => acc + currentValue, 0)
   
-  function confirmHandler(e) {
+  async function confirmHandler(e) {
     e.preventDefault()
+    await addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser, total})
     dispatch(addOrderDetails({fioToServer, addressToServer, email, phone, currentCart, total}))
-    addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser, total})
     dispatch(emptyCart())
+    setChoice(2)
+    history.push('/profile')
   }
   
 
@@ -130,6 +133,8 @@ function Order() {
       </div> 
     </div> 
 
+{/* payment start */}
+
 		<div className="card mb-4">
       <div className="card-body">
       <h4 className="card-title mb-4">Payment</h4>
@@ -195,6 +200,7 @@ function Order() {
 		</form>
       </div> 
 
+{/* payment end */}
 
 <br/><br/> 
 

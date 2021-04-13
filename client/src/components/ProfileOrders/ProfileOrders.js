@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useProfileContext } from "../../contexts/ProfileContext";
 import { getAllOrders } from "../../redux/actionCreators/userAC";
 
 const ProfileOrders = () => {
@@ -7,10 +8,12 @@ const ProfileOrders = () => {
   const orders = useSelector(state => state.user?.orders[0])
   const user = useSelector(state => state.user.id)
   const dispatch = useDispatch()
+  console.log(orders);
+  let {setChoice} = useProfileContext() 
 
   useEffect(() => {
     dispatch(getAllOrders(user))
-  }, [])
+  }, [setChoice])
 
   return ( 
     <>
@@ -76,7 +79,7 @@ const ProfileOrders = () => {
 		</div>
 		</article>
       )
-    }) : <div>No orders</div>}
+    }) : <div>You don't have orders</div>}
     
     </>
    );
