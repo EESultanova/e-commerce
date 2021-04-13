@@ -147,7 +147,7 @@ function Order() {
 			<div className="form-group card required">
 			<label htmlFor="cardNumber">Card number</label>
 			<div className="input-group">
-				<input type="text"  onChange={e => setCard(e.target.value)}  className="form-control" name="cardNumber" placeholder="" />
+				<input type="text"  onChange={e => setCard(e.target.value)}  className="form-control" name="cardNumber" placeholder="" maxLength="16" />
 				<div className="input-group-append">
 					<span className="input-group-text">
 						<i className="fab fa-cc-visa"></i> &nbsp; <i className="fab fa-cc-amex"></i> &nbsp; 

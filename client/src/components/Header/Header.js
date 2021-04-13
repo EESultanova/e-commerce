@@ -77,7 +77,7 @@ const Header = () => {
 						<div className="col-xl-4 col-lg-4 col-md-6">
 							<div className="widgets-wrap float-md-right">
 								<div className="widget-header mr-3">
-										<NavLink to={user ? "/profile" : "/login"}><img src={avatar} alt="" style={Object.assign({}, { width: '32px' }, { height: '31px' }, { 'borderRadius': '50%' })} />
+										<NavLink to={user ? "/profile" : "/login"} onClick={() => setChoice(0)}><img src={avatar} alt="" style={Object.assign({}, { width: '32px' }, { height: '31px' }, { 'borderRadius': '50%' })} />
 											<small className="text"> My profile </small>
 										</NavLink>
 									

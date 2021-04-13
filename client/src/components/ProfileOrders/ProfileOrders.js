@@ -15,6 +15,8 @@ const ProfileOrders = () => {
     dispatch(getAllOrders(user))
   }, [setChoice])
 
+  const fee = 20;
+
   return ( 
     <>
     {orders ? orders.map(order => {
@@ -39,11 +41,11 @@ const ProfileOrders = () => {
 					<h6 className="text-muted">Payment</h6>
 					<span className="text-success">
 						<i className="fab fa-lg fa-cc-visa"></i>
-					    Visa  **** 4216  
+					    Visa  **** {order?.card?.toString().slice(12)} 
 					</span>
-					<p>Subtotal: $356 <br/>
-					 Shipping fee:  $56 <br/> 
-					 <span className="b">Total:  $456 </span>
+					<p>Subtotal: $ {order.total} <br/>
+					 Shipping fee:  $ {fee} <br/> 
+					 <span className="b">Total:  $ {order.total + fee} </span>
 					</p>
 				</div>
 			</div>
@@ -59,7 +61,7 @@ const ProfileOrders = () => {
 				</td>
 				<td> 
 					<p className="title mb-0">{item.name} </p>
-					<var className="price text-muted">USD {item.price}</var>
+					<var className="price text-muted">USD {item.price * item.quantity}</var>
 				</td>
 				<td> Seller <br/> Nike clothing </td>
 				<td width="250"> <a href="/" className="btn btn-outline-primary">Track order</a> 
