@@ -20,7 +20,7 @@ const ProfileOverview = () => {
                   <div className="text" style={{'textAlign': 'start'}}>
                     <strong> {currentUser.name} </strong> <br/> 
                     <p className="mb-2"> {currentUser.email}  </p> 
-                    <div href="/" className="btn btn-light btn-sm" alt="" onClick={() => setChoice(2)}>Edit</div>
+                    <Link href="/profile" className="btn btn-light btn-sm" alt="" onClick={() => setChoice(4)}>Edit</Link>
                   </div>
               </figure>
               <hr/>
