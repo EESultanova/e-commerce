@@ -8,6 +8,9 @@ import { Link } from "react-router-dom"
 import Loader from "../Loader/Loader"
 import { hideLoader, showLoader } from "../../redux/actionCreators/loaderAC"
 
+import { store } from 'react-notifications-component';
+import 'animate.css'
+import 'react-notifications-component/dist/theme.css'
 
 
 const ListGoods = () => {
@@ -18,7 +21,7 @@ const ListGoods = () => {
 
   const { id } = useParams()
   const dispatch = useDispatch()
-  const searchResult = useSelector(state => state.search)
+  const searchResult = useSelector(state => state.search?.filter(elem => elem.quantity > 0))
   const loader = useSelector(state => state.loader)
 
   const history = useHistory();
@@ -26,8 +29,9 @@ const ListGoods = () => {
   useEffect(() => {
     dispatch(getCategoriesFromServer());
     dispatch(getGoodsFromServer(id, sorting, searchResult))
-    return () => {dispatch(getGoods([]))}
-  }, [sorting])
+    return () => { dispatch(getGoods([])) }
+  }, [sorting, id])
+
 
   const goods = useSelector(state => state.goods.goods)
   const categories = useSelector(state => state.categories)
@@ -44,6 +48,25 @@ const ListGoods = () => {
     }
   }
 
+  function NotifyYes() {
+    return (
+      <div className="bg-primary text-white rounded" style={{ width: 200 }}>
+        <h6>Good!</h6>
+        <p>That's very good! Add this in your cart and buy!</p>
+      </div>
+    )
+  }
+
+  function NotifyNo() {
+    return (
+      <div className="bg-secondary text-white rounded" style={{ width: 200 }}>
+        <h6>Sorry</h6>
+        <p>You can write to us in our support so that we become better!</p>
+      </div>
+    )
+  }
+
+  console.log(id);
 
   return (
     <>
@@ -51,7 +74,7 @@ const ListGoods = () => {
         <div className="card-body">
           <div className="row">
             <div className="col-md-2"> Your are here: </div>
-            <nav className="col-md-8" style={{ marginRight: 205 }}>
+            <nav className="col-md-8" style={{ marginRight: "17.9rem" }}>
               <ol className="breadcrumb">
                 <li className="breadcrumb-item"><a href="/">Home</a></li>
                 {currentCategory && <li className="breadcrumb-item"><Link to={`/categories/${currentCategory._id}`}>{currentCategory.name}</Link></li>}
@@ -64,7 +87,7 @@ const ListGoods = () => {
             <div className="col-md-2">Filter by</div>
             <div className="col-md-10">
               <ul className="list-inline" style={{ display: 'flex', marginLeft: '1.2rem' }}>
-                <li className="list-inline-item mr-3 dropdown"><a href="/" className="dropdown-toggle" data-toggle="dropdown">   Supplier type </a>
+                {/* <li className="list-inline-item mr-3 dropdown"><a href="/" className="dropdown-toggle" data-toggle="dropdown">   Supplier type </a>
                   <div className="dropdown-menu p-3" style={{ maxWidth: "20rem" }}>
                     <label className="form-check">
                       <input type="radio" name="myfilter" className="form-check-input" /> Good supplier
@@ -95,7 +118,7 @@ const ListGoods = () => {
                   </div>
                 </li>
                 <li className="list-inline-item mr-3"><a href="/">Color</a></li>
-                <li className="list-inline-item mr-3"><a href="/">Size</a></li>
+                <li className="list-inline-item mr-3"><a href="/">Size</a></li> */}
                 <li className="list-inline-item mr-3">
                   <div className="form-inline">
                     <label className="mr-2">Price</label>
@@ -106,11 +129,11 @@ const ListGoods = () => {
                   </div>
                 </li>
                 <li className="list-inline-item mr-3">
-                  <label className="custom-control mt-1 custom-checkbox">
+                  {/* <label className="custom-control mt-1 custom-checkbox">
                     <input type="checkbox" className="custom-control-input" />
                     <div className="custom-control-label">Ready to ship
                 </div>
-                  </label>
+                  </label> */}
                 </li>
               </ul>
             </div>
@@ -192,8 +215,40 @@ const ListGoods = () => {
 
       <div className="box text-center">
         <p>Did you find what you were looking for？</p>
-        <a href="/" className="btn btn-light">Yes</a>
-        <a href="/" className="btn btn-light">No</a>
+        <div className="btn btn-light" onClick={() => {
+                  store.addNotification({
+                    content: NotifyYes,
+                    message: ``,
+                    type: 'default',
+                    container: 'bottom-right',
+                    insert: 'bottom',
+                    animationIn: ['animated', 'fadeIn'],
+                    animationOut: ['animated', 'fadeOut'],
+
+                    dismiss: {
+                      duration: 2500,
+                    },
+                    width: 200,
+
+                  })
+                }} style={{cursor: 'pointer'}}>Yes</div>
+        <div className="btn btn-light" onClick={() => {
+                  store.addNotification({
+                    content: NotifyNo,
+                    message: ``,
+                    type: 'default',
+                    container: 'bottom-right',
+                    insert: 'bottom',
+                    animationIn: ['animated', 'fadeIn'],
+                    animationOut: ['animated', 'fadeOut'],
+
+                    dismiss: {
+                      duration: 2500,
+                    },
+                    width: 200,
+
+                  })
+                }} style={{cursor: 'pointer'}}>No</div>
       </div>
     </>
   )

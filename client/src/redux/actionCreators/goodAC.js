@@ -66,16 +66,16 @@ export const getGoodsFromServer = (id, sorting, searchResult) => {
   if (searchResult) {
     if (sorting === "price") {
       return (dispatch) =>
-        dispatch(getGoods(searchResult.filter(elem => elem.quantity > 0).sort((a, b) => a.price - b.price)));
+        dispatch(getGoods(searchResult.sort((a, b) => a.price - b.price)));
     } else if (sorting === "price_desc") {
       return (dispatch) =>
-        dispatch(getGoods(searchResult.filter(elem => elem.quantity > 0).sort((a, b) => b.price - a.price)));
+        dispatch(getGoods(searchResult.sort((a, b) => b.price - a.price)));
     } else if (sorting === "rating") {
       return (dispatch) =>
-        dispatch(getGoods(searchResult.filter(elem => elem.quantity > 0).sort((a, b) => b.rating - a.rating)));
+        dispatch(getGoods(searchResult.sort((a, b) => b.rating - a.rating)));
     } else
       return (dispatch) =>
-        dispatch(getGoods(searchResult.filter(elem => elem.quantity > 0).sort((a, b) => a.price - b.price)));
+        dispatch(getGoods(searchResult.sort((a, b) => a.price - b.price)));
   } else {
     if (sorting === "price") {
       return (dispatch) => {
