@@ -7,7 +7,6 @@ const ProfileOrders = () => {
   const orders = useSelector(state => state.user?.orders[0])
   const user = useSelector(state => state.user.id)
   const dispatch = useDispatch()
-  console.log(orders);
 
   useEffect(() => {
     dispatch(getAllOrders(user))
