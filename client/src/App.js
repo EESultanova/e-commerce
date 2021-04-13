@@ -25,6 +25,7 @@ import ReactNotification from 'react-notifications-component';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { getAllOrders } from './redux/actionCreators/userAC';
 import Good from './components/Good/Good';
+import ProfileEditItem from './components/ProfileSelling/ProfileEditItem';
 
 function App() {
 
@@ -94,6 +95,9 @@ function App() {
               </Route>
               <Route exact path="/profile/:id">
                 <GoodDetails />
+              </Route>
+              <Route exact path="/profile/:id/edit">
+                <ProfileEditItem />
               </Route>
             </Switch>
           }
