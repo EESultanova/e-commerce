@@ -82,6 +82,7 @@ app.post("/api/v1/order", async (req, res) => {
       currentUser} = req.body
       await UserModel.findByIdAndUpdate(req.body.currentUser.id,
         {$push:  {orders: orderForUser}})
+
       await OrderModel.create({
         fio: fioToServer,
         address: addressToServer,
@@ -96,12 +97,13 @@ app.post("/api/v1/order", async (req, res) => {
         user: currentUser.id,
       })
 
-
     currentCart.map(async el => {
       const doc = await GoodModel.findById(el._id)
       if (doc.quantity - el.quantity < 0) {
+        console.log('плохой исход')
        return
       } else {
+        console.log('должен писать в базу')
         await GoodModel.findOneAndUpdate({_id: el._id}, {$inc: {quantity: -el.quantity}})
       }
       return
