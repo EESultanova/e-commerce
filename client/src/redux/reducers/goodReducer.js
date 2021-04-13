@@ -1,14 +1,14 @@
-import { ADD_GOOD, CHANGE_GOOD_QUANTITY, DELETE_GOOD, GET_GOOD, GET_GOODS, SELLER_ADD_GOOD } from "../types/goodTypes";
+import { ADD_GOOD, CHANGE_GOOD_QUANTITY, DELETE_GOOD, GET_GOOD, GET_GOODS, SELLER_ADD_GOOD, SELLER_EDIT_GOOD } from "../types/goodTypes";
 
 const goodReducer = (state = [], action) => {
   switch (action.type) {
-    case GET_GOODS: 
+    case GET_GOODS:
       return {
         ...state,
         goods: action.payload
       }
 
-    case GET_GOOD: 
+    case GET_GOOD:
       return {
         ...state,
         good: action.payload
@@ -41,6 +41,11 @@ const goodReducer = (state = [], action) => {
       }
 
     case SELLER_ADD_GOOD:
+      return {
+        newGood: action.payload
+      }
+
+    case SELLER_EDIT_GOOD:
       return {
         newGood: action.payload
       }

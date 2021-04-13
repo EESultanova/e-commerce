@@ -18,7 +18,7 @@ const ProfileSelling = () => {
 
 	// console.log('user.goods--------->', user?.goods[0])
 
-	console.log(user.goods[0])
+	// console.log(user.goods[0])
 
 	return (
 		<article className="card">

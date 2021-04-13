@@ -5,7 +5,7 @@ import '../../html/css/bootstrap.css'
 
 import { useDispatch, useSelector } from "react-redux"
 import { Link, NavLink } from "react-router-dom";
-import { removeUser } from '../../redux/actionCreators/topicsAC'
+import { removeUser } from '../../redux/actionCreators/userAC'
 import avatarLogo from '../../assets/avatar.svg';
 import { API_URL, SITE_URL } from '../../config'
 import { useEffect, useState } from 'react';
@@ -14,28 +14,28 @@ import { useProfileContext } from '../../contexts/ProfileContext';
 
 
 const Header = () => {
-  const [input, setInput] = useState('')
-  const categories = useSelector(state => state.categories)
-  const [categoryForFilter, setCategoryForFilter] = useState(categories[0]?._id)
+	const [input, setInput] = useState('')
+	const categories = useSelector(state => state.categories)
+	const [categoryForFilter, setCategoryForFilter] = useState(categories[0]?._id)
 	const user = useSelector(state => state.user.isAuth);
 	const currentUser = useSelector(state => state.user);
-  const cart = useSelector(state => state.cart)
-  const userCart = useSelector(state => state.user.cart)
+	const cart = useSelector(state => state.cart)
+	const userCart = useSelector(state => state.user.cart)
 	const avatar = currentUser.avatar ? `${SITE_URL + currentUser.avatar}` : avatarLogo;
 	const dispatch = useDispatch()
-  let {setChoice} = useProfileContext()
+	let { setChoice } = useProfileContext()
 
-	const handlergameOver = () => {
+	const handleLogout = () => {
 		dispatch(removeUser())
 	}
 
-  useEffect(() => {
-    dispatch(filterGoodsSaga({categoryForFilter, input})) 
-  }, [input])
+	useEffect(() => {
+		dispatch(filterGoodsSaga({ categoryForFilter, input }))
+	}, [input])
 
-  const headerStyle = {
-    "font-family": 'Prime, Helvetica, Arial, sans-serif'
-  }
+	const headerStyle = {
+		"font-family": 'Prime, Helvetica, Arial, sans-serif'
+	}
 
 	return (
 		<header className="section-header">
@@ -45,19 +45,19 @@ const Header = () => {
 						<div className="col-xl-2 col-lg-3 col-md-12">
 							<Link to="/" className="brand-wrap">
 								<img className="logo" src="/images/logocommerce3.png" alt="" />
-                {/* <span style={headerStyle}>E-Commerce</span> */}
+								{/* <span style={headerStyle}>E-Commerce</span> */}
 							</Link>
 						</div>
 						<div className="col-xl-6 col-lg-5 col-md-6">
 							<form action="#" className="search-header">
 								<div className="input-group w-100">
 									<select className="custom-select border-right" onChange={(e) => setCategoryForFilter(e.target.value)} name="category_name">
-                   {categories.map(el => <option key={el._id} value={el._id}>{el.name}</option>)}
-  								</select>
+										{categories.map(el => <option key={el._id} value={el._id}>{el.name}</option>)}
+									</select>
 									<input type="text" value={input} onChange={(e) => setInput(e.target.value)} className="form-control" placeholder="Search" />
 
 									<div className="input-group-append">
-		                <Link to={`/categories/${categoryForFilter}`} className="btn btn-primary">	<i className="fa fa-search"></i>Search</Link>
+										<Link to={`/categories/${categoryForFilter}`} className="btn btn-primary">	<i className="fa fa-search"></i>Search</Link>
 									</div>
 								</div>
 							</form>
@@ -65,10 +65,10 @@ const Header = () => {
 						<div className="col-xl-4 col-lg-4 col-md-6">
 							<div className="widgets-wrap float-md-right">
 								<div className="widget-header mr-3">
-										<NavLink to={user ? "/profile" : "/login"}><img src={avatar} alt="" style={Object.assign({}, { width: '32px' }, { height: '31px' }, { 'borderRadius': '50%' })} />
-											<small className="text"> My profile </small>
-										</NavLink>
-									
+									<NavLink to={user ? "/profile" : "/login"}><img src={avatar} alt="" style={Object.assign({}, { width: '32px' }, { height: '31px' }, { 'borderRadius': '50%' })} />
+										<small className="text"> My profile </small>
+									</NavLink>
+
 								</div>
 								{/* <div className="widget-header mr-3">
 									<a href="/" className="widget-view">
@@ -79,7 +79,7 @@ const Header = () => {
 										<small className="text"> Message </small>
 									</a>
 								</div> */}
-                
+
 								<div className="widget-header mr-3">
 									<Link to="/profile" className="widget-view" onClick={() => setChoice(2)}>
 										<div className="icon-area">
@@ -92,16 +92,16 @@ const Header = () => {
 									<Link to="/cart" className="widget-view">
 										<div className="icon-area">
 											<i className="fa fa-shopping-cart"></i>
-                      {user &&
-                        (userCart?.length ?
-                        <span className="notify">{userCart.length}</span>
-                        : '')
-                      }
-                      {!user &&
-                        (cart.length ?
-                        <span className="notify">{cart.length}</span>
-                        : '')
-                      }
+											{user &&
+												(userCart?.length ?
+													<span className="notify">{userCart.length}</span>
+													: '')
+											}
+											{!user &&
+												(cart.length ?
+													<span className="notify">{cart.length}</span>
+													: '')
+											}
 										</div>
 										<small className="text"> Cart </small>
 									</Link>
@@ -156,7 +156,7 @@ const Header = () => {
 							{user &&
 								<li className="nav-item">
 									<button>
-										<Link onClick={handlergameOver} className="btn btn-primary" to="/">Log out</Link>
+										<Link onClick={handleLogout} className="btn btn-primary" to="/">Log out</Link>
 									</button>
 								</li>
 							}

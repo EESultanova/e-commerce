@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { API_URL, SITE_URL } from '../../config'
-import { setUser } from '../../redux/actionCreators/topicsAC'
+import { setUser } from '../../redux/actionCreators/userAC'
 import avatarLogo from '../../assets/avatar.svg';
 
 const ProfileSettings = () => {

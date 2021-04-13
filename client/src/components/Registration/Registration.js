@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from '../../redux/actionCreators/topicsAC';
+import { setUser } from '../../redux/actionCreators/userAC';
 import { API_URL, SITE_URL } from '../../config';
 import { emptyCart } from "../../redux/actionCreators/cartAC";
 
