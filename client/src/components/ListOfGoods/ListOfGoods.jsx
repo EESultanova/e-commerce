@@ -18,7 +18,7 @@ const ListGoods = () => {
 
   const { id } = useParams()
   const dispatch = useDispatch()
-  const searchResult = useSelector(state => state.search)
+  const searchResult = useSelector(state => state.search?.filter(elem => elem.quantity > 0))
   const loader = useSelector(state => state.loader)
 
   const history = useHistory();
@@ -26,7 +26,7 @@ const ListGoods = () => {
   useEffect(() => {
     dispatch(getCategoriesFromServer());
     dispatch(getGoodsFromServer(id, sorting, searchResult))
-    return () => {dispatch(getGoods([]))}
+    return () => { dispatch(getGoods([])) }
   }, [sorting])
 
   const goods = useSelector(state => state.goods.goods)
