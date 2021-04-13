@@ -17,7 +17,7 @@ const userReducer = (state = {} , action) => {
                     isAuth: true,
                 }
             }
-            break
+            // break
 
         case REMOVE_USER:
           localStorage.removeItem('token');

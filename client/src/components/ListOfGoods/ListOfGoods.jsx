@@ -30,7 +30,7 @@ const ListGoods = () => {
     dispatch(getCategoriesFromServer());
     dispatch(getGoodsFromServer(id, sorting, searchResult))
     return () => {dispatch(getGoods([]))}
-  }, [sorting])
+  }, [sorting, id])
 
   const goods = useSelector(state => state.goods.goods)
   const categories = useSelector(state => state.categories)
@@ -65,6 +65,7 @@ const ListGoods = () => {
     )
   }
 
+  console.log(id);
 
   return (
     <>
