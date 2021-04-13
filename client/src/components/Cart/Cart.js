@@ -63,7 +63,6 @@ const Cart = () => {
                     <div className="aside"><img src={good.photo} className="img-sm" alt=""/></div>
                     <figcaption className="info">
                       <a href="/" className="title text-dark">{good.name}</a>
-                      <p className="text-muted small">{good.description}</p>
                     </figcaption>
                   </figure>
                 </td>
@@ -93,7 +92,6 @@ const Cart = () => {
                     <div className="aside"><img src={good.photo} className="img-sm" alt=""/></div>
                     <figcaption className="info">
                       <a href="/" className="title text-dark">{good.name}</a>
-                      <p className="text-muted small">{good.description}</p>
                     </figcaption>
                   </figure>
                 </td>

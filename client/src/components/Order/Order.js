@@ -23,8 +23,8 @@ function Order() {
 
   const currentUser = useSelector(state => state.user)
   const currentCart = useSelector(state => state.user.cart)
-  const fioToServer = fio.value
-  const addressToServer = address.value
+  let fioToServer = fio.value
+  let addressToServer = address.value
   
   const total = currentCart
   .map(el => el.price * el.quantity)
@@ -51,7 +51,6 @@ function Order() {
                 <div className="aside"><img src={good.photo} className="img-sm" alt=""/></div>
                 <figcaption className="info">
                   <a style={{maxWidth:500}} href="/" className="title text-dark">{good.name}</a>
-                  <p style={{maxWidth:500}} className="text-muted small">{good.description}</p>
                 </figcaption>
               </figure>
             </td>
@@ -61,7 +60,7 @@ function Order() {
             <td> 
               <div className="price-wrap"> 
                 <var style={{width:200}} className="price mx-5">{(good.price * good.quantity).toFixed(2)} $</var> 
-                <small className="text-muted"> {good.price}each </small> 
+                <small className="text-muted"> {good.price}each</small> 
               </div>
             </td>
             <td className="text-right"> 
@@ -112,7 +111,7 @@ function Order() {
 	<div className="form-row">
 		<div className="col form-group">
 			<label>Email</label>
-		  	<input  onChange={e => setEmail(e.target.value)}  type="email" className="form-control" placeholder="" />
+		  	<input onChange={e => setEmail(e.target.value)}  type="email" className="form-control" placeholder="" />
 		</div> 
 		<div className="col form-group">
 			<label>Phone</label>
