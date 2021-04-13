@@ -1,4 +1,4 @@
-import { ADD_GOOD_TO_USER_CART, ADD_ORDER_DETAILS, CHANGE_QUANTITY_USER, DELETE_GOOD_FROM_USER_CART, GET_GOODS_SELLER } from "../types/userTypes";
+import { ADD_GOOD_TO_USER_CART, ADD_ORDER_DETAILS, CHANGE_QUANTITY_USER, DELETE_GOOD_FROM_USER_CART, GET_ALL_ORDERS, GET_GOODS_SELLER } from "../types/userTypes";
 import { SET_USER, REMOVE_USER } from "../types/topicsTypes";
 // import { ADD_GOOD_TO_CART } from "../types/cartTypes";
 import { SELLER_ADD_GOOD } from "../types/goodTypes";
@@ -86,6 +86,12 @@ const userReducer = (state = {} , action) => {
           return {
             ...state,
             goods: [action.payload]
+         }
+
+         case GET_ALL_ORDERS:
+          return {
+            ...state,
+            orders: [action.payload]
          }
 
         default:

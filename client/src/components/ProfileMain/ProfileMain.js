@@ -17,7 +17,6 @@ const ProfileMain = () => {
     <>
       <section className="section-content padding-y">
         <div className="container">
-
           <div className="row">
             <aside className="col-md-3">
               <nav className="list-group" style={{'cursor': 'pointer'}}>

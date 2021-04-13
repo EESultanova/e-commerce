@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { emptyCart } from '../../redux/actionCreators/cartAC';
 import { changeGoodsQuantityOnServer } from '../../redux/actionCreators/goodAC';
-import { addOrderDetails, addOrderDetailsToServer } from '../../redux/actionCreators/userAC';
+import { addOrderDetails, addOrderDetailsToServer, getAllOrders } from '../../redux/actionCreators/userAC';
 
 function Order() {
   const dispatch = useDispatch()
@@ -33,6 +33,7 @@ function Order() {
   function confirmHandler() {
     dispatch(addOrderDetails({fioToServer, addressToServer, email, phone, currentCart}))
     addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser})
+    dispatch(getAllOrders(currentUser.id))
     dispatch(emptyCart())
   }
 

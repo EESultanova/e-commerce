@@ -23,11 +23,12 @@ import ProfileContextProvider from './contexts/ProfileContext';
 import ReactNotification from 'react-notifications-component';
 
 import MessengerCustomerChat from 'react-messenger-customer-chat';
+import { getAllOrders } from './redux/actionCreators/userAC';
 
 function App() {
 
   const user = useSelector(state => state.user.isAuth);
-
+  const userId = useSelector(state => state.user.id);
   const dispatch = useDispatch();
 
   const auth = async () => {
@@ -49,6 +50,7 @@ function App() {
   useEffect(() => {
     auth();
   }, []);
+
 
   return (
     <div className="App">
