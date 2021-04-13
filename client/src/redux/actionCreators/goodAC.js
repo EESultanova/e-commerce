@@ -7,6 +7,7 @@ import {
   FILTER_GOODS,
   FILTER_GOODS_SAGA,
   SELLER_ADD_GOOD,
+  CHANGE_GOOD_QUANTITY,
 } from "../types/goodTypes";
 import { hideLoader } from "./loaderAC";
 
@@ -37,6 +38,29 @@ export const deleteGood = (good) => {
     payload: good,
   };
 };
+
+export const changeGoodQuantity = (id, quantity) => {
+  return function(dispatch) {
+    dispatch({
+      type: CHANGE_GOOD_QUANTITY,
+      id,
+      quantity
+    })
+  }
+}
+
+export const changeGoodsQuantityOnServer = (goods) => {
+  return (dispatch) => {
+    fetch(`${SITE_URL}api/v1/goods`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({goods})
+    })
+    .then(response => console.log(response.status))
+  }
+}
 
 export const getGoodsFromServer = (id, sorting, searchResult) => {
   if (searchResult) {

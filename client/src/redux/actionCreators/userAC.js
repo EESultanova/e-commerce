@@ -69,6 +69,7 @@ export const changeQuantityUserCart = (id, quantity) => {
     })
   }
 }
+
 export const sellerAddGood = (newGood) => {
   return {
     type: SELLER_ADD_GOOD,
@@ -106,10 +107,10 @@ export const sellerAddGoodToServer = ({
   )
 };
 
+
 export const getSellerGoods = (user) => async (dispatch) => {
   const response = await fetch(`${SITE_URL}api/v1/get_goods_for_seller?_s=${user}`)
   const result = await response.json()
-  console.log(result) 
   dispatch(getSellerGoodsFromServer(result))
 };
 
@@ -119,3 +120,4 @@ export const getSellerGoodsFromServer = (goods) => {
     payload: goods,
   };
 };
+
