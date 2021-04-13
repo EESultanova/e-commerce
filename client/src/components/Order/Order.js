@@ -35,10 +35,8 @@ function Order() {
   
   function confirmHandler(e) {
     e.preventDefault()
-    console.log(123123123);
-    dispatch(addOrderDetails({fioToServer, addressToServer, email, phone, currentCart}))
-    addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser})
-   
+    dispatch(addOrderDetails({fioToServer, addressToServer, email, phone, currentCart, total}))
+    addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser, total})
     dispatch(emptyCart())
   }
   

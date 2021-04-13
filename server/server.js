@@ -140,23 +140,8 @@ app.post("/api/v1/add_new_good", async (req, res) => {
 
 app.get("/api/v1/filter", async (req, res) => {
   try {
-    console.log('ручка дернулась')
     const {_c: category, _s: input} = req.query
-    let good = []
-
-    if (input === '') {
-      const res = await GoodModel.find({category: category})
-      console.log(res)
-      good.push(res)
-      // console.log(good)
-      // return
-    } else {
-      const allRes = await GoodModel.find({name: new RegExp(`^${input}.*`, 'ig'), category: category})
-      good.push(allRes)
-      // console.log('------------>', good)
-      // return
-    }
-    console.log(good)
+    const good = await GoodModel.find({name: new RegExp(`^${input}.*`, 'ig'), category: category})
     good.length ? res.status(200).json(good) : res.sendStatus(404)
   } catch (error) {
     console.log(error)
