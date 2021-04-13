@@ -12,17 +12,18 @@ import { addGoodToUserCart, deleteGoodFromUserCart } from "../../redux/actionCre
 import Loader from "../Loader/Loader"
 
 const GoodDetails = () => {
-  
+
   const [photo, setPhoto] = useState(0)
   const { id } = useParams()
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getGoodDetailsFromServer(id))
-    return () => {dispatch(getGood([]))}
+    return () => { dispatch(getGood([])) }
   }, [])
-  
+
   const currentUserAuth = useSelector(state => state.user.isAuth)
+  const currentUserRole = useSelector(state => state.user.role)
   let good = useSelector(state => state?.goods?.good)
   good.quantity = 1
 
@@ -34,7 +35,7 @@ const GoodDetails = () => {
 
   function NotifyAdd() {
     return (
-      <div className="bg-primary text-white rounded" style={{ width: 200, height: 100 }}>
+      <div className="bg-primary text-white rounded" style={{ width: 200}}>
         <h6>Item was added to your cart!</h6>
       </div>
     )
@@ -42,13 +43,13 @@ const GoodDetails = () => {
 
   function NotifyRemove() {
     return (
-      <div className="bg-secondary text-white rounded" style={{ width: 200, height: 100 }}>
+      <div className="bg-secondary text-white rounded" style={{ width: 200}}>
         <h6>Item was removed from your cart!</h6>
       </div>
     )
   }
 
-  
+
 
   return (
     <div className="row">
@@ -164,7 +165,7 @@ const GoodDetails = () => {
                   <i className="fas fa-shopping-cart"></i> <span className="text">Add to cart</span>
                 </button>)
               }
-              {currentUserAuth &&
+              {(currentUserAuth && currentUserRole === 'buyer') &&
                 ((inUserCart === true) ?
                 <button onClick={() => {
                   store.addNotification({
