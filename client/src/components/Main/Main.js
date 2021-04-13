@@ -25,7 +25,6 @@ const Main = () => {
   useEffect(() => {
     dispatch(getCategoriesFromServer())
     dispatch(getAllOrders(userId))
-
   }, [])
 
   return (

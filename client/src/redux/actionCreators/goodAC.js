@@ -114,8 +114,6 @@ export const getGoodsFromServer = (id, sorting, searchResult) => {
         fetch(`${SITE_URL}api/v1/categories/${id}`)
           .then((response) => response.json())
           .then((goodsFromServer) => {
-            console.log('goodsFromServer ----->', goodsFromServer)
-
             dispatch(
               getGoods(goodsFromServer.filter(elem => elem.quantity > 0).sort((a, b) => a.price - b.price))
             )
