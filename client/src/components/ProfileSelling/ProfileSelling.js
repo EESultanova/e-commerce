@@ -36,8 +36,8 @@ const ProfileSelling = () => {
 									<span className="price">{el.price} $</span>
 									<small className="text-muted"> /per item</small>
 								</div>
-								<Link to={`/profile/${el._id}`} className="btn btn-outline-primary"> <i className="fa fa-pen"></i> Edit </Link>
-								<Link to={`/profile/${el._id}`} className="btn btn-primary"> <i className="fa fa-eye"></i> View </Link>
+								<Link to={`/profile/${el._id}/edit`} className="btn btn-outline-primary"> <i className="fa fa-pen"></i> Edit </Link>
+								<Link to={`/profile/${el._id}/`} className="btn btn-primary"> <i className="fa fa-eye"></i> View </Link>
 								<br />
 							</figcaption>
 						</figure>
