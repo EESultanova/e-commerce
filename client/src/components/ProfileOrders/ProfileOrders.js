@@ -1,10 +1,17 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllOrders } from "../../redux/actionCreators/userAC";
 
 const ProfileOrders = () => {
 
   const orders = useSelector(state => state.user?.orders[0])
-
+  const user = useSelector(state => state.user.id)
+  const dispatch = useDispatch()
   console.log(orders);
+
+  useEffect(() => {
+    dispatch(getAllOrders(user))
+  }, [])
 
   return ( 
     <>
