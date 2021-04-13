@@ -135,10 +135,10 @@ const Header = () => {
 								</div>
 							</li>
 							<li className="nav-item">
-								<a className="nav-link" href="/">All categories</a>
+								<Link className="nav-link" to="/">All categories</Link>
 							</li>
 							<li className="nav-item">
-								<a className="nav-link" href="/">Most popular</a>
+								<Link className="nav-link" to="/">Most popular</Link>
 							</li>
 						</ul>
 						<ul className="navbar-nav ml-md-auto">

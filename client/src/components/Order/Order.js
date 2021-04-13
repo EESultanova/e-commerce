@@ -51,7 +51,6 @@ function Order() {
                 <div className="aside"><img src={good.photo} className="img-sm" alt=""/></div>
                 <figcaption className="info">
                   <a style={{maxWidth:500}} href="/" className="title text-dark">{good.name}</a>
-                  <p style={{maxWidth:500}} className="text-muted small">{good.description}</p>
                 </figcaption>
               </figure>
             </td>
