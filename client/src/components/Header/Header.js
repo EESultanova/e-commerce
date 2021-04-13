@@ -6,7 +6,7 @@ import '../../html/css/bootstrap.css'
 import { useDispatch, useSelector } from "react-redux"
 
 import { Link, NavLink, useHistory } from "react-router-dom";
-import { removeUser } from '../../redux/actionCreators/topicsAC'
+import { removeUser } from '../../redux/actionCreators/userAC'
 
 import avatarLogo from '../../assets/avatar.svg';
 import { API_URL, SITE_URL } from '../../config'
