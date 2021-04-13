@@ -138,6 +138,25 @@ app.post("/api/v1/add_new_good", async (req, res) => {
   }
 })
 
+app.post("/api/v1/edit_new_good", async (req, res) => {
+  try {
+    const { id, name, quantity, price, description, category, photo, rating } = req.body
+    const currentGood = await GoodModel.findById(id);
+    currentGood.quantity = quantity,
+    currentGood.photo = photo,
+    currentGood.name = name,
+    currentGood.description = description,
+    currentGood.price = price,
+    currentGood.rating = rating,
+    currentGood.category = category,
+    await currentGood.save();
+    res.status(200).json(currentGood);
+  } catch (error) {
+    console.log(error)
+    res.sendStatus(500)
+  }
+})
+
 app.get("/api/v1/filter", async (req, res) => {
   try {
     const {_c: category, _s: input} = req.query

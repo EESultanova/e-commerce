@@ -1,5 +1,5 @@
-import { ADD_GOOD_TO_USER_CART, ADD_ORDER_DETAILS, CHANGE_QUANTITY_USER, DELETE_GOOD_FROM_USER_CART, GET_ALL_ORDERS, GET_GOODS_SELLER} from "../types/userTypes"
-import { SELLER_ADD_GOOD } from "../types/goodTypes"
+import { ADD_GOOD_TO_USER_CART, ADD_ORDER_DETAILS, CHANGE_QUANTITY_USER, DELETE_GOOD_FROM_USER_CART, GET_ALL_ORDERS, GET_GOODS_SELLER, REMOVE_USER, SET_AVATAR, SET_USER } from "../types/userTypes"
+import { SELLER_ADD_GOOD, SELLER_EDIT_GOOD } from "../types/goodTypes"
 import { SITE_URL } from "../../config"
 
 export const addOrderDetails = (order) => {
@@ -10,6 +10,7 @@ export const addOrderDetails = (order) => {
 }
 
 export const addOrderDetailsToServer = (
+
   {fioToServer,
   addressToServer,
   email,
@@ -23,12 +24,13 @@ export const addOrderDetailsToServer = (
   currentCart,
   currentUser}) => {
   return  (
+
     fetch(`${SITE_URL}api/v1/order`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         fioToServer,
         addressToServer,
         email,
@@ -42,7 +44,7 @@ export const addOrderDetailsToServer = (
         currentCart,
         currentUser,
       })
-    }).then(response => response.status === 200 ? console.log('Ответ с сервера 200: заказ добавлен ') : console.log('Ответ с сервера', response.status, ': мало товара')) 
+    }).then(response => response.status === 200 ? console.log('Ответ с сервера 200: заказ добавлен ') : console.log('Ответ с сервера', response.status, ': мало товара'))
   )
 }
 
@@ -63,7 +65,7 @@ export const deleteGoodFromUserCart = (good) => {
 
 export const changeQuantityUserCart = (id, quantity) => {
   console.log(quantity, "Change quantity user")
-  return function(dispatch) {
+  return function (dispatch) {
     dispatch({
       type: CHANGE_QUANTITY_USER,
       id,
@@ -75,6 +77,13 @@ export const changeQuantityUserCart = (id, quantity) => {
 export const sellerAddGood = (newGood) => {
   return {
     type: SELLER_ADD_GOOD,
+    payload: newGood,
+  };
+};
+
+export const sellerEditGood = (newGood) => {
+  return {
+    type: SELLER_EDIT_GOOD,
     payload: newGood,
   };
 };
@@ -95,7 +104,7 @@ export const sellerAddGoodToServer = ({
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         name,
         quantity,
         price,
@@ -105,7 +114,39 @@ export const sellerAddGoodToServer = ({
         rating,
         user
       })
-    }).then(response => response.status === 200 ? console.log('Ответ с сервера 200: товар добавлен ') : console.log('Ответ с сервера 500: товар не добавлен')) 
+    }).then(response => response.status === 200 ? console.log('Ответ с сервера 200: товар добавлен ') : console.log('Ответ с сервера 500: товар не добавлен'))
+  )
+};
+
+export const sellerEditGoodToServer = ({
+  id,
+  name,
+  quantity,
+  price,
+  description,
+  category,
+  photo,
+  rating,
+  user
+}) => {
+  return (
+    fetch(`${SITE_URL}api/v1/edit_new_good`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id,
+        name,
+        quantity,
+        price,
+        description,
+        category,
+        photo,
+        rating,
+        user
+      })
+    }).then(response => response.status === 200 ? console.log('Ответ с сервера 200: товар изменен ') : console.log('Ответ с сервера 500: товар не изменен'))
   )
 };
 
@@ -135,3 +176,23 @@ export const getAllOrdersFromServer = (orders) => {
     payload: orders,
   };
 };
+
+export const setUser = (user) => {
+  return {
+    type: SET_USER,
+    payload: user
+  }
+}
+
+export const setAvatar = (avatar) => {
+  return {
+    type: SET_AVATAR,
+    payload: avatar
+  }
+}
+
+export const removeUser = () => {
+  return {
+    type: REMOVE_USER,
+  }
+}
