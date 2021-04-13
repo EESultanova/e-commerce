@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useLocation, useParams } from "react-router"
-import { getGoods, getGoodsFromServer } from "../../redux/actionCreators/goodAC"
+import { filterGoodsSaga, getGoods, getGoodsFromServer } from "../../redux/actionCreators/goodAC"
 import { getCategoriesFromServer } from "../../redux/actionCreators/categoryAC"
 import Good from "../Good/Good.jsx"
 import { Link } from "react-router-dom"
@@ -12,31 +12,31 @@ import { store } from 'react-notifications-component';
 import 'animate.css'
 import 'react-notifications-component/dist/theme.css'
 
-
 const ListGoods = () => {
 
+  
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
   const sorting = searchParams.get('sorting')
-
+  
   const { id } = useParams()
   const dispatch = useDispatch()
   const searchResult = useSelector(state => state.search?.filter(elem => elem.quantity > 0))
   const loader = useSelector(state => state.loader)
-
+  
   const history = useHistory();
-
+  
   useEffect(() => {
     dispatch(getCategoriesFromServer());
     dispatch(getGoodsFromServer(id, sorting, searchResult))
-    return () => { dispatch(getGoods([])) }
+    return () => { dispatch(getGoods([]))}
   }, [sorting, id])
-
-
+  
+  
   const goods = useSelector(state => state.goods.goods)
   const categories = useSelector(state => state.categories)
   const currentCategory = categories.find(categories => categories._id === id)
-
+  
   function sortGoods(arg) {
     if (arg === 'sortasc') {
       history.push(`/categories/${id}/?sorting=price`)
