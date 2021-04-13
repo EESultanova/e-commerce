@@ -67,7 +67,6 @@ app.patch("/api/v1/goods", async (req, res) => {
 
 app.post("/api/v1/order", async (req, res) => {
   try {
-    console.log("req.body------------->", req.body)
     const orderForUser = {...req.body, currentUser: true}
     const {
       fioToServer,
@@ -99,10 +98,7 @@ app.post("/api/v1/order", async (req, res) => {
 
 
     currentCart.map(async el => {
-      console.log(el.name,'---->', el.quantity)
       const doc = await GoodModel.findById(el._id)
-      console.log('doc------------>', doc)
-
       if (doc.quantity - el.quantity < 0) {
        return
       } else {
@@ -157,6 +153,17 @@ app.get("/api/v1/get_goods_for_seller", async (req, res) => {
     res.sendStatus(500)
   }
 });
+
+app.get("/api/v1/get_all_orders", async (req, res) => {
+  try {
+    const {_s: id} = req.query
+    const orders = await OrderModel.find({user: id})
+    return res.json(orders);
+  } catch (error) {
+    res.sendStatus(500)
+  }
+});
+
 
 const root = require('path').join(__dirname, '../', 'client', 'build');
 app.use(express.static(root));
