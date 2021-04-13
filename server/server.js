@@ -107,6 +107,7 @@ app.post("/api/v1/order", async (req, res) => {
       }
       return
     })
+    console.log('vse ok');
     res.sendStatus(200)
   } catch (error) {
     console.log(error)

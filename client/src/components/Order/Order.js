@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AddressSuggestions } from 'react-dadata'
 import { FioSuggestions } from 'react-dadata';
 import 'react-dadata/dist/react-dadata.css'
@@ -30,12 +30,16 @@ function Order() {
   .map(el => el.price * el.quantity)
   .reduce((acc, currentValue) => acc + currentValue, 0)
   
-  function confirmHandler() {
+  function confirmHandler(e) {
+    e.preventDefault()
+    console.log(123123123);
     dispatch(addOrderDetails({fioToServer, addressToServer, email, phone, currentCart}))
     addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser})
-    dispatch(getAllOrders(currentUser.id))
+   
     dispatch(emptyCart())
   }
+  
+
 
   return(
     <>
@@ -128,7 +132,7 @@ function Order() {
 		<div className="card mb-4">
       <div className="card-body">
       <h4 className="card-title mb-4">Payment</h4>
-      <form style={{maxWidth:380}}>
+      <form style={{maxWidth:380}} onSubmit={(e) => confirmHandler(e)}>
 			<div className="form-group">
 			<label htmlFor="username">Name on card</label>
 			<input  onChange={e => setCardName(e.target.value)} type="text" className="form-control" name="username" placeholder="Ex. John Smith" required=""/>
@@ -185,7 +189,7 @@ function Order() {
 				</div>
 			</div>
 				<button className="subscribe btn btn-primary btn-block">
-					<Link onClick={confirmHandler}  to="/"> Confirm </Link>
+          Confirm
 				</button>
 
 		</form>
