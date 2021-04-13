@@ -66,7 +66,6 @@ app.patch("/api/v1/goods", async (req, res) => {
 })
 
 app.post("/api/v1/order", async (req, res) => {
-  console.log(req.body);
   try {
     const orderForUser = { ...req.body, currentUser: true }
     const {
@@ -79,31 +78,35 @@ app.post("/api/v1/order", async (req, res) => {
       expMonth,
       expYear,
       cvv,
+      total,
       currentCart,
-      currentUser } = req.body
-    await UserModel.findByIdAndUpdate(req.body.currentUser.id,
-      { $push: { orders: orderForUser } })
-    await OrderModel.create({
-      fio: fioToServer,
-      address: addressToServer,
-      email: email,
-      phone: phone,
-      card: card,
-      cardName: cardName,
-      expMonth: expMonth,
-      expYear: expYear,
-      cvv: cvv,
-      cart: currentCart,
-      user: currentUser.id,
-    })
+      currentUser} = req.body
+      await UserModel.findByIdAndUpdate(req.body.currentUser.id,
+        {$push:  {orders: orderForUser}})
 
+      await OrderModel.create({
+        fio: fioToServer,
+        address: addressToServer,
+        email: email,
+        phone: phone,
+        card: card,
+        cardName: cardName,
+        expMonth: expMonth,
+        expYear: expYear,
+        cvv: cvv,
+        total: total,
+        cart: currentCart,
+        user: currentUser.id,
+      })
 
     currentCart.map(async el => {
       const doc = await GoodModel.findById(el._id)
       if (doc.quantity - el.quantity < 0) {
-        return
+        console.log('плохой исход')
+       return
       } else {
-        await GoodModel.findOneAndUpdate({ _id: el._id }, { $inc: { quantity: -el.quantity } })
+        console.log('должен писать в базу')
+        await GoodModel.findOneAndUpdate({_id: el._id}, {$inc: {quantity: -el.quantity}})
       }
       return
     })
@@ -137,8 +140,8 @@ app.post("/api/v1/add_new_good", async (req, res) => {
 
 app.get("/api/v1/filter", async (req, res) => {
   try {
-    const { _c: category, _s: input } = req.query
-    const good = await GoodModel.find({ name: new RegExp(`^${input}.*`, 'ig'), category: category })
+    const {_c: category, _s: input} = req.query
+    const good = await GoodModel.find({name: new RegExp(`^${input}.*`, 'ig'), category: category})
     good.length ? res.status(200).json(good) : res.sendStatus(404)
   } catch (error) {
     console.log(error)
