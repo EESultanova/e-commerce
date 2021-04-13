@@ -19,6 +19,7 @@ export const addOrderDetailsToServer = (
   expMonth,
   expYear,
   cvv,
+  total,
   currentCart,
   currentUser}) => {
   return  (
@@ -37,6 +38,7 @@ export const addOrderDetailsToServer = (
         expMonth,
         expYear,
         cvv,
+        total,
         currentCart,
         currentUser,
       })

@@ -33,6 +33,10 @@ const Header = () => {
     dispatch(filterGoodsSaga({categoryForFilter, input})) 
   }, [input])
 
+  useEffect(() => {
+    dispatch(filterGoodsSaga({categoryForFilter, input})) 
+  }, [categoryForFilter])
+
   const headerStyle = {
     "font-family": 'Prime, Helvetica, Arial, sans-serif'
   }
@@ -51,7 +55,7 @@ const Header = () => {
 						<div className="col-xl-6 col-lg-5 col-md-6">
 							<form action="#" className="search-header">
 								<div className="input-group w-100">
-									<select className="custom-select border-right" onChange={(e) => setCategoryForFilter(e.target.value)} name="category_name">
+									<select className="custom-select border-right" value={categoryForFilter} onChange={(e) => setCategoryForFilter(e.target.value)} name="category_name">
                    {categories.map(el => <option key={el._id} value={el._id}>{el.name}</option>)}
   								</select>
 									<input type="text" value={input} onChange={(e) => setInput(e.target.value)} className="form-control" placeholder="Search" />

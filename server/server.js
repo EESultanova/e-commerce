@@ -66,7 +66,6 @@ app.patch("/api/v1/goods", async (req, res) => {
 })
 
 app.post("/api/v1/order", async (req, res) => {
-  console.log(req.body);
   try {
     const orderForUser = {...req.body, currentUser: true}
     const {
@@ -79,6 +78,7 @@ app.post("/api/v1/order", async (req, res) => {
       expMonth,
       expYear,
       cvv,
+      total,
       currentCart,
       currentUser} = req.body
       await UserModel.findByIdAndUpdate(req.body.currentUser.id,
@@ -94,6 +94,7 @@ app.post("/api/v1/order", async (req, res) => {
         expMonth: expMonth,
         expYear: expYear,
         cvv: cvv,
+        total: total,
         cart: currentCart,
         user: currentUser.id,
       })
@@ -139,7 +140,15 @@ app.post("/api/v1/add_new_good", async (req, res) => {
 app.get("/api/v1/filter", async (req, res) => {
   try {
     const {_c: category, _s: input} = req.query
-    const good = await GoodModel.find({name: new RegExp(`^${input}.*`, 'ig'), category: category})
+    let good = []
+
+    if (input === '') {
+      const res = await GoodModel.find({category: category})
+      good.push(res)
+    } else {
+      const allRes = await GoodModel.find({name: new RegExp(`^${input}.*`, 'ig'), category: category})
+      good.push(allRes)
+    }
     good.length ? res.status(200).json(good) : res.sendStatus(404)
   } catch (error) {
     console.log(error)

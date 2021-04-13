@@ -31,12 +31,11 @@ function Order() {
   .reduce((acc, currentValue) => acc + currentValue, 0)
   
   function confirmHandler() {
-    dispatch(addOrderDetails({fioToServer, addressToServer, email, phone, currentCart}))
-    addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser})
+    dispatch(addOrderDetails({fioToServer, addressToServer, email, phone, currentCart, total}))
+    addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, total, currentCart, currentUser})
     dispatch(getAllOrders(currentUser.id))
     dispatch(emptyCart())
   }
-
   return(
     <>
     <section className="section-content padding-y">

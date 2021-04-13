@@ -28,6 +28,9 @@ const orderSchema = new Schema({
   cvv: {
     type: Number,
   },
+  total: {
+    type: Number
+  },
   cart: [],
   user: {
     type: Schema.Types.ObjectId,
