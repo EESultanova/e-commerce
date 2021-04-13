@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import { API_URL, SITE_URL } from '../../config'
 import avatarLogo from '../../assets/avatar.svg';
 import { useProfileContext } from "../../contexts/ProfileContext";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const ProfileOverview = () => {
 
@@ -24,7 +26,7 @@ const ProfileOverview = () => {
                   <div className="text" style={{'textAlign': 'start'}}>
                     <strong> {currentUser.name} </strong> <br/> 
                     <p className="mb-2"> {currentUser.email}  </p> 
-                    <div href="/" className="btn btn-light btn-sm" alt="" >Edit</div>
+                    <div href="/" className="btn btn-light btn-sm" alt="" onClick={() => setChoice(2)}>Edit</div>
                   </div>
               </figure>
               <hr/>
@@ -32,7 +34,9 @@ const ProfileOverview = () => {
                 <i className="fa fa-map-marker text-muted"></i> &nbsp; My address:  
                 <br/>
                 Tashkent city, Street name, Building 123, House 321 &nbsp; 
-                <a href="/" className="btn-link"> Edit</a>
+                <div >
+                <Link to="/profile" className="btn-link"> Edit</Link>
+                </div>
               </p>
 
               
