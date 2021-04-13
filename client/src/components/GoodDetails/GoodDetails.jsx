@@ -35,18 +35,16 @@ const GoodDetails = () => {
 
   function NotifyAdd() {
     return (
-      <div className="bg-primary text-white rounded" style={{ width: 200 }}>
-        <h6>Success</h6>
-        <p>{good.name} was added to your cart!</p>
+      <div className="bg-primary text-white rounded" style={{ width: 200}}>
+        <h6>Item was added to your cart!</h6>
       </div>
     )
   }
 
   function NotifyRemove() {
     return (
-      <div className="bg-secondary text-white rounded" style={{ width: 200 }}>
-        <h6>Success</h6>
-        <p>{good.name} was removed from your cart!</p>
+      <div className="bg-secondary text-white rounded" style={{ width: 200}}>
+        <h6>Item was removed from your cart!</h6>
       </div>
     )
   }
@@ -127,87 +125,87 @@ const GoodDetails = () => {
             <div className="form-group col-md">
               {!currentUserAuth &&
                 ((inCart === true) ?
-                  <button onClick={() => {
-                    store.addNotification({
-                      content: NotifyRemove,
-                      message: `${good?.name} was removed from your cart!`,
-                      type: 'default',
-                      container: 'bottom-right',
-                      insert: 'bottom',
-                      animationIn: ['animated', 'fadeIn'],
-                      animationOut: ['animated', 'fadeOut'],
+                <button onClick={() => {
+                  store.addNotification({
+                    content: NotifyRemove,
+                    message: `Item was removed from your cart!`,
+                    type: 'default',
+                    container: 'bottom-right',
+                    insert: 'bottom',
+                    animationIn: ['animated', 'fadeIn'],
+                    animationOut: ['animated', 'fadeOut'],
 
-                      dismiss: {
-                        duration: 2000,
-                      },
-                      width: 200,
+                    dismiss: {
+                      duration: 2000,
+                    },
+                    width: 200,
 
-                    })
-                    dispatch(deleteGoodFromCart(good?._id))
-                  }} type="button" class="btn btn-secondary">Remove from cart</button>
-                  :
-                  <button onClick={() => {
-                    store.addNotification({
-                      content: NotifyAdd,
-                      message: `${good?.name} was added to your cart!`,
-                      type: 'warning',
-                      container: 'bottom-right',
-                      insert: 'succes',
-                      animationIn: ['animated', 'fadeIn'],
-                      animationOut: ['animated', 'fadeOut'],
+                  })
+                  dispatch(deleteGoodFromCart(good?._id))
+                }} type="button" class="btn btn-secondary">Remove from cart</button>
+                :
+                <button onClick={() => {
+                  store.addNotification({
+                    content: NotifyAdd,
+                    message: `Item was added to your cart!`,
+                    type: 'warning',
+                    container: 'bottom-right',
+                    insert: 'succes',
+                    animationIn: ['animated', 'fadeIn'],
+                    animationOut: ['animated', 'fadeOut'],
 
-                      dismiss: {
-                        duration: 2000,
-                      },
-                      width: 200,
+                    dismiss: {
+                      duration: 2000,
+                    },
+                    width: 200,
 
-                    })
-                    dispatch(addGoodToCart(good))
-                  }} className="btn  btn-primary">
-                    <i className="fas fa-shopping-cart"></i> <span className="text">Add to cart</span>
-                  </button>)
+                  })
+                  dispatch(addGoodToCart(good))
+                }} className="btn  btn-primary">
+                  <i className="fas fa-shopping-cart"></i> <span className="text">Add to cart</span>
+                </button>)
               }
               {(currentUserAuth && currentUserRole === 'buyer') &&
                 ((inUserCart === true) ?
-                  <button onClick={() => {
-                    store.addNotification({
-                      content: NotifyRemove,
-                      message: `${good?.name} was removed from your cart!`,
-                      type: 'default',
-                      container: 'bottom-right',
-                      insert: 'bottom',
-                      animationIn: ['animated', 'fadeIn'],
-                      animationOut: ['animated', 'fadeOut'],
+                <button onClick={() => {
+                  store.addNotification({
+                    content: NotifyRemove,
+                    message: `Item was removed from your cart!`,
+                    type: 'default',
+                    container: 'bottom-right',
+                    insert: 'bottom',
+                    animationIn: ['animated', 'fadeIn'],
+                    animationOut: ['animated', 'fadeOut'],
 
-                      dismiss: {
-                        duration: 2000,
-                      },
-                      width: 200,
+                    dismiss: {
+                      duration: 2000,
+                    },
+                    width: 200,
 
-                    })
-                    dispatch(deleteGoodFromUserCart(good?._id))
-                  }} type="button" class="btn btn-secondary">Remove from cart</button>
-                  :
-                  <button onClick={() => {
-                    store.addNotification({
-                      content: NotifyAdd,
-                      message: `${good?.name} was added to your cart!`,
-                      type: 'warning',
-                      container: 'bottom-right',
-                      insert: 'succes',
-                      animationIn: ['animated', 'fadeIn'],
-                      animationOut: ['animated', 'fadeOut'],
+                  })
+                  dispatch(deleteGoodFromUserCart(good?._id))
+                }} type="button" class="btn btn-secondary">Remove from cart</button>
+                :
+                <button onClick={() => {
+                  store.addNotification({
+                    content: NotifyAdd,
+                    message: `Item was added to your cart!`,
+                    type: 'warning',
+                    container: 'bottom-right',
+                    insert: 'succes',
+                    animationIn: ['animated', 'fadeIn'],
+                    animationOut: ['animated', 'fadeOut'],
 
-                      dismiss: {
-                        duration: 2000,
-                      },
-                      width: 200,
+                    dismiss: {
+                      duration: 2000,
+                    },
+                    width: 200,
 
-                    })
-                    dispatch(addGoodToUserCart(good))
-                  }} className="btn  btn-primary">
-                    <i className="fas fa-shopping-cart"></i> <span className="text">Add to cart</span>
-                  </button>)
+                  })
+                  dispatch(addGoodToUserCart(good))
+                }} className="btn  btn-primary">
+                  <i className="fas fa-shopping-cart"></i> <span className="text">Add to cart</span>
+                </button>)
               }
             </div>
           </div>

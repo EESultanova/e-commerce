@@ -55,7 +55,7 @@ const Footer = () => {
 		</section>
 
 		<section className="footer-copyright border-top">
-				<p className="float-left text-muted"> &copy 2019 Company  All rights resetved </p>
+				<p className="float-left text-muted"> 2021 Company  All rights resetved </p>
 				<p target="_blank" className="float-right text-muted">
 					<a href="/">Privacy & Cookies</a> 
           &nbsp;&nbsp;
