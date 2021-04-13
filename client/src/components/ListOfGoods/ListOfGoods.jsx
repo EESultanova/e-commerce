@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useLocation, useParams } from "react-router"
-import { getGoods, getGoodsFromServer } from "../../redux/actionCreators/goodAC"
+import { filterGoodsSaga, getGoods, getGoodsFromServer } from "../../redux/actionCreators/goodAC"
 import { getCategoriesFromServer } from "../../redux/actionCreators/categoryAC"
 import Good from "../Good/Good.jsx"
 import { Link } from "react-router-dom"
@@ -29,15 +29,13 @@ const ListGoods = () => {
   useEffect(() => {
     dispatch(getCategoriesFromServer());
     dispatch(getGoodsFromServer(id, sorting, searchResult))
-    return () => { dispatch(getGoods([])) }
+    return () => { dispatch(getGoods([]))}
   }, [sorting, id])
   
   
   const goods = useSelector(state => state.goods.goods)
   const categories = useSelector(state => state.categories)
   const currentCategory = categories.find(categories => categories._id === id)
-  console.log("searchResult", searchResult)
-  console.log('goods---------->', goods)
   
   function sortGoods(arg) {
     if (arg === 'sortasc') {
