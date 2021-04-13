@@ -70,7 +70,7 @@ const Header = () => {
 										</NavLink>
 									
 								</div>
-								<div className="widget-header mr-3">
+								{/* <div className="widget-header mr-3">
 									<a href="/" className="widget-view">
 										<div className="icon-area">
 											<i className="fa fa-comment-dots"></i>
@@ -78,7 +78,7 @@ const Header = () => {
 										</div>
 										<small className="text"> Message </small>
 									</a>
-								</div>
+								</div> */}
                 
 								<div className="widget-header mr-3">
 									<Link to="/profile" className="widget-view" onClick={() => setChoice(2)}>
@@ -127,8 +127,9 @@ const Header = () => {
 								<div className="dropdown-menu dropdown-large">
 									<nav className="row">
 										<div className="col-12 ml-3">
-											<a href="/">Home page</a>
-											<a href="page-category.html">All category</a>
+											<Link to="/">Home page</Link>
+											<Link to={`/categories/607045d7fa8ce327ed1edb2f`}>Books</Link>
+											<Link to={`/categories/607045d7fa8ce327ed1edb30`}>Computers & Accessories</Link>
 										</div>
 									</nav>
 								</div>
@@ -137,13 +138,7 @@ const Header = () => {
 								<a className="nav-link" href="/">All categories</a>
 							</li>
 							<li className="nav-item">
-								<a className="nav-link" href="/">Trade shows</a>
-							</li>
-							<li className="nav-item">
-								<a className="nav-link" href="/">Services</a>
-							</li>
-							<li className="nav-item">
-								<a className="nav-link" href="/">Sell with us</a>
+								<a className="nav-link" href="/">Most popular</a>
 							</li>
 						</ul>
 						<ul className="navbar-nav ml-md-auto">
@@ -172,9 +167,6 @@ const Header = () => {
 								<a className="nav-link dropdown-toggle mt-1" href="http://example.com" data-toggle="dropdown">English</a>
 								<div className="dropdown-menu dropdown-menu-right">
 									<a className="dropdown-item" href="/">Russian</a>
-									<a className="dropdown-item" href="/">French</a>
-									<a className="dropdown-item" href="/">Spanish</a>
-									<a className="dropdown-item" href="/">Chinese</a>
 								</div>
 							</li>
 						</ul>

@@ -8,6 +8,9 @@ import { Link } from "react-router-dom"
 import Loader from "../Loader/Loader"
 import { hideLoader, showLoader } from "../../redux/actionCreators/loaderAC"
 
+import { store } from 'react-notifications-component';
+import 'animate.css'
+import 'react-notifications-component/dist/theme.css'
 
 
 const ListGoods = () => {
@@ -44,6 +47,24 @@ const ListGoods = () => {
     }
   }
 
+  function NotifyYes() {
+    return (
+      <div className="bg-primary text-white rounded" style={{ width: 200 }}>
+        <h6>Good!</h6>
+        <p>That's very good! Add this in your cart and buy!</p>
+      </div>
+    )
+  }
+
+  function NotifyNo() {
+    return (
+      <div className="bg-secondary text-white rounded" style={{ width: 200 }}>
+        <h6>Sorry</h6>
+        <p>You can write to us in our support so that we become better!</p>
+      </div>
+    )
+  }
+
 
   return (
     <>
@@ -51,7 +72,7 @@ const ListGoods = () => {
         <div className="card-body">
           <div className="row">
             <div className="col-md-2"> Your are here: </div>
-            <nav className="col-md-8" style={{ marginRight: 205 }}>
+            <nav className="col-md-8" style={{ marginRight: "17.9rem" }}>
               <ol className="breadcrumb">
                 <li className="breadcrumb-item"><a href="/">Home</a></li>
                 {currentCategory && <li className="breadcrumb-item"><Link to={`/categories/${currentCategory._id}`}>{currentCategory.name}</Link></li>}
@@ -192,8 +213,40 @@ const ListGoods = () => {
 
       <div className="box text-center">
         <p>Did you find what you were looking for？</p>
-        <a href="/" className="btn btn-light">Yes</a>
-        <a href="/" className="btn btn-light">No</a>
+        <div className="btn btn-light" onClick={() => {
+                  store.addNotification({
+                    content: NotifyYes,
+                    message: ``,
+                    type: 'default',
+                    container: 'bottom-right',
+                    insert: 'bottom',
+                    animationIn: ['animated', 'fadeIn'],
+                    animationOut: ['animated', 'fadeOut'],
+
+                    dismiss: {
+                      duration: 2500,
+                    },
+                    width: 200,
+
+                  })
+                }} style={{cursor: 'pointer'}}>Yes</div>
+        <div className="btn btn-light" onClick={() => {
+                  store.addNotification({
+                    content: NotifyNo,
+                    message: ``,
+                    type: 'default',
+                    container: 'bottom-right',
+                    insert: 'bottom',
+                    animationIn: ['animated', 'fadeIn'],
+                    animationOut: ['animated', 'fadeOut'],
+
+                    dismiss: {
+                      duration: 2500,
+                    },
+                    width: 200,
+
+                  })
+                }} style={{cursor: 'pointer'}}>No</div>
       </div>
     </>
   )
