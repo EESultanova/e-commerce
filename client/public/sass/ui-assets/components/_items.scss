@@ -4,7 +4,7 @@
 .itemside{ position:relative;  display:flex; width:100%;
 	
 	.aside{position:relative; flex-shrink: 0;}
-	.info{padding-left:15px;  padding-right:7px;  }
+	.info{padding-left:15px;  padding-right:7px; min-width: 27rem; }
 	
 	p{margin-bottom:0;}
 	.title{  display: block; margin-bottom:5px; color:$dark; }

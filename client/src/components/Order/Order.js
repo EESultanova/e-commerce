@@ -4,6 +4,7 @@ import { FioSuggestions } from 'react-dadata';
 import 'react-dadata/dist/react-dadata.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useProfileContext } from '../../contexts/ProfileContext';
 import { emptyCart } from '../../redux/actionCreators/cartAC';
 import { changeGoodsQuantityOnServer } from '../../redux/actionCreators/goodAC';
 import { addOrderDetails, addOrderDetailsToServer, getAllOrders } from '../../redux/actionCreators/userAC';
@@ -20,6 +21,8 @@ function Order() {
   const [expMonth, setExpMonth] = useState('')
   const [expYear, setExpYear] = useState('')
   const [cvv, setCvv] = useState('')
+
+  let {setChoice} = useProfileContext()
 
   const currentUser = useSelector(state => state.user)
   const currentCart = useSelector(state => state.user.cart)
@@ -188,10 +191,9 @@ function Order() {
 					</div> 
 				</div>
 			</div>
-				<button className="subscribe btn btn-primary btn-block">
-          Confirm
-				</button>
-
+      <button className="subscribe btn btn-primary btn-block">
+        Confirm
+      </button>
 		</form>
       </div> 
 

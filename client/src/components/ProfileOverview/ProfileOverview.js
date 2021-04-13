@@ -7,6 +7,8 @@ const ProfileOverview = () => {
   const currentUser = useSelector(state => state.user);
   const avatar = currentUser.avatar ? `${SITE_URL + currentUser.avatar}` : avatarLogo;
 
+  const orders = useSelector(state => state.user?.orders[0])
+
   return ( 
     <>
     <article className="card mb-3">
@@ -35,7 +37,7 @@ const ProfileOverview = () => {
               <article className="card-group card-stat">
                 <figure className="card bg">
                   <div className="p-3">
-                    <h4 className="title">38</h4>
+                    <h4 className="title">{orders.length}</h4>
                     <span>Orders</span>
                   </div>
                 </figure>
@@ -68,16 +70,21 @@ const ProfileOverview = () => {
               <h5 className="card-title mb-4">Recent orders </h5>	
 
               <div className="row">
-              <div className="col-md-6">
-                <figure className="itemside  mb-3">
-                  <div className="aside"><img src="images/items/1.jpg" className="border img-sm" alt=""/></div>
-                  <figcaption className="info">
-                    <time className="text-muted"><i className="fa fa-calendar-alt"></i> 12.09.2019</time>
-                    <p>Great book name goes here </p>
-                    <span className="text-success">Order confirmed </span>
-                  </figcaption>
-                </figure>
-              </div>
+                {orders.map(order => {
+                  return (
+                    <div className="col-md-6">
+                      <figure className="itemside  mb-3">
+                        <div className="aside"><img src={order.cart[0].photo} className="border img-sm" alt=""/></div>
+                        <figcaption className="info">
+                          <time className="text-muted"><i className="fa fa-calendar-alt"></i> 12.09.2019</time>
+                          <p>{order.cart[0].name} </p>
+                          <span className="text-success">Order confirmed </span>
+                        </figcaption>
+                      </figure>
+                    </div>
+                  )
+                })}
+              
               <div className="col-md-6">
                 <figure className="itemside  mb-3">
                   <div className="aside"><img src="images/items/2.jpg" className="border img-sm" alt=""/></div>
