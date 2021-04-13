@@ -34,18 +34,16 @@ const GoodDetails = () => {
 
   function NotifyAdd() {
     return (
-      <div className="bg-primary text-white rounded" style={{ width: 200 }}>
-        <h6>Success</h6>
-        <p>{good.name} was added to your cart!</p>
+      <div className="bg-primary text-white rounded" style={{ width: 200, height: 100 }}>
+        <h6>Item was added to your cart!</h6>
       </div>
     )
   }
 
   function NotifyRemove() {
     return (
-      <div className="bg-secondary text-white rounded" style={{ width: 200 }}>
-        <h6>Success</h6>
-        <p>{good.name} was removed from your cart!</p>
+      <div className="bg-secondary text-white rounded" style={{ width: 200, height: 100 }}>
+        <h6>Item was removed from your cart!</h6>
       </div>
     )
   }
@@ -129,7 +127,7 @@ const GoodDetails = () => {
                 <button onClick={() => {
                   store.addNotification({
                     content: NotifyRemove,
-                    message: `${good?.name} was removed from your cart!`,
+                    message: `Item was removed from your cart!`,
                     type: 'default',
                     container: 'bottom-right',
                     insert: 'bottom',
@@ -148,7 +146,7 @@ const GoodDetails = () => {
                 <button onClick={() => {
                   store.addNotification({
                     content: NotifyAdd,
-                    message: `${good?.name} was added to your cart!`,
+                    message: `Item was added to your cart!`,
                     type: 'warning',
                     container: 'bottom-right',
                     insert: 'succes',
@@ -171,7 +169,7 @@ const GoodDetails = () => {
                 <button onClick={() => {
                   store.addNotification({
                     content: NotifyRemove,
-                    message: `${good?.name} was removed from your cart!`,
+                    message: `Item was removed from your cart!`,
                     type: 'default',
                     container: 'bottom-right',
                     insert: 'bottom',
@@ -190,7 +188,7 @@ const GoodDetails = () => {
                 <button onClick={() => {
                   store.addNotification({
                     content: NotifyAdd,
-                    message: `${good?.name} was added to your cart!`,
+                    message: `Item was added to your cart!`,
                     type: 'warning',
                     container: 'bottom-right',
                     insert: 'succes',
