@@ -34,12 +34,12 @@ function Order() {
   .map(el => el.price * el.quantity)
   .reduce((acc, currentValue) => acc + currentValue, 0)
   
-  function confirmHandler(e) {
+  async function confirmHandler(e) {
     e.preventDefault()
     console.log(123123123);
+    
+    await addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser})
     dispatch(addOrderDetails({fioToServer, addressToServer, email, phone, currentCart}))
-    addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser})
-   
     dispatch(emptyCart())
     setChoice(2)
     history.push('/profile')
@@ -135,6 +135,8 @@ function Order() {
       </div> 
     </div> 
 
+{/* payment start */}
+
 		<div className="card mb-4">
       <div className="card-body">
       <h4 className="card-title mb-4">Payment</h4>
@@ -200,6 +202,7 @@ function Order() {
 		</form>
       </div> 
 
+{/* payment end */}
 
 <br/><br/> 
 

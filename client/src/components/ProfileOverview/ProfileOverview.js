@@ -46,19 +46,19 @@ const ProfileOverview = () => {
                 </figure>
                 <figure className="card bg">
                   <div className="p-3">
-                    <h4 className="title">5</h4>
+                    <h4 className="title">1</h4>
                     <span>Wishlists</span>
                   </div>
                 </figure>
                 <figure className="card bg">
                   <div className="p-3">
-                    <h4 className="title">12</h4>
+                    <h4 className="title">3</h4>
                     <span>Awaiting delivery</span>
                   </div>
                 </figure>
                 <figure className="card bg">
                   <div className="p-3">
-                    <h4 className="title">50</h4>
+                    <h4 className="title">0</h4>
                     <span>Delivered items</span>
                   </div>
                 </figure>

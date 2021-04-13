@@ -17,7 +17,7 @@ const ProfileOrders = () => {
 
   return ( 
     <>
-    {orders.map(order => {
+    {orders ? orders.map(order => {
       return (
         <article key={order._id} className="card mb-4">
 		<header className="card-header">
@@ -79,7 +79,7 @@ const ProfileOrders = () => {
 		</div>
 		</article>
       )
-    })}
+    }) : <div>You don't have orders</div>}
     
     </>
    );
