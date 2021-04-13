@@ -16,7 +16,6 @@ const Cart = () => {
   const currentUserAuth = useSelector(state => state.user.isAuth)
 
   const userCart = useSelector(state => state.user.cart)
-  console.log(userCart)
 
   const totalLocalCart = cart
     .map(el => el.price * el.quantity)

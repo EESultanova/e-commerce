@@ -66,7 +66,6 @@ const ListGoods = () => {
     )
   }
 
-  console.log(id);
 
   return (
     <>

@@ -104,7 +104,7 @@ router.get('/auth', checkAuth, async (req, res) => {
                 name: user.name,
                 avatar: user.avatar,
                 role: user.role,
-                cart: user.cart,
+                // cart: user.cart,
             }
         });
     } catch (e) {
