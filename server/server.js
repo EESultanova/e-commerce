@@ -68,7 +68,7 @@ app.patch("/api/v1/goods", async (req, res) => {
 app.post("/api/v1/order", async (req, res) => {
   console.log(req.body);
   try {
-    const orderForUser = {...req.body, currentUser: true}
+    const orderForUser = { ...req.body, currentUser: true }
     const {
       fioToServer,
       addressToServer,
@@ -80,30 +80,30 @@ app.post("/api/v1/order", async (req, res) => {
       expYear,
       cvv,
       currentCart,
-      currentUser} = req.body
-      await UserModel.findByIdAndUpdate(req.body.currentUser.id,
-        {$push:  {orders: orderForUser}})
-      await OrderModel.create({
-        fio: fioToServer,
-        address: addressToServer,
-        email: email,
-        phone: phone,
-        card: card,
-        cardName: cardName,
-        expMonth: expMonth,
-        expYear: expYear,
-        cvv: cvv,
-        cart: currentCart,
-        user: currentUser.id,
-      })
+      currentUser } = req.body
+    await UserModel.findByIdAndUpdate(req.body.currentUser.id,
+      { $push: { orders: orderForUser } })
+    await OrderModel.create({
+      fio: fioToServer,
+      address: addressToServer,
+      email: email,
+      phone: phone,
+      card: card,
+      cardName: cardName,
+      expMonth: expMonth,
+      expYear: expYear,
+      cvv: cvv,
+      cart: currentCart,
+      user: currentUser.id,
+    })
 
 
     currentCart.map(async el => {
       const doc = await GoodModel.findById(el._id)
       if (doc.quantity - el.quantity < 0) {
-       return
+        return
       } else {
-        await GoodModel.findOneAndUpdate({_id: el._id}, {$inc: {quantity: -el.quantity}})
+        await GoodModel.findOneAndUpdate({ _id: el._id }, { $inc: { quantity: -el.quantity } })
       }
       return
     })
@@ -116,18 +116,18 @@ app.post("/api/v1/order", async (req, res) => {
 
 app.post("/api/v1/add_new_good", async (req, res) => {
   try {
-    const {name, quantity, price, description, category, photo, rating, user} = req.body
+    const { name, quantity, price, description, category, photo, rating, user } = req.body
     const newGood = await GoodModel.create({
-      quantity :quantity,
+      quantity: quantity,
       photo: [photo],
       name: name,
       description: description,
       price: price,
       rating: rating,
       category: category,
-})
-    await UserModel.findByIdAndUpdate(user, {$push: {goods: newGood._id}})
-      res.sendStatus(200)
+    })
+    await UserModel.findByIdAndUpdate(user, { $push: { goods: newGood._id } })
+    res.sendStatus(200)
   } catch (error) {
     console.log(error)
     res.sendStatus(500)
@@ -136,8 +136,8 @@ app.post("/api/v1/add_new_good", async (req, res) => {
 
 app.get("/api/v1/filter", async (req, res) => {
   try {
-    const {_c: category, _s: input} = req.query
-    const good = await GoodModel.find({name: new RegExp(`^${input}.*`, 'ig'), category: category})
+    const { _c: category, _s: input } = req.query
+    const good = await GoodModel.find({ name: new RegExp(`^${input}.*`, 'ig'), category: category })
     good.length ? res.status(200).json(good) : res.sendStatus(404)
   } catch (error) {
     console.log(error)
@@ -147,7 +147,7 @@ app.get("/api/v1/filter", async (req, res) => {
 
 app.get("/api/v1/get_goods_for_seller", async (req, res) => {
   try {
-    const {_s: id} = req.query
+    const { _s: id } = req.query
     const user = await UserModel.findById(id).populate('goods')
     return res.json(user.goods);
   } catch (error) {
@@ -157,8 +157,8 @@ app.get("/api/v1/get_goods_for_seller", async (req, res) => {
 
 app.get("/api/v1/get_all_orders", async (req, res) => {
   try {
-    const {_s: id} = req.query
-    const orders = await OrderModel.find({user: id})
+    const { _s: id } = req.query
+    const orders = await OrderModel.find({ user: id })
     return res.json(orders);
   } catch (error) {
     res.sendStatus(500)
