@@ -23,6 +23,7 @@ const GoodDetails = () => {
   }, [])
 
   const currentUserAuth = useSelector(state => state.user.isAuth)
+  const currentUserRole = useSelector(state => state.user.role)
   let good = useSelector(state => state?.goods?.good)
   good.quantity = 1
 
@@ -166,7 +167,7 @@ const GoodDetails = () => {
                     <i className="fas fa-shopping-cart"></i> <span className="text">Add to cart</span>
                   </button>)
               }
-              {currentUserAuth &&
+              {(currentUserAuth && currentUserRole === 'buyer') &&
                 ((inUserCart === true) ?
                   <button onClick={() => {
                     store.addNotification({

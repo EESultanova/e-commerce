@@ -1,6 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Good = ({ good }) => {
+
+  let {id} = useParams();
+  console.log(id)
 
   return (
     <div className="col-md-3 mx-4 good" data-price={good.price} data-rate={good.rating}>
