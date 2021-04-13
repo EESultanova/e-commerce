@@ -148,6 +148,16 @@ app.get("/api/v1/filter", async (req, res) => {
   }
 })
 
+app.get("/api/v1/get_goods_for_seller", async (req, res) => {
+  try {
+    const {_s: id} = req.query
+    const user = await UserModel.findById(id).populate('goods')
+    return res.json(user.goods);
+  } catch (error) {
+    res.sendStatus(500)
+  }
+});
+
 const root = require('path').join(__dirname, '../', 'client', 'build');
 app.use(express.static(root));
 app.get('*', (req, res) => {

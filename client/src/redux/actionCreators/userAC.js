@@ -1,4 +1,4 @@
-import { ADD_GOOD_TO_USER_CART, ADD_ORDER_DETAILS, CHANGE_QUANTITY_USER, DELETE_GOOD_FROM_USER_CART } from "../types/userTypes"
+import { ADD_GOOD_TO_USER_CART, ADD_ORDER_DETAILS, CHANGE_QUANTITY_USER, DELETE_GOOD_FROM_USER_CART, GET_GOODS_SELLER} from "../types/userTypes"
 import { SELLER_ADD_GOOD } from "../types/goodTypes"
 import { SITE_URL } from "../../config"
 
@@ -106,3 +106,18 @@ export const sellerAddGoodToServer = ({
     }).then(response => response.status === 200 ? console.log('Ответ с сервера 200: товар добавлен ') : console.log('Ответ с сервера 500: товар не добавлен')) 
   )
 };
+
+
+export const getSellerGoods = (user) => async (dispatch) => {
+  const response = await fetch(`${SITE_URL}api/v1/get_goods_for_seller?_s=${user}`)
+  const result = await response.json()
+  dispatch(getSellerGoodsFromServer(result))
+};
+
+export const getSellerGoodsFromServer = (goods) => {
+  return {
+    type: GET_GOODS_SELLER,
+    payload: goods,
+  };
+};
+

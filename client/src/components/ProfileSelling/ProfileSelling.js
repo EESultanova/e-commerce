@@ -1,23 +1,26 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getGoods } from "../../redux/actionCreators/goodAC"
+import { getSellerGoods } from "../../redux/actionCreators/userAC"
 
 
 
 const ProfileSelling = () => {
   const user = useSelector(state => state.user)
+  const state=useSelector(state => state)
   const dispatch = useDispatch()
-  console.log('user.goods--->', user.goods)
 
-  // useEffect(() => {
-  //   dispatch(getGoods())
-  // })
+
+  useEffect(() => {
+    dispatch(getSellerGoods(user.id))
+  }, [])
+
+console.log('user.goods--------->', user.goods[0])
 
   return ( 
     <article className="card">
 			<div className="card-body">
 
-		{ user.goods.length ? user.goods.map( el => <div key={el._id} className="d-flex flex-row justify-content-center">
+		{ user.goods.length ? user.goods[0].map( el => <div key={el._id} className="d-flex flex-row justify-content-center">
 				<div className="p-3" style={{width:600}}>
 					<figure className="card card-product-grid" >
 						<div className="img-wrap"> 
@@ -36,7 +39,7 @@ const ProfileSelling = () => {
 					</figure>
 				</div>
 			</div>
-    ): <div class="container"><p>No items for sale yet</p></div> }
+    ): <div className="container"><p>No items for sale yet</p></div> }
 
 			</div>
 		</article>
