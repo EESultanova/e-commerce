@@ -56,6 +56,15 @@ app.get("/api/v1/goods/:id", async (req, res) => {
   }
 })
 
+app.patch("/api/v1/goods", async (req, res) => {
+  try {
+    const { goods } = req.body
+    console.log(goods)
+  } catch (error) {
+    res.sendStatus(500)
+  }
+})
+
 app.post("/api/v1/order", async (req, res) => {
   try {
     console.log("req.body------------->", req.body)
