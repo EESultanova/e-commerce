@@ -126,7 +126,6 @@ export const getSellerGoodsFromServer = (goods) => {
 export const getAllOrders = (user) => async (dispatch) => {
   const response = await fetch(`${SITE_URL}api/v1/get_all_orders?_s=${user}`)
   const result = await response.json()
-  console.log(result)
   dispatch(getAllOrdersFromServer(result))
 }
 
