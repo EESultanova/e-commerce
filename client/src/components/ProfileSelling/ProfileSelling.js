@@ -14,13 +14,13 @@ const ProfileSelling = () => {
     dispatch(getSellerGoods(user.id))
   }, [])
 
-console.log('user.goods--------->', user.goods[0])
+// console.log('user.goods--------->', user?.goods[0])
 
   return ( 
     <article className="card">
 			<div className="card-body">
 
-		{ user.goods.length ? user.goods[0].map( el => <div key={el._id} className="d-flex flex-row justify-content-center">
+		{ user.goods?.length ? user.goods[0].map( el => <div key={el._id} className="d-flex flex-row justify-content-center">
 				<div className="p-3" style={{width:600}}>
 					<figure className="card card-product-grid" >
 						<div className="img-wrap"> 
