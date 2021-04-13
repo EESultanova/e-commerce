@@ -69,6 +69,7 @@ export const changeQuantityUserCart = (id, quantity) => {
     })
   }
 }
+
 export const sellerAddGood = (newGood) => {
   return {
     type: SELLER_ADD_GOOD,
@@ -105,4 +106,3 @@ export const sellerAddGoodToServer = ({
     }).then(response => response.status === 200 ? console.log('Ответ с сервера 200: товар добавлен ') : console.log('Ответ с сервера 500: товар не добавлен')) 
   )
 };
-

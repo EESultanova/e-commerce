@@ -23,17 +23,14 @@ const GoodDetails = () => {
   }, [])
   
   const currentUserAuth = useSelector(state => state.user.isAuth)
-  const good = useSelector(state => state.goods.good)
+  let good = useSelector(state => state.goods.good)
+  good.quantity = 1
 
   const cart = useSelector(state => state.cart)
-  const ids = cart?.map(good => good?._id)
-  const inCart = ids?.includes(good?._id)
-  console.log(inCart, 'local cart')
+  const inCart = cart?.map(good => good?._id)?.includes(good?._id)
 
   const userCart = useSelector(state => state?.user?.cart)
-  const userIds = userCart?.map(good => good?._id)
-  const inUserCart = userIds?.includes(good?._id)
-  console.log(inUserCart, 'user cart');
+  const inUserCart = userCart?.map(good => good?._id)?.includes(good?._id)
 
   function NotifyAdd() {
     return (
