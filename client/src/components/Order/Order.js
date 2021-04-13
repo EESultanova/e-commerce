@@ -3,7 +3,7 @@ import { AddressSuggestions } from 'react-dadata'
 import { FioSuggestions } from 'react-dadata';
 import 'react-dadata/dist/react-dadata.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useProfileContext } from '../../contexts/ProfileContext';
 import { emptyCart } from '../../redux/actionCreators/cartAC';
 import { changeGoodsQuantityOnServer } from '../../redux/actionCreators/goodAC';
@@ -28,6 +28,7 @@ function Order() {
   const currentCart = useSelector(state => state.user.cart)
   let fioToServer = fio.value
   let addressToServer = address.value
+  const history = useHistory()
   
   const total = currentCart
   .map(el => el.price * el.quantity)
@@ -40,6 +41,8 @@ function Order() {
     addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser})
    
     dispatch(emptyCart())
+    setChoice(2)
+    history.push('/profile')
   }
   
 

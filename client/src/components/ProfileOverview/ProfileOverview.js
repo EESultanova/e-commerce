@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { API_URL, SITE_URL } from '../../config'
 import avatarLogo from '../../assets/avatar.svg';
+import { useProfileContext } from "../../contexts/ProfileContext";
 
 const ProfileOverview = () => {
 
@@ -8,6 +9,8 @@ const ProfileOverview = () => {
   const avatar = currentUser.avatar ? `${SITE_URL + currentUser.avatar}` : avatarLogo;
 
   const orders = useSelector(state => state.user?.orders[0])
+
+  let {setChoice} = useProfileContext()
 
   return ( 
     <>
@@ -21,7 +24,7 @@ const ProfileOverview = () => {
                   <div className="text" style={{'textAlign': 'start'}}>
                     <strong> {currentUser.name} </strong> <br/> 
                     <p className="mb-2"> {currentUser.email}  </p> 
-                    <a href="/" className="btn btn-light btn-sm" alt="">Edit</a>
+                    <div href="/" className="btn btn-light btn-sm" alt="" >Edit</div>
                   </div>
               </figure>
               <hr/>
@@ -74,37 +77,16 @@ const ProfileOverview = () => {
                   return (
                     <div className="col-md-6">
                       <figure className="itemside  mb-3">
-                        <div className="aside"><img src={order.cart[0].photo} className="border img-sm" alt=""/></div>
+                        <div className="aside"><img src={order?.cart[0]?.photo} className="border img-sm" alt=""/></div>
                         <figcaption className="info">
                           <time className="text-muted"><i className="fa fa-calendar-alt"></i> 12.09.2019</time>
-                          <p>{order.cart[0].name} </p>
+                          <p>{order?.cart[0]?.name} </p>
                           <span className="text-success">Order confirmed </span>
                         </figcaption>
                       </figure>
                     </div>
                   )
                 })}
-              
-              <div className="col-md-6">
-                <figure className="itemside  mb-3">
-                  <div className="aside"><img src="images/items/2.jpg" className="border img-sm" alt=""/></div>
-                  <figcaption className="info">
-                    <time className="text-muted"><i className="fa fa-calendar-alt"></i> 12.09.2019</time>
-                    <p>How to be rich</p>
-                    <span className="text-success">Departured</span>
-                  </figcaption>
-                </figure>
-              </div>
-              <div className="col-md-6">
-                <figure className="itemside mb-3">
-                  <div className="aside"><img src="images/items/3.jpg" className="border img-sm" alt=""/></div>
-                  <figcaption className="info">
-                    <time className="text-muted"><i className="fa fa-calendar-alt"></i> 12.09.2019</time>
-                    <p>Harry Potter book </p>
-                    <span className="text-success">Shipped  </span>
-                  </figcaption>
-                </figure>
-              </div>
             </div>
 
             <a href="/" className="btn btn-outline-primary btn-block"> See all orders <i className="fa fa-chevron-down"></i>  </a>
