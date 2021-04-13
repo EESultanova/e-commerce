@@ -36,10 +36,8 @@ function Order() {
   
   async function confirmHandler(e) {
     e.preventDefault()
-    console.log(123123123);
-    
-    await addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser})
-    dispatch(addOrderDetails({fioToServer, addressToServer, email, phone, currentCart}))
+    await addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser, total})
+    dispatch(addOrderDetails({fioToServer, addressToServer, email, phone, currentCart, total}))
     dispatch(emptyCart())
     setChoice(2)
     history.push('/profile')
