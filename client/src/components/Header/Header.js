@@ -4,12 +4,14 @@ import '../../html/css/bootstrap.css'
 
 
 import { useDispatch, useSelector } from "react-redux"
-import { Link, NavLink } from "react-router-dom";
-import { removeUser } from '../../redux/actionCreators/userAC'
+
+import { Link, NavLink, useHistory } from "react-router-dom";
+import { removeUser } from '../../redux/actionCreators/topicsAC'
+
 import avatarLogo from '../../assets/avatar.svg';
 import { API_URL, SITE_URL } from '../../config'
 import { useEffect, useState } from 'react';
-import { filterGoodsSaga } from '../../redux/actionCreators/goodAC';
+import { filterGoodsSaga, getGoods } from '../../redux/actionCreators/goodAC';
 import { useProfileContext } from '../../contexts/ProfileContext';
 
 
@@ -23,7 +25,10 @@ const Header = () => {
 	const userCart = useSelector(state => state.user.cart)
 	const avatar = currentUser.avatar ? `${SITE_URL + currentUser.avatar}` : avatarLogo;
 	const dispatch = useDispatch()
-	let { setChoice } = useProfileContext()
+
+  const history = useHistory()
+  let {setChoice} = useProfileContext()
+
 
 	const handleLogout = () => {
 		dispatch(removeUser())
@@ -33,9 +38,22 @@ const Header = () => {
 		dispatch(filterGoodsSaga({ categoryForFilter, input }))
 	}, [input])
 
-	const headerStyle = {
-		"font-family": 'Prime, Helvetica, Arial, sans-serif'
-	}
+
+  useEffect(() => {
+    dispatch(filterGoodsSaga({categoryForFilter, input}))
+  }, [categoryForFilter])
+
+  const headerStyle = {
+    "font-family": 'Prime, Helvetica, Arial, sans-serif'
+  }
+
+
+  function selectHandler(option) {
+    setCategoryForFilter(option)
+    history.push(`/categories/${option}`)
+    setInput('')
+  }
+
 
 	return (
 		<header className="section-header">
@@ -51,9 +69,10 @@ const Header = () => {
 						<div className="col-xl-6 col-lg-5 col-md-6">
 							<form action="#" className="search-header">
 								<div className="input-group w-100">
-									<select className="custom-select border-right" onChange={(e) => setCategoryForFilter(e.target.value)} name="category_name">
-										{categories.map(el => <option key={el._id} value={el._id}>{el.name}</option>)}
-									</select>
+									<select className="custom-select border-right" value={categoryForFilter} onChange={(e) => selectHandler(e.target.value)} name="category_name">
+                   {categories.map(el => <option key={el._id} value={el._id}>{el.name}</option>)}
+  								</select>
+
 									<input type="text" value={input} onChange={(e) => setInput(e.target.value)} className="form-control" placeholder="Search" />
 
 									<div className="input-group-append">
@@ -65,9 +84,11 @@ const Header = () => {
 						<div className="col-xl-4 col-lg-4 col-md-6">
 							<div className="widgets-wrap float-md-right">
 								<div className="widget-header mr-3">
-									<NavLink to={user ? "/profile" : "/login"}><img src={avatar} alt="" style={Object.assign({}, { width: '32px' }, { height: '31px' }, { 'borderRadius': '50%' })} />
-										<small className="text"> My profile </small>
-									</NavLink>
+
+										<NavLink to={user ? "/profile" : "/login"} onClick={() => setChoice(0)}><img src={avatar} alt="" style={Object.assign({}, { width: '32px' }, { height: '31px' }, { 'borderRadius': '50%' })} />
+											<small className="text"> My profile </small>
+										</NavLink>
+									
 
 								</div>
 								{/* <div className="widget-header mr-3">

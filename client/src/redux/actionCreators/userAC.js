@@ -10,18 +10,21 @@ export const addOrderDetails = (order) => {
 }
 
 export const addOrderDetailsToServer = (
-  { fioToServer,
-    addressToServer,
-    email,
-    phone,
-    card,
-    cardName,
-    expMonth,
-    expYear,
-    cvv,
-    currentCart,
-    currentUser }) => {
-  return (
+
+  {fioToServer,
+  addressToServer,
+  email,
+  phone,
+  card,
+  cardName,
+  expMonth,
+  expYear,
+  cvv,
+  total,
+  currentCart,
+  currentUser}) => {
+  return  (
+
     fetch(`${SITE_URL}api/v1/order`, {
       method: "POST",
       headers: {
@@ -37,6 +40,7 @@ export const addOrderDetailsToServer = (
         expMonth,
         expYear,
         cvv,
+        total,
         currentCart,
         currentUser,
       })
@@ -163,7 +167,6 @@ export const getSellerGoodsFromServer = (goods) => {
 export const getAllOrders = (user) => async (dispatch) => {
   const response = await fetch(`${SITE_URL}api/v1/get_all_orders?_s=${user}`)
   const result = await response.json()
-  console.log(result)
   dispatch(getAllOrdersFromServer(result))
 }
 
