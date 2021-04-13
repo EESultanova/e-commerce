@@ -23,7 +23,7 @@ const GoodDetails = () => {
   }, [])
   
   const currentUserAuth = useSelector(state => state.user.isAuth)
-  let good = useSelector(state => state.goods.good)
+  let good = useSelector(state => state?.goods?.good)
   good.quantity = 1
 
   const cart = useSelector(state => state.cart)
