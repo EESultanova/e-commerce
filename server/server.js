@@ -67,7 +67,7 @@ app.patch("/api/v1/goods", async (req, res) => {
 
 app.post("/api/v1/order", async (req, res) => {
   try {
-    const orderForUser = {...req.body, currentUser: true}
+    const orderForUser = { ...req.body, currentUser: true }
     const {
       fioToServer,
       addressToServer,
@@ -119,18 +119,18 @@ app.post("/api/v1/order", async (req, res) => {
 
 app.post("/api/v1/add_new_good", async (req, res) => {
   try {
-    const {name, quantity, price, description, category, photo, rating, user} = req.body
+    const { name, quantity, price, description, category, photo, rating, user } = req.body
     const newGood = await GoodModel.create({
-      quantity :quantity,
+      quantity: quantity,
       photo: [photo],
       name: name,
       description: description,
       price: price,
       rating: rating,
       category: category,
-})
-    await UserModel.findByIdAndUpdate(user, {$push: {goods: newGood._id}})
-      res.sendStatus(200)
+    })
+    await UserModel.findByIdAndUpdate(user, { $push: { goods: newGood._id } })
+    res.sendStatus(200)
   } catch (error) {
     console.log(error)
     res.sendStatus(500)
@@ -158,7 +158,7 @@ app.get("/api/v1/filter", async (req, res) => {
 
 app.get("/api/v1/get_goods_for_seller", async (req, res) => {
   try {
-    const {_s: id} = req.query
+    const { _s: id } = req.query
     const user = await UserModel.findById(id).populate('goods')
     return res.json(user.goods);
   } catch (error) {
@@ -168,8 +168,8 @@ app.get("/api/v1/get_goods_for_seller", async (req, res) => {
 
 app.get("/api/v1/get_all_orders", async (req, res) => {
   try {
-    const {_s: id} = req.query
-    const orders = await OrderModel.find({user: id})
+    const { _s: id } = req.query
+    const orders = await OrderModel.find({ user: id })
     return res.json(orders);
   } catch (error) {
     res.sendStatus(500)

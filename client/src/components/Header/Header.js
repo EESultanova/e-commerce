@@ -141,9 +141,6 @@ const Header = () => {
 							<li className="nav-item">
 								<Link className="nav-link" to="/">All categories</Link>
 							</li>
-							<li className="nav-item">
-								<Link className="nav-link" to="/">Most popular</Link>
-							</li>
 						</ul>
 						<ul className="navbar-nav ml-md-auto">
 							{!user &&
