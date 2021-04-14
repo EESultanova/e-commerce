@@ -15,7 +15,7 @@ import { useProfileContext } from "../../contexts/ProfileContext"
 const GoodDetails = () => {
 
   const [photo, setPhoto] = useState(0)
-  const { language } = useProfileContext()
+  const language = useSelector(state => state.language)
   const { id } = useParams()
   const dispatch = useDispatch()
 
@@ -26,8 +26,9 @@ const GoodDetails = () => {
 
   const currentUserAuth = useSelector(state => state.user.isAuth)
   const currentUserRole = useSelector(state => state.user.role)
-  const good = useSelector(state => state?.goods?.good)
-  good.quantity = 1
+  const good = useSelector(state => state.goods.good)
+  console.log(good?.quantity, 'QUANTITY')
+  // good.quantity = 1
 
   const cart = useSelector(state => state.cart)
   const inCart = cart?.map(good => good?._id)?.includes(good?._id)

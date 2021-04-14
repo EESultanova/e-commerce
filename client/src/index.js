@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import thunk from "redux-thunk"
 import createSagaMiddleware from 'redux-saga'
 import rootSaga from './redux/saga/rootSaga';
+import ProfileContextProvider from './contexts/ProfileContext';
 
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(rootReducer, initState(), composeWithDevTools(applyMiddleware(thunk, sagaMiddleware)))
@@ -21,9 +22,11 @@ store.subscribe(() => {
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <ProfileContextProvider>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ProfileContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

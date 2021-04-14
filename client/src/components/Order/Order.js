@@ -23,7 +23,7 @@ function Order() {
   const [cvv, setCvv] = useState('')
 
   let {setChoice} = useProfileContext()
-  const { language } = useProfileContext()
+  const language = useSelector(state => state.language)
 
   const currentUser = useSelector(state => state.user)
   const currentCart = useSelector(state => state.user.cart)

@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import cartReducer from "./cartReducer";
 import categoryReducer from "./categoryReducer";
 import goodReducer from "./goodReducer";
+import languageReducer from "./languageReducer";
 import loaderReducer from "./loaderReducer";
 import searchReducer from "./searchReducer";
 import userReducer from './userReducer'
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   user: userReducer,
   cart: cartReducer,
   search: searchReducer,
-  loader: loaderReducer
+  loader: loaderReducer,
+  language: languageReducer,
 })
 
 export default rootReducer

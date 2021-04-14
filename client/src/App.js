@@ -56,7 +56,6 @@ function App() {
 
   return (
     <div className="App">
-      <ProfileContextProvider>
         <Router>
           <LastLocationProvider>
             <ReactNotification />
@@ -105,7 +104,6 @@ function App() {
             <Footer />
           </LastLocationProvider>
         </Router>
-      </ProfileContextProvider>
     </div>
   );
 }
