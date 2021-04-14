@@ -78,7 +78,7 @@ const ListGoods = () => {
                 {currentCategory && <li className="breadcrumb-item"><Link to={`/categories/${currentCategory._id}`}>{currentCategory.name}</Link></li>}
                 <li className="breadcrumb-item active" aria-current="page">Items</li>
                 <div className="col-md-2">Filter by</div>
-                <li className="list-inline-item mr-2">
+                <li className="list-inline-item mr-1">
                   <div className="form-inline">
                     <label className="mr-2">Price</label>
                     <input className="form-control form-control-sm" placeholder="Min" type="number" />

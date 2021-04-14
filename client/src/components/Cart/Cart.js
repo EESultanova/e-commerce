@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { changeQuantity, deleteGoodFromCart } from "../../redux/actionCreators/cartAC";
 import { changeQuantityUserCart, deleteGoodFromUserCart } from "../../redux/actionCreators/userAC";
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 import { store } from 'react-notifications-component';
 
@@ -11,6 +11,10 @@ import 'react-notifications-component/dist/theme.css'
 const Cart = () => {
 
   const dispatch = useDispatch()
+  const location = useLocation()
+
+  // const referrer = document.referrer
+  // console.log(referrer)
 
   const cart = useSelector(state => state.cart)
   const currentUserAuth = useSelector(state => state.user.isAuth)
