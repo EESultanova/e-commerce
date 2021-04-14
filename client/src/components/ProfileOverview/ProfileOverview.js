@@ -22,12 +22,12 @@ const ProfileOverview = () => {
   let {setChoice} = useProfileContext()
 console.log(currentUser.goods[0])
   const BarSeries = VerticalBarSeries
-  const dataResult = currentUser.goods[0].filter(el => el.initQuantity - el.quantity > 0).map(el => el = new Object ({
+  const dataResult = currentUser?.goods[0]?.filter(el => el.initQuantity - el.quantity > 0).map(el => el = new Object ({
     x: el.name?.split(' ').slice(0,2).join(' '),
     y: el.initQuantity - el.quantity
   }))
 
-  const dataResultAll = currentUser.goods[0].filter(el => el.initQuantity - el.quantity > 0).map(el => el = new Object ({
+  const dataResultAll = currentUser?.goods[0]?.filter(el => el.initQuantity - el.quantity > 0).map(el => el = new Object ({
     x: el.name?.split(' ').slice(0,2).join(' '),
     y: el.initQuantity
   }))
