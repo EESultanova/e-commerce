@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from '../../redux/actionCreators/userAC';
 import { API_URL, SITE_URL } from '../../config';
 import { emptyCart } from "../../redux/actionCreators/cartAC";
+import { useLastLocation } from 'react-router-last-location';
+import { useProfileContext } from "../../contexts/ProfileContext";
 
 
 function Registration() {
@@ -16,6 +18,9 @@ function Registration() {
     const [name, setNickname] = useState('');
     const [role, setRole] = useState('');
     const cart = useSelector(state => state.cart)
+    const { language } = useProfileContext()
+
+    const lastLocation = useLastLocation()
 
     const inputEmailHandler = (e) => {
         setEmail(e.target.value);
@@ -74,7 +79,11 @@ function Registration() {
                             dispatch(setUser(responseFromServer));
                             localStorage.setItem('token', responseFromServer.token);
                             dispatch(emptyCart())
-                            history.push('/');
+                            if (lastLocation.pathname === '/cart') {
+                              history.push('/order')
+                            } else {
+                              history.push('/');
+                            }
                         }
 
                 })
@@ -87,29 +96,29 @@ function Registration() {
     return (
         <section className="section-conten padding-y" style={{ minHeight: 84 }}>
 
-            <div className="card mx-auto" style={{ maxWidth: 380, marginTop: 100 }}>
+            <div className="card mx-auto" style={{ maxWidth: 380, marginTop: 60, marginBottom: 60 }}>
                 <div className="card-body">
-                    <h4 id="container" className="card-title mb-4">Sign up</h4>
+                    <h4 id="container" className="card-title mb-4">{language === 'Russian' ? 'Регистрация' : 'Sign up'}</h4>
                     <form onSubmit={submitHandler}>
                         <div className="form-group">
-                            <input value={email} onChange={inputEmailHandler} name='email' type="email" class="form-control" id="exampleInputEmail1" placeholder="Type your email ..." aria-describedby="emailHelp" />
+                            <input value={email} onChange={inputEmailHandler} name='email' type="email" class="form-control" id="exampleInputEmail1" placeholder="E-mail" aria-describedby="emailHelp" />
                         </div>
                         <div className="form-group">
-                            <input value={name} onChange={inputNicknameHandler} name="name" type="text" class="form-control" placeholder="Type your name ..." />
+                            <input value={name} onChange={inputNicknameHandler} name="name" type="text" class="form-control" placeholder={language === 'Russian' ? 'Имя' : 'Name'} />
                         </div>
                         <div className="form-group">
-                            <input value={password} onChange={inputPasswordHandler} name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Type your password ..." />
+                            <input value={password} onChange={inputPasswordHandler} name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder={language === 'Russian' ? 'Пароль' : 'Password'} />
                         </div>
 
                         <div className="form-group">
                             <select onChange={inputRoleHandler} className="mr-2 form-control">
-                                <option selected="selected">Choose your role</option>
+                                <option selected="selected">{language === 'Russian' ? 'Выберите роль' : 'Choose your role'}</option>
                                 <option value="seller">Seller</option>
                                 <option value="buyer">Buyer</option>
                             </select>
                         </div>
                         <div className="form-group">
-                            <button type="submit" className="btn btn-primary btn-block">Submit</button>
+                            <button type="submit" className="btn btn-primary btn-block">{language === 'Russian' ? 'Зарегистрироваться' : 'Sign up'}</button>
                         </div>
                     </form>
                 </div>

@@ -21,6 +21,7 @@ import Registration from './components/Registration/Registration';
 import Profile from './components/Profile.js/Profile';
 import ProfileContextProvider from './contexts/ProfileContext';
 import ReactNotification from 'react-notifications-component';
+import { LastLocationProvider } from 'react-router-last-location'
 
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { getAllOrders } from './redux/actionCreators/userAC';
@@ -57,50 +58,52 @@ function App() {
     <div className="App">
       <ProfileContextProvider>
         <Router>
-          <ReactNotification />
-          <Header />
-          <MessengerCustomerChat
-            pageId="104351358442170"
-            appId="1179535882491681"
-          />
-          <Route exact path="/categories/:id">
-            <ListOfGoods />
-          </Route>
-          <Route path="/goods/:id">
-            <GoodDetails />
-          </Route>
-          <Route exact path="/cart">
-            <Cart />
-          </Route>
-          <Route exact path="/order">
-            <Order />
-          </Route>
-          <Route exact path="/">
-            <Main />
-          </Route>
-          {!user ?
-            <Switch>
-              <Route exact path="/registration">
-                <Registration />
-              </Route>
-              <Route exact path="/login">
-                <Login />
-              </Route>
-            </Switch>
-            :
-            <Switch>
-              <Route exact path="/profile">
-                <Profile />
-              </Route>
-              <Route exact path="/profile/:id">
-                <GoodDetails />
-              </Route>
-              <Route exact path="/profile/:id/edit">
-                <ProfileEditItem />
-              </Route>
-            </Switch>
-          }
-          <Footer />
+          <LastLocationProvider>
+            <ReactNotification />
+            <Header />
+            <MessengerCustomerChat
+              pageId="104351358442170"
+              appId="1179535882491681"
+            />
+            <Route exact path="/categories/:id">
+              <ListOfGoods />
+            </Route>
+            <Route path="/goods/:id">
+              <GoodDetails />
+            </Route>
+            <Route exact path="/cart">
+              <Cart />
+            </Route>
+            <Route exact path="/order">
+              <Order />
+            </Route>
+            <Route exact path="/">
+              <Main />
+            </Route>
+            {!user ?
+              <Switch>
+                <Route exact path="/registration">
+                  <Registration />
+                </Route>
+                <Route exact path="/login">
+                  <Login />
+                </Route>
+              </Switch>
+              :
+              <Switch>
+                <Route exact path="/profile">
+                  <Profile />
+                </Route>
+                <Route exact path="/profile/:id">
+                  <GoodDetails />
+                </Route>
+                <Route exact path="/profile/:id/edit">
+                  <ProfileEditItem />
+                </Route>
+              </Switch>
+            }
+            <Footer />
+          </LastLocationProvider>
         </Router>
       </ProfileContextProvider>
     </div>
