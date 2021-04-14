@@ -1,20 +1,23 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom"
+import { useHistory, useLocation } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { setUser } from '../../redux/actionCreators/userAC'
 import { API_URL, SITE_URL } from '../../config'
 import { emptyCart } from "../../redux/actionCreators/cartAC";
+import { useLastLocation } from 'react-router-last-location'
 
 
 const Login = () => {
-  console.log('login');
 
   const history = useHistory()
+
   const dispatch = useDispatch()
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const cart = useSelector(state => state.cart)
+
+  const lastLocation = useLastLocation()
 
   const inputEmailHandler = (e) => {
     setEmail(e.target.value)
@@ -63,7 +66,11 @@ const Login = () => {
             dispatch(setUser(response))
             localStorage.setItem('token', response.token)
             dispatch(emptyCart())
-            history.push('/');
+            if (lastLocation.pathname === '/cart') {
+              history.push('/order')
+            } else {
+              history.push('/');
+            }
           }
         })
     } catch (e) {
@@ -73,7 +80,6 @@ const Login = () => {
 
   return (
     <section className="section-conten padding-y" style={{ minHeight: 84 }}>
-
       <div className="card mx-auto" style={{ maxWidth: 380, marginTop: 100 }}>
         <div className="card-body">
           <h4 id="container" className="card-title mb-4">Sign in</h4>
