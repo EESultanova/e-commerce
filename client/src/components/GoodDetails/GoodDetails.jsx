@@ -27,7 +27,7 @@ const GoodDetails = () => {
   const currentUserAuth = useSelector(state => state.user.isAuth)
   const currentUserRole = useSelector(state => state.user.role)
   const good = useSelector(state => state?.goods?.good)
-  good.quantity = 1
+  // good.quantity = 1
 
   const cart = useSelector(state => state.cart)
   const inCart = cart?.map(good => good?._id)?.includes(good?._id)
