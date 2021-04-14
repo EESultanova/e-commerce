@@ -20,7 +20,7 @@ const Login = () => {
 
   const lastLocation = useLastLocation()
 
-  const { language } = useProfileContext()
+  const language = useSelector(state => state.language)
 
   const inputEmailHandler = (e) => {
     setEmail(e.target.value)

@@ -23,7 +23,7 @@ const ListGoods = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const searchResult = useSelector(state => state.search?.filter(elem => elem.quantity > 0))
-  const { language } = useProfileContext()
+  const language = useSelector(state => state.language)
   
   const history = useHistory();
   

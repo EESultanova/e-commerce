@@ -22,7 +22,8 @@ function Order() {
   const [expMonth, setExpMonth] = useState('')
   const [expYear, setExpYear] = useState('')
   const [cvv, setCvv] = useState('')
-  let { setChoice } = useProfileContext()
+  let {setChoice} = useProfileContext()
+  const language = useSelector(state => state.language)
   const currentUser = useSelector(state => state.user)
   const currentCart = useSelector(state => state.user.cart)
   let fioToServer = fio.value

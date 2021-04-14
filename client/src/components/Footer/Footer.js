@@ -1,10 +1,11 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { SITE_URL } from "../../config";
 import { useProfileContext } from "../../contexts/ProfileContext";
 
 const Footer = () => {
 
-  const { language } = useProfileContext()
+  const language = useSelector(state => state.language)
 
   return ( 
     <footer className="section-footer border-top">
