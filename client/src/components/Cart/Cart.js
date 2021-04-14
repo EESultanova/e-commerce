@@ -7,6 +7,7 @@ import { store } from 'react-notifications-component';
 
 import 'animate.css'
 import 'react-notifications-component/dist/theme.css'
+import { useProfileContext } from "../../contexts/ProfileContext";
 
 const Cart = () => {
 
@@ -29,6 +30,8 @@ const Cart = () => {
     .map(el => el.price * el.quantity)
     .reduce((acc, currentValue) => acc + currentValue, 0)
 
+  const { language } = useProfileContext()
+
   function NotifyRemove() {
     return (
       <div className="bg-secondary text-white rounded" style={{ width: 200 }}>
@@ -49,9 +52,9 @@ const Cart = () => {
       <table className="table table-borderless table-shopping-cart">
       <thead className="text-muted">
       <tr className="small text-uppercase">
-        <th scope="col">Product</th>
-        <th scope="col" width="120">Quantity</th>
-        <th scope="col" width="120">Price</th>
+        <th scope="col">{language === 'Russian' ? 'Товар' : 'Product'}</th>
+        <th scope="col" width="120">{language === 'Russian' ? 'Количество' : 'Quantity'}</th>
+        <th scope="col" width="120">{language === 'Russian' ? 'Цена' : 'Price'}</th>
         <th scope="col" className="text-right" width="200"> </th>
       </tr>
       </thead>
@@ -75,16 +78,18 @@ const Cart = () => {
                 <td> 
                   <div className="price-wrap"> 
                     <var className="price">{(good.price * good.quantity).toFixed(2)} $</var> 
-                    <small className="text-muted"> {good.price} each </small> 
+                    <small className="text-muted"> {good.price}$ {language === 'Russian' ? ' / шт' : '/ each'} </small> 
                   </div>
                 </td>
                 <td className="text-right"> 
-                <button onClick={() => dispatch(deleteGoodFromCart(good._id))} className="btn btn-light"> Remove</button>
+                <button onClick={() => dispatch(deleteGoodFromCart(good._id))} className="btn btn-light">{language === 'Russian' ? 'Удалить' : 'Remove'}</button>
                 </td>
               </tr>
             )
           })
-          : 'No goods')  
+          : 
+          <p className="my-5">{language === 'Russian' ? 'Товары не найдены' : 'No products found'}</p>
+        )  
         }
         {currentUserAuth &&
           (userCart.length ? userCart.map(good => {
@@ -104,28 +109,30 @@ const Cart = () => {
                 <td> 
                   <div className="price-wrap"> 
                     <var className="price">{(good.price * good.quantity).toFixed(2)} $</var> 
-                    <small className="text-muted"> {good.price} each </small> 
+                    <small className="text-muted"> {good.price}$ {language === 'Russian' ? ' / шт' : '/ each'} </small> 
                   </div>
                 </td>
                 <td className="text-right"> 
-                <button onClick={() => dispatch(deleteGoodFromUserCart(good._id))} className="btn btn-light"> Remove</button>
+                <button onClick={() => dispatch(deleteGoodFromUserCart(good._id))} className="btn btn-light">{language === 'Russian' ? 'Удалить' : 'Remove'}</button>
                 </td>
               </tr>
             )
           })
-          : 'No goods')  
+          :
+          <p className="my-5">{language === 'Russian' ? 'Товары не найдены' : 'No products found'}</p>
+          )  
         }
       {/*  */}
       </tbody>
       </table>
 
       <div className="card-body border-top">
-        <Link to={currentUserAuth ? `/order` : `/login`} className="btn btn-primary float-md-right"> Make Purchase <i className="fa fa-chevron-right"></i> </Link>
-        <a href="/" className="btn btn-light d-flex" style={{'width': '19%'}}> <i className="fa fa-chevron-left mr-1" style={{'margin-top': '0.2rem'}}></i> Continue shopping </a>
+        <Link to={currentUserAuth ? `/order` : `/login`} className="btn btn-primary float-md-right">{language === 'Russian' ? 'Купить ' : 'Make Purchase '}</Link>
+        <Link to="/" className="btn btn-light d-flex" style={{'width': '21%'}}> <i className="fa fa-chevron-left mr-1" style={{'margin-top': '0.2rem'}}></i>{language === 'Russian' ? 'Продолжить покупки' : 'Continue shopping'}</Link>
       </div>	
       </div>
             <div className="alert alert-success mt-3">
-              <p className="icontext"><i className="icon text-success fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
+              <p className="icontext"><i className="icon text-success fa fa-truck"></i>{language === 'Russian' ? 'Бесплатная доставка в течении 1-2 недель' : 'Free Delivery within 1-2 weeks'}</p>
             </div>
 
           </main>
@@ -133,7 +140,7 @@ const Cart = () => {
             <div className="card">
               <div className="card-body">
                 <dl className="dlist-align">
-                  <dt>Total price:</dt>
+                  <dt>{language === 'Russian' ? 'Итого:' : 'Total price:'}</dt>
                   {currentUserAuth &&
                     <dd className="text-right">{totalUserCart.toFixed(2)} $</dd>
                   }

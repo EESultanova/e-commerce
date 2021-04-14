@@ -11,6 +11,7 @@ import { hideLoader, showLoader } from "../../redux/actionCreators/loaderAC"
 import { store } from 'react-notifications-component';
 import 'animate.css'
 import 'react-notifications-component/dist/theme.css'
+import { useProfileContext } from "../../contexts/ProfileContext"
 
 const ListGoods = () => {
 
@@ -22,7 +23,7 @@ const ListGoods = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const searchResult = useSelector(state => state.search?.filter(elem => elem.quantity > 0))
-  const loader = useSelector(state => state.loader)
+  const { language } = useProfileContext()
   
   const history = useHistory();
   
@@ -51,8 +52,8 @@ const ListGoods = () => {
   function NotifyYes() {
     return (
       <div className="bg-primary text-white rounded" style={{ width: 200 }}>
-        <h6>Good!</h6>
-        <p>That's very good! Add this in your cart and buy!</p>
+        <h6>{language === 'Russian' ? 'Отлично!' : 'Great!'}</h6>
+        <p>{language === 'Russian' ? 'Добавьте товар в корзину и купите!' : `Add this in your cart and buy!`}</p>
       </div>
     )
   }
@@ -60,8 +61,11 @@ const ListGoods = () => {
   function NotifyNo() {
     return (
       <div className="bg-secondary text-white rounded" style={{ width: 200 }}>
-        <h6>Sorry</h6>
-        <p>You can write to us in our support so that we become better!</p>
+        <h6>{language === 'Russian' ? 'Извините!' : 'Sorry!'}</h6>
+        <p>{language === 'Russian' 
+          ? 'Вы можете написать нам в поддержку, чтобы мы стали лучше!' 
+          : 'You can write to us in our support so that we become better!'}
+        </p>
       </div>
     )
   }
@@ -74,15 +78,13 @@ const ListGoods = () => {
           <div className="row">
             <nav className="col-md-8" style={{ marginRight: "28rem" }}>
               <ol className="breadcrumb">
-                <li className="breadcrumb-item"><Link to="/">Home</Link></li>
-                {currentCategory && <li className="breadcrumb-item"><Link to={`/categories/${currentCategory._id}`}>{currentCategory.name}</Link></li>}
-                <li className="breadcrumb-item active" aria-current="page">Items</li>
-                <div className="col-md-2">Filter by</div>
+                <li className="breadcrumb-item"><Link to="/">{language === 'Russian' ? 'Главная' : 'Home'}</Link></li>
+                {currentCategory && <li className="breadcrumb-item"><Link to={`/categories/${currentCategory._id}`}>{language === 'Russian' ? currentCategory.nameRu : currentCategory.name}</Link></li>}
                 <li className="list-inline-item mr-1">
                   <div className="form-inline">
-                    <label className="mr-2">Price</label>
+                    <label className="ml-5 mr-2">{language === 'Russian' ? 'Цена' : 'Price'}</label>
                     <input className="form-control form-control-sm" placeholder="Min" type="number" />
-                    <span className="px-2"> - </span>
+                    <span className="px-2"> </span>
                     <input className="form-control form-control-sm" placeholder="Max" type="number" />
                     <button type="submit" className="btn btn-sm btn-light ml-2">Ok</button>
                   </div>
@@ -91,30 +93,30 @@ const ListGoods = () => {
                   <form className="form-inline mx-2">
                     {sorting === 'price' &&
                       <select onChange={(event) => sortGoods(event.target.value)} className="form-control form-control-sm">
-                        <option selected="selected" value="sortasc">Price Low to High</option>
-                        <option value="sortdesc">Price High to Low</option>
-                        <option value="sortrating">Rating</option>
+                        <option selected="selected" value="sortasc">{language === 'Russian' ? 'Цена по убыванию' : 'Price Low to High'}</option>
+                        <option value="sortdesc">{language === 'Russian' ? 'Цена по возрастанию' : 'Price High to Low'}</option>
+                        <option value="sortrating">{language === 'Russian' ? 'Рейтинг' : 'Rating'}</option>
                       </select>
                     }
                     {sorting === 'price_desc' &&
                       <select onChange={(event) => sortGoods(event.target.value)} className="form-control form-control-sm">
-                        <option value="sortasc">Price Low to High</option>
-                        <option selected="selected" value="sortdesc">Price High to Low</option>
-                        <option value="sortrating">Rating</option>
+                        <option value="sortasc">{language === 'Russian' ? 'Цена по убыванию' : 'Price Low to High'}</option>
+                        <option selected="selected" value="sortdesc">{language === 'Russian' ? 'Цена по возрастанию' : 'Price High to Low'}</option>
+                        <option value="sortrating">{language === 'Russian' ? 'Рейтинг' : 'Rating'}</option>
                       </select>
                     }
                     {sorting === 'rating' &&
                       <select onChange={(event) => sortGoods(event.target.value)} className="form-control form-control-sm">
-                        <option value="sortasc">Price Low to High</option>
-                        <option value="sortdesc">Price High to Low</option>
-                        <option selected="selected" value="sortrating">Rating</option>
+                        <option value="sortasc">{language === 'Russian' ? 'Цена по убыванию' : 'Price Low to High'}</option>
+                        <option value="sortdesc">{language === 'Russian' ? 'Цена по возрастанию' : 'Price High to Low'}</option>
+                        <option selected="selected" value="sortrating">{language === 'Russian' ? 'Рейтинг' : 'Rating'}</option>
                       </select>
                     }
                     {sorting == null &&
                       <select onChange={(event) => sortGoods(event.target.value)} className="form-control form-control-sm">
-                        <option selected="selected" value="sortasc">Price Low to High</option>
-                        <option value="sortdesc">Price High to Low</option>
-                        <option value="sortrating">Rating</option>
+                        <option selected="selected" value="sortasc">{language === 'Russian' ? 'Цена по убыванию' : 'Price Low to High'}</option>
+                        <option value="sortdesc">{language === 'Russian' ? 'Цена по возрастанию' : 'Price High to Low'}</option>
+                        <option value="sortrating">{language === 'Russian' ? 'Рейтинг' : 'Rating'}</option>
                       </select>
                     }
                   </form>
@@ -143,19 +145,19 @@ const ListGoods = () => {
 
       <nav className="mb-4 mx-4" aria-label="Page navigation sample">
         <ul className="pagination">
-          <li className="page-item disabled"><a className="page-link" href="/">Previous</a></li>
+          <li className="page-item disabled"><a className="page-link" href="/">{language === 'Russian' ? 'Предыдущая' : 'Previous'}</a></li>
           <li className="page-item active"><a className="page-link" href="/">1</a></li>
           <li className="page-item"><a className="page-link" href="/">2</a></li>
           <li className="page-item"><a className="page-link" href="/">3</a></li>
           <li className="page-item"><a className="page-link" href="/">4</a></li>
           <li className="page-item"><a className="page-link" href="/">5</a></li>
-          <li className="page-item"><a className="page-link" href="/">Next</a></li>
+          <li className="page-item"><a className="page-link" href="/">{language === 'Russian' ? 'Следующая' : 'Next'}</a></li>
         </ul>
       </nav>
 
 
       <div className="box text-center">
-        <p>Did you find what you were looking for？</p>
+        <p>{language === 'Russian' ? 'Ты нашел то, что искал?' : 'Did you find what you were looking for?'}</p>
         <div className="btn btn-light" onClick={() => {
                   store.addNotification({
                     content: NotifyYes,
@@ -172,7 +174,8 @@ const ListGoods = () => {
                     width: 200,
 
                   })
-                }} style={{cursor: 'pointer'}}>Yes</div>
+                }} style={{cursor: 'pointer'}}>{language === 'Russian' ? 'Да' : 'Yes'}</div>
+        <span> </span>
         <div className="btn btn-light" onClick={() => {
                   store.addNotification({
                     content: NotifyNo,
@@ -189,7 +192,7 @@ const ListGoods = () => {
                     width: 200,
 
                   })
-                }} style={{cursor: 'pointer'}}>No</div>
+                }} style={{cursor: 'pointer'}}>{language === 'Russian' ? 'Нет' : 'No'}</div>
       </div>
     </>
   )

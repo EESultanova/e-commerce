@@ -23,35 +23,35 @@ const Footer = () => {
 					</article>
 				</aside>
 				<aside className="col-sm-3 col-md-2">
-					<h6 className="title">{language === 'English' ? 'About' : 'О компании'}</h6>
+					<h6 className="title">{language === 'Russian' ? 'О компании': 'About'}</h6>
 					<ul className="list-unstyled">
-						<li> <Link to="/">{language === 'English' ? 'About us' : 'Команда'}</Link></li>
-						<li> <Link to="/">{language === 'English' ? 'Services' : 'Сервисы'}</Link></li>
-						<li> <Link to="/">{language === 'English' ? 'Rules and terms' : 'Правила и условия'}</Link></li>
-						<li> <Link to="/">{language === 'English' ? 'Blogs' : 'Блоги'}</Link></li>
+						<li> <Link to="/">{language === 'Russian' ? 'Команда' : 'About us'}</Link></li>
+						<li> <Link to="/">{language === 'Russian' ? 'Сервисы' : 'Services'}</Link></li>
+						<li> <Link to="/">{language === 'Russian' ? 'Правила и условия' : 'Rules and terms'}</Link></li>
+						<li> <Link to="/">{language === 'Russian' ? 'Блоги' : 'Blogs'}</Link></li>
 					</ul>
 				</aside>
 				<aside className="col-sm-3 col-md-2">
-					<h6 className="title">{language === 'English' ? 'Services' : 'Сервисы'}</h6>
+					<h6 className="title">{language === 'Russian' ? 'Сервисы' : 'Services'}</h6>
 					<ul className="list-unstyled">
-						<li> <Link to="/">{language === 'English' ? 'Help center' : 'Контактный центр'}</Link></li>
-						<li> <Link to="/">{language === 'English' ? 'Money refund' : 'Возврат денег'}</Link></li>
-						<li> <Link to="/">{language === 'English' ? 'Terms and policy' : 'Условия и политика'}</Link></li>
-						<li> <Link to="/">{language === 'English' ? 'Open dispute' : 'Открытый спор'}</Link></li>
+						<li> <Link to="/">{language === 'Russian' ? 'Контактный центр' : 'Help center'}</Link></li>
+						<li> <Link to="/">{language === 'Russian' ? 'Возврат денег' : 'Money refund'}</Link></li>
+						<li> <Link to="/">{language === 'Russian' ? 'Условия и политика' : 'Terms and policy'}</Link></li>
+						<li> <Link to="/">{language === 'Russian' ? 'Открытый спор' : 'Open dispute'}</Link></li>
 					</ul>
 				</aside>
 				<aside className="col-sm-3  col-md-2">
-					<h6 className="title">{language === 'English' ? 'For users' : 'Пользователям'}</h6>
+					<h6 className="title">{language === 'Russian' ? 'Пользователям' : 'For users'}</h6>
 					<ul className="list-unstyled">
-						<li> <Link to="/">{language === 'English' ? 'User login' : 'Вход'}</Link></li>
-						<li> <Link to="/">{language === 'English' ? 'User register' : 'Регистрация'}</Link></li>
-						<li> <Link to="/">{language === 'English' ? 'Account setting' : 'Настройка аккаунта'}</Link></li>
-						<li> <Link to="/">{language === 'English' ? 'My orders' : 'Мои заказы'}</Link></li>
-						<li> <Link to="/">{language === 'English' ? 'My wishlist' : 'Мой список пожеланий'}</Link></li>
+						<li> <Link to="/">{language === 'Russian' ? 'Вход' : 'User login'}</Link></li>
+						<li> <Link to="/">{language === 'Russian' ? 'Регистрация' : 'User register'}</Link></li>
+						<li> <Link to="/">{language === 'Russian' ? 'Настройка аккаунта' : 'Account setting'}</Link></li>
+						<li> <Link to="/">{language === 'Russian' ? 'Мои заказы' : 'My orders'}</Link></li>
+						<li> <Link to="/">{language === 'Russian' ? 'Мой список пожеланий' : 'My wishlist'}</Link></li>
 					</ul>
 				</aside>
 				<aside className="col-sm-2  col-md-2">
-					<h6 className="title">{language === 'English' ? 'Our app' : 'Наши приложения'}</h6>
+					<h6 className="title">{language === 'Russian' ? 'Наши приложения' : 'Our app'}</h6>
 					<Link to="/" className="d-block mb-2"><img src="../images/misc/appstore.png" height="40" alt=''/></Link>
 					<Link to="/"  className="d-block mb-2"><img src="../images/misc/playmarket.png" height="40" alt=''/></Link>
 				</aside>
@@ -59,9 +59,9 @@ const Footer = () => {
 		</section>
 
 		<section className="footer-copyright border-top">
-				<p className="float-left text-muted">{language === 'English' ? '2021 All rights resetved' : '2021 Все права защищены'}</p>
+				<p className="float-left text-muted">{language === 'Russian' ? '2021 Все права защищены' : '2021 All rights resetved'}</p>
 				<p target="_blank" className="float-right text-muted">
-					<Link to="/">{language === 'English' ? 'Privacy & Cookies' : 'Конфиденциальность и файлы cookie'}</Link> 
+					<Link to="/">{language === 'Russian' ? 'Конфиденциальность и файлы cookie' : 'Privacy & Cookies'}</Link> 
 				</p>
 		</section>
 	</div>

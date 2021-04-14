@@ -73,13 +73,13 @@ const Header = () => {
 							<form action="#" className="search-header">
 								<div className="input-group w-100">
 									<select className="custom-select border-right" value={categoryForFilter} onChange={(e) => selectHandler(e.target.value)} name="category_name">
-                   {categories.map(el => <option key={el._id} value={el._id}>{el.name}</option>)}
+                   {categories.map(el => <option key={el._id} value={el._id}>{(language === 'Russian') ? el.nameRu : el.name}</option>)}
   								</select>
 
-									<input type="text" value={input} onChange={(e) => setInput(e.target.value)} className="form-control" placeholder={language === 'English' ? 'Search' : 'Поиск'} />
+									<input type="text" value={input} onChange={(e) => setInput(e.target.value)} className="form-control" placeholder={language === 'Russian' ? 'Поиск': 'Search' } />
 
 									<div className="input-group-append">
-										<Link to={`/categories/${categoryForFilter}`} className="btn btn-primary">	<i className="fa fa-search"></i>{language === 'English' ? 'Search' : 'Поиск'}</Link>
+										<Link to={`/categories/${categoryForFilter}`} className="btn btn-primary">	<i className="fa fa-search"></i>{language === 'Russian' ? 'Поиск' : 'Search'}</Link>
 									</div>
 								</div>
 							</form>
@@ -89,7 +89,7 @@ const Header = () => {
 								<div className="widget-header mr-3">
 
 										<NavLink to={user ? "/profile" : "/login"} onClick={() => setChoice(0)}><img src={avatar} alt="" style={Object.assign({}, { width: '32px' }, { height: '31px' }, { 'borderRadius': '50%' })} />
-											<small className="text"> {language === 'English' ? 'My profile' : 'Мой профиль'} </small>
+											<small className="text"> {language === 'Russian' ? 'Мой профиль' : 'My profile'} </small>
 										</NavLink>
 									
 
@@ -109,7 +109,7 @@ const Header = () => {
 										<div className="icon-area">
 											<i className="fa fa-store"></i>
 										</div>
-										<small className="text"> {language === 'English' ? 'Orders' : 'Заказы'} </small>
+										<small className="text"> {language === 'Russian' ? 'Заказы' : 'Orders'} </small>
 									</Link>
 								</div>
 								<div className="widget-header">
@@ -127,7 +127,7 @@ const Header = () => {
 													: '')
 											}
 										</div>
-										<small className="text"> {language === 'English' ? 'Cart' : 'Корзина'} </small>
+										<small className="text"> {language === 'Russian' ? 'Корзина': 'Cart'} </small>
 									</Link>
 								</div>
 							</div>
@@ -147,7 +147,7 @@ const Header = () => {
 					<div className="collapse navbar-collapse" id="main_nav">
 						<ul className="navbar-nav">
 							<li className="nav-item dropdown">
-								<a className="nav-link dropdown-toggle" data-toggle="dropdown" href="/"> <i className="fa fa-bars text-muted mr-2"></i> {language === 'English' ? 'Menu' : 'Меню'} </a>
+								<a className="nav-link dropdown-toggle" data-toggle="dropdown" href="/"> <i className="fa fa-bars text-muted mr-2"></i> {language === 'Russian' ? 'Меню' : 'Menu'} </a>
 								<div className="dropdown-menu dropdown-large">
 									<nav className="row">
 										<div className="col-12 ml-3">
@@ -159,28 +159,28 @@ const Header = () => {
 								</div>
 							</li>
 							<li className="nav-item">
-								<Link className="nav-link" to="/">{language === 'English' ? 'All categories' : 'Все категории'}</Link>
+								<Link className="nav-link" to="/">{language === 'Russian' ? 'Все категории' : 'All categories'}</Link>
 							</li>
 						</ul>
 						<ul className="navbar-nav ml-md-auto">
 							{!user &&
 								<li className="nav-item">
 									<button>
-										<Link className="btn btn-primary" to="/login">{language === 'English' ? 'Sign in' : 'Вход'}</Link>
+										<Link className="btn btn-primary" to="/login">{language === 'Russian' ? 'Вход' : 'Sign in'}</Link>
 									</button>
 								</li>
 							}
 							{!user &&
 								<li className="nav-item">
 									<button>
-										<Link className="btn btn-primary" to="/registration">{language === 'English' ? 'Sign up' : 'Регистрация'}</Link>
+										<Link className="btn btn-primary" to="/registration">{language === 'Russian' ? 'Регистрация': 'Sign up'}</Link>
 									</button>
 								</li>
 							}
 							{user &&
 								<li className="nav-item">
 									<button>
-										<Link onClick={handleLogout} className="btn btn-primary" to="/">{language === 'English' ? 'Log out' : 'Выход'}</Link>
+										<Link onClick={handleLogout} className="btn btn-primary" to="/">{language === 'Russian' ? 'Выход' : 'Log out'}</Link>
 									</button>
 								</li>
 							}
