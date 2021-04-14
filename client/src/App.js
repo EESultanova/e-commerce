@@ -14,7 +14,7 @@ import GoodDetails from './components/GoodDetails/GoodDetails';
 import Cart from './components/Cart/Cart'
 import Login from './components/Login/Login'
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser } from "./redux/actionCreators/topicsAC";
+import { setUser } from "./redux/actionCreators/userAC";
 import { useEffect } from 'react';
 import { API_URL, SITE_URL } from './config';
 import Registration from './components/Registration/Registration';

@@ -1,24 +1,25 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { sellerAddGood, sellerAddGoodToServer } from "../../redux/actionCreators/userAC"
+import { sellerAddGood, sellerAddGoodToServer, sellerEditGood, sellerEditGoodToServer } from "../../redux/actionCreators/userAC"
 import { store } from 'react-notifications-component';
 import 'animate.css'
 import 'react-notifications-component/dist/theme.css'
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 
 function ProfileEditItem() {
 
     const { id } = useParams()
 
-    console.log(id, 'id -----------')
+    // console.log(id, 'id -----------')
 
     const categories = useSelector(state => state.categories)
     const user = useSelector(state => state.user.id)
 
     const good = useSelector(state => state.user.goods[0].filter(elem => elem._id == id))
-    console.log('good =====', good)
+    // console.log('good =====', good)
 
     const [name, setName] = useState(good[0].name)
+    
     const [quantity, setQuantity] = useState(good[0].quantity)
     const [price, setPrice] = useState(good[0].price)
     const [description, setDescription] = useState(good[0].description)
@@ -27,14 +28,16 @@ function ProfileEditItem() {
 
     const dispatch = useDispatch()
 
-    function confirmHandler() {
+    const history = useHistory();
 
-        dispatch(sellerAddGood({ name, quantity, price, description, category, photo, rating: "0" }))
-        sellerAddGoodToServer({ name, quantity, price, description, category, photo, rating: "0", user })
+    function confirmHandler(e) {
+        e.preventDefault()
+        dispatch(sellerEditGood({ id, name, quantity, price, description, category, photo, rating: "0" }))
+        sellerEditGoodToServer({ id, name, quantity, price, description, category, photo, rating: "0", user })
 
         store.addNotification({
             content: NotifyAdd,
-            message: `${name} was added succsessfully!`,
+            message: `Item was updated succsessfully!`,
             type: 'default',
             container: 'bottom-right',
             insert: 'bottom',
@@ -43,15 +46,17 @@ function ProfileEditItem() {
             dismiss: {
                 duration: 4000,
             },
-            width: 500,
+            width: 300,
 
         })
+        history.push('/profile');
+
     }
 
     function NotifyAdd() {
         return (
             <div className="bg-primary text-white rounded" style={{ width: 500 }}>
-                <h6>Item was added succsessfully!</h6>
+                <h6>Item was updated succsessfully!</h6>
             </div>
         )
     }
