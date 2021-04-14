@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoriesFromServer } from "../../redux/actionCreators/categoryAC"
-import { getAllOrders } from "../../redux/actionCreators/userAC";
+import { getAllOrders, getSellerGoods } from "../../redux/actionCreators/userAC";
 import Category from "../Category/Category";
 import Loader from "../Loader/Loader";
 
@@ -10,7 +10,7 @@ const Main = () => {
   const dispatch = useDispatch()
 
   const categories = useSelector(state => state.categories)
-  const userId = useSelector(state => state.user.id)
+  const user = useSelector(state => state.user)
 
   const [loader, setLoader] = useState(false)
 
@@ -24,7 +24,9 @@ const Main = () => {
   
   useEffect(() => {
     dispatch(getCategoriesFromServer())
-    dispatch(getAllOrders(userId))
+    dispatch(getAllOrders(user.id))
+    if (user.role === 'seller') dispatch(getSellerGoods(user.id))
+
   }, [])
 
   return (

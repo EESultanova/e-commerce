@@ -123,6 +123,7 @@ app.post("/api/v1/add_new_good", async (req, res) => {
     const { name, quantity, price, description, category, photo, rating, user } = req.body
     const newGood = await GoodModel.create({
       quantity: quantity,
+      initQuantity: quantity,
       photo: [photo],
       name: name,
       description: description,
@@ -143,6 +144,7 @@ app.post("/api/v1/edit_new_good", async (req, res) => {
     const { id, name, quantity, price, description, category, photo, rating } = req.body
     const currentGood = await GoodModel.findById(id);
     currentGood.quantity = quantity,
+    currentGood.initQuantity = quantity,
     currentGood.photo = photo,
     currentGood.name = name,
     currentGood.description = description,
