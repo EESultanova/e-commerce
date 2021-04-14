@@ -1,20 +1,26 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom"
+import { Link, useHistory, useLocation } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { setUser } from '../../redux/actionCreators/userAC'
 import { API_URL, SITE_URL } from '../../config'
 import { emptyCart } from "../../redux/actionCreators/cartAC";
+import { useLastLocation } from 'react-router-last-location'
+import { useProfileContext } from "../../contexts/ProfileContext";
 
 
 const Login = () => {
-  console.log('login');
 
   const history = useHistory()
+
   const dispatch = useDispatch()
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const cart = useSelector(state => state.cart)
+
+  const lastLocation = useLastLocation()
+
+  const { language } = useProfileContext()
 
   const inputEmailHandler = (e) => {
     setEmail(e.target.value)
@@ -63,7 +69,11 @@ const Login = () => {
             dispatch(setUser(response))
             localStorage.setItem('token', response.token)
             dispatch(emptyCart())
-            history.push('/');
+            if (lastLocation.pathname === '/cart') {
+              history.push('/order')
+            } else {
+              history.push('/');
+            }
           }
         })
     } catch (e) {
@@ -73,26 +83,25 @@ const Login = () => {
 
   return (
     <section className="section-conten padding-y" style={{ minHeight: 84 }}>
-
       <div className="card mx-auto" style={{ maxWidth: 380, marginTop: 100 }}>
         <div className="card-body">
-          <h4 id="container" className="card-title mb-4">Sign in</h4>
+          <h4 id="container" className="card-title mb-4">{language === 'Russian' ? 'Вход' : 'Sign in'}</h4>
           <form onSubmit={submitHandler}>
             <img className="logo" src="/images/logocommerce3.png" alt="" style={{ maxWidth: 180, marginBottom: 40 }} />
             <div className="form-group">
               <input value={email} onChange={inputEmailHandler} name='email' type="email" className="form-control" placeholder="Email" />
             </div>
             <div className="form-group">
-              <input value={password} onChange={inputPasswordHandler} name="password" className="form-control" placeholder="Password" type="password" />
+              <input value={password} onChange={inputPasswordHandler} name="password" className="form-control" placeholder={language === 'Russian' ? 'Пароль' : 'Password'} type="password" />
             </div>
             <div className="form-group">
-              <button type="submit" className="btn btn-primary btn-block"> Login  </button>
+              <button type="submit" className="btn btn-primary btn-block">{language === 'Russian' ? 'Войти' : 'Sign in'}</button>
             </div>
           </form>
         </div>
       </div>
 
-      <p className="text-center mt-4">Don't have account? <a href="/registration">Sign up</a></p>
+      <p className="text-center mt-4">{language === 'Russian' ? 'Нет аккаунта?' : `Don't have account?`}<Link to="/registration"> {language === 'Russian' ? 'Зарегистрироваться' : 'Sign up'}</Link></p>
       <br /><br />
 
     </section>

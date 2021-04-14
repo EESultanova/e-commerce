@@ -23,6 +23,7 @@ function Order() {
   const [cvv, setCvv] = useState('')
 
   let {setChoice} = useProfileContext()
+  const { language } = useProfileContext()
 
   const currentUser = useSelector(state => state.user)
   const currentCart = useSelector(state => state.user.cart)
@@ -68,7 +69,7 @@ function Order() {
             <td> 
               <div className="price-wrap"> 
                 <var style={{width:200}} className="price mx-5">{(good.price * good.quantity).toFixed(2)} $</var> 
-                <small className="text-muted"> {good.price}each</small> 
+                <small className="text-muted"> {good.price}$ {language === 'Russian' ? ' / шт' : '/ each'} </small> 
               </div>
             </td>
             <td className="text-right"> 
@@ -78,31 +79,32 @@ function Order() {
           </section>
           )
         })
-        : <h5>No goods</h5>
+        :
+        <p className="my-5">{language === 'Russian' ? 'Товары не найдены' : 'No products found'}</p>
       }
 
     </section>
-  <h4 className="card-title mb-3">Total price: {total.toFixed(2)} $</h4>
+  <h4 className="card-title mb-3">{language === 'Russian' ? 'Итого:' : 'Total Price:'} {total.toFixed(2)} $</h4>
   <section className="section-content padding-y">
     <div className="container" style={{maxWidth:720}}>
 
     <div className="card mb-4">
       <div className="card-body">
-      <h4 className="card-title mb-3">Delivery info</h4>
+      <h4 className="card-title mb-3">{language === 'Russian' ? 'Информация о доставке' : 'Delivery info'}</h4>
 
 	  <div className="form-row">
 			<div className="form-group col-sm-6">
 				<label className="js-check box active">
 					<input type="radio" name="dostavka" value="option1" defaultChecked/>
-					<h6 className="title">Standart delivery</h6>
-					<p className="text-muted">Free by airline within 20 days</p>
+					<h6 className="title">{language === 'Russian' ? 'Стандартная доставка' : 'Standart delivery'}</h6>
+					<p className="text-muted">{language === 'Russian' ? 'Бесплатная доставка в течении  20 дней' : 'Free by airline within 20 days'}</p>
 				</label> 
 			</div>
 			<div className="form-group col-sm-6">
 				<label className="js-check box">
 					<input type="radio" name="dostavka" value="option1"/>
-					<h6 className="title">Fast delivery</h6>
-					<p className="text-muted">Extra 20$ will be charged </p>
+					<h6 className="title">{language === 'Russian' ? 'Быстрая доставка' : 'Fast delivery'}</h6>
+					<p className="text-muted">{language === 'Russian' ? 'Доставка в течении 5 дней. Взимается 20$ дополнительно' : 'Extra 20$ will be charged'}</p>
 				</label> 
 			</div>
 		</div> 
@@ -111,7 +113,7 @@ function Order() {
 
 	<div className="form-row">
 		<div className="col form-group">
-			<label>Full name</label>
+			<label>{language === 'Russian' ? 'Полное имя' : 'Full name'}</label>
         <FioSuggestions token="5380c3726e32d6ce9d7fba825b4570fea6395f1b" value={fio} onChange={setFio}/>
 		</div> 
 	</div> 
@@ -122,12 +124,12 @@ function Order() {
 		  	<input onChange={e => setEmail(e.target.value)}  type="email" className="form-control" placeholder="" />
 		</div> 
 		<div className="col form-group">
-			<label>Phone</label>
+			<label>{language === 'Russian' ? 'Телефон' : 'Phone'}</label>
 		  	<input type="text" onChange={e => setPhone(e.target.value)} className="form-control" placeholder="" />
 		</div>
 	</div> 
 	<div className="form-group">
-		<label>Adress</label>
+		<label>{language === 'Russian' ? 'Адрес' : 'Address'}</label>
       <AddressSuggestions token="5380c3726e32d6ce9d7fba825b4570fea6395f1b" value={address} onChange={setAddress} />
     </div> 
       </div> 
@@ -137,15 +139,15 @@ function Order() {
 
 		<div className="card mb-4">
       <div className="card-body">
-      <h4 className="card-title mb-4">Payment</h4>
-      <form style={{maxWidth:380}} onSubmit={(e) => confirmHandler(e)}>
+      <h4 className="card-title mb-4">{language === 'Russian' ? 'Оплата' : 'Payment'}</h4>
+      <form onSubmit={(e) => confirmHandler(e)}>
 			<div className="form-group">
-			<label htmlFor="username">Name on card</label>
-			<input  onChange={e => setCardName(e.target.value)} type="text" className="form-control" name="username" placeholder="Ex. John Smith" required=""/>
+			<label htmlFor="username">{language === 'Russian' ? 'Имя карты' : 'Name on card'}</label>
+			<input onChange={e => setCardName(e.target.value)} type="text" className="form-control" name="username" placeholder="Ex. John Smith" required=""/>
 			</div> 
 
 			<div className="form-group card required">
-			<label htmlFor="cardNumber">Card number</label>
+			<label htmlFor="cardNumber">{language === 'Russian' ? 'Номер карты' : 'Card number'}</label>
 			<div className="input-group">
 				<input type="text"  onChange={e => setCard(e.target.value)}  className="form-control" name="cardNumber" placeholder="" maxLength="16" />
 				<div className="input-group-append">
@@ -160,10 +162,10 @@ function Order() {
 			<div className="row">
 				<div className="col-md flex-grow-0">
 					<div className="form-group">
-						<label className="hidden-xs">Expiration</label>
+						<label className="hidden-xs">{language === 'Russian' ? 'Срок действия' : 'Expiration'}</label>
 						<div className="form-inline" style={{minWidth:220}}>
 							<select className="form-control" onChange={e => setExpMonth(e.target.value)} style={{width:100}}>
-								<option value="1">01 - Janiary</option>
+								<option value="1">01 - January</option>
 								<option value="2">02 - February</option>
 								<option value="3">03 - February</option>
                 <option value="4">04 - March</option>
@@ -195,7 +197,7 @@ function Order() {
 				</div>
 			</div>
       <button className="subscribe btn btn-primary btn-block">
-        Confirm
+      {language === 'Russian' ? 'Подтвердить' : 'Confirm'}
       </button>
 		</form>
       </div> 
