@@ -183,7 +183,9 @@ function Order() {
                   Confirm
                 </button>
                 {checkout ? (
+                  <div className="mt-3">
                   <Paypal total={total} />
+                  </div>
                 ) : (
                   <button className="subscribe btn btn-primary btn-block"
                     onClick={() => {
