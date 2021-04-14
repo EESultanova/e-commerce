@@ -10,10 +10,12 @@ import 'animate.css'
 import 'react-notifications-component/dist/theme.css'
 import { addGoodToUserCart, deleteGoodFromUserCart } from "../../redux/actionCreators/userAC"
 import Loader from "../Loader/Loader"
+import { useProfileContext } from "../../contexts/ProfileContext"
 
 const GoodDetails = () => {
 
   const [photo, setPhoto] = useState(0)
+  const { language } = useProfileContext()
   const { id } = useParams()
   const dispatch = useDispatch()
 
@@ -36,7 +38,7 @@ const GoodDetails = () => {
   function NotifyAdd() {
     return (
       <div className="bg-primary text-white rounded" style={{ width: 200}}>
-        <h6>Item was added to your cart!</h6>
+        <h6>{language === 'Russian' ? 'Товар добавлен в вашу корзину' : 'Item was added to your cart'}</h6>
       </div>
     )
   }
@@ -44,7 +46,7 @@ const GoodDetails = () => {
   function NotifyRemove() {
     return (
       <div className="bg-secondary text-white rounded" style={{ width: 200}}>
-        <h6>Item was removed from your cart!</h6>
+        <h6>{language === 'Russian' ? 'Товар удален из вашей корзины' : 'Item was removed from your cart'}</h6>
       </div>
     )
   }
@@ -78,7 +80,7 @@ const GoodDetails = () => {
       <main className="col-md-6">
         <article className="product-info-aside">
 
-          <h2 className="title mt-3">{good?.name}</h2>
+          <h4 className="title mt-5">{good?.name}</h4>
 
           <div className="rating-wrap my-3">
             <ul className="rating-stars">
@@ -93,32 +95,29 @@ const GoodDetails = () => {
                 <i className="fa fa-star"></i>
               </li>
             </ul>
-            <small className="label-rating text-muted">132 reviews</small>
-            <small className="label-rating text-success"> <i className="fa fa-clipboard-check"></i> 154 orders </small>
+            <small className="label-rating text-muted">{language === 'Russian' ? '132 отзыва' : '132 reviews'}</small>
+            <small className="label-rating text-success"> <i className="fa fa-clipboard-check"></i>{language === 'Russian' ? ' 154 заказа' : ' 154 orders'}</small>
           </div>
 
           <div className="mb-3">
             <var className="price h4">{good?.price} $</var>
           </div>
 
-          <p>{good?.description}</p>
+          <p className="my-5">{good?.description}</p>
 
 
-          <dl className="row">
-            <dt className="col-sm-3">Manufacturer</dt>
-            <dd className="col-sm-9"><a href="/">Great textile Ltd.</a></dd>
-
-            <dt className="col-sm-3">Article number</dt>
+          <dl className="row mt-5">
+            <dt className="col-sm-3">{language === 'Russian' ? 'Артикль №' : 'Article number'}</dt>
             <dd className="col-sm-9">596 065</dd>
 
-            <dt className="col-sm-3">Guarantee</dt>
-            <dd className="col-sm-9">2 year</dd>
+            <dt className="col-sm-3">{language === 'Russian' ? 'Гарантия' : 'Guarantee'}</dt>
+            <dd className="col-sm-9">{language === 'Russian' ? '2 года' : '2 years'}</dd>
 
-            <dt className="col-sm-3">Delivery time</dt>
-            <dd className="col-sm-9">3-4 days</dd>
+            <dt className="col-sm-3">{language === 'Russian' ? 'Время доставки' : 'Delivery time'}</dt>
+            <dd className="col-sm-9">{language === 'Russian' ? '3-4 дня' : '3-4 days'}</dd>
 
-            <dt className="col-sm-3">Availabilty</dt>
-            <dd className="col-sm-9">in Stock</dd>
+            <dt className="col-sm-3">{language === 'Russian' ? 'Наличие' : 'Availabilty'}</dt>
+            <dd className="col-sm-9">{language === 'Russian' ? 'В магазине' : ' In Stock'}</dd>
           </dl>
 
           <div className="form-row  mt-5">
@@ -142,7 +141,7 @@ const GoodDetails = () => {
 
                   })
                   dispatch(deleteGoodFromCart(good?._id))
-                }} type="button" class="btn btn-secondary">Remove from cart</button>
+                }} type="button" class="btn btn-secondary">{language === 'Russian' ? 'Удалить из корзины' : 'Remove from cart'}</button>
                 :
                 <button onClick={() => {
                   store.addNotification({
@@ -162,7 +161,7 @@ const GoodDetails = () => {
                   })
                   dispatch(addGoodToCart(good))
                 }} className="btn  btn-primary">
-                  <i className="fas fa-shopping-cart"></i> <span className="text">Add to cart</span>
+                  <i className="fas fa-shopping-cart"></i> <span className="text">{language === 'Russian' ? 'Добавить в корзину' : 'Add to cart'}</span>
                 </button>)
               }
               {(currentUserAuth && currentUserRole === 'buyer') &&
@@ -184,7 +183,7 @@ const GoodDetails = () => {
 
                   })
                   dispatch(deleteGoodFromUserCart(good?._id))
-                }} type="button" class="btn btn-secondary">Remove from cart</button>
+                }} type="button" class="btn btn-secondary">{language === 'Russian' ? 'Удалить из корзины' : 'Remove from cart'}</button>
                 :
                 <button onClick={() => {
                   store.addNotification({
@@ -204,7 +203,7 @@ const GoodDetails = () => {
                   })
                   dispatch(addGoodToUserCart(good))
                 }} className="btn  btn-primary">
-                  <i className="fas fa-shopping-cart"></i> <span className="text">Add to cart</span>
+                  <i className="fas fa-shopping-cart"></i> <span className="text">{language === 'Russian' ? 'Добавить в корзину' : 'Add to cart'}</span>
                 </button>)
               }
             </div>

@@ -11,7 +11,6 @@ const Main = () => {
 
   const categories = useSelector(state => state.categories)
   const userId = useSelector(state => state.user.id)
-
   const [loader, setLoader] = useState(false)
 
   const showLoader = () => {
