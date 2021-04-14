@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from '../../redux/actionCreators/userAC';
 import { API_URL, SITE_URL } from '../../config';
 import { emptyCart } from "../../redux/actionCreators/cartAC";
+import { useLastLocation } from 'react-router-last-location';
 
 
 function Registration() {
@@ -16,6 +17,8 @@ function Registration() {
     const [name, setNickname] = useState('');
     const [role, setRole] = useState('');
     const cart = useSelector(state => state.cart)
+
+    const lastLocation = useLastLocation()
 
     const inputEmailHandler = (e) => {
         setEmail(e.target.value);
@@ -74,7 +77,11 @@ function Registration() {
                             dispatch(setUser(responseFromServer));
                             localStorage.setItem('token', responseFromServer.token);
                             dispatch(emptyCart())
-                            history.push('/');
+                            if (lastLocation.pathname === '/cart') {
+                              history.push('/order')
+                            } else {
+                              history.push('/');
+                            }
                         }
 
                 })

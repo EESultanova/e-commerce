@@ -5,10 +5,15 @@ const ProfileContext = createContext()
 
 const ProfileContextProvider = ({children}) => {
 
-  let [choice, setChoice] = useState(0)
+  const [choice, setChoice] = useState(0)
+  const [language, setLanguage] = useState('')
 
   return (
-    <ProfileContext.Provider value={{setChoice, choice}}>
+    <ProfileContext.Provider value={{
+      setChoice,
+      choice,
+      language,
+      setLanguage,}}>
       {children}
     </ProfileContext.Provider>
   )
