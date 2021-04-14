@@ -1,9 +1,8 @@
 import { useSelector } from "react-redux";
-import { API_URL, SITE_URL } from '../../config'
+import { SITE_URL } from '../../config'
 import avatarLogo from '../../assets/avatar.svg';
 import { useProfileContext } from "../../contexts/ProfileContext";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 import {
   XYPlot,
   XAxis,
@@ -12,13 +11,13 @@ import {
   HorizontalGridLines,
   VerticalBarSeries,
   DiscreteColorLegend,
-  GradientDefs
 } from 'react-vis';
 
 const ProfileOverview = () => {
   const currentUser = useSelector(state => state.user);
   const avatar = currentUser.avatar ? `${SITE_URL + currentUser.avatar}` : avatarLogo;
   const orders = useSelector(state => state.user?.orders[0])
+  const language = useSelector(state => state.language)
   let {setChoice} = useProfileContext()
 console.log(currentUser.goods[0])
   const BarSeries = VerticalBarSeries
@@ -46,41 +45,35 @@ console.log(currentUser.goods[0])
                   <div className="text" style={{'textAlign': 'start'}}>
                     <strong> {currentUser.name} </strong> <br/> 
                     <p className="mb-2"> {currentUser.email}  </p> 
-                    <Link href="/profile" className="btn btn-light btn-sm" alt="" onClick={() => setChoice(4)}>Edit</Link>
+                    <Link href="/profile" className="btn btn-light btn-sm" alt="" onClick={() => setChoice(4)}>{language === 'Russian' ? 'Редактировать': 'Edit'}</Link>
                   </div>
               </figure>
               <hr/>
               <p>
-                <i className="fa fa-map-marker text-muted"></i> &nbsp; My address:  
+                <i className="fa fa-map-marker text-muted"></i> &nbsp; {language === 'Russian' ? 'Мой адрес:': 'My address:'} 
                 <br/>
                 Tashkent city, Street name, Building 123, House 321 &nbsp; 
                 <div >
-                <Link to="/profile" className="btn-link"> Edit</Link>
+                <Link to="/profile" className="btn-link">{language === 'Russian' ? 'Редактировать': 'Edit'} </Link>
                 </div>
               </p>
               <article className="card-group card-stat">
                 <figure className="card bg">
                   <div className="p-3">
-                    <h4 className="title">{orders.length}</h4>
-                    <span>Orders</span>
-                  </div>
-                </figure>
-                <figure className="card bg">
-                  <div className="p-3">
                     <h4 className="title">1</h4>
-                    <span>Wishlists</span>
+                    <span>{language === 'Russian' ? 'Список желаний': 'Wishlists'}</span>
                   </div>
                 </figure>
                 <figure className="card bg">
                   <div className="p-3">
                     <h4 className="title">3</h4>
-                    <span>Awaiting delivery</span>
+                    <span>{language === 'Russian' ? 'Ожидают доставку': 'Awaiting delivery'}</span>
                   </div>
                 </figure>
                 <figure className="card bg">
                   <div className="p-3">
                     <h4 className="title">0</h4>
-                    <span>Delivered items</span>
+                    <span>{language === 'Russian' ? 'Доставлено товаров': 'Delivered items'}</span>
                   </div>
                 </figure>
               </article>
@@ -91,7 +84,7 @@ console.log(currentUser.goods[0])
             {currentUser.role === 'seller' ?  (
               dataResult.length ? (
                 <div>
-            <h5 className="card-title mb-4">Sales Analytics </h5>
+            <h5 className="card-title mb-4">{language === 'Russian' ? 'Аналитика продаж': 'Sales Analytics'}</h5>
             <XYPlot
                 className="clustered-stacked-bar-chart-example"
                 xType="ordinal"
@@ -127,7 +120,7 @@ console.log(currentUser.goods[0])
               ) : <p>No sales yet</p>
          ) : (
            <div>
-          <h5 className="card-title mb-4">Recent orders </h5> 
+          <h5 className="card-title mb-4">{language === 'Russian' ? 'Последние заказы': 'Recent orders'}</h5> 
               <div className="row">
                 {orders.map(order => {
                   return (
@@ -137,14 +130,14 @@ console.log(currentUser.goods[0])
                         <figcaption className="info">
                           <time className="text-muted"><i className="fa fa-calendar-alt"></i> 12.09.2019</time>
                           <p>{order?.cart[0]?.name} </p>
-                          <span className="text-success">Order confirmed </span>
+                          <span className="text-success">{language === 'Russian' ? 'Заказ подтвержден': 'Order confirmed'}</span>
                         </figcaption>
                       </figure>
                     </div>
                   )
                 })}
             </div>
-            <a href="/" className="btn btn-outline-primary btn-block"> See all orders <i className="fa fa-chevron-down"></i>  </a>
+            <a href="/" className="btn btn-outline-primary btn-block">{language === 'Russian' ? 'Посмотреть все заказы': 'See all orders'}<i className="fa fa-chevron-down"></i>  </a>
             </div>
          )}
           </div>

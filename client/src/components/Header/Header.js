@@ -105,15 +105,16 @@ const Header = () => {
 										<small className="text"> Message </small>
 									</a>
 								</div> */}
-
-								<div className="widget-header mr-3">
-									<Link to="/profile" className="widget-view" onClick={() => setChoice(2)}>
-										<div className="icon-area">
-											<i className="fa fa-store"></i>
-										</div>
-										<small className="text"> {language === 'Russian' ? 'Заказы' : 'Orders'} </small>
-									</Link>
-								</div>
+                {user && 
+                  <div className="widget-header mr-3">
+                    <Link to="/profile" className="widget-view" onClick={() => setChoice(2)}>
+                      <div className="icon-area">
+                        <i className="fa fa-store"></i>
+                      </div>
+                      <small className="text"> {language === 'Russian' ? 'Заказы' : 'Orders'} </small>
+                    </Link>
+                  </div>
+                }
 								<div className="widget-header">
 									<Link to="/cart" className="widget-view">
 										<div className="icon-area">
