@@ -14,7 +14,6 @@ function Order() {
   const [checkout, setCheckOut] = useState(false);
   const [address, setAddress] = useState('')
   const [fio, setFio] = useState('')
-  const [fiof, setFiof] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [card, setCard] = useState('')
@@ -22,8 +21,10 @@ function Order() {
   const [expMonth, setExpMonth] = useState('')
   const [expYear, setExpYear] = useState('')
   const [cvv, setCvv] = useState('')
+
   let {setChoice} = useProfileContext()
   const language = useSelector(state => state.language)
+
   const currentUser = useSelector(state => state.user)
   const currentCart = useSelector(state => state.user.cart)
   let fioToServer = fio.value
@@ -180,7 +181,7 @@ function Order() {
                 </div>
                 <button className="subscribe btn btn-primary btn-block">
                   Confirm
-      </button>
+                </button>
                 {checkout ? (
                   <Paypal total={total} />
                 ) : (
