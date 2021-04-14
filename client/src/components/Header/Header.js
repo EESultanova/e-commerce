@@ -17,6 +17,8 @@ import { useProfileContext } from '../../contexts/ProfileContext';
 
 const Header = () => {
 	const [input, setInput] = useState('')
+  let {setChoice} = useProfileContext()
+  const { language, setLanguage } = useProfileContext()
 	const categories = useSelector(state => state.categories)
 	const [categoryForFilter, setCategoryForFilter] = useState(categories[0]?._id)
 	const user = useSelector(state => state.user.isAuth);
@@ -27,7 +29,8 @@ const Header = () => {
 	const dispatch = useDispatch()
 
   const history = useHistory()
-  let {setChoice} = useProfileContext()
+
+  console.log(language)
 
 
 	const handleLogout = () => {
@@ -73,10 +76,10 @@ const Header = () => {
                    {categories.map(el => <option key={el._id} value={el._id}>{el.name}</option>)}
   								</select>
 
-									<input type="text" value={input} onChange={(e) => setInput(e.target.value)} className="form-control" placeholder="Search" />
+									<input type="text" value={input} onChange={(e) => setInput(e.target.value)} className="form-control" placeholder={language === 'English' ? 'Search' : 'Поиск'} />
 
 									<div className="input-group-append">
-										<Link to={`/categories/${categoryForFilter}`} className="btn btn-primary">	<i className="fa fa-search"></i>Search</Link>
+										<Link to={`/categories/${categoryForFilter}`} className="btn btn-primary">	<i className="fa fa-search"></i>{language === 'English' ? 'Search' : 'Поиск'}</Link>
 									</div>
 								</div>
 							</form>
@@ -86,7 +89,7 @@ const Header = () => {
 								<div className="widget-header mr-3">
 
 										<NavLink to={user ? "/profile" : "/login"} onClick={() => setChoice(0)}><img src={avatar} alt="" style={Object.assign({}, { width: '32px' }, { height: '31px' }, { 'borderRadius': '50%' })} />
-											<small className="text"> My profile </small>
+											<small className="text"> {language === 'English' ? 'My profile' : 'Мой профиль'} </small>
 										</NavLink>
 									
 
@@ -106,7 +109,7 @@ const Header = () => {
 										<div className="icon-area">
 											<i className="fa fa-store"></i>
 										</div>
-										<small className="text"> Orders </small>
+										<small className="text"> {language === 'English' ? 'Orders' : 'Заказы'} </small>
 									</Link>
 								</div>
 								<div className="widget-header">
@@ -124,7 +127,7 @@ const Header = () => {
 													: '')
 											}
 										</div>
-										<small className="text"> Cart </small>
+										<small className="text"> {language === 'English' ? 'Cart' : 'Корзина'} </small>
 									</Link>
 								</div>
 							</div>
@@ -144,7 +147,7 @@ const Header = () => {
 					<div className="collapse navbar-collapse" id="main_nav">
 						<ul className="navbar-nav">
 							<li className="nav-item dropdown">
-								<a className="nav-link dropdown-toggle" data-toggle="dropdown" href="/"> <i className="fa fa-bars text-muted mr-2"></i> Menu </a>
+								<a className="nav-link dropdown-toggle" data-toggle="dropdown" href="/"> <i className="fa fa-bars text-muted mr-2"></i> {language === 'English' ? 'Menu' : 'Меню'} </a>
 								<div className="dropdown-menu dropdown-large">
 									<nav className="row">
 										<div className="col-12 ml-3">
@@ -156,37 +159,35 @@ const Header = () => {
 								</div>
 							</li>
 							<li className="nav-item">
-								<Link className="nav-link" to="/">All categories</Link>
+								<Link className="nav-link" to="/">{language === 'English' ? 'All categories' : 'Все категории'}</Link>
 							</li>
 						</ul>
 						<ul className="navbar-nav ml-md-auto">
 							{!user &&
 								<li className="nav-item">
 									<button>
-										<Link className="btn btn-primary" to="/login">Sign in</Link>
+										<Link className="btn btn-primary" to="/login">{language === 'English' ? 'Sign in' : 'Вход'}</Link>
 									</button>
 								</li>
 							}
 							{!user &&
 								<li className="nav-item">
 									<button>
-										<Link className="btn btn-primary" to="/registration">Sign up</Link>
+										<Link className="btn btn-primary" to="/registration">{language === 'English' ? 'Sign up' : 'Регистрация'}</Link>
 									</button>
 								</li>
 							}
 							{user &&
 								<li className="nav-item">
 									<button>
-										<Link onClick={handleLogout} className="btn btn-primary" to="/">Log out</Link>
+										<Link onClick={handleLogout} className="btn btn-primary" to="/">{language === 'English' ? 'Log out' : 'Выход'}</Link>
 									</button>
 								</li>
 							}
-							<li className="nav-item dropdown">
-								<a className="nav-link dropdown-toggle mt-1" href="http://example.com" data-toggle="dropdown">English</a>
-								<div className="dropdown-menu dropdown-menu-right">
-									<a className="dropdown-item" href="/">Russian</a>
-								</div>
-							</li>
+              <select selected='English' onChange={(e) => setLanguage(e.target.value)} className="nav-item dropdown border-0">
+                <option>English</option>
+                <option>Russian</option>
+              </select>
 						</ul>
 					</div>
 				</div>
