@@ -17,6 +17,7 @@ const initState = () =>  {
     cart: [],
     search: [],
     loader: true,
+    language: '',
   }
 
   const fromLS = JSON.parse(window.localStorage.getItem('myApp'))

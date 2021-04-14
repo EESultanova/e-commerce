@@ -13,12 +13,13 @@ import { API_URL, SITE_URL } from '../../config'
 import { useEffect, useState } from 'react';
 import { filterGoodsSaga, getGoods } from '../../redux/actionCreators/goodAC';
 import { useProfileContext } from '../../contexts/ProfileContext';
+import { setLanguage } from '../../redux/actionCreators/languageAC';
 
 
 const Header = () => {
 	const [input, setInput] = useState('')
   let {setChoice} = useProfileContext()
-  const { language, setLanguage } = useProfileContext()
+  // const { language } = useProfileContext()
 	const categories = useSelector(state => state.categories)
 	const [categoryForFilter, setCategoryForFilter] = useState(categories[0]?._id)
 	const user = useSelector(state => state.user.isAuth);
@@ -27,6 +28,7 @@ const Header = () => {
 	const userCart = useSelector(state => state.user.cart)
 	const avatar = currentUser.avatar ? `${SITE_URL + currentUser.avatar}` : avatarLogo;
 	const dispatch = useDispatch()
+  const language = useSelector(state => state.language)
 
   const history = useHistory()
 
@@ -184,10 +186,17 @@ const Header = () => {
 									</button>
 								</li>
 							}
-              <select selected='English' onChange={(e) => setLanguage(e.target.value)} className="nav-item dropdown border-0">
-                <option>English</option>
-                <option>Russian</option>
-              </select>
+              {(language === 'Russian') ? 
+                <select onChange={(e) => dispatch(setLanguage(e.target.value))} className="nav-item dropdown border-0">
+                  <option>English</option>
+                  <option selected="selected">Russian</option>
+                </select>
+                :
+                <select onChange={(e) => dispatch(setLanguage(e.target.value))} className="nav-item dropdown border-0">
+                  <option selected="selected">English</option>
+                  <option>Russian</option>
+                </select>
+              }
 						</ul>
 					</div>
 				</div>

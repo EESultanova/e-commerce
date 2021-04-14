@@ -16,7 +16,10 @@ const cartReducer = (state = [], action) => {
     case ADD_GOOD_TO_CART:
       return [
         ...state,
-        action.payload
+        {
+          ...action.payload,
+          quantity: 1,
+        }
       ]
 
     case DELETE_GOOD_FROM_CART:

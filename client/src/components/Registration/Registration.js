@@ -18,7 +18,7 @@ function Registration() {
     const [name, setNickname] = useState('');
     const [role, setRole] = useState('');
     const cart = useSelector(state => state.cart)
-    const { language } = useProfileContext()
+    const language = useSelector(state => state.language)
 
     const lastLocation = useLastLocation()
 

@@ -1,10 +1,11 @@
+import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { useProfileContext } from "../../contexts/ProfileContext";
 
 const Good = ({ good }) => {
 
   let {id} = useParams();
-  const { language } = useProfileContext()
+  const language = useSelector(state => state.language)
 
   return (
     <div className="col-md-3 mx-4 good" data-price={good.price} data-rate={good.rating}>
@@ -20,6 +21,17 @@ const Good = ({ good }) => {
               <span className="price">{good.price} $</span>
               <small className="text-muted">{(language === 'Russian') ? '/ единица товара' : '/ per item'}</small>
             </div>
+
+            <div className="price-wrap">
+              <span className="mt-2">Rating: {good.rating}  / 10</span>
+
+            </div>
+
+            <label className="custom-control mb-3 mt-2 custom-checkbox">
+              <input type="checkbox" className="custom-control-input" />
+              <div className="custom-control-label mr-4">Add to compare
+                </div>
+            </label>
           </figcaption>
         </figure>
       </Link>

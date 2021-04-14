@@ -56,7 +56,10 @@ const userReducer = (state = {}, action) => {
     case ADD_GOOD_TO_USER_CART:
       return {
         ...state,
-        cart: [...state.cart, action.payload]
+        cart: [...state.cart, {
+          ...action.payload,
+          quantity: 1,
+        }]
       }
 
     case DELETE_GOOD_FROM_USER_CART:
@@ -65,21 +68,6 @@ const userReducer = (state = {}, action) => {
         cart: state.cart.filter(good => good._id !== action.payload)
       }
 
-    // case SET_AVATAR:
-    //     if (action.payload.user) {
-    //         return {
-    //             ...state,
-    //             avatar: action.payload.user.avatar,
-    //         }
-    //     }
-    // } else {
-    //     localStorage.removeItem('token');
-    //     return {
-    //         ...state,
-    //         name: '',
-    //         isAuth: false
-    //     }
-    // }
     case GET_GOODS_SELLER:
       return {
         ...state,
