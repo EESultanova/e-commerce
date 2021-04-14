@@ -4,11 +4,37 @@ import avatarLogo from '../../assets/avatar.svg';
 import { useProfileContext } from "../../contexts/ProfileContext";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import {
+  XYPlot,
+  XAxis,
+  YAxis,
+  VerticalGridLines,
+  HorizontalGridLines,
+  VerticalBarSeries,
+  DiscreteColorLegend,
+  GradientDefs
+} from 'react-vis';
+
 const ProfileOverview = () => {
   const currentUser = useSelector(state => state.user);
   const avatar = currentUser.avatar ? `${SITE_URL + currentUser.avatar}` : avatarLogo;
   const orders = useSelector(state => state.user?.orders[0])
   let {setChoice} = useProfileContext()
+console.log(currentUser.goods[0])
+  const BarSeries = VerticalBarSeries
+  const dataResult = currentUser?.goods[0]?.filter(el => el.initQuantity - el.quantity > 0).map(el => el = new Object ({
+    x: el.name?.split(' ').slice(0,2).join(' '),
+    y: el.initQuantity - el.quantity
+  }))
+
+  const dataResultAll = currentUser?.goods[0]?.filter(el => el.initQuantity - el.quantity > 0).map(el => el = new Object ({
+    x: el.name?.split(' ').slice(0,2).join(' '),
+    y: el.initQuantity
+  }))
+  const ITEMS = [
+    {title: 'ITEMS IN STOCK', color: '#79C7E3', strokeWidth: 9},
+    {title: 'SOLD', color: '#FF6A00', strokeWidth: 9}
+  ]
   return ( 
     <>
     <article className="card mb-3">
@@ -62,7 +88,46 @@ const ProfileOverview = () => {
           </article>
           <article className="card  mb-3">
             <div className="card-body">
-              <h5 className="card-title mb-4">Recent orders </h5> 
+            {currentUser.role === 'seller' ?  (
+              dataResult.length ? (
+                <div>
+            <h5 className="card-title mb-4">Sales Analytics </h5>
+            <XYPlot
+                className="clustered-stacked-bar-chart-example"
+                xType="ordinal"
+                stackBy="y"
+                width={1000}
+                height={500}
+                xType="ordinal"
+                margin={{bottom: 150}}
+              >
+              <DiscreteColorLegend
+                  style={{position: 'absolute', left: '850px', top: '8px'}}
+                  orientation="horizontal"
+                  items={ITEMS}
+                />
+            
+                <VerticalGridLines />
+                  <HorizontalGridLines />
+                  <XAxis tickLabelAngle={-45}/>
+                  <YAxis />
+                  <BarSeries
+                    cluster="sold"
+                    color="#FF6A00"
+                    data = {dataResult}
+                  />
+              <BarSeries
+                cluster="soldq"
+                color="#79C7E3"
+                data={dataResultAll}
+              />
+            
+            </XYPlot>
+          </div>
+              ) : <p>No sales yet</p>
+         ) : (
+           <div>
+          <h5 className="card-title mb-4">Recent orders </h5> 
               <div className="row">
                 {orders.map(order => {
                   return (
@@ -81,6 +146,8 @@ const ProfileOverview = () => {
             </div>
             <a href="/" className="btn btn-outline-primary btn-block"> See all orders <i className="fa fa-chevron-down"></i>  </a>
             </div>
+         )}
+          </div>
           </article>
           </>
    );

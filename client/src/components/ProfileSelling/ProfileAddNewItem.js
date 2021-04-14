@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { sellerAddGood, sellerAddGoodToServer } from "../../redux/actionCreators/userAC"
+import { getSellerGoods, sellerAddGood, sellerAddGoodToServer } from "../../redux/actionCreators/userAC"
 import { store } from 'react-notifications-component';
 import 'animate.css'
 import 'react-notifications-component/dist/theme.css'
@@ -22,6 +22,7 @@ function ProfileAddNewItem() {
 
     dispatch(sellerAddGood({ name, quantity, price, description, category, photo, rating: "0" }))
     sellerAddGoodToServer({ name, quantity, price, description, category, photo, rating: "0", user })
+    dispatch(getSellerGoods(user))
 
     store.addNotification({
       content: NotifyAdd,
