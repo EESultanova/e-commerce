@@ -8,9 +8,14 @@ import { useProfileContext } from '../../contexts/ProfileContext';
 import { emptyCart } from '../../redux/actionCreators/cartAC';
 import { changeGoodsQuantityOnServer } from '../../redux/actionCreators/goodAC';
 import { addOrderDetails, addOrderDetailsToServer, getAllOrders } from '../../redux/actionCreators/userAC';
+import Paypal from '../PayPal/PayPal';
+
 
 function Order() {
   const dispatch = useDispatch()
+
+  const [checkout, setCheckOut] = useState(false);
+
   const [address, setAddress] = useState('')
   const [fio, setFio] = useState('')
   const [fiof, setFiof] = useState('')
@@ -22,32 +27,35 @@ function Order() {
   const [expYear, setExpYear] = useState('')
   const [cvv, setCvv] = useState('')
 
+
   let {setChoice} = useProfileContext()
   const { language } = useProfileContext()
+
 
   const currentUser = useSelector(state => state.user)
   const currentCart = useSelector(state => state.user.cart)
   let fioToServer = fio.value
   let addressToServer = address.value
   const history = useHistory()
-  
+
   const total = currentCart
-  .map(el => el.price * el.quantity)
-  .reduce((acc, currentValue) => acc + currentValue, 0)
-  
+    .map(el => el.price * el.quantity)
+    .reduce((acc, currentValue) => acc + currentValue, 0)
+
   async function confirmHandler(e) {
     e.preventDefault()
-    await addOrderDetailsToServer({fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser, total})
-    dispatch(addOrderDetails({fioToServer, addressToServer, email, phone, currentCart, total}))
+    await addOrderDetailsToServer({ fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser, total })
+    dispatch(addOrderDetails({ fioToServer, addressToServer, email, phone, currentCart, total }))
     dispatch(emptyCart())
     setChoice(2)
     history.push('/profile')
   }
-  
 
 
-  return(
+
+  return (
     <>
+
     <section className="section-content padding-y">
     {
       currentCart.length ? currentCart.map(good => {
@@ -70,12 +78,35 @@ function Order() {
               <div className="price-wrap"> 
                 <var style={{width:200}} className="price mx-5">{(good.price * good.quantity).toFixed(2)} $</var> 
                 <small className="text-muted"> {good.price}$ {language === 'Russian' ? ' / шт' : '/ each'} </small> 
+
               </div>
-            </td>
-            <td className="text-right"> 
-            </td>
-          </tr>
+
+
+
+              <div className="form-row">
+                <div className="col form-group">
+                  <label>Full name</label>
+                  <FioSuggestions token="5380c3726e32d6ce9d7fba825b4570fea6395f1b" value={fio} onChange={setFio} />
+                </div>
+              </div>
+
+              <div className="form-row">
+                <div className="col form-group">
+                  <label>Email</label>
+                  <input onChange={e => setEmail(e.target.value)} type="email" className="form-control" placeholder="" />
+                </div>
+                <div className="col form-group">
+                  <label>Phone</label>
+                  <input type="text" onChange={e => setPhone(e.target.value)} className="form-control" placeholder="" />
+                </div>
+              </div>
+              <div className="form-group">
+                <label>Adress</label>
+                <AddressSuggestions token="5380c3726e32d6ce9d7fba825b4570fea6395f1b" value={address} onChange={setAddress} />
+              </div>
+            </div>
           </div>
+
           </section>
           )
         })
@@ -198,19 +229,36 @@ function Order() {
 			</div>
       <button className="subscribe btn btn-primary btn-block">
       {language === 'Russian' ? 'Подтвердить' : 'Confirm'}
+
       </button>
-		</form>
-      </div> 
+                {checkout ? (
+                  <Paypal total={total} />
+                ) : (
+                  <button className="subscribe btn btn-primary btn-block"
+                    onClick={() => {
+                      setCheckOut(true);
+                    }}
+                  >
+                    Paypal
+                  </button>
+                )}
+              </form>
 
-{/* payment end */}
 
-<br/><br/> 
 
-  </div> 
-  </div>
-  </section>
-  
-  </>
+
+            </div>
+
+
+            {/* payment end */}
+
+            <br /><br />
+
+          </div>
+        </div>
+      </section>
+
+    </>
   )
 }
 
