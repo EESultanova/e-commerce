@@ -29,7 +29,7 @@ function ProfileAddNewItem() {
       content: NotifyAdd,
       message: `${name} was added succsessfully!`,
       type: 'default',
-      container: 'bottom-right',
+      container: 'bottom-left',
       insert: 'bottom',
       animationIn: ['animated', 'fadeIn'],
       animationOut: ['animated', 'fadeOut'],
