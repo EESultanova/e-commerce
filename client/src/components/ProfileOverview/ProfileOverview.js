@@ -119,26 +119,27 @@ console.log(currentUser.goods[0])
           </div>
               ) : <p>No sales yet</p>
          ) : (
-           <div>
-          <h5 className="card-title mb-4">{language === 'Russian' ? 'Последние заказы': 'Recent orders'}</h5> 
-              <div className="row">
-                {orders.map(order => {
-                  return (
-                    <div className="col-md-6">
-                      <figure className="itemside  mb-3">
-                        <div className="aside"><img src={order?.cart[0]?.photo} className="border img-sm" alt=""/></div>
-                        <figcaption className="info">
-                          <time className="text-muted"><i className="fa fa-calendar-alt"></i> 12.09.2019</time>
-                          <p>{order?.cart[0]?.name} </p>
-                          <span className="text-success">{language === 'Russian' ? 'Заказ подтвержден': 'Order confirmed'}</span>
-                        </figcaption>
-                      </figure>
-                    </div>
-                  )
-                })}
+          <>
+            <h5 className="card-title mb-4">{language === 'Russian' ? 'Последние заказы': 'Recent orders'}</h5> 
+            <div className="d-flex flex-row justify-content-center">
+                <div>
+                  {orders.map(order => {
+                    return (
+                      <div>
+                        <figure className="itemside  mb-3">
+                          <div className="aside"><img src={order?.cart[0]?.photo} className="border img-sm" alt=""/></div>
+                          <figcaption className="info">
+                            <time className="text-muted"><i className="fa fa-calendar-alt"></i> 12.09.2019</time>
+                            <p>{order?.cart[0]?.name} </p>
+                            <span className="text-success">{language === 'Russian' ? 'Заказ подтвержден': 'Order confirmed'}</span>
+                          </figcaption>
+                        </figure>
+                      </div>
+                    )
+                  })}
+              </div>
             </div>
-            <a href="/" className="btn btn-outline-primary btn-block">{language === 'Russian' ? 'Посмотреть все заказы': 'See all orders'}<i className="fa fa-chevron-down"></i>  </a>
-            </div>
+          </>
          )}
           </div>
           </article>

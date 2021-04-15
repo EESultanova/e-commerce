@@ -17,7 +17,7 @@ const ProfileOrders = () => {
     dispatch(getAllOrders(user))
   }, [setChoice])
 
-  const fee = 20;
+  const fee = 0;
 
   return ( 
     <>
@@ -47,7 +47,7 @@ const ProfileOrders = () => {
 					</span>
 					<p>Subtotal: $ {order.total} <br/>
 					 Shipping fee:  $ {fee} <br/> 
-					 <span className="b">Total:  $ {order.total + fee} </span>
+					 <span className="b">Total:  $ {(order.total + fee).toFixed(2)} </span>
 					</p>
 				</div>
 			</div>
