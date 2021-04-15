@@ -7,7 +7,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useProfileContext } from '../../contexts/ProfileContext';
 import { emptyCart } from '../../redux/actionCreators/cartAC';
 import { changeGoodsQuantityOnServer } from '../../redux/actionCreators/goodAC';
-import { addOrderDetails, addOrderDetailsToServer, getAllOrders } from '../../redux/actionCreators/userAC';
+import { addOrderDetails, addOrderDetailsToServer, emptyUserCart, getAllOrders } from '../../redux/actionCreators/userAC';
 import Paypal from '../PayPal/PayPal';
 function Order() {
   const dispatch = useDispatch()
@@ -37,7 +37,7 @@ function Order() {
     e.preventDefault()
     await addOrderDetailsToServer({ fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser, total })
     dispatch(addOrderDetails({ fioToServer, addressToServer, email, phone, currentCart, total }))
-    dispatch(emptyCart())
+    dispatch(emptyUserCart())
     setChoice(2)
     history.push('/profile')
   }
@@ -54,7 +54,7 @@ function Order() {
                       <figure className="itemside">
                         <div className="aside"><img src={good.photo} className="img-sm" alt="" /></div>
                         <figcaption className="info">
-                          <a style={{ maxWidth: 500 }} href="/" className="title text-dark">{good.name}</a>
+                          <Link style={{ minWidth: 340, maxWidth: 500 }} to={`/goods/${good?._id}`} className="title text-dark">{good.name}</Link>
                         </figcaption>
                       </figure>
                     </td>

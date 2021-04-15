@@ -84,7 +84,7 @@ const GoodDetails = () => {
 
           <div className="rating-wrap my-3">
             <ul className="rating-stars">
-              <li style={{ width: 9.4 * good.rating }} className="stars-active">
+              <li style={{ width: 9.4 * good?.rating }} className="stars-active">
                 <i className="fa fa-star"> </i> <i className="fa fa-star"> </i>
                 <i className="fa fa-star"> </i> <i className="fa fa-star"> </i>
                 <i className="fa fa-star"> </i> 

@@ -50,23 +50,24 @@ function ProfileAddNewItem() {
   }
   return (
     <div className="card mb-4">
-      <div className="card-body">
-        <h4 className="card-title mb-5">{language === 'Russian' ? 'Пожалуйста, заполните форму заказа': 'Please fill out the item form'}</h4>
+      <h4 className="card-title my-4">{language === 'Russian' ? 'Пожалуйста, заполните форму заказа': 'Please fill out the item form'}</h4>
+      <div className="card-body d-flex justify-content-center">
         <form>
 
           <div className="form-row">
-            <div className="col form-group">
+            <div className="form-group">
               <label>{language === 'Russian' ? 'Название': 'Name'}</label>
               <input type="text" onChange={e => setName(e.target.value)} className="form-control" placeholder="Drill" maxLength="125" />
             </div>
-            <div className="col form-group">
+            &nbsp;
+            <div className="form-group">
               <label>{language === 'Russian' ? 'Количество': 'Quantity'}</label>
               <input type="number" onChange={e => setQuantity(e.target.value)} className="form-control" placeholder="0" />
             </div>
           </div>
 
-          <div className="form-row">
-            <div className="form-group col-md-6">
+          <div className="form-row d-flex justify-content-center">
+            <div className="form-group">
               <label>{language === 'Russian' ? 'Категория': 'Category'}</label>
               <select id="inputState" className="form-control" onChange={e => setCategory(e.target.value)}>
                 {categories.map(el => <option key={el._id} value={el._id}>{el.name}</option>)}
@@ -94,7 +95,6 @@ function ProfileAddNewItem() {
         </form>
       </div>
     </div>
-
   )
 }
 

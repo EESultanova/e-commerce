@@ -15,23 +15,23 @@ const Good = ({ good }) => {
             <span className="badge badge-danger"> NEW </span>
             <img src={good.photo[0]} className="mt-2" alt="" />
           </div>
-          <figcaption className="mx-4 my-3">
+          <figcaption className="mx-4 my-3" style={{'height': '9rem'}}>
             <p className="title mb-2">{good.name}</p>
             <div className="price-wrap">
               <span className="price">{good.price} $</span>
               <small className="text-muted">{(language === 'Russian') ? '/ единица товара' : '/ per item'}</small>
             </div>
 
-            <div className="price-wrap">
-              <span className="mt-2">Rating: {good.rating}  / 10</span>
+            <div className="price-wrap mt-2">
+              <span>Rating: {good.rating}  / 10</span>
 
             </div>
 
-            <label className="custom-control mb-3 mt-2 custom-checkbox">
+            {/* <label className="custom-control mb-3 mt-2 custom-checkbox">
               <input type="checkbox" className="custom-control-input" />
               <div className="custom-control-label mr-4">Add to compare
                 </div>
-            </label>
+            </label> */}
           </figcaption>
         </figure>
       </Link>
