@@ -1,4 +1,4 @@
-import { ADD_GOOD_TO_USER_CART, ADD_ORDER_DETAILS, CHANGE_QUANTITY_USER, DELETE_GOOD_FROM_USER_CART, GET_ALL_ORDERS, GET_GOODS_SELLER, REMOVE_USER, SET_AVATAR, SET_USER } from "../types/userTypes"
+import { ADD_GOOD_TO_USER_CART, ADD_ORDER_DETAILS, CHANGE_QUANTITY_USER, DELETE_GOOD_FROM_USER_CART, EMPTY_USER_CART, GET_ALL_ORDERS, GET_GOODS_SELLER, REMOVE_USER, SET_AVATAR, SET_USER } from "../types/userTypes"
 import { SELLER_ADD_GOOD, SELLER_EDIT_GOOD } from "../types/goodTypes"
 import { SITE_URL } from "../../config"
 
@@ -54,6 +54,13 @@ export const addGoodToUserCart = (good) => {
     payload: good
   }
 }
+
+export const emptyUserCart = () => {
+  return {
+    type: EMPTY_USER_CART,
+  }
+}
+
 
 export const deleteGoodFromUserCart = (good) => {
   console.log(good, "Delete good User")

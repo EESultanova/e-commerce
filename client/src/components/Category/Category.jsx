@@ -1,11 +1,9 @@
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { useProfileContext } from "../../contexts/ProfileContext"
-
 const Category = ({category}) => {
 
   const language = useSelector(state => state.language)
-  
+
   return (
     
       <div className="col-md-3">

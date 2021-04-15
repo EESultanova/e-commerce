@@ -25,7 +25,7 @@ const ProfileOrders = () => {
       return (
         <article key={order._id} className="card mb-4">
 		<header className="card-header">
-			<a href="/" className="float-right"> <i className="fa fa-print"></i>{(language === 'Russian') ? ' Печатать' : ' Print'}</a>
+			<a href="javascript:(print());" className="float-right print-doc"> <i className="fa fa-print"></i>{(language === 'Russian') ? ' Печатать' : ' Print'}</a>
 			<strong className="d-inline-block mr-3">{(language === 'Russian') ? 'ID Заказа' : 'Order ID:'} {order._id}</strong>
 			<span>{(language === 'Russian') ? 'Дата заказа: 16 March 2021' : `Order Date: 16 March 2021`}</span>
 		</header>

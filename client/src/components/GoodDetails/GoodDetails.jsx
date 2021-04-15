@@ -37,7 +37,7 @@ const GoodDetails = () => {
 
   function NotifyAdd() {
     return (
-      <div className="bg-primary text-white rounded" style={{ width: 200}}>
+      <div className="bg-primary text-white rounded" style={{ width: 200 }}>
         <h6>{language === 'Russian' ? 'Товар добавлен в вашу корзину' : 'Item was added to your cart'}</h6>
       </div>
     )
@@ -45,7 +45,7 @@ const GoodDetails = () => {
 
   function NotifyRemove() {
     return (
-      <div className="bg-secondary text-white rounded" style={{ width: 200}}>
+      <div className="bg-secondary text-white rounded" style={{ width: 200 }}>
         <h6>{language === 'Russian' ? 'Товар удален из вашей корзины' : 'Item was removed from your cart'}</h6>
       </div>
     )
@@ -84,15 +84,15 @@ const GoodDetails = () => {
 
           <div className="rating-wrap my-3">
             <ul className="rating-stars">
-              <li style={{ width: 9.4 * good.rating }} className="stars-active">
+              <li style={{ width: 9.4 * good?.rating }} className="stars-active">
                 <i className="fa fa-star"> </i> <i className="fa fa-star"> </i>
                 <i className="fa fa-star"> </i> <i className="fa fa-star"> </i>
-                <i className="fa fa-star"> </i> 
+                <i className="fa fa-star"> </i>
               </li>
               <li>
-                <i className="fa fa-star"> </i> <i className="fa fa-star"> </i> 
                 <i className="fa fa-star"> </i> <i className="fa fa-star"> </i>
-                <i className="fa fa-star"> </i> 
+                <i className="fa fa-star"> </i> <i className="fa fa-star"> </i>
+                <i className="fa fa-star"> </i>
               </li>
             </ul>
             {/* <small className="label-rating text-muted">{language === 'Russian' ? '132 отзыва' : '132 reviews'}</small> */}
@@ -124,87 +124,87 @@ const GoodDetails = () => {
             <div className="form-group col-md">
               {!currentUserAuth &&
                 ((inCart === true) ?
-                <button onClick={() => {
-                  store.addNotification({
-                    content: NotifyRemove,
-                    message: `Item was removed from your cart!`,
-                    type: 'default',
-                    container: 'bottom-right',
-                    insert: 'bottom',
-                    animationIn: ['animated', 'fadeIn'],
-                    animationOut: ['animated', 'fadeOut'],
+                  <button onClick={() => {
+                    store.addNotification({
+                      content: NotifyRemove,
+                      message: `Item was removed from your cart!`,
+                      type: 'default',
+                      container: 'bottom-right',
+                      insert: 'bottom',
+                      animationIn: ['animated', 'fadeIn'],
+                      animationOut: ['animated', 'fadeOut'],
 
-                    dismiss: {
-                      duration: 2000,
-                    },
-                    width: 200,
+                      dismiss: {
+                        duration: 2000,
+                      },
+                      width: 200,
 
-                  })
-                  dispatch(deleteGoodFromCart(good?._id))
-                }} type="button" class="btn btn-secondary">{language === 'Russian' ? 'Удалить из корзины' : 'Remove from cart'}</button>
-                :
-                <button onClick={() => {
-                  store.addNotification({
-                    content: NotifyAdd,
-                    message: `Item was added to your cart!`,
-                    type: 'warning',
-                    container: 'bottom-right',
-                    insert: 'succes',
-                    animationIn: ['animated', 'fadeIn'],
-                    animationOut: ['animated', 'fadeOut'],
+                    })
+                    dispatch(deleteGoodFromCart(good?._id))
+                  }} type="button" class="btn btn-secondary">{language === 'Russian' ? 'Удалить из корзины' : 'Remove from cart'}</button>
+                  :
+                  <button onClick={() => {
+                    store.addNotification({
+                      content: NotifyAdd,
+                      message: `Item was added to your cart!`,
+                      type: 'warning',
+                      container: 'bottom-right',
+                      insert: 'succes',
+                      animationIn: ['animated', 'fadeIn'],
+                      animationOut: ['animated', 'fadeOut'],
 
-                    dismiss: {
-                      duration: 2000,
-                    },
-                    width: 200,
+                      dismiss: {
+                        duration: 2000,
+                      },
+                      width: 200,
 
-                  })
-                  dispatch(addGoodToCart(good))
-                }} className="btn  btn-primary">
-                  <i className="fas fa-shopping-cart"></i> <span className="text">{language === 'Russian' ? 'Добавить в корзину' : 'Add to cart'}</span>
-                </button>)
+                    })
+                    dispatch(addGoodToCart(good))
+                  }} className="btn  btn-primary">
+                    <i className="fas fa-shopping-cart"></i> <span className="text">{language === 'Russian' ? 'Добавить в корзину' : 'Add to cart'}</span>
+                  </button>)
               }
               {(currentUserAuth && currentUserRole === 'buyer') &&
                 ((inUserCart === true) ?
-                <button onClick={() => {
-                  store.addNotification({
-                    content: NotifyRemove,
-                    message: `Item was removed from your cart!`,
-                    type: 'default',
-                    container: 'bottom-right',
-                    insert: 'bottom',
-                    animationIn: ['animated', 'fadeIn'],
-                    animationOut: ['animated', 'fadeOut'],
+                  <button onClick={() => {
+                    store.addNotification({
+                      content: NotifyRemove,
+                      message: `Item was removed from your cart!`,
+                      type: 'default',
+                      container: 'bottom-right',
+                      insert: 'bottom',
+                      animationIn: ['animated', 'fadeIn'],
+                      animationOut: ['animated', 'fadeOut'],
 
-                    dismiss: {
-                      duration: 2000,
-                    },
-                    width: 200,
+                      dismiss: {
+                        duration: 2000,
+                      },
+                      width: 200,
 
-                  })
-                  dispatch(deleteGoodFromUserCart(good?._id))
-                }} type="button" class="btn btn-secondary">{language === 'Russian' ? 'Удалить из корзины' : 'Remove from cart'}</button>
-                :
-                <button onClick={() => {
-                  store.addNotification({
-                    content: NotifyAdd,
-                    message: `Item was added to your cart!`,
-                    type: 'warning',
-                    container: 'bottom-right',
-                    insert: 'succes',
-                    animationIn: ['animated', 'fadeIn'],
-                    animationOut: ['animated', 'fadeOut'],
+                    })
+                    dispatch(deleteGoodFromUserCart(good?._id))
+                  }} type="button" class="btn btn-secondary">{language === 'Russian' ? 'Удалить из корзины' : 'Remove from cart'}</button>
+                  :
+                  <button onClick={() => {
+                    store.addNotification({
+                      content: NotifyAdd,
+                      message: `Item was added to your cart!`,
+                      type: 'warning',
+                      container: 'bottom-right',
+                      insert: 'succes',
+                      animationIn: ['animated', 'fadeIn'],
+                      animationOut: ['animated', 'fadeOut'],
 
-                    dismiss: {
-                      duration: 2000,
-                    },
-                    width: 200,
+                      dismiss: {
+                        duration: 2000,
+                      },
+                      width: 200,
 
-                  })
-                  dispatch(addGoodToUserCart(good))
-                }} className="btn  btn-primary">
-                  <i className="fas fa-shopping-cart"></i> <span className="text">{language === 'Russian' ? 'Добавить в корзину' : 'Add to cart'}</span>
-                </button>)
+                    })
+                    dispatch(addGoodToUserCart(good))
+                  }} className="btn  btn-primary">
+                    <i className="fas fa-shopping-cart"></i> <span className="text">{language === 'Russian' ? 'Добавить в корзину' : 'Add to cart'}</span>
+                  </button>)
               }
             </div>
           </div>
