@@ -21,6 +21,7 @@ const Header = () => {
   let {setChoice} = useProfileContext()
   // const { language } = useProfileContext()
 	const categories = useSelector(state => state.categories)
+  const orders = useSelector(state => state.user?.orders[0])
   const [categoryForFilter, setCategoryForFilter] = useState(categories[0]?._id)
 	const user = useSelector(state => state.user.isAuth);
   const role = useSelector(state => state.user.role)
@@ -104,6 +105,7 @@ const Header = () => {
                         <i className="fa fa-store"></i>
                       </div>
                       <small className="text"> {language === 'Russian' ? 'Заказы' : 'Orders'} </small>
+                      {orders.length ? <span className="notify">{orders.length}</span> : ''}
                     </Link>
                   </div>
                 }

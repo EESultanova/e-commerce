@@ -7,7 +7,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useProfileContext } from '../../contexts/ProfileContext';
 import { emptyCart } from '../../redux/actionCreators/cartAC';
 import { changeGoodsQuantityOnServer } from '../../redux/actionCreators/goodAC';
-import { addOrderDetails, addOrderDetailsToServer, getAllOrders } from '../../redux/actionCreators/userAC';
+import { addOrderDetails, addOrderDetailsToServer, emptyUserCart, getAllOrders } from '../../redux/actionCreators/userAC';
 import Paypal from '../PayPal/PayPal';
 function Order() {
   const dispatch = useDispatch()
@@ -37,7 +37,7 @@ function Order() {
     e.preventDefault()
     await addOrderDetailsToServer({ fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser, total })
     dispatch(addOrderDetails({ fioToServer, addressToServer, email, phone, currentCart, total }))
-    dispatch(emptyCart())
+    dispatch(emptyUserCart())
     setChoice(2)
     history.push('/profile')
   }
