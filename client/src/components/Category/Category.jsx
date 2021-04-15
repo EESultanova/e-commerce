@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 import { useProfileContext } from "../../contexts/ProfileContext"
 const Category = ({category}) => {
 
-  const { language } = useProfileContext()
   const language = useSelector(state => state.language)
   
   return (
