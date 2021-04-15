@@ -14,15 +14,13 @@ import { useEffect, useState } from 'react';
 import { filterGoodsSaga, getGoodsFromServer } from '../../redux/actionCreators/goodAC';
 import { useProfileContext } from '../../contexts/ProfileContext';
 import { setLanguage } from '../../redux/actionCreators/languageAC';
+import { setSearchCategoryRedux } from '../../redux/actionCreators/searchCategoryAC';
 
 
 const Header = () => {
   const [input, setInput] = useState('')
   let {setChoice} = useProfileContext()
-  // const { language } = useProfileContext()
 	const categories = useSelector(state => state.categories)
-  const orders = useSelector(state => state.user?.orders[0])
-  const [categoryForFilter, setCategoryForFilter] = useState(categories[0]?._id)
 	const user = useSelector(state => state.user.isAuth);
   const role = useSelector(state => state.user.role)
 	const currentUser = useSelector(state => state.user);
@@ -32,10 +30,12 @@ const Header = () => {
 	const dispatch = useDispatch()
   const language = useSelector(state => state.language)
 
+  
   const history = useHistory()
 	const handleLogout = () => {
-		dispatch(removeUser())
+    dispatch(removeUser())
 	}
+  const categoryForFilter = useSelector(state => state.searchcategory)
   
 	useEffect(() => {
 		dispatch(filterGoodsSaga({ categoryForFilter, input }))
@@ -47,9 +47,9 @@ const Header = () => {
   }, [categoryForFilter])
 
   function selectHandler(option) {
-    setCategoryForFilter(option)
-    history.push(`/categories/${option}`)
+    dispatch(setSearchCategoryRedux(option))
     setInput('')
+    history.push(`/categories/${option}`)
   }
 
 

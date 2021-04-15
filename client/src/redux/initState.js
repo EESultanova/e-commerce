@@ -1,4 +1,6 @@
+
 const initState = () =>  {
+  
   const state = {
     user: {
       name: '',
@@ -18,6 +20,7 @@ const initState = () =>  {
     search: [],
     loader: true,
     language: '',
+    searchcategory: '607045d7fa8ce327ed1edb30',
   }
 
   const fromLS = JSON.parse(window.localStorage.getItem('myApp'))
