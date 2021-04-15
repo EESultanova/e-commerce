@@ -20,7 +20,7 @@ const goodSchema = new Schema({
   },
   initQuantity: {
     type: Number,
-    default: 1,
+    default: 100,
     min: 0,
   },
   rating: {

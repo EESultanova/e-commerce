@@ -3,7 +3,6 @@ import { API_URL, SITE_URL } from '../../config'
 import avatarLogo from '../../assets/avatar.svg';
 import { useProfileContext } from "../../contexts/ProfileContext";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 import {
   XYPlot,
   XAxis,
@@ -12,7 +11,6 @@ import {
   HorizontalGridLines,
   VerticalBarSeries,
   DiscreteColorLegend,
-  GradientDefs
 } from 'react-vis';
 
 const ProfileOverview = () => {
@@ -33,8 +31,9 @@ console.log(currentUser.goods[0])
   }))
   const ITEMS = [
     {title: 'ITEMS IN STOCK', color: '#79C7E3', strokeWidth: 9},
-    {title: 'SOLD', color: '#FF6A00', strokeWidth: 9}
+    {title: 'ORDERED', color: '#FF6A00', strokeWidth: 9}
   ]
+  console.log('CHART DATA:', dataResult)
   return ( 
     <>
     <article className="card mb-3">

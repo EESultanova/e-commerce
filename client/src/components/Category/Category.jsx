@@ -1,10 +1,13 @@
+import { useEffect } from "react"
+import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import { useProfileContext } from "../../contexts/ProfileContext"
+import { filterGoodsSaga } from "../../redux/actionCreators/goodAC"
 
 const Category = ({category}) => {
 
   const { language } = useProfileContext()
-  
+
   return (
     
       <div className="col-md-3">

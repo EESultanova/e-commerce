@@ -11,16 +11,17 @@ import { removeUser } from '../../redux/actionCreators/userAC'
 import avatarLogo from '../../assets/avatar.svg';
 import { API_URL, SITE_URL } from '../../config'
 import { useEffect, useState } from 'react';
-import { filterGoodsSaga, getGoods } from '../../redux/actionCreators/goodAC';
+import { filterGoodsSaga, getGoodsFromServer } from '../../redux/actionCreators/goodAC';
 import { useProfileContext } from '../../contexts/ProfileContext';
+import { GET_GOODS } from '../../redux/types/goodTypes';
 
 
 const Header = () => {
-	const [input, setInput] = useState('')
+  const [input, setInput] = useState('')
   let {setChoice} = useProfileContext()
   const { language, setLanguage } = useProfileContext()
 	const categories = useSelector(state => state.categories)
-	const [categoryForFilter, setCategoryForFilter] = useState(categories[0]?._id)
+  const [categoryForFilter, setCategoryForFilter] = useState(categories[0]?._id)
 	const user = useSelector(state => state.user.isAuth);
 	const currentUser = useSelector(state => state.user);
 	const cart = useSelector(state => state.cart)
@@ -29,9 +30,6 @@ const Header = () => {
 	const dispatch = useDispatch()
 
   const history = useHistory()
-
-  console.log(language)
-
 
 	const handleLogout = () => {
 		dispatch(removeUser())
@@ -44,12 +42,12 @@ const Header = () => {
 
   useEffect(() => {
     dispatch(filterGoodsSaga({categoryForFilter, input}))
+    dispatch(getGoodsFromServer(categoryForFilter))
   }, [categoryForFilter])
 
   const headerStyle = {
     "font-family": 'Prime, Helvetica, Arial, sans-serif'
   }
-
 
   function selectHandler(option) {
     setCategoryForFilter(option)
@@ -94,16 +92,6 @@ const Header = () => {
 									
 
 								</div>
-								{/* <div className="widget-header mr-3">
-									<a href="/" className="widget-view">
-										<div className="icon-area">
-											<i className="fa fa-comment-dots"></i>
-											<span className="notify">1</span>
-										</div>
-										<small className="text"> Message </small>
-									</a>
-								</div> */}
-
 								<div className="widget-header mr-3">
 									<Link to="/profile" className="widget-view" onClick={() => setChoice(2)}>
 										<div className="icon-area">
