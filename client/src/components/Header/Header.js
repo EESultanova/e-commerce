@@ -113,22 +113,41 @@ const Header = () => {
 									</div>
 								}
 								<div className="widget-header">
-									<Link to="/profile" className="widget-view">
-										<div className="icon-area">
-                      <span style={{fontSize: '25px'}}>&#128202;</span>
-											{user &&
+										
+											{user && (role === 'buyer') &&
 												(userCart?.length ?
-													<span className="notify">{userCart.length}</span>
+                          <Link to="/cart" className="widget-view">
+                            <div className="icon-area">
+                              <i className="fa fa-shopping-cart"></i>
+                              <span className="notify">{userCart.length}</span>
+                            </div>
+                            <small className="text"> {language === 'Russian' ? 'Корзина' : 'Cart'} </small>
+                          </Link>
 													: '')
 											}
 											{!user &&
-												(cart.length ?
-													<span className="notify">{cart.length}</span>
-													: '')
+                        <Link to="/cart" className="widget-view">
+                          <div className="icon-area">
+                            <i className="fa fa-shopping-cart"></i>
+                            {cart.length ?
+                              <span className="notify">{cart.length}</span>
+                              : ''
+                            }
+                          </div>
+                          <small className="text"> {language === 'Russian' ? 'Корзина' : 'Cart'} </small>
+                        </Link>
 											}
-										</div>
-										<small className="text"> {language === 'Russian' ? 'Аналитика' : 'Analytics'} </small>
-									</Link>
+                      {user && 
+                        (role === 'seller' ? 
+                        <Link to="/profile" className="widget-view">
+                          <div className="icon-area">
+                            <span style={{fontSize: '25'}}>&#128202;</span>
+                          </div>
+                          <small className="text"> {language === 'Russian' ? 'Аналитика' : 'Analytics'} </small>
+                        </Link>
+                        : '')
+                      }
+									
 								</div>
 							</div>
 						</div>

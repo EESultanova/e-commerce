@@ -86,13 +86,7 @@ const ListGoods = () => {
                 <li className="breadcrumb-item"><Link to="/">{language === 'Russian' ? 'Главная' : 'Home'}</Link></li>
                 {currentCategory && <li className="breadcrumb-item"><Link to={`/categories/${currentCategory._id}`}>{language === 'Russian' ? currentCategory.nameRu : currentCategory.name}</Link></li>}
                 <li className="list-inline-item mr-1">
-                  <div className="form-inline">
-                    <label className="ml-5 mr-2">{language === 'Russian' ? 'Цена' : 'Price'}</label>
-                    <input className="form-control form-control-sm" placeholder="Min" type="number" />
-                    <span className="px-2"> </span>
-                    <input className="form-control form-control-sm" placeholder="Max" type="number" />
-                    <button type="submit" className="btn btn-sm btn-light ml-2">Ok</button>
-                  </div>
+                  <label className="ml-5 mr-2">{language === 'Russian' ? 'Фильтровать по ' : 'Sort by'}</label>
                 </li>
                 <li>
                   <form className="form-inline mx-2">
