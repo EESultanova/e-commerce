@@ -46,11 +46,6 @@ const Header = () => {
     dispatch(filterGoodsSaga({categoryForFilter, input}))
   }, [categoryForFilter])
 
-  const headerStyle = {
-    "font-family": 'Prime, Helvetica, Arial, sans-serif'
-  }
-
-
   function selectHandler(option) {
     setCategoryForFilter(option)
     history.push(`/categories/${option}`)
@@ -153,8 +148,7 @@ const Header = () => {
 									<nav className="row">
 										<div className="col-12 ml-3">
 											<Link to="/">Home page</Link>
-											<Link to={`/categories/607045d7fa8ce327ed1edb2f`}>Books</Link>
-											<Link to={`/categories/607045d7fa8ce327ed1edb30`}>Computers & Accessories</Link>
+                      {categories?.map(category => <Link to={`/categories/${category?._id}`}>{category.name}</Link>)}
 										</div>
 									</nav>
 								</div>

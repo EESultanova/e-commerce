@@ -26,19 +26,19 @@ const Footer = () => {
 				<aside className="col-sm-3 col-md-2">
 					<h6 className="title">{language === 'Russian' ? 'О компании': 'About'}</h6>
 					<ul className="list-unstyled">
-						<li> <Link to="/">{language === 'Russian' ? 'Команда' : 'About us'}</Link></li>
-						<li> <Link to="/">{language === 'Russian' ? 'Сервисы' : 'Services'}</Link></li>
-						<li> <Link to="/">{language === 'Russian' ? 'Правила и условия' : 'Rules and terms'}</Link></li>
-						<li> <Link to="/">{language === 'Russian' ? 'Блоги' : 'Blogs'}</Link></li>
+						<li> <a href="https://www.facebook.com/E-commerce-Support-104351358442170" rel="noreferrer" target="_blank" >{language === 'Russian' ? 'Команда' : 'About us'}</a></li>
+						<li> <a href="https://www.facebook.com/E-commerce-Support-104351358442170" rel="noreferrer" target="_blank" >{language === 'Russian' ? 'Сервисы' : 'Services'}</a></li>
+						<li> <a href="https://www.facebook.com/E-commerce-Support-104351358442170" rel="noreferrer" target="_blank" >{language === 'Russian' ? 'Правила и условия' : 'Rules and terms'}</a></li>
+						<li> <a href="https://www.facebook.com/E-commerce-Support-104351358442170" rel="noreferrer" target="_blank" >{language === 'Russian' ? 'Блоги' : 'Blogs'}</a></li>
 					</ul>
 				</aside>
 				<aside className="col-sm-3 col-md-2">
 					<h6 className="title">{language === 'Russian' ? 'Сервисы' : 'Services'}</h6>
 					<ul className="list-unstyled">
-						<li> <Link to="/">{language === 'Russian' ? 'Контактный центр' : 'Help center'}</Link></li>
-						<li> <Link to="/">{language === 'Russian' ? 'Возврат денег' : 'Money refund'}</Link></li>
-						<li> <Link to="/">{language === 'Russian' ? 'Условия и политика' : 'Terms and policy'}</Link></li>
-						<li> <Link to="/">{language === 'Russian' ? 'Открытый спор' : 'Open dispute'}</Link></li>
+						<li> <a href="https://www.facebook.com/E-commerce-Support-104351358442170" rel="noreferrer" target="_blank" >{language === 'Russian' ? 'Контактный центр' : 'Help center'}</a></li>
+						<li> <a href="https://www.facebook.com/E-commerce-Support-104351358442170" rel="noreferrer" target="_blank" >{language === 'Russian' ? 'Возврат денег' : 'Money refund'}</a></li>
+						<li> <a href="https://www.facebook.com/E-commerce-Support-104351358442170" rel="noreferrer" target="_blank" >{language === 'Russian' ? 'Условия и политика' : 'Terms and policy'}</a></li>
+						<li> <a href="https://www.facebook.com/E-commerce-Support-104351358442170" rel="noreferrer" target="_blank" >{language === 'Russian' ? 'Открытый спор' : 'Open dispute'}</a></li>
 					</ul>
 				</aside>
 				<aside className="col-sm-3  col-md-2">
