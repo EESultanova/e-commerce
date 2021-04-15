@@ -61,12 +61,12 @@ const GoodDetails = () => {
             {good?.photo &&
               <>
                 <div className="img-big-wrap mt-5">
-                  <div><img className='w-75 h-75' src={good.photo[photo]} alt=""/></div>
+                  <div><img className='w-75 h-75' src={good.photo[photo]} alt="" style={{cursor: 'auto'}} /></div>
                 </div>
                 <div className="thumbs-wrap">
                   {good?.photo.length ? good?.photo.map((photo, indx) => {
                     return (
-                      <div key={indx} className="item-thumb" onClick={() => setPhoto(indx)}> <img src={photo} alt="" /></div>
+                      <div key={indx} className="item-thumb" onClick={() => setPhoto(indx)}> <img src={photo} alt="" style={{cursor: 'pointer'}}/></div>
                     )
                   })
                     : <Loader />
@@ -129,7 +129,7 @@ const GoodDetails = () => {
                       content: NotifyRemove,
                       message: `Item was removed from your cart!`,
                       type: 'default',
-                      container: 'bottom-right',
+                      container: 'bottom-left',
                       insert: 'bottom',
                       animationIn: ['animated', 'fadeIn'],
                       animationOut: ['animated', 'fadeOut'],
@@ -148,7 +148,7 @@ const GoodDetails = () => {
                       content: NotifyAdd,
                       message: `Item was added to your cart!`,
                       type: 'warning',
-                      container: 'bottom-right',
+                      container: 'bottom-left',
                       insert: 'succes',
                       animationIn: ['animated', 'fadeIn'],
                       animationOut: ['animated', 'fadeOut'],
@@ -171,7 +171,7 @@ const GoodDetails = () => {
                       content: NotifyRemove,
                       message: `Item was removed from your cart!`,
                       type: 'default',
-                      container: 'bottom-right',
+                      container: 'bottom-left',
                       insert: 'bottom',
                       animationIn: ['animated', 'fadeIn'],
                       animationOut: ['animated', 'fadeOut'],
@@ -190,7 +190,7 @@ const GoodDetails = () => {
                       content: NotifyAdd,
                       message: `Item was added to your cart!`,
                       type: 'warning',
-                      container: 'bottom-right',
+                      container: 'bottom-left',
                       insert: 'succes',
                       animationIn: ['animated', 'fadeIn'],
                       animationOut: ['animated', 'fadeOut'],

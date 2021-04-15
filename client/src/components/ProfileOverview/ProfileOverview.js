@@ -20,7 +20,9 @@ const ProfileOverview = () => {
   const language = useSelector(state => state.language)
   let {setChoice} = useProfileContext()
 console.log(currentUser.goods[0])
+
   const BarSeries = VerticalBarSeries
+
   const dataResult = currentUser?.goods[0]?.filter(el => el.initQuantity - el.quantity > 0).map(el => el = new Object ({
     x: el.name?.split(' ').slice(0,2).join(' '),
     y: el.initQuantity - el.quantity
@@ -53,7 +55,7 @@ console.log(currentUser.goods[0])
               <p>
                 <i className="fa fa-map-marker text-muted"></i> &nbsp; {language === 'Russian' ? 'Мой адрес:': 'My address:'} 
                 <br/>
-                Tashkent city, Street name, Building 123, House 321 &nbsp; 
+                {language === 'Russian' ? 'Москва, Ленинский проспект, дом 31, строение 2': 'Moscow city, Leninsky prospect, Building 31, House 2'} &nbsp; 
                 <div >
                 <Link to="/profile" className="btn-link">{language === 'Russian' ? 'Редактировать': 'Edit'} </Link>
                 </div>

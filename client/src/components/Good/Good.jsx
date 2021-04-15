@@ -27,11 +27,11 @@ const Good = ({ good }) => {
 
             </div>
 
-            <label className="custom-control mb-3 mt-2 custom-checkbox">
+            {/* <label className="custom-control mb-3 mt-2 custom-checkbox">
               <input type="checkbox" className="custom-control-input" />
               <div className="custom-control-label mr-4">Add to compare
                 </div>
-            </label>
+            </label> */}
           </figcaption>
         </figure>
       </Link>

@@ -39,7 +39,7 @@ function ProfileEditItem() {
             content: NotifyAdd,
             message: `Item was updated succsessfully!`,
             type: 'default',
-            container: 'bottom-right',
+            container: 'bottom-left',
             insert: 'bottom',
             animationIn: ['animated', 'fadeIn'],
             animationOut: ['animated', 'fadeOut'],
