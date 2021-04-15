@@ -131,7 +131,7 @@ console.log(currentUser.goods[0])
                       <div>
                         <figure className="itemside  mb-3">
                           <div className="aside"><img src={order?.cart[0]?.photo} className="border img-sm" alt=""/></div>
-                          <figcaption className="info">
+                          <figcaption className="info" style={{width: "100%"}}>
                             <time className="text-muted"><i className="fa fa-calendar-alt"></i> 12.09.2019</time>
                             <p>{order?.cart[0]?.name} </p>
                             <span className="text-success">{language === 'Russian' ? 'Заказ подтвержден': 'Order confirmed'}</span>
