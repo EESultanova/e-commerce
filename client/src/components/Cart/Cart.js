@@ -67,7 +67,7 @@ const Cart = () => {
                 <td>
                   <figure className="itemside">
                     <div className="aside"><img src={good.photo} className="img-sm" alt=""/></div>
-                    <figcaption className="info">
+                    <figcaption className="info" style={{width: "100%"}}>
                       <a href="/" className="title text-dark">{good.name}</a>
                       <small className="text-muted">{language === 'Russian' ? `Доступно: ${good.quantity} ${good.quantity > 1 ? 'штук' : 'штука'}` : `Available: ${good.quantity} ${good.quantity > 1 ? 'items' : 'item'}`}</small>
                     </figcaption>
@@ -99,7 +99,7 @@ const Cart = () => {
                 <td>
                   <figure className="itemside">
                     <div className="aside"><img src={good.photo} className="img-sm" alt=""/></div>
-                    <figcaption className="info">
+                    <figcaption className="info" style={{width: "100%"}}>
                       <a href="/" className="title text-dark">{good.name}</a>
                       <small className="text-muted">{language === 'Russian' ? `Доступно: ${good.quantity} ${good.quantity > 1 ? 'штук' : 'штука'}` : `Available: ${good.quantity} ${good.quantity > 1 ? 'items' : 'item'}`}</small>
                     </figcaption>

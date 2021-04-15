@@ -54,7 +54,7 @@ function Order() {
                       <figure className="itemside">
                         <div className="aside"><img src={good.photo} className="img-sm" alt="" /></div>
                         <figcaption className="info">
-                          <Link style={{ minWidth: 340, maxWidth: 500 }} to={`/goods/${good?._id}`} className="title text-dark">{good.name}</Link>
+                          <Link style={{ width: 520 }} to={`/goods/${good?._id}`} className="title text-dark">{good.name}</Link>
                         </figcaption>
                       </figure>
                     </td>
@@ -62,9 +62,8 @@ function Order() {
                       <input type="number" style={{ width: 70 }} value={good.quantity} min="1" placeholder="0" className="form-control" readOnly={true} />
                     </td>
                     <td>
-                      <div className="price-wrap">
-                        <var style={{ width: 200 }} className="price mx-5">{(good.price * good.quantity).toFixed(2)} $</var>
-                        <small className="text-muted"> {good.price} {(language === 'Russian') ? '/ единица товара' : '/ per item'}</small>
+                      <div className="price-wrap ml-3">
+                        <var style={{ width: 200 }} className="price">{(good.price * good.quantity).toFixed(2)} $</var>
                       </div>
                     </td>
                     <td className="text-right">
