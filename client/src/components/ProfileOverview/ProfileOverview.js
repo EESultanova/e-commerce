@@ -61,15 +61,15 @@ console.log(currentUser.goods[0])
                 </div>
               </p>
               <article className="card-group card-stat">
-                <figure className="card bg">
+                {currentUser.role === "buyer" && <figure className="card bg">
                   <div className="p-3">
                     <h4 className="title">1</h4>
                     <span>{language === 'Russian' ? 'Список желаний': 'Wishlists'}</span>
                   </div>
-                </figure>
+                </figure>}
                 <figure className="card bg">
                   <div className="p-3">
-                    <h4 className="title">3</h4>
+                    <h4 className="title">1</h4>
                     <span>{language === 'Russian' ? 'Ожидают доставку': 'Awaiting delivery'}</span>
                   </div>
                 </figure>
