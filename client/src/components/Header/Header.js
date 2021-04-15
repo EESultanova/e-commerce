@@ -18,39 +18,40 @@ import { setSearchCategoryRedux } from '../../redux/actionCreators/searchCategor
 
 
 const Header = () => {
-  const [input, setInput] = useState('')
-  let {setChoice} = useProfileContext()
+	const [input, setInput] = useState('')
+	let { setChoice } = useProfileContext()
 	const categories = useSelector(state => state.categories)
+	const orders = useSelector(state => state.user?.orders[0]);
 	const user = useSelector(state => state.user.isAuth);
-  const role = useSelector(state => state.user.role)
+	const role = useSelector(state => state.user.role)
 	const currentUser = useSelector(state => state.user);
 	const cart = useSelector(state => state.cart)
 	const userCart = useSelector(state => state.user.cart)
 	const avatar = currentUser.avatar ? `${SITE_URL + currentUser.avatar}` : avatarLogo;
 	const dispatch = useDispatch()
-  const language = useSelector(state => state.language)
+	const language = useSelector(state => state.language)
 
-  
-  const history = useHistory()
+
+	const history = useHistory()
 	const handleLogout = () => {
-    dispatch(removeUser())
+		dispatch(removeUser())
 	}
-  const categoryForFilter = useSelector(state => state.searchcategory)
-  
+	const categoryForFilter = useSelector(state => state.searchcategory)
+
 	useEffect(() => {
 		dispatch(filterGoodsSaga({ categoryForFilter, input }))
 	}, [input])
 
-  useEffect(() => {
-    dispatch(filterGoodsSaga({categoryForFilter, input}))
-    dispatch(getGoodsFromServer(categoryForFilter))
-  }, [categoryForFilter])
+	useEffect(() => {
+		dispatch(filterGoodsSaga({ categoryForFilter, input }))
+		dispatch(getGoodsFromServer(categoryForFilter))
+	}, [categoryForFilter])
 
-  function selectHandler(option) {
-    dispatch(setSearchCategoryRedux(option))
-    setInput('')
-    history.push(`/categories/${option}`)
-  }
+	function selectHandler(option) {
+		dispatch(setSearchCategoryRedux(option))
+		setInput('')
+		history.push(`/categories/${option}`)
+	}
 
 
 	return (
@@ -68,10 +69,10 @@ const Header = () => {
 							<form action="#" className="search-header">
 								<div className="input-group w-100">
 									<select className="custom-select border-right" value={categoryForFilter} onChange={(e) => selectHandler(e.target.value)} name="category_name">
-                   {categories.map(el => <option key={el._id} value={el._id}>{(language === 'Russian') ? el.nameRu : el.name}</option>)}
-  								</select>
+										{categories.map(el => <option key={el._id} value={el._id}>{(language === 'Russian') ? el.nameRu : el.name}</option>)}
+									</select>
 
-									<input type="text" value={input} onChange={(e) => setInput(e.target.value)} className="form-control" placeholder={language === 'Russian' ? 'Поиск': 'Search' } />
+									<input type="text" value={input} onChange={(e) => setInput(e.target.value)} className="form-control" placeholder={language === 'Russian' ? 'Поиск' : 'Search'} />
 
 									<div className="input-group-append">
 										<Link to={`/categories/${categoryForFilter}`} className="btn btn-primary">	<i className="fa fa-search"></i>{language === 'Russian' ? 'Поиск' : 'Search'}</Link>
@@ -83,10 +84,10 @@ const Header = () => {
 							<div className="widgets-wrap float-md-right">
 								<div className="widget-header mr-3">
 
-										<NavLink to={user ? "/profile" : "/login"} onClick={() => setChoice(0)}><img src={avatar} alt="" style={Object.assign({}, { width: '32px' }, { height: '31px' }, { 'borderRadius': '50%' })} />
-											<small className="text"> {language === 'Russian' ? 'Мой профиль' : 'My profile'} </small>
-										</NavLink>
-									
+									<NavLink to={user ? "/profile" : "/login"} onClick={() => setChoice(0)}><img src={avatar} alt="" style={Object.assign({}, { width: '32px' }, { height: '31px' }, { 'borderRadius': '50%' })} />
+										<small className="text"> {language === 'Russian' ? 'Мой профиль' : 'My profile'} </small>
+									</NavLink>
+
 
 								</div>
 								{/* <div className="widget-header mr-3">
@@ -98,17 +99,17 @@ const Header = () => {
 										<small className="text"> Message </small>
 									</a>
 								</div> */}
-                {user &&  (role === 'buyer') && 
-                  <div className="widget-header mr-3">
-                    <Link to="/profile" className="widget-view" onClick={() => setChoice(2)}>
-                      <div className="icon-area">
-                        <i className="fa fa-store"></i>
-                      </div>
-                      <small className="text"> {language === 'Russian' ? 'Заказы' : 'Orders'} </small>
-                      {orders.length ? <span className="notify">{orders.length}</span> : ''}
-                    </Link>
-                  </div>
-                }
+								{user && (role === 'buyer') &&
+									<div className="widget-header mr-3">
+										<Link to="/profile" className="widget-view" onClick={() => setChoice(2)}>
+											<div className="icon-area">
+												<i className="fa fa-store"></i>
+											</div>
+											<small className="text"> {language === 'Russian' ? 'Заказы' : 'Orders'} </small>
+											{orders.length ? <span className="notify">{orders.length}</span> : ''}
+										</Link>
+									</div>
+								}
 								<div className="widget-header">
 									<Link to="/cart" className="widget-view">
 										<div className="icon-area">
@@ -124,7 +125,7 @@ const Header = () => {
 													: '')
 											}
 										</div>
-										<small className="text"> {language === 'Russian' ? 'Корзина': 'Cart'} </small>
+										<small className="text"> {language === 'Russian' ? 'Корзина' : 'Cart'} </small>
 									</Link>
 								</div>
 							</div>
@@ -149,7 +150,7 @@ const Header = () => {
 									<nav className="row">
 										<div className="col-12 ml-3">
 											<Link to="/">Home page</Link>
-                      {categories?.map(category => <Link to={`/categories/${category?._id}`}>{category.name}</Link>)}
+											{categories?.map(category => <Link to={`/categories/${category?._id}`}>{category.name}</Link>)}
 										</div>
 									</nav>
 								</div>
@@ -169,7 +170,7 @@ const Header = () => {
 							{!user &&
 								<li className="nav-item">
 									<button>
-										<Link className="btn btn-primary" to="/registration">{language === 'Russian' ? 'Регистрация': 'Sign up'}</Link>
+										<Link className="btn btn-primary" to="/registration">{language === 'Russian' ? 'Регистрация' : 'Sign up'}</Link>
 									</button>
 								</li>
 							}
@@ -180,17 +181,17 @@ const Header = () => {
 									</button>
 								</li>
 							}
-              {(language === 'Russian') ? 
-                <select onChange={(e) => dispatch(setLanguage(e.target.value))} className="nav-item dropdown border-0">
-                  <option>English</option>
-                  <option selected="selected">Russian</option>
-                </select>
-                :
-                <select onChange={(e) => dispatch(setLanguage(e.target.value))} className="nav-item dropdown border-0">
-                  <option selected="selected">English</option>
-                  <option>Russian</option>
-                </select>
-              }
+							{(language === 'Russian') ?
+								<select onChange={(e) => dispatch(setLanguage(e.target.value))} className="nav-item dropdown border-0">
+									<option>English</option>
+									<option selected="selected">Russian</option>
+								</select>
+								:
+								<select onChange={(e) => dispatch(setLanguage(e.target.value))} className="nav-item dropdown border-0">
+									<option selected="selected">English</option>
+									<option>Russian</option>
+								</select>
+							}
 						</ul>
 					</div>
 				</div>
