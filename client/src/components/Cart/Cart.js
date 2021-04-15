@@ -30,7 +30,7 @@ const Cart = () => {
     .map(el => el.price * el.quantity)
     .reduce((acc, currentValue) => acc + currentValue, 0)
 
-  const { language } = useProfileContext()
+    const language = useSelector(state => state.language)
 
   function NotifyRemove() {
     return (
@@ -52,7 +52,7 @@ const Cart = () => {
       <table className="table table-borderless table-shopping-cart">
       <thead className="text-muted">
       <tr className="small text-uppercase">
-        <th scope="col">{language === 'Russian' ? 'Товар' : 'Product'}</th>
+        <th scope="col" >{language === 'Russian' ? 'Товар' : 'Product'}</th>
         <th scope="col" width="120">{language === 'Russian' ? 'Количество' : 'Quantity'}</th>
         <th scope="col" width="120">{language === 'Russian' ? 'Цена' : 'Price'}</th>
         <th scope="col" className="text-right" width="200"> </th>
@@ -69,6 +69,7 @@ const Cart = () => {
                     <div className="aside"><img src={good.photo} className="img-sm" alt=""/></div>
                     <figcaption className="info">
                       <a href="/" className="title text-dark">{good.name}</a>
+                      <small className="text-muted">{language === 'Russian' ? `Доступно: ${good.quantity} ${good.quantity > 1 ? 'штук' : 'штука'}` : `Available: ${good.quantity} ${good.quantity > 1 ? 'items' : 'item'}`}</small>
                     </figcaption>
                   </figure>
                 </td>
@@ -100,6 +101,7 @@ const Cart = () => {
                     <div className="aside"><img src={good.photo} className="img-sm" alt=""/></div>
                     <figcaption className="info">
                       <a href="/" className="title text-dark">{good.name}</a>
+                      <small className="text-muted">{language === 'Russian' ? `Доступно: ${good.quantity} ${good.quantity > 1 ? 'штук' : 'штука'}` : `Available: ${good.quantity} ${good.quantity > 1 ? 'items' : 'item'}`}</small>
                     </figcaption>
                   </figure>
                 </td>

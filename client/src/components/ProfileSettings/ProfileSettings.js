@@ -6,6 +6,7 @@ import avatarLogo from '../../assets/avatar.svg';
 const ProfileSettings = () => {
 
   const currentUser = useSelector(state => state.user);
+  const language = useSelector(state => state.language)
   const avatar = currentUser.avatar ? `${SITE_URL + currentUser.avatar}` : avatarLogo;
 
   const dispatch = useDispatch()
@@ -62,7 +63,7 @@ const ProfileSettings = () => {
      	<div className="col-md-9">
      		<div className="form-row">
 				<div className="col form-group">
-					<label>Name</label>
+					<label>{(language === 'Russian') ? 'Имя' : 'Name'}</label>
 				  	<input type="text" className="form-control" value={currentUser.name} />
 				</div>
 				<div className="col form-group">
@@ -73,7 +74,7 @@ const ProfileSettings = () => {
 			
 			<div className="form-row">
 				<div className="form-group col-md-6">
-				  <label>Country</label>
+				  <label>{(language === 'Russian') ? 'Страна' : 'Country'}</label>
 				  <select id="inputState" className="form-control">
 				    <option> Choose...</option>
 				      <option>Uzbekistan</option>
@@ -84,7 +85,7 @@ const ProfileSettings = () => {
 				  </select>
 				</div>
 				<div className="form-group col-md-6">
-				  <label>City</label>
+				  <label>{(language === 'Russian') ? 'Город' : 'City'}</label>
 				  <input type="text" className="form-control" />
 				</div>
 			</div>
@@ -95,21 +96,21 @@ const ProfileSettings = () => {
 				  <input type="text" className="form-control" value="123009" />
 				</div>
 				<div className="form-group col-md-6">
-				  <label>Phone</label>
+				  <label>{(language === 'Russian') ? 'Телефон' : 'Phone'}</label>
 				  <input type="text" className="form-control" value="+123456789" />
 				</div>
 			</div>
 
-			<button className="btn btn-primary mr-2">Save</button>	
-			<button className="btn btn-light">Change password</button>
+			<button className="btn btn-primary mr-2">{(language === 'Russian') ? 'Сохранить' : 'Save'}</button>	
+			<button className="btn btn-light">{(language === 'Russian') ? 'Изменить пароль' : 'Change password'}</button>
       <br/>	
       <br/>	
       <div className="mx-auto" style={{"width": '400px', 'margin-top': '10px', 'margin-bottom': '10px', 'border': '1px solid #ced4da', 'padding': '10px', 'border-radius': '0.37rem'}}>
-      <div className="mb-3">Download / Delete Avatar</div>
+      <div className="mb-3">{(language === 'Russian') ? 'Загрузить / Изменить Аватар' : 'Download / Delete Avatar'}</div>
         <div className="mb-3">
           <input accept="image/*" onChange={(e) => inputAvatarHandler(e)} name="avatar" type="file" style={{'width': '18rem'}}/>
         </div>
-          <button onClick={deleteHandler} type="submit" className="btn btn-primary">Delete avatar</button>
+          <button onClick={deleteHandler} type="submit" className="btn btn-primary">{(language === 'Russian') ? 'Удалить Аватар' : 'Delete Avatar'}</button>
       </div>
 
 			<br/><br/><br/><br/><br/><br/>

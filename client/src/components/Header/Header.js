@@ -13,32 +13,32 @@ import { API_URL, SITE_URL } from '../../config'
 import { useEffect, useState } from 'react';
 import { filterGoodsSaga, getGoodsFromServer } from '../../redux/actionCreators/goodAC';
 import { useProfileContext } from '../../contexts/ProfileContext';
-import { GET_GOODS } from '../../redux/types/goodTypes';
+import { setLanguage } from '../../redux/actionCreators/languageAC';
 
 
 const Header = () => {
   const [input, setInput] = useState('')
   let {setChoice} = useProfileContext()
-  const { language, setLanguage } = useProfileContext()
+  // const { language } = useProfileContext()
 	const categories = useSelector(state => state.categories)
   const [categoryForFilter, setCategoryForFilter] = useState(categories[0]?._id)
 	const user = useSelector(state => state.user.isAuth);
+  const role = useSelector(state => state.user.role)
 	const currentUser = useSelector(state => state.user);
 	const cart = useSelector(state => state.cart)
 	const userCart = useSelector(state => state.user.cart)
 	const avatar = currentUser.avatar ? `${SITE_URL + currentUser.avatar}` : avatarLogo;
 	const dispatch = useDispatch()
+  const language = useSelector(state => state.language)
 
   const history = useHistory()
-
 	const handleLogout = () => {
 		dispatch(removeUser())
 	}
-
+  
 	useEffect(() => {
 		dispatch(filterGoodsSaga({ categoryForFilter, input }))
 	}, [input])
-
 
   useEffect(() => {
     dispatch(filterGoodsSaga({categoryForFilter, input}))
@@ -92,14 +92,25 @@ const Header = () => {
 									
 
 								</div>
-								<div className="widget-header mr-3">
-									<Link to="/profile" className="widget-view" onClick={() => setChoice(2)}>
+								{/* <div className="widget-header mr-3">
+									<a href="/" className="widget-view">
 										<div className="icon-area">
-											<i className="fa fa-store"></i>
+											<i className="fa fa-comment-dots"></i>
+											<span className="notify">1</span>
 										</div>
-										<small className="text"> {language === 'Russian' ? 'Заказы' : 'Orders'} </small>
-									</Link>
-								</div>
+										<small className="text"> Message </small>
+									</a>
+								</div> */}
+                {user &&  (role === 'buyer') && 
+                  <div className="widget-header mr-3">
+                    <Link to="/profile" className="widget-view" onClick={() => setChoice(2)}>
+                      <div className="icon-area">
+                        <i className="fa fa-store"></i>
+                      </div>
+                      <small className="text"> {language === 'Russian' ? 'Заказы' : 'Orders'} </small>
+                    </Link>
+                  </div>
+                }
 								<div className="widget-header">
 									<Link to="/cart" className="widget-view">
 										<div className="icon-area">
@@ -172,10 +183,17 @@ const Header = () => {
 									</button>
 								</li>
 							}
-              <select selected='English' onChange={(e) => setLanguage(e.target.value)} className="nav-item dropdown border-0">
-                <option>English</option>
-                <option>Russian</option>
-              </select>
+              {(language === 'Russian') ? 
+                <select onChange={(e) => dispatch(setLanguage(e.target.value))} className="nav-item dropdown border-0">
+                  <option>English</option>
+                  <option selected="selected">Russian</option>
+                </select>
+                :
+                <select onChange={(e) => dispatch(setLanguage(e.target.value))} className="nav-item dropdown border-0">
+                  <option selected="selected">English</option>
+                  <option>Russian</option>
+                </select>
+              }
 						</ul>
 					</div>
 				</div>
