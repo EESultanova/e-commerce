@@ -7,7 +7,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useProfileContext } from '../../contexts/ProfileContext';
 import { emptyCart } from '../../redux/actionCreators/cartAC';
 import { changeGoodsQuantityOnServer } from '../../redux/actionCreators/goodAC';
-import { addOrderDetails, addOrderDetailsToServer, getAllOrders } from '../../redux/actionCreators/userAC';
+import { addOrderDetails, addOrderDetailsToServer, emptyUserCart, getAllOrders } from '../../redux/actionCreators/userAC';
 import Paypal from '../PayPal/PayPal';
 function Order() {
   const dispatch = useDispatch()
@@ -37,7 +37,7 @@ function Order() {
     e.preventDefault()
     await addOrderDetailsToServer({ fioToServer, addressToServer, email, phone, card, cardName, expMonth, expYear, cvv, currentCart, currentUser, total })
     dispatch(addOrderDetails({ fioToServer, addressToServer, email, phone, currentCart, total }))
-    dispatch(emptyCart())
+    dispatch(emptyUserCart())
     setChoice(2)
     history.push('/profile')
   }
@@ -54,7 +54,7 @@ function Order() {
                       <figure className="itemside">
                         <div className="aside"><img src={good.photo} className="img-sm" alt="" /></div>
                         <figcaption className="info">
-                          <a style={{ maxWidth: 500 }} href="/" className="title text-dark">{good.name}</a>
+                          <Link style={{ minWidth: 340, maxWidth: 500 }} to={`/goods/${good?._id}`} className="title text-dark">{good.name}</Link>
                         </figcaption>
                       </figure>
                     </td>
@@ -95,13 +95,13 @@ function Order() {
                   <label className="js-check box">
                     <input type="radio" name="dostavka" value="option1" />
                     <h6 className="title">{(language === 'Russian') ? 'Быстрая доставка' : 'Fast delivery'}</h6>
-                    <p className="text-muted">{(language === 'Russian') ? 'Доставка в чтечении 5 дней. Дополнительно взимается 20$' : 'Extra 20$ will be charged'}</p>
+                    <p className="text-muted">{(language === 'Russian') ? 'Доставка в течении 5 дней. Дополнительно взимается 20$' : 'Extra 20$ will be charged'}</p>
                   </label>
                 </div>
               </div>
               <div className="form-row">
                 <div className="col form-group">
-                  <label>{(language === 'Russian') ? 'Полно имя' : 'Full name'}</label>
+                  <label>{(language === 'Russian') ? 'Полное имя' : 'Full name'}</label>
                   <FioSuggestions token="5380c3726e32d6ce9d7fba825b4570fea6395f1b" value={fio} onChange={setFio} />
                 </div>
               </div>
@@ -131,7 +131,7 @@ function Order() {
                   <input onChange={e => setCardName(e.target.value)} type="text" className="form-control" name="username" placeholder="Ex. John Smith" required="" />
                 </div>
                 <div className="form-group card required">
-                  <label htmlFor="cardNumber">{(language === 'Russian') ? 'Имя на карте' : 'Name on card'}</label>
+                  <label htmlFor="cardNumber">{(language === 'Russian') ? 'Номер карты' : 'Card number'}</label>
                   <div className="input-group">
                     <input type="text" onChange={e => setCard(e.target.value)} className="form-control" name="cardNumber" placeholder="" maxLength="16" />
                     <div className="input-group-append">

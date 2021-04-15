@@ -84,19 +84,19 @@ const GoodDetails = () => {
 
           <div className="rating-wrap my-3">
             <ul className="rating-stars">
-              <li style={{ width: 80 }} className="stars-active">
-                <i className="fa fa-star"></i> <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i> <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
+              <li style={{ width: 9.4 * good.rating }} className="stars-active">
+                <i className="fa fa-star"> </i> <i className="fa fa-star"> </i>
+                <i className="fa fa-star"> </i> <i className="fa fa-star"> </i>
+                <i className="fa fa-star"> </i> 
               </li>
               <li>
-                <i className="fa fa-star"></i> <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i> <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
+                <i className="fa fa-star"> </i> <i className="fa fa-star"> </i> 
+                <i className="fa fa-star"> </i> <i className="fa fa-star"> </i>
+                <i className="fa fa-star"> </i> 
               </li>
             </ul>
-            <small className="label-rating text-muted">{language === 'Russian' ? '132 отзыва' : '132 reviews'}</small>
-            <small className="label-rating text-success"> <i className="fa fa-clipboard-check"></i>{language === 'Russian' ? ' 154 заказа' : ' 154 orders'}</small>
+            {/* <small className="label-rating text-muted">{language === 'Russian' ? '132 отзыва' : '132 reviews'}</small> */}
+            <small className="label-rating text-success"> <i className="fa fa-clipboard-check"></i>{language === 'Russian' ? ` ${Math.abs(good?.initQuantity - good?.quantity)}  заказов` : ` ${Math.abs(good?.initQuantity - good?.quantity)}  orders`}</small>
           </div>
 
           <div className="mb-3">
@@ -117,7 +117,7 @@ const GoodDetails = () => {
             <dd className="col-sm-9">{language === 'Russian' ? '3-4 дня' : '3-4 days'}</dd>
 
             <dt className="col-sm-3">{language === 'Russian' ? 'Наличие' : 'Availabilty'}</dt>
-            <dd className="col-sm-9">{language === 'Russian' ? 'В магазине' : ' In Stock'}</dd>
+            <dd className="col-sm-9">{language === 'Russian' ? ((good?.quantity < 9) ? `Осталось мало (${good?.quantity} штук доступно)` : ' В магазине') : ((good?.quantity < 9) ? `Little left (${good?.quantity} items available)` : ' In Stock')}</dd>
           </dl>
 
           <div className="form-row  mt-5">

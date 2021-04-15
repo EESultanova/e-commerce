@@ -11,17 +11,18 @@ import { removeUser } from '../../redux/actionCreators/userAC'
 import avatarLogo from '../../assets/avatar.svg';
 import { API_URL, SITE_URL } from '../../config'
 import { useEffect, useState } from 'react';
-import { filterGoodsSaga, getGoods } from '../../redux/actionCreators/goodAC';
+import { filterGoodsSaga, getGoodsFromServer } from '../../redux/actionCreators/goodAC';
 import { useProfileContext } from '../../contexts/ProfileContext';
 import { setLanguage } from '../../redux/actionCreators/languageAC';
 
 
 const Header = () => {
-	const [input, setInput] = useState('')
+  const [input, setInput] = useState('')
   let {setChoice} = useProfileContext()
   // const { language } = useProfileContext()
 	const categories = useSelector(state => state.categories)
-	const [categoryForFilter, setCategoryForFilter] = useState(categories[0]?._id)
+  const orders = useSelector(state => state.user?.orders[0])
+  const [categoryForFilter, setCategoryForFilter] = useState(categories[0]?._id)
 	const user = useSelector(state => state.user.isAuth);
   const role = useSelector(state => state.user.role)
 	const currentUser = useSelector(state => state.user);
@@ -32,24 +33,18 @@ const Header = () => {
   const language = useSelector(state => state.language)
 
   const history = useHistory()
-  
 	const handleLogout = () => {
 		dispatch(removeUser())
 	}
-
+  
 	useEffect(() => {
 		dispatch(filterGoodsSaga({ categoryForFilter, input }))
 	}, [input])
 
-
   useEffect(() => {
     dispatch(filterGoodsSaga({categoryForFilter, input}))
+    dispatch(getGoodsFromServer(categoryForFilter))
   }, [categoryForFilter])
-
-  const headerStyle = {
-    "font-family": 'Prime, Helvetica, Arial, sans-serif'
-  }
-
 
   function selectHandler(option) {
     setCategoryForFilter(option)
@@ -110,6 +105,7 @@ const Header = () => {
                         <i className="fa fa-store"></i>
                       </div>
                       <small className="text"> {language === 'Russian' ? 'Заказы' : 'Orders'} </small>
+                      {orders.length ? <span className="notify">{orders.length}</span> : ''}
                     </Link>
                   </div>
                 }
@@ -153,8 +149,7 @@ const Header = () => {
 									<nav className="row">
 										<div className="col-12 ml-3">
 											<Link to="/">Home page</Link>
-											<Link to={`/categories/607045d7fa8ce327ed1edb2f`}>Books</Link>
-											<Link to={`/categories/607045d7fa8ce327ed1edb30`}>Computers & Accessories</Link>
+                      {categories?.map(category => <Link to={`/categories/${category?._id}`}>{category.name}</Link>)}
 										</div>
 									</nav>
 								</div>
