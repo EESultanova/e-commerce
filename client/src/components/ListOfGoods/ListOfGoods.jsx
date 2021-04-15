@@ -128,6 +128,7 @@ const ListGoods = () => {
 
       <div id="goods-wrap" className="row">
         {searchResult ? searchResult.map(good => {
+          console.log(good)
           return (
             <Good key={good._id} good={good} />
           )
