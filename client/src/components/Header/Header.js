@@ -106,24 +106,27 @@ const Header = () => {
 										<Link to="/profile" className="widget-view" onClick={() => setChoice(2)}>
 											<div className="icon-area">
 												<i className="fa fa-store"></i>
+                        {orders.length ? <span className="notify">{orders.length}</span> : ''}
 											</div>
 											<small className="text"> {language === 'Russian' ? 'Заказы' : 'Orders'} </small>
-											{orders.length ? <span className="notify">{orders.length}</span> : ''}
 										</Link>
 									</div>
 								}
 								<div className="widget-header">
 										
 											{user && (role === 'buyer') &&
-												(userCart?.length ?
+												// (userCart?.length ?
                           <Link to="/cart" className="widget-view">
                             <div className="icon-area">
                               <i className="fa fa-shopping-cart"></i>
+                              {userCart.length ?
                               <span className="notify">{userCart.length}</span>
+                              : ''
+                              }
                             </div>
                             <small className="text"> {language === 'Russian' ? 'Корзина' : 'Cart'} </small>
                           </Link>
-													: '')
+													// : '')
 											}
 											{!user &&
                         <Link to="/cart" className="widget-view">
@@ -138,14 +141,15 @@ const Header = () => {
                         </Link>
 											}
                       {user && 
-                        (role === 'seller' ? 
-                        <Link to="/profile" className="widget-view">
-                          <div className="icon-area">
-                            <span style={{fontSize: '25'}}>&#128202;</span>
-                          </div>
-                          <small className="text"> {language === 'Russian' ? 'Аналитика' : 'Analytics'} </small>
-                        </Link>
-                        : '')
+                        (role === 'seller' ?
+                          <Link to="/profile" className="widget-view">
+                            <div className="icon-area">
+                              <span style={{fontSize: '25px'}}>&#128202;</span>
+                            </div>
+                            <small className="text"> {language === 'Russian' ? 'Аналитика' : 'Analytics'} </small>
+                          </Link>
+                          : ''
+                        )
                       }
 									
 								</div>
