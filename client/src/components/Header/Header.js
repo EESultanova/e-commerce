@@ -23,6 +23,7 @@ const Header = () => {
 	const categories = useSelector(state => state.categories)
 	const [categoryForFilter, setCategoryForFilter] = useState(categories[0]?._id)
 	const user = useSelector(state => state.user.isAuth);
+  const role = useSelector(state => state.user.role)
 	const currentUser = useSelector(state => state.user);
 	const cart = useSelector(state => state.cart)
 	const userCart = useSelector(state => state.user.cart)
@@ -31,10 +32,7 @@ const Header = () => {
   const language = useSelector(state => state.language)
 
   const history = useHistory()
-
-  console.log(language)
-
-
+  
 	const handleLogout = () => {
 		dispatch(removeUser())
 	}
@@ -105,15 +103,16 @@ const Header = () => {
 										<small className="text"> Message </small>
 									</a>
 								</div> */}
-
-								<div className="widget-header mr-3">
-									<Link to="/profile" className="widget-view" onClick={() => setChoice(2)}>
-										<div className="icon-area">
-											<i className="fa fa-store"></i>
-										</div>
-										<small className="text"> {language === 'Russian' ? 'Заказы' : 'Orders'} </small>
-									</Link>
-								</div>
+                {user &&  (role === 'buyer') && 
+                  <div className="widget-header mr-3">
+                    <Link to="/profile" className="widget-view" onClick={() => setChoice(2)}>
+                      <div className="icon-area">
+                        <i className="fa fa-store"></i>
+                      </div>
+                      <small className="text"> {language === 'Russian' ? 'Заказы' : 'Orders'} </small>
+                    </Link>
+                  </div>
+                }
 								<div className="widget-header">
 									<Link to="/cart" className="widget-view">
 										<div className="icon-area">

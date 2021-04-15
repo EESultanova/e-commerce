@@ -30,7 +30,7 @@ const Cart = () => {
     .map(el => el.price * el.quantity)
     .reduce((acc, currentValue) => acc + currentValue, 0)
 
-  const { language } = useProfileContext()
+    const language = useSelector(state => state.language)
 
   function NotifyRemove() {
     return (
