@@ -54,8 +54,8 @@ const Footer = () => {
 				</aside>
 				<aside className="col-sm-2  col-md-2">
 					<h6 className="title">{language === 'Russian' ? 'Наши приложения' : 'Our app'}</h6>
-					<Link to="/" className="d-block mb-2"><img src="../images/misc/appstore.png" height="40" alt=''/></Link>
-					<Link to="/"  className="d-block mb-2"><img src="../images/misc/playmarket.png" height="40" alt=''/></Link>
+					<a href="https://www.apple.com/ru/app-store/" className="d-block mb-2"><img src="../images/misc/appstore.png" height="40" alt=''/></a>
+					<a href="https://play.google.com/store?hl=ru&gl=US"  className="d-block mb-2"><img src="../images/misc/playmarket.png" height="40" alt=''/></a>
 				</aside>
 			</div>
 		</section>
