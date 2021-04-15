@@ -8,15 +8,14 @@ import { store } from 'react-notifications-component';
 import 'animate.css'
 import 'react-notifications-component/dist/theme.css'
 import { useProfileContext } from "../../contexts/ProfileContext";
+import { useEffect } from "react";
+import { getGoods, getGoodsFromServer } from "../../redux/actionCreators/goodAC";
 
 const Cart = () => {
 
   const dispatch = useDispatch()
   const location = useLocation()
-
-  // const referrer = document.referrer
-  // console.log(referrer)
-
+  
   const cart = useSelector(state => state.cart)
   const currentUserAuth = useSelector(state => state.user.isAuth)
 
@@ -69,7 +68,7 @@ const Cart = () => {
                     <div className="aside"><img src={good.photo} className="img-sm" alt=""/></div>
                     <figcaption className="info" style={{width: "100%"}}>
                       <a href="/" className="title text-dark">{good.name}</a>
-                      <small className="text-muted">{language === 'Russian' ? `Доступно: ${good.quantity} ${good.quantity > 1 ? 'штук' : 'штука'}` : `Available: ${good.quantity} ${good.quantity > 1 ? 'items' : 'item'}`}</small>
+                      {/* <small className="text-muted">{language === 'Russian' ? `Доступно: ${good.quantity} ${good.quantity > 1 ? 'штук' : 'штука'}` : `Available: ${good.quantity} ${good.quantity > 1 ? 'items' : 'item'}`}</small> */}
                     </figcaption>
                   </figure>
                 </td>
@@ -101,7 +100,7 @@ const Cart = () => {
                     <div className="aside"><img src={good.photo} className="img-sm" alt=""/></div>
                     <figcaption className="info" style={{width: "100%"}}>
                       <a href="/" className="title text-dark">{good.name}</a>
-                      <small className="text-muted">{language === 'Russian' ? `Доступно: ${good.quantity} ${good.quantity > 1 ? 'штук' : 'штука'}` : `Available: ${good.quantity} ${good.quantity > 1 ? 'items' : 'item'}`}</small>
+                      {/* <small className="text-muted">{language === 'Russian' ? `Доступно: ${good.quantity} ${good.quantity > 1 ? 'штук' : 'штука'}` : `Available: ${good.quantity} ${good.quantity > 1 ? 'items' : 'item'}`}</small> */}
                     </figcaption>
                   </figure>
                 </td>

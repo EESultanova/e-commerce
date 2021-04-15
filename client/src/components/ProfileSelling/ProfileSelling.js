@@ -29,7 +29,7 @@ const ProfileSelling = () => {
 					<div className="p-3" style={{ width: 600 }}>
 						<figure className="card card-product-grid" >
 							<div className="img-wrap">
-								<img src={el.photo} alt="" />
+								<img src={el.photo} alt="" className="mt-3" />
 							</div>
 							<figcaption className="info-wrap" style={{ minHeight: 160, minWindth: 300 }} >
 								<a href="/" className="title mb-2">{el.name}</a>

@@ -128,6 +128,7 @@ const ListGoods = () => {
 
       <div id="goods-wrap" className="row">
         {searchResult ? searchResult.map(good => {
+          console.log(good)
           return (
             <Good key={good._id} good={good} />
           )
@@ -162,7 +163,7 @@ const ListGoods = () => {
                     content: NotifyYes,
                     message: ``,
                     type: 'default',
-                    container: 'bottom-right',
+                    container: 'bottom-left',
                     insert: 'bottom',
                     animationIn: ['animated', 'fadeIn'],
                     animationOut: ['animated', 'fadeOut'],
@@ -180,7 +181,7 @@ const ListGoods = () => {
                     content: NotifyNo,
                     message: ``,
                     type: 'default',
-                    container: 'bottom-right',
+                    container: 'bottom-left',
                     insert: 'bottom',
                     animationIn: ['animated', 'fadeIn'],
                     animationOut: ['animated', 'fadeOut'],

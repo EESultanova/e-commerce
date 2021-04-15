@@ -20,7 +20,9 @@ const ProfileOverview = () => {
   const language = useSelector(state => state.language)
   let {setChoice} = useProfileContext()
 console.log(currentUser.goods[0])
+
   const BarSeries = VerticalBarSeries
+
   const dataResult = currentUser?.goods[0]?.filter(el => el.initQuantity - el.quantity > 0).map(el => el = new Object ({
     x: el.name?.split(' ').slice(0,2).join(' '),
     y: el.initQuantity - el.quantity
@@ -53,21 +55,21 @@ console.log(currentUser.goods[0])
               <p>
                 <i className="fa fa-map-marker text-muted"></i> &nbsp; {language === 'Russian' ? 'Мой адрес:': 'My address:'} 
                 <br/>
-                Tashkent city, Street name, Building 123, House 321 &nbsp; 
+                {language === 'Russian' ? 'Москва, Ленинский проспект, дом 31, строение 2': 'Moscow city, Leninsky prospect, Building 31, House 2'} &nbsp; 
                 <div >
                 <Link to="/profile" className="btn-link">{language === 'Russian' ? 'Редактировать': 'Edit'} </Link>
                 </div>
               </p>
               <article className="card-group card-stat">
-                <figure className="card bg">
+                {currentUser.role === "buyer" && <figure className="card bg">
                   <div className="p-3">
                     <h4 className="title">1</h4>
                     <span>{language === 'Russian' ? 'Список желаний': 'Wishlists'}</span>
                   </div>
-                </figure>
+                </figure>}
                 <figure className="card bg">
                   <div className="p-3">
-                    <h4 className="title">3</h4>
+                    <h4 className="title">1</h4>
                     <span>{language === 'Russian' ? 'Ожидают доставку': 'Awaiting delivery'}</span>
                   </div>
                 </figure>
@@ -129,7 +131,7 @@ console.log(currentUser.goods[0])
                       <div>
                         <figure className="itemside  mb-3">
                           <div className="aside"><img src={order?.cart[0]?.photo} className="border img-sm" alt=""/></div>
-                          <figcaption className="info">
+                          <figcaption className="info" style={{width: "100%"}}>
                             <time className="text-muted"><i className="fa fa-calendar-alt"></i> 12.09.2019</time>
                             <p>{order?.cart[0]?.name} </p>
                             <span className="text-success">{language === 'Russian' ? 'Заказ подтвержден': 'Order confirmed'}</span>
