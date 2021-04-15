@@ -54,7 +54,7 @@ function Order() {
                       <figure className="itemside">
                         <div className="aside"><img src={good.photo} className="img-sm" alt="" /></div>
                         <figcaption className="info">
-                          <a style={{ maxWidth: 500 }} href="/" className="title text-dark">{good.name}</a>
+                          <Link style={{ minWidth: 340, maxWidth: 500 }} to={`/goods/${good?._id}`} className="title text-dark">{good.name}</Link>
                         </figcaption>
                       </figure>
                     </td>

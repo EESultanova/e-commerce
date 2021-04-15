@@ -143,7 +143,7 @@ const ListGoods = () => {
       </div>
 
 
-      <nav className="mb-4 mx-4" aria-label="Page navigation sample">
+      {/* <nav className="mb-4 mx-4" aria-label="Page navigation sample">
         <ul className="pagination">
           <li className="page-item disabled"><a className="page-link" href="/">{language === 'Russian' ? 'Предыдущая' : 'Previous'}</a></li>
           <li className="page-item active"><a className="page-link" href="/">1</a></li>
@@ -153,7 +153,7 @@ const ListGoods = () => {
           <li className="page-item"><a className="page-link" href="/">5</a></li>
           <li className="page-item"><a className="page-link" href="/">{language === 'Russian' ? 'Следующая' : 'Next'}</a></li>
         </ul>
-      </nav>
+      </nav> */}
 
 
       <div className="box text-center">
