@@ -12,6 +12,7 @@ import { store } from 'react-notifications-component';
 import 'animate.css'
 import 'react-notifications-component/dist/theme.css'
 import { useProfileContext } from "../../contexts/ProfileContext"
+import { setSearchCategoryRedux } from "../../redux/actionCreators/searchCategoryAC"
 
 const ListGoods = () => {
 
@@ -38,6 +39,10 @@ const ListGoods = () => {
   const categories = useSelector(state => state.categories)
   const currentCategory = categories.find(categories => categories._id === id)
   
+  useEffect(() => {
+    dispatch(setSearchCategoryRedux(currentCategory?._id))
+  }, [])
+
   function sortGoods(arg) {
     if (arg === 'sortasc') {
       history.push(`/categories/${id}/?sorting=price`)
