@@ -122,27 +122,27 @@ function Order() {
             </div>
           </div>
           {/* payment start */}
-          <div className="card mb-4">
-            <div className="card-body">
-              <h4 className="card-title mb-4">{(language === 'Russian') ? 'Оплата' : 'Payment'}</h4>
-              <form style={{ maxWidth: 380 }} onSubmit={(e) => confirmHandler(e)}>
+          <div className="card">
+            <h4 className="card-title mt-4">{(language === 'Russian') ? 'Оплата' : 'Payment'}</h4>
+            <div className="card-body d-flex justify-content-center">
+              <form onSubmit={(e) => confirmHandler(e)}>
                 <div className="form-group">
                   <label htmlFor="username">{(language === 'Russian') ? 'Имя на карте' : 'Name on card'}</label>
                   <input onChange={e => setCardName(e.target.value)} type="text" className="form-control" name="username" placeholder="Ex. John Smith" required="" />
                 </div>
-                <div className="form-group card required">
+                <div className="form-group card required border-0">
                   <label htmlFor="cardNumber">{(language === 'Russian') ? 'Номер карты' : 'Card number'}</label>
                   <div className="input-group">
-                    <input type="text" onChange={e => setCard(e.target.value)} className="form-control" name="cardNumber" placeholder="" maxLength="16" />
+                    <input type="text" onChange={e => setCard(e.target.value)} className="form-control" name="cardNumber" placeholder=""/>
                     <div className="input-group-append">
                       <span className="input-group-text">
                         <i className="fab fa-cc-visa"></i> &nbsp; <i className="fab fa-cc-amex"></i> &nbsp;
-            <i className="fab fa-cc-mastercard"></i>
+                        <i className="fab fa-cc-mastercard"></i>
                       </span>
                     </div>
                   </div>
                 </div>
-                <div className="row">
+                <div className="row mb-4">
                   <div className="col-md flex-grow-0">
                     <div className="form-group">
                       <label className="hidden-xs">{(language === 'Russian') ? 'Срок действия' : 'Expiration'}</label>
