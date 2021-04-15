@@ -92,29 +92,29 @@ const ListGoods = () => {
                   <form className="form-inline mx-2">
                     {sorting === 'price' &&
                       <select onChange={(event) => sortGoods(event.target.value)} className="form-control form-control-sm">
-                        <option selected="selected" value="sortasc">{language === 'Russian' ? 'Цена по убыванию' : 'Price Low to High'}</option>
-                        <option value="sortdesc">{language === 'Russian' ? 'Цена по возрастанию' : 'Price High to Low'}</option>
+                        <option selected="selected" value="sortasc">{language === 'Russian' ? 'Цена по возрастанию' : 'Price Low to High'}</option>
+                        <option value="sortdesc">{language === 'Russian' ? 'Цена по убыванию' : 'Price High to Low'}</option>
                         <option value="sortrating">{language === 'Russian' ? 'Рейтинг' : 'Rating'}</option>
                       </select>
                     }
                     {sorting === 'price_desc' &&
                       <select onChange={(event) => sortGoods(event.target.value)} className="form-control form-control-sm">
-                        <option value="sortasc">{language === 'Russian' ? 'Цена по убыванию' : 'Price Low to High'}</option>
-                        <option selected="selected" value="sortdesc">{language === 'Russian' ? 'Цена по возрастанию' : 'Price High to Low'}</option>
+                        <option value="sortasc">{language === 'Russian' ? 'Цена по возрастанию' : 'Price Low to High'}</option>
+                        <option selected="selected" value="sortdesc">{language === 'Russian' ? 'Цена по убыванию' : 'Price High to Low'}</option>
                         <option value="sortrating">{language === 'Russian' ? 'Рейтинг' : 'Rating'}</option>
                       </select>
                     }
                     {sorting === 'rating' &&
                       <select onChange={(event) => sortGoods(event.target.value)} className="form-control form-control-sm">
-                        <option value="sortasc">{language === 'Russian' ? 'Цена по убыванию' : 'Price Low to High'}</option>
-                        <option value="sortdesc">{language === 'Russian' ? 'Цена по возрастанию' : 'Price High to Low'}</option>
+                        <option value="sortasc">{language === 'Russian' ? 'Цена по возрастанию' : 'Price Low to High'}</option>
+                        <option value="sortdesc">{language === 'Russian' ? 'Цена по убыванию' : 'Price High to Low'}</option>
                         <option selected="selected" value="sortrating">{language === 'Russian' ? 'Рейтинг' : 'Rating'}</option>
                       </select>
                     }
                     {sorting == null &&
                       <select onChange={(event) => sortGoods(event.target.value)} className="form-control form-control-sm">
-                        <option selected="selected" value="sortasc">{language === 'Russian' ? 'Цена по убыванию' : 'Price Low to High'}</option>
-                        <option value="sortdesc">{language === 'Russian' ? 'Цена по возрастанию' : 'Price High to Low'}</option>
+                        <option selected="selected" value="sortasc">{language === 'Russian' ? 'Цена по возрастанию' : 'Price Low to High'}</option>
+                        <option value="sortdesc">{language === 'Russian' ? 'Цена по убыванию' : 'Price High to Low'}</option>
                         <option value="sortrating">{language === 'Russian' ? 'Рейтинг' : 'Rating'}</option>
                       </select>
                     }
