@@ -21,6 +21,7 @@ const Header = () => {
   const [input, setInput] = useState('')
   let {setChoice} = useProfileContext()
 	const categories = useSelector(state => state.categories)
+  const orders = useSelector(state => state.user?.orders[0])
 	const user = useSelector(state => state.user.isAuth);
   const role = useSelector(state => state.user.role)
 	const currentUser = useSelector(state => state.user);
