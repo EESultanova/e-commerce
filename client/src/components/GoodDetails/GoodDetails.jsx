@@ -61,7 +61,7 @@ const GoodDetails = () => {
             {good?.photo &&
               <>
                 <div className="img-big-wrap mt-5">
-                  <div><img src={good.photo[photo]} alt="" /></div>
+                  <div><img className='w-75 h-75' src={good.photo[photo]} alt=""/></div>
                 </div>
                 <div className="thumbs-wrap">
                   {good?.photo.length ? good?.photo.map((photo, indx) => {
