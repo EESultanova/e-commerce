@@ -55,7 +55,7 @@ const Header = () => {
 		history.push(`/categories/${option}`)
 	}
 
-
+//custom-select border-right
 	return (
 		<header className="section-header">
 			<section className="header-main border-bottom">
@@ -206,13 +206,14 @@ const Header = () => {
 									</button>
 								</li>
 							}
+              {/* nav-item dropdown border-0 */}
 							{(language === 'Russian') ?
-								<select onChange={(e) => dispatch(setLanguage(e.target.value))} className="nav-item dropdown border-0">
-									<option>English</option>
+								<select onChange={(e) => dispatch(setLanguage(e.target.value))} style={{"background-color": 'red'}} className="rounded btn btn-light py-0 ml-2 border-0 bg-white">
+									<option >English</option>
 									<option selected="selected">Russian</option>
 								</select>
 								:
-								<select onChange={(e) => dispatch(setLanguage(e.target.value))} className="nav-item dropdown border-0">
+								<select onChange={(e) => dispatch(setLanguage(e.target.value))} className="rounded btn btn-light ml-2 py-0 border-0 bg-white">
 									<option selected="selected">English</option>
 									<option>Russian</option>
 								</select>
