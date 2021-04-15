@@ -1,7 +1,12 @@
+import { useSelector } from "react-redux";
+
 const ProfileAddress = () => {
+
+  const language = useSelector(state => state.language)
+
   return ( 
     <>
-    <a href="/" className="btn btn-light mb-3"> <i className="fa fa-plus"></i> Add new address </a>
+    <a href="/" className="btn btn-light mb-3"> <i className="fa fa-plus"></i>{language === 'Russian' ? 'Добавить новый адрес' : 'Add new address'}</a>
 
         <div className="row">
             <div className="col-md-6">

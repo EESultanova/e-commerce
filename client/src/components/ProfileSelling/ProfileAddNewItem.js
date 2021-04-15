@@ -15,6 +15,7 @@ function ProfileAddNewItem() {
   const [description, setDescription] = useState('')
   const [category, setCategory] = useState('607045d7fa8ce327ed1edb2f')
   const [photo, setPhoto] = useState('')
+  const language = useSelector(state => state.language)
 
   const dispatch = useDispatch()
 
@@ -50,46 +51,46 @@ function ProfileAddNewItem() {
   return (
     <div className="card mb-4">
       <div className="card-body">
-        <h4 className="card-title mb-4">Please fill out the item form</h4>
+        <h4 className="card-title mb-5">{language === 'Russian' ? 'Пожалуйста, заполните форму заказа': 'Please fill out the item form'}</h4>
         <form>
 
           <div className="form-row">
             <div className="col form-group">
-              <label>Name</label>
+              <label>{language === 'Russian' ? 'Название': 'Name'}</label>
               <input type="text" onChange={e => setName(e.target.value)} className="form-control" placeholder="Drill" maxLength="125" />
             </div>
             <div className="col form-group">
-              <label>Quantity</label>
+              <label>{language === 'Russian' ? 'Количество': 'Quantity'}</label>
               <input type="number" onChange={e => setQuantity(e.target.value)} className="form-control" placeholder="0" />
             </div>
           </div>
 
           <div className="form-row">
             <div className="form-group col-md-6">
-              <label>Category</label>
+              <label>{language === 'Russian' ? 'Категория': 'Category'}</label>
               <select id="inputState" className="form-control" onChange={e => setCategory(e.target.value)}>
                 {categories.map(el => <option key={el._id} value={el._id}>{el.name}</option>)}
               </select>
             </div>
           </div>
           <div className="form-group col-md-13">
-            <label>Description</label>
+            <label>{language === 'Russian' ? 'Описание': 'Description'}</label>
             <textarea className="form-control" onChange={e => setDescription(e.target.value)} rows="3"></textarea>
           </div>
 
           <div className="form-row">
             <div className="form-group col-md-6">
-              <label>Price</label>
+              <label>{language === 'Russian' ? 'Цена': 'Price'}</label>
               <input type="number" onChange={e => setPrice(e.target.value)} className="form-control" />
             </div>
             <div className="form-group col-md-6">
-              <label>Image link</label>
+              <label>{language === 'Russian' ? 'Ссылка на фото': 'Image link'}</label>
               <input type="text" onChange={e => setPhoto(e.target.value)} className="form-control" />
             </div>
           </div>
 
 
-          <button onClick={confirmHandler} className="btn btn-primary btn-block">Send</button>
+          <button onClick={confirmHandler} className="btn btn-primary btn-block">{language === 'Russian' ? 'Добавить': 'Add'}</button>
         </form>
       </div>
     </div>
