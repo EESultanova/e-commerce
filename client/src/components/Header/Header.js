@@ -11,17 +11,17 @@ import { removeUser } from '../../redux/actionCreators/userAC'
 import avatarLogo from '../../assets/avatar.svg';
 import { API_URL, SITE_URL } from '../../config'
 import { useEffect, useState } from 'react';
-import { filterGoodsSaga, getGoods } from '../../redux/actionCreators/goodAC';
+import { filterGoodsSaga, getGoodsFromServer } from '../../redux/actionCreators/goodAC';
 import { useProfileContext } from '../../contexts/ProfileContext';
 import { setLanguage } from '../../redux/actionCreators/languageAC';
 
 
 const Header = () => {
-	const [input, setInput] = useState('')
+  const [input, setInput] = useState('')
   let {setChoice} = useProfileContext()
   // const { language } = useProfileContext()
 	const categories = useSelector(state => state.categories)
-	const [categoryForFilter, setCategoryForFilter] = useState(categories[0]?._id)
+  const [categoryForFilter, setCategoryForFilter] = useState(categories[0]?._id)
 	const user = useSelector(state => state.user.isAuth);
   const role = useSelector(state => state.user.role)
 	const currentUser = useSelector(state => state.user);
@@ -32,18 +32,17 @@ const Header = () => {
   const language = useSelector(state => state.language)
 
   const history = useHistory()
-  
 	const handleLogout = () => {
 		dispatch(removeUser())
 	}
-
+  
 	useEffect(() => {
 		dispatch(filterGoodsSaga({ categoryForFilter, input }))
 	}, [input])
 
-
   useEffect(() => {
     dispatch(filterGoodsSaga({categoryForFilter, input}))
+    dispatch(getGoodsFromServer(categoryForFilter))
   }, [categoryForFilter])
 
   function selectHandler(option) {
