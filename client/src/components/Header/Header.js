@@ -113,9 +113,9 @@ const Header = () => {
 									</div>
 								}
 								<div className="widget-header">
-									<Link to="/cart" className="widget-view">
+									<Link to="/profile" className="widget-view">
 										<div className="icon-area">
-											<i className="fa fa-shopping-cart"></i>
+                      <span style={{fontSize: '25px'}}>&#128202;</span>
 											{user &&
 												(userCart?.length ?
 													<span className="notify">{userCart.length}</span>
@@ -127,7 +127,7 @@ const Header = () => {
 													: '')
 											}
 										</div>
-										<small className="text"> {language === 'Russian' ? 'Корзина' : 'Cart'} </small>
+										<small className="text"> {language === 'Russian' ? 'Аналитика' : 'Analytics'} </small>
 									</Link>
 								</div>
 							</div>
