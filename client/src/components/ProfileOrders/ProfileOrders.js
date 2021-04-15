@@ -40,14 +40,14 @@ const ProfileOrders = () => {
 			 		</p>
 				</div>
 				<div className="col-md-4">
-					<h6 className="text-muted">Payment</h6>
+					<h6 className="text-muted">{(language === 'Russian') ? 'Оплата' : 'Payment'}</h6>
 					<span className="text-success">
 						<i className="fab fa-lg fa-cc-visa"></i>
 					    Visa  **** {order?.card?.toString().slice(12)} 
 					</span>
-					<p>Subtotal: $ {order.total} <br/>
-					 Shipping fee:  $ {fee} <br/> 
-					 <span className="b">Total:  $ {(order.total + fee).toFixed(2)} </span>
+					<p>{(language === 'Russian') ? 'Сумма' : 'Subtotal'}: $ {order.total} <br/>
+          {(language === 'Russian') ? 'Стоимость доставки' : 'Shipping fee'}:  $ {fee} <br/> 
+					 <span className="b">{(language === 'Russian') ? 'Общая сумма' : 'Total'}:  $ {(order.total + fee).toFixed(2)} </span>
 					</p>
 				</div>
 			</div>
