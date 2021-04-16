@@ -142,11 +142,11 @@ const Header = () => {
 											}
                       {user && 
                         (role === 'seller' ?
-                          <Link to="/profile" className="widget-view">
+                          <Link to="/profile" className="widget-view" onClick={() => setChoice(0)}>
                             <div className="icon-area">
                               <span style={{fontSize: '25px'}}>&#128202;</span>
                             </div>
-                            <small className="text"> {language === 'Russian' ? 'Аналитика' : 'Analytics'} </small>
+                            <small className="text">  {language === 'Russian' ? 'Аналитика' : 'Analytics'} </small>
                           </Link>
                           : ''
                         )
