@@ -30,7 +30,10 @@ npm start
 
 <p align="center">
   <img src="books.png" width="350" alt="accessibility text">
-   <img src="analytics.png" width="350" title="hover text">
+</p>
+
+<p align="center">
+<img src="analytics.png" width="350" title="hover text">
 </p>
 
 ## Планы 
