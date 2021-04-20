@@ -18,5 +18,9 @@
 
 • интеграция с Facebook Chat.
 
+<p align="center">
+  <img src="home.png" width="350" alt="accessibility text">
+   <img src="auth.png" width="350" title="hover text">
+</p>
 
-
+## Технологии
