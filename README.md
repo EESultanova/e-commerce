@@ -1,5 +1,15 @@
 # [e-commerce](https://e-commerce-here.herokuapp.com) || Интернет-магазин
 
+## Запуск: в папках server/src, client/src
+```bash
+npm i
+npm start
+```
+<p align="center">
+  <img src="home.png" width="350" alt="accessibility text">
+   <img src="auth.png" width="350" title="hover text">
+</p>
+
 ## Функционал
 
 • регистрация и аутентификация польтзователей на JWT,
@@ -19,8 +29,12 @@
 • интеграция с Facebook Chat.
 
 <p align="center">
-  <img src="home.png" width="350" alt="accessibility text">
-   <img src="auth.png" width="350" title="hover text">
+  <img src="books.png" width="350" alt="accessibility text">
+   <img src="analytics.png" width="350" title="hover text">
 </p>
 
-## Технологии
+## Планы 
+
+1) Добавление показа товаров в режиме online c использованием веб-сокетов
+2) Реализовать добавление товаров в wishlist для покупателя
+3) Разработка мобильного приложения на React Native
